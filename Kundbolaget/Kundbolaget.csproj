@@ -121,9 +121,12 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\ContactPerson.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Context\StoreContext.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Container.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

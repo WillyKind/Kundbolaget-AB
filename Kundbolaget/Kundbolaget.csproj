@@ -120,6 +120,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\ContactPerson.cs" />
     <Compile Include="Models\Context\StoreContext.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Container.cs" />

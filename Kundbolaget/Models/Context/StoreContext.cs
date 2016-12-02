@@ -12,5 +12,10 @@ namespace Kundbolaget.Models.Context
         public DbSet<Container> Containers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductGroup> ProductGroups { get; set; }
+
+        public StoreContext():base("name=KundBolaget")
+        {
+            
+        }
     }
 }

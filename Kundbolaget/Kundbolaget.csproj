@@ -118,6 +118,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612020945526_InitialModel.cs" />
+    <Compile Include="Migrations\201612020945526_InitialModel.Designer.cs">
+      <DependentUpon>201612020945526_InitialModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Context\StoreContext.cs" />
     <Compile Include="Models\Category.cs" />
@@ -142,6 +146,11 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612020945526_InitialModel.resx">
+      <DependentUpon>201612020945526_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

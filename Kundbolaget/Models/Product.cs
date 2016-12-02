@@ -21,6 +21,9 @@ namespace Kundbolaget.Models
         [Required]
         public int ProductGroupId { get; set; }
 
+        [ForeignKey("ProductGroupId")]
+        public virtual ProductGroup ProductGroup { get; set; }
+
         [Required]
         public string Name { get; set; }
 

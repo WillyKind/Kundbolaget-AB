@@ -126,6 +126,10 @@
     <Compile Include="Migrations\201612021231345_OneToManyProductContainer.Designer.cs">
       <DependentUpon>201612021231345_OneToManyProductContainer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612021238381_OneToManyProductProductGroup.cs" />
+    <Compile Include="Migrations\201612021238381_OneToManyProductProductGroup.Designer.cs">
+      <DependentUpon>201612021238381_OneToManyProductProductGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Context\StoreContext.cs" />
     <Compile Include="Models\Category.cs" />
@@ -157,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612021231345_OneToManyProductContainer.resx">
       <DependentUpon>201612021231345_OneToManyProductContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021238381_OneToManyProductProductGroup.resx">
+      <DependentUpon>201612021238381_OneToManyProductProductGroup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

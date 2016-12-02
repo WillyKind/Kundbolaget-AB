@@ -25,7 +25,10 @@ namespace Kundbolaget.Models
         public int ContactPersonId { get; set; }
         [ForeignKey("ContactPersonId")]
         public virtual ContactPerson ContactPerson { get; set; }
+        [Required]
         public int CountryId { get; set; }
+        [ForeignKey("CountryId")]
+        public Country Country { get; set; }
         public int DeliveryAddressId { get; set; }
         public int GroupId { get; set; }
     }

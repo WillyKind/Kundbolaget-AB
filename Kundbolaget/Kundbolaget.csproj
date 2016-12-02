@@ -142,6 +142,10 @@
     <Compile Include="Migrations\201612021338366_OneToManyCompanyContactPerson.Designer.cs">
       <DependentUpon>201612021338366_OneToManyCompanyContactPerson.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612021344546_OneToManyCompanyCountry.cs" />
+    <Compile Include="Migrations\201612021344546_OneToManyCompanyCountry.Designer.cs">
+      <DependentUpon>201612021344546_OneToManyCompanyCountry.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\ContactPerson.cs" />
@@ -190,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612021338366_OneToManyCompanyContactPerson.resx">
       <DependentUpon>201612021338366_OneToManyCompanyContactPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021344546_OneToManyCompanyCountry.resx">
+      <DependentUpon>201612021344546_OneToManyCompanyCountry.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

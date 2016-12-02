@@ -138,6 +138,10 @@
     <Compile Include="Migrations\201612021324404_OneToManyCompanyAddress.Designer.cs">
       <DependentUpon>201612021324404_OneToManyCompanyAddress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612021338366_OneToManyCompanyContactPerson.cs" />
+    <Compile Include="Migrations\201612021338366_OneToManyCompanyContactPerson.Designer.cs">
+      <DependentUpon>201612021338366_OneToManyCompanyContactPerson.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\ContactPerson.cs" />
@@ -183,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612021324404_OneToManyCompanyAddress.resx">
       <DependentUpon>201612021324404_OneToManyCompanyAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021338366_OneToManyCompanyContactPerson.resx">
+      <DependentUpon>201612021338366_OneToManyCompanyContactPerson.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

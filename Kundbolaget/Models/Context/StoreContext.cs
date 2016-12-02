@@ -14,6 +14,7 @@ namespace Kundbolaget.Models.Context
         public DbSet<ProductGroup> ProductGroups { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<ContactPerson> ContactPersons { get; set; }
 
         public StoreContext():base("name=KundBolaget")
         {

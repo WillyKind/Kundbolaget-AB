@@ -118,6 +118,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612020945526_InitialModel.cs" />
+    <Compile Include="Migrations\201612020945526_InitialModel.Designer.cs">
+      <DependentUpon>201612020945526_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612021231345_OneToManyProductContainer.cs" />
+    <Compile Include="Migrations\201612021231345_OneToManyProductContainer.Designer.cs">
+      <DependentUpon>201612021231345_OneToManyProductContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612021238381_OneToManyProductProductGroup.cs" />
+    <Compile Include="Migrations\201612021238381_OneToManyProductProductGroup.Designer.cs">
+      <DependentUpon>201612021238381_OneToManyProductProductGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612021248294_OneToManyProductGroupCategory.cs" />
+    <Compile Include="Migrations\201612021248294_OneToManyProductGroupCategory.Designer.cs">
+      <DependentUpon>201612021248294_OneToManyProductGroupCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\ContactPerson.cs" />
@@ -147,6 +163,20 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612020945526_InitialModel.resx">
+      <DependentUpon>201612020945526_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021231345_OneToManyProductContainer.resx">
+      <DependentUpon>201612021231345_OneToManyProductContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021238381_OneToManyProductProductGroup.resx">
+      <DependentUpon>201612021238381_OneToManyProductProductGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021248294_OneToManyProductGroupCategory.resx">
+      <DependentUpon>201612021248294_OneToManyProductGroupCategory.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

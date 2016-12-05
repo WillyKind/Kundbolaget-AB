@@ -190,6 +190,10 @@
     <Compile Include="Migrations\201612051857041_OneToManyProductInfoOrderDetails.Designer.cs">
       <DependentUpon>201612051857041_OneToManyProductInfoOrderDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612051912358_OneToManyOrderOrderDetails.cs" />
+    <Compile Include="Migrations\201612051912358_OneToManyOrderOrderDetails.Designer.cs">
+      <DependentUpon>201612051912358_OneToManyOrderOrderDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\ContactPerson.cs" />
@@ -198,6 +202,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Container.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Models\ProductInfo.cs" />
     <Compile Include="Models\ProductGroup.cs" />
@@ -276,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612051857041_OneToManyProductInfoOrderDetails.resx">
       <DependentUpon>201612051857041_OneToManyProductInfoOrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612051912358_OneToManyOrderOrderDetails.resx">
+      <DependentUpon>201612051912358_OneToManyOrderOrderDetails.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

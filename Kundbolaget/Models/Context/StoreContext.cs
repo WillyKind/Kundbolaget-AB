@@ -19,7 +19,7 @@ namespace Kundbolaget.Models.Context
         public DbSet<ProductStock> ProductStocks { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
-
+        public DbSet<Order> Orders { get; set; }
 
         public StoreContext() : base("name=KundBolaget") {}
 
@@ -29,6 +29,7 @@ namespace Kundbolaget.Models.Context
                 .HasOptional(x => x.ParentCompany)
                 .WithMany(x => x.SubCompanies)
                 .HasForeignKey(x => x.ParentCompanyId);
+
             modelBuilder.Entity<Company>()
                 .HasRequired(x => x.Address)
                 .WithMany(x => x.Companies)

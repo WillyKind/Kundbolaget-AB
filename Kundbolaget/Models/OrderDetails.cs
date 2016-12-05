@@ -18,5 +18,9 @@ namespace Kundbolaget.Models
         public virtual ProductInfo ProductInfo { get; set; }
         [Required]
         public int ProductInfoId { get; set; }
+        [Required]
+        public int OrderId { get; set; }
+        [ForeignKey("OrderId")]
+        public virtual Order Order { get; set; }
     }
 }

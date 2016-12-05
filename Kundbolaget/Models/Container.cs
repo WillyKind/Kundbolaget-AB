@@ -10,10 +10,13 @@ namespace Kundbolaget.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
+
         [Required]
         public double Volume { get; set; }
-        public virtual ICollection<ProductInfo> Products { get; set; }
+
+        public virtual ICollection<ProductInfo> ProductsInfoes { get; set; }
     }
 }

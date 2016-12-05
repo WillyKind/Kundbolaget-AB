@@ -150,6 +150,10 @@
     <Compile Include="Migrations\201612051248539_OnToManyCompanyToCompany.Designer.cs">
       <DependentUpon>201612051248539_OnToManyCompanyToCompany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612051255164_RenamedProductToProductInfo.cs" />
+    <Compile Include="Migrations\201612051255164_RenamedProductToProductInfo.Designer.cs">
+      <DependentUpon>201612051255164_RenamedProductToProductInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\ContactPerson.cs" />
@@ -158,7 +162,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Container.cs" />
     <Compile Include="Models\Country.cs" />
-    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductInfo.cs" />
     <Compile Include="Models\ProductGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -203,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612051248539_OnToManyCompanyToCompany.resx">
       <DependentUpon>201612051248539_OnToManyCompanyToCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612051255164_RenamedProductToProductInfo.resx">
+      <DependentUpon>201612051255164_RenamedProductToProductInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

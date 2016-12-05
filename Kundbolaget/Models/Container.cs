@@ -14,6 +14,6 @@ namespace Kundbolaget.Models
         public string Name { get; set; }
         [Required]
         public double Volume { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<ProductInfo> Products { get; set; }
     }
 }

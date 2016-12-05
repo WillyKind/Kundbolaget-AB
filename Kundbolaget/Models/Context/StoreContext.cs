@@ -17,9 +17,14 @@ namespace Kundbolaget.Models.Context
         public DbSet<ContactPerson> ContactPersons { get; set; }
         public DbSet<Country> Countries { get; set; }
 
-        public StoreContext():base("name=KundBolaget")
+        public StoreContext() : base("name=KundBolaget") {}
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<Company>()
+                .HasOptional(x => x.ParentCompany)
+                .WithMany(x => x.SubCompanies)
+                .HasForeignKey(x => x.ParentCompanyId);
         }
     }
 }

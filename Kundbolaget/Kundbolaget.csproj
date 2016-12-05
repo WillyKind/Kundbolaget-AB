@@ -154,6 +154,10 @@
     <Compile Include="Migrations\201612051255164_RenamedProductToProductInfo.Designer.cs">
       <DependentUpon>201612051255164_RenamedProductToProductInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612051449122_RemodelCompanyToCompany.cs" />
+    <Compile Include="Migrations\201612051449122_RemodelCompanyToCompany.Designer.cs">
+      <DependentUpon>201612051449122_RemodelCompanyToCompany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\ContactPerson.cs" />
@@ -210,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612051255164_RenamedProductToProductInfo.resx">
       <DependentUpon>201612051255164_RenamedProductToProductInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612051449122_RemodelCompanyToCompany.resx">
+      <DependentUpon>201612051449122_RemodelCompanyToCompany.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

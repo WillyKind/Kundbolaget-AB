@@ -166,6 +166,10 @@
     <Compile Include="Migrations\201612051501021_AddWarehouseEntity.Designer.cs">
       <DependentUpon>201612051501021_AddWarehouseEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612051503140_OneToManyContactPersonWarehouse.cs" />
+    <Compile Include="Migrations\201612051503140_OneToManyContactPersonWarehouse.Designer.cs">
+      <DependentUpon>201612051503140_OneToManyContactPersonWarehouse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\ContactPerson.cs" />
@@ -233,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612051501021_AddWarehouseEntity.resx">
       <DependentUpon>201612051501021_AddWarehouseEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612051503140_OneToManyContactPersonWarehouse.resx">
+      <DependentUpon>201612051503140_OneToManyContactPersonWarehouse.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

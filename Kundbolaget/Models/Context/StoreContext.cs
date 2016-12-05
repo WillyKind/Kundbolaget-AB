@@ -17,6 +17,7 @@ namespace Kundbolaget.Models.Context
         public DbSet<ContactPerson> ContactPersons { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<ProductStock> ProductStocks { get; set; }
+        public DbSet<Warehouse> Warehouses { get; set; }
 
         public StoreContext() : base("name=KundBolaget") {}
 

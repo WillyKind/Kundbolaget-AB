@@ -162,6 +162,10 @@
     <Compile Include="Migrations\201612051458046_AddProductStockEntity.Designer.cs">
       <DependentUpon>201612051458046_AddProductStockEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612051501021_AddWarehouseEntity.cs" />
+    <Compile Include="Migrations\201612051501021_AddWarehouseEntity.Designer.cs">
+      <DependentUpon>201612051501021_AddWarehouseEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\ContactPerson.cs" />
@@ -173,6 +177,7 @@
     <Compile Include="Models\ProductInfo.cs" />
     <Compile Include="Models\ProductGroup.cs" />
     <Compile Include="Models\ProductStock.cs" />
+    <Compile Include="Models\Warehouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +230,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612051458046_AddProductStockEntity.resx">
       <DependentUpon>201612051458046_AddProductStockEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612051501021_AddWarehouseEntity.resx">
+      <DependentUpon>201612051501021_AddWarehouseEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

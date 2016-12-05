@@ -14,5 +14,6 @@ namespace Kundbolaget.Models
         public virtual ProductInfo ProductInfo { get; set; }
 
         public int ProductInfoId { get; set; }
+        public virtual ICollection<Warehouse> Warehouses { get; set; }
     }
 }

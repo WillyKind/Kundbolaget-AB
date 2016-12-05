@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kundbolaget.Models
@@ -31,5 +32,7 @@ namespace Kundbolaget.Models
 
         [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
+
+        public virtual ICollection<ProductStock> ProductStocks { get; set; }
     }
 }

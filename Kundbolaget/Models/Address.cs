@@ -17,6 +17,7 @@ namespace Kundbolaget.Models
         [Required]
         public string ZipCode{ get; set; }
         public virtual ICollection<Company> Companies { get; set; }
+        public virtual ICollection<Warehouse> Warehouses { get; set; }
 
     }
 }

@@ -11,6 +11,7 @@ namespace Kundbolaget.Models
     {
         [Key]
         public int Id { get; set; }
+        public virtual ICollection<Company> Companies { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -30,6 +31,5 @@ namespace Kundbolaget.Models
         [ForeignKey("CountryId")]
         public Country Country { get; set; }
         public int DeliveryAddressId { get; set; }
-        public int GroupId { get; set; }
     }
 }

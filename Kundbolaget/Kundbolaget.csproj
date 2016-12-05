@@ -146,6 +146,10 @@
     <Compile Include="Migrations\201612021344546_OneToManyCompanyCountry.Designer.cs">
       <DependentUpon>201612021344546_OneToManyCompanyCountry.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612051248539_OnToManyCompanyToCompany.cs" />
+    <Compile Include="Migrations\201612051248539_OnToManyCompanyToCompany.Designer.cs">
+      <DependentUpon>201612051248539_OnToManyCompanyToCompany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\ContactPerson.cs" />
@@ -153,7 +157,6 @@
     <Compile Include="Models\Context\StoreContext.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Container.cs" />
-    <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductGroup.cs" />
@@ -197,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612021344546_OneToManyCompanyCountry.resx">
       <DependentUpon>201612021344546_OneToManyCompanyCountry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612051248539_OnToManyCompanyToCompany.resx">
+      <DependentUpon>201612051248539_OnToManyCompanyToCompany.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

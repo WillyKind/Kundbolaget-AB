@@ -40,5 +40,7 @@ namespace Kundbolaget.Models
 
         [Required]
         public bool Removed { get; set; }
+
+        public virtual ICollection<ProductStock> ProductStocks { get; set; }
     }
 }

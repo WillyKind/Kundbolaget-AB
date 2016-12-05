@@ -41,11 +41,15 @@ namespace Kundbolaget.Models
         [ForeignKey("CountryId")]
         public Country Country { get; set; }
 
+        [Required]
         public int DeliveryAddressId { get; set; }
 
         [ForeignKey("ParentCompanyId")]
         public Company ParentCompany { get; set; }
 
         public int? ParentCompanyId { get; set; }
+
+        [ForeignKey("DeliveryAddressId ")]
+        public virtual Address DeliveryAddress { get; set; }
     }
 }

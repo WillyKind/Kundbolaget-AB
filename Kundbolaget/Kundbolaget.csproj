@@ -182,6 +182,10 @@
     <Compile Include="Migrations\201612051515532_OneToManyProductStockProductInfo.Designer.cs">
       <DependentUpon>201612051515532_OneToManyProductStockProductInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612051548047_OneToManyCompanyAddressForDelivery.cs" />
+    <Compile Include="Migrations\201612051548047_OneToManyCompanyAddressForDelivery.Designer.cs">
+      <DependentUpon>201612051548047_OneToManyCompanyAddressForDelivery.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\ContactPerson.cs" />
@@ -261,6 +265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612051515532_OneToManyProductStockProductInfo.resx">
       <DependentUpon>201612051515532_OneToManyProductStockProductInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612051548047_OneToManyCompanyAddressForDelivery.resx">
+      <DependentUpon>201612051548047_OneToManyCompanyAddressForDelivery.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

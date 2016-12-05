@@ -27,6 +27,17 @@ namespace Kundbolaget.Models.Context
                 .HasOptional(x => x.ParentCompany)
                 .WithMany(x => x.SubCompanies)
                 .HasForeignKey(x => x.ParentCompanyId);
+            modelBuilder.Entity<Company>()
+                .HasRequired(x => x.Address)
+                .WithMany(x => x.Companies)
+                .HasForeignKey(x => x.AddressId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Company>()
+                .HasRequired(x => x.DeliveryAddress)
+                .WithMany(x => x.DeliveryCompanies)
+                .HasForeignKey(x => x.DeliveryAddressId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

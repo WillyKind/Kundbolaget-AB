@@ -18,8 +18,6 @@ namespace Kundbolaget.Migrations
 
         protected override void Seed(StoreContext context)
         {
-            
-
             var containers = new Container[]
             {
                 new Container {Name = "Burk 0.33L", Volume = 0.33},
@@ -30,8 +28,6 @@ namespace Kundbolaget.Migrations
                 new Container {Name = "Flaska 1L", Volume = 1},
                 new Container {Name = "Flaska 0.7L", Volume = 0.7},
                 new Container {Name = "Flaska 0.35L", Volume = 0.35},
-
-
             };
 
             var categories = new Category[]
@@ -47,6 +43,7 @@ namespace Kundbolaget.Migrations
                 new ProductGroup {Name = "Rött vin", Category = categories[2]},
                 new ProductGroup {Name = "Mouserande vin", Category = categories[2]},
                 new ProductGroup {Name = "IPA", Category = categories[0]},
+                new ProductGroup {Name = "Lager", Category = categories[0]},
                 new ProductGroup {Name = "APA", Category = categories[0]},
                 new ProductGroup {Name = "Stout", Category = categories[0]},
                 new ProductGroup {Name = "Rom", Category = categories[1]},
@@ -107,13 +104,13 @@ namespace Kundbolaget.Migrations
                 ContactPerson = contactPersons[0],
                 Email = "lager@kundbolaget.se",
                 PhoneNumber = "+46899 00 00",
-                Address =  new Address {Street = "Lagervägen", Number = "1A", ZipCode = "000 00"}
+                Address = new Address {Street = "Lagervägen", Number = "1A", ZipCode = "000 00"}
             };
 
 
             var icaGruppen = new Company
             {
-                Address = new Address { Street = "Besöksvägen", Number = "1A", ZipCode = "111 11" },
+                Address = new Address {Street = "Besöksvägen", Number = "1A", ZipCode = "111 11"},
                 ContactPerson = contactPersons[4],
                 Country = countries[0],
                 DeliveryAddress = new Address
@@ -129,7 +126,7 @@ namespace Kundbolaget.Migrations
 
             var anyIca = new Company
             {
-                Address = new Address { Street = "Glimmervägen", Number = "1A", ZipCode = "111 11" },
+                Address = new Address {Street = "Glimmervägen", Number = "1A", ZipCode = "111 11"},
                 ContactPerson = contactPersons[3],
                 Country = countries[0],
                 DeliveryAddress = new Address
@@ -149,6 +146,32 @@ namespace Kundbolaget.Migrations
                 icaGruppen, anyIca
             };
 
+            var productInfoes = new ProductInfo[]
+            {
+                new ProductInfo
+                {
+                    Name = "Norrlandsguld 33cl",
+                    Abv = 5.3,
+                    Container = containers[0],
+                    Description = "En burk med öl...",
+                    ProductGroup = productGroups[4],
+                    PurchasePrice = 5.3,
+                    TradingMargin = 10,
+                    Removed = false
+                },
+                new ProductInfo
+                {
+                    Name = "Norrlandsguld 50cl",
+                    Abv = 5.3,
+                    Container = containers[1],
+                    Description = "En burk med öl...",
+                    ProductGroup = productGroups[4],
+                    PurchasePrice = 8.3,
+                    TradingMargin = 8,
+                    Removed = false
+                }
+            };
+
             context.Countries.AddOrUpdate(countries);
             context.ContactPersons.AddOrUpdate(contactPersons);
             context.Categories.AddOrUpdate(categories);
@@ -156,6 +179,7 @@ namespace Kundbolaget.Migrations
             context.Containers.AddOrUpdate(containers);
             context.Warehouses.AddOrUpdate(warehouse);
             context.Companies.AddOrUpdate(companies);
+            context.ProductsInfoes.AddOrUpdate(productInfoes);
             context.SaveChanges();
         }
     }

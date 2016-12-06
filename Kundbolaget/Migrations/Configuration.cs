@@ -18,6 +18,20 @@ namespace Kundbolaget.Migrations
 
         protected override void Seed(StoreContext context)
         {
+            var containers = new Container[]
+            {
+                new Container {Name = "Burk 0.33L", Volume = 0.33},
+                new Container {Name = "Burk 0.5L", Volume = 0.5},
+                new Container {Name = "Flaska 0.33L", Volume = 0.33},
+                new Container {Name = "Flaska 0.5L", Volume = 0.5},
+                new Container {Name = "Flaska 0.75L", Volume = 0.75},
+                new Container {Name = "Flaska 1L", Volume = 1},
+                new Container {Name = "Flaska 0.7L", Volume = 0.7},
+                new Container {Name = "Flaska 0.35L", Volume = 0.35},
+
+
+            };
+
             var categories = new Category[]
             {
                 new Category {Name = "Öl"},
@@ -88,6 +102,7 @@ namespace Kundbolaget.Migrations
             context.ContactPersons.AddOrUpdate(contactPersons);
             context.Categories.AddOrUpdate(categories);
             context.ProductGroups.AddOrUpdate(productGroups);
+            context.Containers.AddOrUpdate(containers);
             context.SaveChanges();
         }
     }

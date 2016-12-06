@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateProductInfo.cs" />
     <Compile Include="ReadProductInfo.cs" />
     <Compile Include="ReadProductsInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

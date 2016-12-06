@@ -34,7 +34,7 @@ namespace Kundbolaget.Migrations
             var categories = new Category[]
             {
                 new Category {Name = "Öl"},
-                new Category {Name = "Spritdrycker"},
+                new Category {Name = "Sprit"},
                 new Category {Name = "Vin"},
             };
 
@@ -98,28 +98,33 @@ namespace Kundbolaget.Migrations
                 }
             };
 
+            var addresses = new Address[]
+            {
+                new Address {Street = "Besöksvägen", Number = "1A", ZipCode = "111 11"},
+                new Address {Street = "Lagervägen", Number = "1A", ZipCode = "000 00"},
+                new Address {Street = "Leveransvägen", Number = "2B", ZipCode = "111 12"},
+                new Address {Street = "Glimmervägen", Number = "1A", ZipCode = "111 11"},
+                new Address {Street = "Leveransvägen", Number = "1A", ZipCode = "111 11"}
+            };
+
+
             var warehouse = new Warehouse
             {
                 Name = "Kundbolagets Lager",
                 AmmountOfStorageSpace = 500,
-                ContactPerson = contactPersons[0],
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Viktor"),
                 Email = "lager@kundbolaget.se",
                 PhoneNumber = "+46899 00 00",
-                Address = new Address {Street = "Lagervägen", Number = "1A", ZipCode = "000 00"}
+                Address = addresses.First(a => a.Street == "Lagervägen")
             };
 
 
             var icaGruppen = new Company
             {
-                Address = new Address {Street = "Besöksvägen", Number = "1A", ZipCode = "111 11"},
-                ContactPerson = contactPersons[4],
-                Country = countries[0],
-                DeliveryAddress = new Address
-                {
-                    Street = "Leveransvägen",
-                    Number = "2B",
-                    ZipCode = "111 12"
-                },
+                Address = addresses.First(a => a.Street == "Besöksvägen"),
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Johan"),
+                Country = countries.First(c => c.Name == "Sweden"),
+                DeliveryAddress = addresses.First(a => a.Street == "Besöksvägen"),
                 Email = "icagruppen@ica.com",
                 Name = "IcaGruppen",
                 PhoneNumber = "+56899 22 22"
@@ -127,15 +132,10 @@ namespace Kundbolaget.Migrations
 
             var anyIca = new Company
             {
-                Address = new Address {Street = "Glimmervägen", Number = "1A", ZipCode = "111 11"},
-                ContactPerson = contactPersons[3],
-                Country = countries[0],
-                DeliveryAddress = new Address
-                {
-                    Street = "Leveransvägen",
-                    Number = "1A",
-                    ZipCode = "111 11"
-                },
+                Address = addresses.First(a => a.Street == "Glimmervägen"),
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
+                Country = countries.First(c => c.Name == "Sweden"),
+                DeliveryAddress = addresses.First(a => a.Street == "Leveransvägen" && a.Number == "2B"),
                 Email = "Icanågonstans@ica.com",
                 PhoneNumber = "+46899 11 11",
                 ParentCompany = icaGruppen,
@@ -153,9 +153,9 @@ namespace Kundbolaget.Migrations
                 {
                     Name = "Norrlandsguld 33cl",
                     Abv = 5.3,
-                    Container = containers[0],
+                    Container = containers.First(c => c.Name == "Burk 0.33L"),
                     Description = "En burk med öl...",
-                    ProductGroup = productGroups[4],
+                    ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 5.3,
                     TradingMargin = 10,
                     Removed = false
@@ -164,29 +164,56 @@ namespace Kundbolaget.Migrations
                 {
                     Name = "Norrlandsguld 50cl",
                     Abv = 5.3,
-                    Container = containers[1],
+                    Container = containers.First(c => c.Name == "Burk 0.5L"),
                     Description = "En burk med öl...",
-                    ProductGroup = productGroups[4],
+                    ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 8.3,
                     TradingMargin = 8,
                     Removed = false
-                }
+                },
+                new ProductInfo
+                {
+                    Name = "Koskenkorva 0.7L",
+                    Abv = 40,
+                    Container = containers.First(c => c.Name == "Flaska 0.7L"),
+                    Description = "En Flaska sprit...",
+                    ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
+                    PurchasePrice = 35,
+                    TradingMargin = 50,
+                    Removed = false
+                },
             };
 
             var stock = new ProductStock[]
             {
                 new ProductStock
                 {
-                Amount = 500,
-                ProductInfo = productInfoes[0],
-                Warehouses = new List<Warehouse> { warehouse }
+                    Amount = 500,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld 33cl"),
+                    Warehouses = new List<Warehouse> {warehouse}
                 },
                 new ProductStock
                 {
-                Amount = 200,
-                ProductInfo = productInfoes[1],
-                Warehouses = new List<Warehouse> { warehouse }
+                    Amount = 200,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva 0.7L"),
+                    Warehouses = new List<Warehouse> {warehouse}
                 }
+            };
+
+            var dummyOrder = new Order
+            {
+                Company = companies.First(c => c.Name == "Ica någonstans"),
+                CreatedDate = DateTime.Now,
+            };
+
+            var orderDetails = new OrderDetails[]
+            {
+                new OrderDetails {ProductInfo = productInfoes.First(pi=>pi.Name=="Koskenkorva 0.7L"),
+                    Amount = 500,
+                    Order = dummyOrder},
+                 new OrderDetails {ProductInfo = productInfoes.First(pi=>pi.Name=="Norrlandsguld 33cl"),
+                    Amount = 500,
+                    Order = dummyOrder}
             };
 
             context.Countries.AddOrUpdate(countries);
@@ -198,6 +225,8 @@ namespace Kundbolaget.Migrations
             context.Companies.AddOrUpdate(companies);
             context.ProductsInfoes.AddOrUpdate(productInfoes);
             context.ProductStocks.AddOrUpdate(stock);
+            context.Addresses.AddOrUpdate(addresses);
+            context.OrderDetails.AddOrUpdate(orderDetails);
             context.SaveChanges();
         }
     }

@@ -110,12 +110,52 @@ namespace Kundbolaget.Migrations
                 Address =  new Address {Street = "Lagervägen", Number = "1A", ZipCode = "000 00"}
             };
 
+
+            var icaGruppen = new Company
+            {
+                Address = new Address { Street = "Besöksvägen", Number = "1A", ZipCode = "111 11" },
+                ContactPerson = contactPersons[4],
+                Country = countries[0],
+                DeliveryAddress = new Address
+                {
+                    Street = "Leveransvägen",
+                    Number = "2B",
+                    ZipCode = "111 12"
+                },
+                Email = "icagruppen@ica.com",
+                Name = "IcaGruppen",
+                PhoneNumber = "+56899 22 22"
+            };
+
+            var anyIca = new Company
+            {
+                Address = new Address { Street = "Glimmervägen", Number = "1A", ZipCode = "111 11" },
+                ContactPerson = contactPersons[3],
+                Country = countries[0],
+                DeliveryAddress = new Address
+                {
+                    Street = "Leveransvägen",
+                    Number = "1A",
+                    ZipCode = "111 11"
+                },
+                Email = "Icanågonstans@ica.com",
+                PhoneNumber = "+46899 11 11",
+                ParentCompany = icaGruppen,
+                Name = "Ica någonstans"
+            };
+
+            var companies = new Company[]
+            {
+                icaGruppen, anyIca
+            };
+
             context.Countries.AddOrUpdate(countries);
             context.ContactPersons.AddOrUpdate(contactPersons);
             context.Categories.AddOrUpdate(categories);
             context.ProductGroups.AddOrUpdate(productGroups);
             context.Containers.AddOrUpdate(containers);
             context.Warehouses.AddOrUpdate(warehouse);
+            context.Companies.AddOrUpdate(companies);
             context.SaveChanges();
         }
     }

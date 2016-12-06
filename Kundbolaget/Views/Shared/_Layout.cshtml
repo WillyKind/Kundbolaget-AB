@@ -9,8 +9,11 @@
     <link href="~/content/materialize/css/materialize.css" rel="stylesheet" />
 </head>
 <body>
-    <div>
-        @RenderBody()
-    </div>
+<header>
+    @Html.Partial("_Navbar")
+</header>
+<div>
+    @RenderBody()
+</div>
 </body>
 </html>

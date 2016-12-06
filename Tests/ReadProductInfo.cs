@@ -65,7 +65,7 @@ namespace Tests
                 db.SaveChanges();
                 
             }
-            //Comparing index synced and get a list of bools
+            //Comparing indexes synced in expected and result
             var enumerable = result.Zip(expected,(info, productInfo) => info.Id == productInfo.Id);
             //Esuring that all bools are true
             Assert.IsTrue(enumerable.All(x => x));

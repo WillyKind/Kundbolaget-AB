@@ -10,11 +10,10 @@ namespace Kundbolaget.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
         public DateTime CreatedDate { get; set; }
-        
-        //public double TotalPrice { get; set; } Nödvändig?
-        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
 
+        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
     }
 }

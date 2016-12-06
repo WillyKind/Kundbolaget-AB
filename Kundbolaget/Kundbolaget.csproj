@@ -194,6 +194,10 @@
     <Compile Include="Migrations\201612051912358_OneToManyOrderOrderDetails.Designer.cs">
       <DependentUpon>201612051912358_OneToManyOrderOrderDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612060944313_OneToManyOrderCompany.cs" />
+    <Compile Include="Migrations\201612060944313_OneToManyOrderCompany.Designer.cs">
+      <DependentUpon>201612060944313_OneToManyOrderCompany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\ContactPerson.cs" />
@@ -284,6 +288,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612051912358_OneToManyOrderOrderDetails.resx">
       <DependentUpon>201612051912358_OneToManyOrderOrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612060944313_OneToManyOrderCompany.resx">
+      <DependentUpon>201612060944313_OneToManyOrderCompany.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -51,5 +51,7 @@ namespace Kundbolaget.Models
 
         [ForeignKey("DeliveryAddressId ")]
         public virtual Address DeliveryAddress { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

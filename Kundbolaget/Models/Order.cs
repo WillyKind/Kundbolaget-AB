@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -15,5 +16,11 @@ namespace Kundbolaget.Models
         public DateTime CreatedDate { get; set; }
 
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
+
+        [ForeignKey("CompanyId")]
+        public virtual Company Company { get; set; }
+
+        [Required]
+        public int CompanyId { get; set; }
     }
 }

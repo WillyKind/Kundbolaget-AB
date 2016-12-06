@@ -18,6 +18,8 @@ namespace Kundbolaget.Migrations
 
         protected override void Seed(StoreContext context)
         {
+            
+
             var containers = new Container[]
             {
                 new Container {Name = "Burk 0.33L", Volume = 0.33},
@@ -98,11 +100,22 @@ namespace Kundbolaget.Migrations
                 }
             };
 
+            var warehouse = new Warehouse
+            {
+                Name = "Kundbolagets Lager",
+                AmmountOfStorageSpace = 500,
+                ContactPerson = contactPersons[0],
+                Email = "lager@kundbolaget.se",
+                PhoneNumber = "+46899 00 00",
+                Address =  new Address {Street = "Lagervägen", Number = "1A", ZipCode = "000 00"}
+            };
+
             context.Countries.AddOrUpdate(countries);
             context.ContactPersons.AddOrUpdate(contactPersons);
             context.Categories.AddOrUpdate(categories);
             context.ProductGroups.AddOrUpdate(productGroups);
             context.Containers.AddOrUpdate(containers);
+            context.Warehouses.AddOrUpdate(warehouse);
             context.SaveChanges();
         }
     }

@@ -1,5 +1,6 @@
 using Kundbolaget.EntityFramework.Context;
 using Kundbolaget.Models.EntityModels;
+using System.Collections.Generic;
 using Kundbolaget.Models;
 
 namespace Kundbolaget.Migrations
@@ -172,6 +173,22 @@ namespace Kundbolaget.Migrations
                 }
             };
 
+            var stock = new ProductStock[]
+            {
+                new ProductStock
+                {
+                Amount = 500,
+                ProductInfo = productInfoes[0],
+                Warehouses = new List<Warehouse> { warehouse }
+                },
+                new ProductStock
+                {
+                Amount = 200,
+                ProductInfo = productInfoes[1],
+                Warehouses = new List<Warehouse> { warehouse }
+                }
+            };
+
             context.Countries.AddOrUpdate(countries);
             context.ContactPersons.AddOrUpdate(contactPersons);
             context.Categories.AddOrUpdate(categories);
@@ -180,6 +197,7 @@ namespace Kundbolaget.Migrations
             context.Warehouses.AddOrUpdate(warehouse);
             context.Companies.AddOrUpdate(companies);
             context.ProductsInfoes.AddOrUpdate(productInfoes);
+            context.ProductStocks.AddOrUpdate(stock);
             context.SaveChanges();
         }
     }

@@ -10,5 +10,6 @@ namespace Kundbolaget.Interfaces
     interface IEntityRepository<T>
     {
         T[] GetEntities();
+        T GetEntity(int id);
     }
 }

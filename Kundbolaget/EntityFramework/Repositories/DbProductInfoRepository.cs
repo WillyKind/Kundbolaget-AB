@@ -18,7 +18,12 @@ namespace Kundbolaget.EntityFramework.Repositories
                 return db.ProductsInfoes.ToArray();
             }
         }
-
-
+        public ProductInfo GetEntity(int id)
+        {
+            using (var db = new StoreContext())
+            {
+                return db.ProductsInfoes.SingleOrDefault(p => p.Id == id);
+            }
+        }
     }
 }

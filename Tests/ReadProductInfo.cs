@@ -16,13 +16,16 @@ namespace Tests
     public class ReadProductInfo
     {
 
-
         [Test]
         public void Read_Product_Info()
         {
+            //Instance for testing "GetEntities"
             DbProductInfoRepository repo = new DbProductInfoRepository();
+
             ProductInfo[] result;
             ProductInfo[] expected;
+            
+            //Testobject
             var container = new Container
             {
                 Name = "33cl",
@@ -49,17 +52,22 @@ namespace Tests
             };
             using (var db = new StoreContext())
             {
+                //Saving test-object to DB
                 db.ProductsInfoes.Add(pi);
                 db.SaveChanges();
+                //Creating arrays to be compared
                 result = repo.GetEntities().ToArray();
                 expected = db.ProductsInfoes.ToArray();
+                //Removes entries in DB.
                 db.ProductsInfoes.Remove(pi);
                 db.ProductGroups.Remove(pg);
                 db.Containers.Remove(container);
                 db.SaveChanges();
                 
             }
+            //Comparing index synced and get a list of bools
             var enumerable = result.Zip(expected,(info, productInfo) => info.Id == productInfo.Id);
+            //Esuring that all bools are true
             Assert.IsTrue(enumerable.All(x => x));
         }
     }

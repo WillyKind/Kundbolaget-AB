@@ -15,7 +15,7 @@ namespace Kundbolaget.EntityFramework.Repositories
         {
             using (var db = new StoreContext())
             {
-                return db.ProductsInfoes.Include(x => x.ProductGroup.Category).Include(x => x.ProductGroup).ToArray();
+                return db.ProductsInfoes.ToArray();
             }
         }
 

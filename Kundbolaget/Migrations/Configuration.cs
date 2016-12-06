@@ -1,3 +1,5 @@
+using Kundbolaget.EntityFramework.Context;
+
 namespace Kundbolaget.Migrations
 {
     using System;
@@ -5,14 +7,14 @@ namespace Kundbolaget.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Kundbolaget.Models.Context.StoreContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<StoreContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Kundbolaget.Models.Context.StoreContext context)
+        protected override void Seed(StoreContext context)
         {
             //  This method will be called after migrating to the latest version.
 

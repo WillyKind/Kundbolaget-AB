@@ -8,6 +8,6 @@ namespace Kundbolaget.Interfaces
 {
     interface IEntityRepository<T>
     {
-
+        T[] GetEnity();
     }
 }

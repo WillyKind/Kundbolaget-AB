@@ -8,7 +8,7 @@ using Kundbolaget.Models.EntityModels;
 
 namespace Kundbolaget.Interfaces
 {
-    interface IEntityRepository<T>
+    interface IEntityRepository<T> : IDisposable
     {
         T[] GetEntities();
         T GetEntity(int id);

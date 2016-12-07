@@ -63,9 +63,9 @@ namespace Tests
                     result = db.ProductsInfoes.SingleOrDefault(p => p.Id == pi.Id);
                     expected = pi;
                     //Removes entries in DB.
-                    repo.DeleteEntity(pi.Id);
-                    db.ProductGroups.Remove(pi.ProductGroup);
-                    db.Containers.Remove(pi.Container);
+                    db.ProductsInfoes.Remove(db.ProductsInfoes.FirstOrDefault(p => p.Id == pi.Id));
+                    db.ProductGroups.Remove(db.ProductGroups.FirstOrDefault(p => p.Id == pi.ProductGroupId));
+                    db.Containers.Remove(db.Containers.FirstOrDefault(p => p.Id == pi.ContainerId));
                     db.SaveChanges();
                 }
                 //Esuring that Id's are equal 

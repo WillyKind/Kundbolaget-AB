@@ -134,6 +134,7 @@
     <Content Include="content\materialize\css\materialize.min.css" />
     <Content Include="content\materialize\font\material-design-icons\LICENSE.txt" />
     <Content Include="content\materialize\font\material-design-icons\Material-Design-Icons.svg" />
+    <Content Include="content\Styles.css" />
     <Content Include="Global.asax" />
     <Content Include="content\materialize\font\roboto\Roboto-Thin.woff2" />
     <Content Include="content\materialize\font\roboto\Roboto-Thin.woff" />

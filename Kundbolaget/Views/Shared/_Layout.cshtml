@@ -3,21 +3,21 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width"/>
     <title>@ViewBag.Title</title>
-    <link href="~/content/materialize/css/materialize.min.css" rel="stylesheet" />
-    <link href="~/content/materialize/css/materialize.css" rel="stylesheet" />
+    <link href="~/content/materialize/css/materialize.min.css" rel="stylesheet"/>
+    <link href="~/content/materialize/css/materialize.css" rel="stylesheet"/>
 </head>
 <body>
 
 <header>
     @Html.Partial("_Navbar")
 </header>
-<div>
+<main>
     @RenderBody()
-</div>
-    <header>
-        @Html.Partial("_Footer")
-    </header>
+</main>
+<footer class="page-footer">
+    @Html.Partial("_Footer")
+</footer>
 </body>
 </html>

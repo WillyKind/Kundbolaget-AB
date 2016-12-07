@@ -42,13 +42,21 @@ namespace Kundbolaget.Migrations
             {
                 new ProductGroup {Name = "Vitt vin", Category = categories[2]},
                 new ProductGroup {Name = "Rött vin", Category = categories[2]},
+                new ProductGroup {Name = "Rosé vin", Category = categories[2]},
                 new ProductGroup {Name = "Mouserande vin", Category = categories[2]},
+                new ProductGroup {Name = "Portvin", Category = categories[2]},
                 new ProductGroup {Name = "IPA", Category = categories[0]},
+                new ProductGroup {Name = "ALE", Category = categories[0]},
                 new ProductGroup {Name = "Lager", Category = categories[0]},
                 new ProductGroup {Name = "APA", Category = categories[0]},
                 new ProductGroup {Name = "Stout", Category = categories[0]},
                 new ProductGroup {Name = "Rom", Category = categories[1]},
-                new ProductGroup {Name = "Vodka", Category = categories[1]}
+                new ProductGroup {Name = "Vodka", Category = categories[1]},
+                new ProductGroup {Name = "Whiskey", Category = categories[1]},
+                new ProductGroup {Name = "Konjak", Category = categories[1]},
+                new ProductGroup {Name = "Likör", Category = categories[1]},
+                new ProductGroup {Name = "Punch", Category = categories[1]},
+                new ProductGroup {Name = "Calvados", Category = categories[1]},
             };
 
             var countries = new Country[]

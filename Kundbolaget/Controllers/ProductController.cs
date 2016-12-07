@@ -87,5 +87,39 @@ namespace Kundbolaget.Controllers
             _productInfo.DeleteEntity(id);
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult Create(ProductInfo model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            _productInfo.CreateEntity(model);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Create()
+        {
+            var containers = _containerRepository.GetEntities();
+            var productGroups = _productGroupRepository.GetEntities();
+
+            var selectListContainers = containers.Select(container => new SelectListItem
+            {
+                Value = container.Id.ToString(),
+                Text = container.Name
+            }).ToList();
+
+            var selectListProductGroups = productGroups.Select(p => new SelectListItem
+            {
+                Value = p.Id.ToString(),
+                Text = p.Name
+            }).ToList();
+
+            ViewBag.Containers = selectListContainers;
+            ViewBag.ProductGroups = selectListProductGroups;
+
+            return View();
+        }
     }
 }

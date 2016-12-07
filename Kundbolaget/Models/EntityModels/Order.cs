@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
-namespace Kundbolaget.Models
+namespace Kundbolaget.Models.EntityModels
 {
     public class Order
     {

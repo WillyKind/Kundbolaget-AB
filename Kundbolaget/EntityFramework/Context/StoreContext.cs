@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
+using Kundbolaget.Models.EntityModels;
 
-namespace Kundbolaget.Models.Context
+namespace Kundbolaget.EntityFramework.Context
 {
     public class StoreContext : DbContext
     {

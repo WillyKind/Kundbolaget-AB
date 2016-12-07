@@ -191,9 +191,12 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="EntityFramework\Context\StoreContext.cs" />
+    <Compile Include="EntityFramework\Repositories\DbProductInfoRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IEntityRepository.cs" />
     <Compile Include="Migrations\201612020945526_InitialModel.cs" />
     <Compile Include="Migrations\201612020945526_InitialModel.Designer.cs">
       <DependentUpon>201612020945526_InitialModel.cs</DependentUpon>
@@ -275,19 +278,18 @@
       <DependentUpon>201612060944313_OneToManyOrderCompany.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Company.cs" />
-    <Compile Include="Models\ContactPerson.cs" />
-    <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\Context\StoreContext.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Container.cs" />
-    <Compile Include="Models\Country.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\OrderDetails.cs" />
-    <Compile Include="Models\ProductInfo.cs" />
-    <Compile Include="Models\ProductGroup.cs" />
-    <Compile Include="Models\ProductStock.cs" />
-    <Compile Include="Models\Warehouse.cs" />
+    <Compile Include="Models\EntityModels\Company.cs" />
+    <Compile Include="Models\EntityModels\ContactPerson.cs" />
+    <Compile Include="Models\EntityModels\Address.cs" />
+    <Compile Include="Models\EntityModels\Category.cs" />
+    <Compile Include="Models\EntityModels\Container.cs" />
+    <Compile Include="Models\EntityModels\Country.cs" />
+    <Compile Include="Models\EntityModels\Order.cs" />
+    <Compile Include="Models\EntityModels\OrderDetails.cs" />
+    <Compile Include="Models\EntityModels\ProductInfo.cs" />
+    <Compile Include="Models\EntityModels\ProductGroup.cs" />
+    <Compile Include="Models\EntityModels\ProductStock.cs" />
+    <Compile Include="Models\EntityModels\Warehouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

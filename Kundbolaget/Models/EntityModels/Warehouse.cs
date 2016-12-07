@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Kundbolaget.Models
+namespace Kundbolaget.Models.EntityModels
 {
     public class Warehouse
     {

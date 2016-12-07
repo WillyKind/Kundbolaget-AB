@@ -1,82 +1,52 @@
 ﻿@model Kundbolaget.Models.EntityModels.ProductInfo
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Produktbeskrivning";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>ProductInfo</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Container.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Container.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductGroup.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductGroup.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Abv)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Abv)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TradingMargin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TradingMargin)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PurchasePrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PurchasePrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Removed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Removed)
-        </dd>
-
-    </dl>
+<div class="row">
+    <div class="col s12 m6">
+        <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">@Html.DisplayFor(model => model.Name)</span>
+                <ul>
+                    <li>
+                        Behållare:
+                        @Html.DisplayFor(model => model.Container.Name)
+                    </li>
+                    <li>
+                        Produktgrupp:
+                        @Html.DisplayFor(model => model.ProductGroup.Name)
+                    </li>
+                    <li>
+                        Produktnamn:
+                        @Html.DisplayFor(model => model.Name)
+                    </li>
+                    <li>
+                        Beskrivning:
+                        @Html.DisplayFor(model => model.Description)
+                    </li>
+                    <li>
+                        Alkoholhalt:
+                        @Html.DisplayFor(model => model.Abv)
+                    </li>
+                    <li>
+                        TG:
+                        @Html.DisplayFor(model => model.TradingMargin)
+                    </li>
+                    <li>
+                        Inköpspris:
+                        @Html.DisplayFor(model => model.PurchasePrice)
+                    </li>
+                </ul>
+                
+                <div class="card-action">
+                    @Html.ActionLink("Produktöversikt", "Index")
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

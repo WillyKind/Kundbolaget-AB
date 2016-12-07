@@ -18,7 +18,7 @@ namespace Kundbolaget.EntityFramework.Context
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<Order> Orders { get; set; }
 
-        public StoreContext() : base(@"data source =.\SQLEXPRESS; initial catalog=KundBolaget; integrated security=SSPI") {}
+        public StoreContext() : base(@"data source =.\SQLEXPRESS; initial catalog=KundBolagetDemo; integrated security=SSPI") {}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

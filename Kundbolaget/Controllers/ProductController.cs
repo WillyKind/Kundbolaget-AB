@@ -62,5 +62,11 @@ namespace Kundbolaget.Controllers
             _productInfo.UpdateEntity(model);
             return RedirectToAction("Index");
         }
+
+        public ActionResult Details(int id)
+        {
+            var model = _productInfo.GetEntity(id);
+            return View(model);
+        }
     }
 }

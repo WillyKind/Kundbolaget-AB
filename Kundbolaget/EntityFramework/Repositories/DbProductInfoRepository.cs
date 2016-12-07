@@ -22,7 +22,10 @@ namespace Kundbolaget.EntityFramework.Repositories
         {
             using (var db = new StoreContext())
             {
-                return db.ProductsInfoes.SingleOrDefault(p => p.Id == id);
+                return db.ProductsInfoes
+                    .Include(p => p.ProductGroup)
+                    .Include(p => p.Container)
+                    .SingleOrDefault(p => p.Id == id);
             }
         }
 

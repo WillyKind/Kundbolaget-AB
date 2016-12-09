@@ -18,5 +18,7 @@ namespace Kundbolaget.Models.EntityModels
         public string Name { get; set; }
 
         public virtual ICollection<ProductInfo> ProductInfoes { get; set; }
+        [Required]
+        public bool IsRemoved { get; set; }
     }
 }

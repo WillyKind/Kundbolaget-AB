@@ -114,7 +114,8 @@ namespace Kundbolaget.Migrations
                 new Address {Street = "Lagervägen", Number = "1A", ZipCode = "000 00"},
                 new Address {Street = "Leveransvägen", Number = "2B", ZipCode = "111 12"},
                 new Address {Street = "Glimmervägen", Number = "1A", ZipCode = "111 11"},
-                new Address {Street = "Leveransvägen", Number = "1A", ZipCode = "111 11"}
+                new Address {Street = "Leveransvägen", Number = "1A", ZipCode = "111 11"},
+                new Address {Street = "Stadsvägen", Number = "1C", ZipCode = "112 11"}
             };
 
 
@@ -128,6 +129,15 @@ namespace Kundbolaget.Migrations
                 Address = addresses.First(a => a.Street == "Lagervägen")
             };
 
+            var wareHouse2 = new Warehouse
+            {
+                Name = "Kundbolagets mindre lager",
+                AmmountOfStorageSpace = 200,
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
+                Email = "mindreLager@kundbolaget.se",
+                PhoneNumber = "+46899 00 01",
+                Address = addresses.First(a => a.Street == "Stadsvägen")
+            };
 
             var icaGruppen = new Company
             {
@@ -237,7 +247,7 @@ namespace Kundbolaget.Migrations
             context.Categories.AddOrUpdate(categories);
             context.ProductGroups.AddOrUpdate(productGroups);
             context.Containers.AddOrUpdate(containers);
-            context.Warehouses.AddOrUpdate(warehouse);
+            context.Warehouses.AddOrUpdate(warehouse, wareHouse2);
             context.Companies.AddOrUpdate(companies);
             context.ProductsInfoes.AddOrUpdate(productInfoes);
             context.ProductStocks.AddOrUpdate(stock);

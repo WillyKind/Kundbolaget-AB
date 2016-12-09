@@ -20,11 +20,10 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public Company GetEntity(int id)
         {
-            using (var db = new StoreContext())
-            {
-                return db.Companies
-                    .SingleOrDefault(c => c.Id == id);
-            }
+            
+                return db.Companies.SingleOrDefault(c => c.Id == id);
+
+            
 
             //using (var db = new StoreContext())
             //{
@@ -59,7 +58,7 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            db.Dispose();
         }
     }
 

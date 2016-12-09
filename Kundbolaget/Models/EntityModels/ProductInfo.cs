@@ -16,6 +16,12 @@ namespace Kundbolaget.Models.EntityModels
         public virtual Container Container { get; set; }
 
         [Required]
+        public int VolumeId { get; set; }
+
+        [ForeignKey("VolumeId")]
+        public virtual Volume Volume { get; set; }
+
+        [Required]
         public int ProductGroupId { get; set; }
 
         [ForeignKey("ProductGroupId")]

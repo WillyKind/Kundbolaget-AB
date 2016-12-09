@@ -386,6 +386,7 @@
     <Content Include="Views\ProductStock\Create.cshtml" />
     <Content Include="Views\ProductStock\Index.cshtml" />
     <Content Include="Views\ProductStock\Details.cshtml" />
+    <Content Include="Views\ProductStock\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

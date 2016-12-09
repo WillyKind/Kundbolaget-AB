@@ -15,7 +15,7 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public ProductInfo[] GetEntities()
         {
-            return db.ProductsInfoes.ToArray();
+            return db.ProductsInfoes.Where(x => x.IsRemoved == false).ToArray();
         }
 
         public ProductInfo GetEntity(int id)
@@ -38,7 +38,7 @@ namespace Kundbolaget.EntityFramework.Repositories
         public void DeleteEntity(int id)
         {
             var product = db.ProductsInfoes.SingleOrDefault(p => p.Id == id);
-            db.ProductsInfoes.Remove(product);
+            product.IsRemoved = true;
             db.SaveChanges();
         }
 

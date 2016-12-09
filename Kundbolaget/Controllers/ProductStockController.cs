@@ -72,6 +72,7 @@ namespace Kundbolaget.Controllers
             return View(_stockRepository.GetEntity(id));
         }
 
+        [HttpPost]
         public ActionResult Edit(ProductStock model)
         {
             if (!ModelState.IsValid)
@@ -80,6 +81,11 @@ namespace Kundbolaget.Controllers
             }
             _stockRepository.UpdateEntity(model);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(int id)
+        {
+            return View(_stockRepository.GetEntity(id));
         }
     }
 }

@@ -291,6 +291,10 @@
     <Compile Include="Migrations\201612090935024_AddsIsRemovedToAddress.Designer.cs">
       <DependentUpon>201612090935024_AddsIsRemovedToAddress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612090943147_AddsIsRemovedToCategories.cs" />
+    <Compile Include="Migrations\201612090943147_AddsIsRemovedToCategories.Designer.cs">
+      <DependentUpon>201612090943147_AddsIsRemovedToCategories.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -398,6 +402,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612090935024_AddsIsRemovedToAddress.resx">
       <DependentUpon>201612090935024_AddsIsRemovedToAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612090943147_AddsIsRemovedToCategories.resx">
+      <DependentUpon>201612090943147_AddsIsRemovedToCategories.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

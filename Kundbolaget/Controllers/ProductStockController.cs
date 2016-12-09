@@ -51,5 +51,35 @@ namespace Kundbolaget.Controllers
             ViewBag.Warehouses = warehouseSelectListItems;
             return View();
         }
+
+        public ActionResult Edit(int id)
+        {
+            var productinfoSelectListItems = new DbProductInfoRepository().GetEntities().Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            }).ToList();
+
+            var warehouseSelectListItems = new DbWarehouseRepository().GetEntities().Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            }).ToList();
+
+            ViewBag.ProductInfoes = productinfoSelectListItems;
+            ViewBag.Warehouses = warehouseSelectListItems;
+
+            return View(_stockRepository.GetEntity(id));
+        }
+
+        public ActionResult Edit(ProductStock model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            _stockRepository.UpdateEntity(model);
+            return RedirectToAction("Index");
+        }
     }
 }

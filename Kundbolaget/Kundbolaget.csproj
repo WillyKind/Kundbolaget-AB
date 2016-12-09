@@ -307,6 +307,10 @@
     <Compile Include="Migrations\201612091002126_AddsIsRemovedToContainer.Designer.cs">
       <DependentUpon>201612091002126_AddsIsRemovedToContainer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612091004084_AddsIsRemovedToCountry.cs" />
+    <Compile Include="Migrations\201612091004084_AddsIsRemovedToCountry.Designer.cs">
+      <DependentUpon>201612091004084_AddsIsRemovedToCountry.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -426,6 +430,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612091002126_AddsIsRemovedToContainer.resx">
       <DependentUpon>201612091002126_AddsIsRemovedToContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091004084_AddsIsRemovedToCountry.resx">
+      <DependentUpon>201612091004084_AddsIsRemovedToCountry.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

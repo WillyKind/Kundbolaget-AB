@@ -344,6 +344,10 @@
     <Compile Include="Migrations\201612091246479_ChangeManyToManyWareHouseProductStockToOneToMany.Designer.cs">
       <DependentUpon>201612091246479_ChangeManyToManyWareHouseProductStockToOneToMany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612091925105_AddVolumeEntity.cs" />
+    <Compile Include="Migrations\201612091925105_AddVolumeEntity.Designer.cs">
+      <DependentUpon>201612091925105_AddVolumeEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -356,6 +360,7 @@
     <Compile Include="Models\EntityModels\ProductInfo.cs" />
     <Compile Include="Models\EntityModels\ProductGroup.cs" />
     <Compile Include="Models\EntityModels\ProductStock.cs" />
+    <Compile Include="Models\EntityModels\Volume.cs" />
     <Compile Include="Models\EntityModels\Warehouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -489,6 +494,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612091246479_ChangeManyToManyWareHouseProductStockToOneToMany.resx">
       <DependentUpon>201612091246479_ChangeManyToManyWareHouseProductStockToOneToMany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091925105_AddVolumeEntity.resx">
+      <DependentUpon>201612091925105_AddVolumeEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

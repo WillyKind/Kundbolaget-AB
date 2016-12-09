@@ -1,15 +1,11 @@
 using Kundbolaget.EntityFramework.Context;
 using Kundbolaget.Models.EntityModels;
-using System.Collections.Generic;
-using Kundbolaget.Models;
+using System;
+using System.Data.Entity.Migrations;
+using System.Linq;
 
 namespace Kundbolaget.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
     internal sealed class Configuration : DbMigrationsConfiguration<StoreContext>
     {
         public Configuration()
@@ -19,28 +15,28 @@ namespace Kundbolaget.Migrations
 
         protected override void Seed(StoreContext context)
         {
-            var volumes = new Volume[]
+            var volumes = new[]
             {
                 new Volume {Milliliter = 33},
                 new Volume {Milliliter = 5},
                 new Volume {Milliliter = 75},
                 new Volume {Milliliter = 100}
             };
-            var containers = new Container[]
+            var containers = new[]
             {
                 new Container {Name = "Burk"},
                 new Container {Name = "Flaska"},
                 new Container {Name = "Box"}
             };
 
-            var categories = new Category[]
+            var categories = new[]
             {
                 new Category {Name = "Öl"},
                 new Category {Name = "Sprit"},
                 new Category {Name = "Vin"},
             };
 
-            var productGroups = new ProductGroup[]
+            var productGroups = new[]
             {
                 new ProductGroup {Name = "Vitt vin", Category = categories[2]},
                 new ProductGroup {Name = "Rött vin", Category = categories[2]},
@@ -61,7 +57,7 @@ namespace Kundbolaget.Migrations
                 new ProductGroup {Name = "Calvados", Category = categories[1]},
             };
 
-            var countries = new Country[]
+            var countries = new[]
             {
                 new Country {Name = "Sweden", CountryCode = "+46", Region = "EMEA"},
                 new Country {Name = "Norway", CountryCode = "+47", Region = "EMEA"},
@@ -69,7 +65,7 @@ namespace Kundbolaget.Migrations
                 new Country {Name = "Denmark", CountryCode = "+45", Region = "EMEA"},
             };
 
-            var contactPersons = new ContactPerson[]
+            var contactPersons = new[]
             {
                 new ContactPerson
                 {
@@ -108,7 +104,7 @@ namespace Kundbolaget.Migrations
                 }
             };
 
-            var addresses = new Address[]
+            var addresses = new[]
             {
                 new Address {Street = "Besöksvägen", Number = "1A", ZipCode = "111 11"},
                 new Address {Street = "Lagervägen", Number = "1A", ZipCode = "000 00"},
@@ -162,19 +158,19 @@ namespace Kundbolaget.Migrations
                 Name = "Ica någonstans"
             };
 
-            var companies = new Company[]
+            var companies = new[]
             {
                 icaGruppen, anyIca
             };
 
-            var productInfoes = new ProductInfo[]
+            var productInfoes = new[]
             {
                 new ProductInfo
                 {
-                    Name = "Norrlandsguld 33cl",
+                    Name = "Norrlandsguld",
                     Abv = 5.3,
                     Container = containers.First(c => c.Name == "Burk"),
-                    Volume = volumes.First(v => v.Milliliter == 0.33),
+                    Volume = volumes[0],
                     Description = "En burk med öl...",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 5.3,
@@ -182,10 +178,10 @@ namespace Kundbolaget.Migrations
                 },
                 new ProductInfo
                 {
-                    Name = "Norrlandsguld 50cl",
+                    Name = "Norrlandsguld",
                     Abv = 5.3,
                     Container = containers.First(c => c.Name == "Burk"),
-                    Volume = volumes.First(v => v.Milliliter == 0.55),
+                    Volume = volumes[1],
                     Description = "En burk med öl...",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 8.3,
@@ -193,10 +189,10 @@ namespace Kundbolaget.Migrations
                 },
                 new ProductInfo
                 {
-                    Name = "Koskenkorva 0.7L",
+                    Name = "Koskenkorva",
                     Abv = 40,
                     Container = containers.First(c => c.Name == "Flaska"),
-                    Volume = volumes.First(v => v.Milliliter == 0.7),
+                    Volume = volumes[2],
                     Description = "En Flaska sprit...",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
                     PurchasePrice = 35,
@@ -204,18 +200,18 @@ namespace Kundbolaget.Migrations
                 },
             };
 
-            var stock = new ProductStock[]
+            var stock = new[]
             {
                 new ProductStock
                 {
                     Amount = 500,
-                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld 33cl"),
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld"),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
                     Amount = 200,
-                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva 0.7L"),
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva"),
                     Warehouse = warehouse
                 }
             };
@@ -226,17 +222,17 @@ namespace Kundbolaget.Migrations
                 CreatedDate = DateTime.Now,
             };
 
-            var orderDetails = new OrderDetails[]
+            var orderDetails = new[]
             {
                 new OrderDetails
                 {
-                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva 0.7L"),
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva"),
                     Amount = 500,
                     Order = dummyOrder
                 },
                 new OrderDetails
                 {
-                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld 33cl"),
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld"),
                     Amount = 500,
                     Order = dummyOrder
                 }

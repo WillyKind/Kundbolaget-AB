@@ -38,8 +38,11 @@ namespace Kundbolaget.EntityFramework.Repositories
         public void DeleteEntity(int id)
         {
             var product = db.ProductsInfoes.SingleOrDefault(p => p.Id == id);
-            product.IsRemoved = true;
-            db.SaveChanges();
+            if (product != null)
+            {
+                product.IsRemoved = true;
+                db.SaveChanges();
+            }
         }
 
         public void UpdateEntity(ProductInfo updatedEntity)

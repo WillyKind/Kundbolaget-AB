@@ -7,14 +7,20 @@ namespace Kundbolaget.Models.EntityModels
     {
         [Key]
         public int Id { get; set; }
-
         [Required]
         public string Name { get; set; }
-
-        [Required]
-        public double Volume { get; set; }
-
         public virtual ICollection<ProductInfo> ProductsInfoes { get; set; }
+        [Required]
+        public bool IsRemoved { get; set; }
+    }
+
+    public class Volume
+    {
+        [Key]
+        public int Id { get; set; }
+        [Required]
+        public double Milliliter { get; set; }
+        public virtual ICollection<ProductInfo> ProductInfos { get; set; }
         [Required]
         public bool IsRemoved { get; set; }
     }

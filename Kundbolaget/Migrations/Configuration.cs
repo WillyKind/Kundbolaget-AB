@@ -19,16 +19,18 @@ namespace Kundbolaget.Migrations
 
         protected override void Seed(StoreContext context)
         {
+            var volumes = new Volume[]
+            {
+                new Volume {Milliliter = 33},
+                new Volume {Milliliter = 5},
+                new Volume {Milliliter = 75},
+                new Volume {Milliliter = 100}
+            };
             var containers = new Container[]
             {
-                new Container {Name = "Burk 0.33L", Volume = 0.33},
-                new Container {Name = "Burk 0.5L", Volume = 0.5},
-                new Container {Name = "Flaska 0.33L", Volume = 0.33},
-                new Container {Name = "Flaska 0.5L", Volume = 0.5},
-                new Container {Name = "Flaska 0.75L", Volume = 0.75},
-                new Container {Name = "Flaska 1L", Volume = 1},
-                new Container {Name = "Flaska 0.7L", Volume = 0.7},
-                new Container {Name = "Flaska 0.35L", Volume = 0.35},
+                new Container {Name = "Burk"},
+                new Container {Name = "Flaska"},
+                new Container {Name = "Box"}
             };
 
             var categories = new Category[]
@@ -161,7 +163,8 @@ namespace Kundbolaget.Migrations
                 {
                     Name = "Norrlandsguld 33cl",
                     Abv = 5.3,
-                    Container = containers.First(c => c.Name == "Burk 0.33L"),
+                    Container = containers.First(c => c.Name == "Burk"),
+                    Volume = volumes.First(v => v.Milliliter == 0.33),
                     Description = "En burk med öl...",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 5.3,
@@ -171,7 +174,8 @@ namespace Kundbolaget.Migrations
                 {
                     Name = "Norrlandsguld 50cl",
                     Abv = 5.3,
-                    Container = containers.First(c => c.Name == "Burk 0.5L"),
+                    Container = containers.First(c => c.Name == "Burk"),
+                    Volume = volumes.First(v => v.Milliliter == 0.55),
                     Description = "En burk med öl...",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 8.3,
@@ -181,7 +185,8 @@ namespace Kundbolaget.Migrations
                 {
                     Name = "Koskenkorva 0.7L",
                     Abv = 40,
-                    Container = containers.First(c => c.Name == "Flaska 0.7L"),
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 0.7),
                     Description = "En Flaska sprit...",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
                     PurchasePrice = 35,

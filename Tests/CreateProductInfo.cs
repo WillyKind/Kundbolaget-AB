@@ -26,13 +26,16 @@ namespace Tests
                 ProductInfo expected;
 
                 //Testobject
-                #region 
+                #region
 
+                var volume = new Volume
+                {
+                    Milliliter = 33
+                };
                 var container = new Container
                 {
                     Name = "33cl",
                     Id = 99,
-                    Volume = 33
                 };
                 var pg = new ProductGroup
                 {
@@ -49,6 +52,7 @@ namespace Tests
                     Abv = 4.3,
                     ProductGroup = pg,
                     Container = container,
+                    Volume = volume,
                     PurchasePrice = 187,
                     TradingMargin = 1.24
                 };

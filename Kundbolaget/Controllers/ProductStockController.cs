@@ -51,5 +51,10 @@ namespace Kundbolaget.Controllers
             ViewBag.Warehouses = warehouseSelectListItems;
             return View();
         }
+
+        public ActionResult Details(int id)
+        {
+            return View(_stockRepository.GetEntity(id));
+        }
     }
 }

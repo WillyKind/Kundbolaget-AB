@@ -19,5 +19,7 @@ namespace Kundbolaget.Models.EntityModels
         public int ProductInfoId { get; set; }
 
         public virtual ICollection<Warehouse> Warehouses { get; set; }
+        [Required]
+        public bool IsRemoved { get; set; }
     }
 }

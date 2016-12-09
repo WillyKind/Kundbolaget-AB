@@ -16,6 +16,8 @@ namespace Kundbolaget.Models.EntityModels
 
         [Required]
         public string ZipCode { get; set; }
+        [Required]
+        public bool IsRemoved { get; set; }
 
         public virtual ICollection<Company> Companies { get; set; }
         public virtual ICollection<Warehouse> Warehouses { get; set; }

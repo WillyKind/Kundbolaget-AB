@@ -195,13 +195,13 @@ namespace Kundbolaget.Migrations
                 {
                     Amount = 500,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld 33cl"),
-                    Warehouses = new List<Warehouse> {warehouse}
+                    Warehouse = warehouse
                 },
                 new ProductStock
                 {
                     Amount = 200,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva 0.7L"),
-                    Warehouses = new List<Warehouse> {warehouse}
+                    Warehouse = warehouse
                 }
             };
 
@@ -213,12 +213,18 @@ namespace Kundbolaget.Migrations
 
             var orderDetails = new OrderDetails[]
             {
-                new OrderDetails {ProductInfo = productInfoes.First(pi=>pi.Name=="Koskenkorva 0.7L"),
+                new OrderDetails
+                {
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva 0.7L"),
                     Amount = 500,
-                    Order = dummyOrder},
-                 new OrderDetails {ProductInfo = productInfoes.First(pi=>pi.Name=="Norrlandsguld 33cl"),
+                    Order = dummyOrder
+                },
+                new OrderDetails
+                {
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld 33cl"),
                     Amount = 500,
-                    Order = dummyOrder}
+                    Order = dummyOrder
+                }
             };
 
             context.Countries.AddOrUpdate(countries);

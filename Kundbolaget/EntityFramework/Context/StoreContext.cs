@@ -12,13 +12,14 @@ namespace Kundbolaget.EntityFramework.Context
         public DbSet<Company> Companies { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<ContactPerson> ContactPersons { get; set; }
-        public DbSet<Country> Countries { get; set; } 
+        public DbSet<Country> Countries { get; set; }
         public DbSet<ProductStock> ProductStocks { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<Order> Orders { get; set; }
 
-        public StoreContext() : base(@"data source =.\SQLEXPRESS; initial catalog=KundBolaget; integrated security=SSPI") {}
+        public StoreContext()
+            : base(@"data source =.\SQLEXPRESS; initial catalog=KundBolaget; integrated security=SSPI") {}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -32,12 +33,9 @@ namespace Kundbolaget.EntityFramework.Context
                 .WithMany(x => x.Companies)
                 .HasForeignKey(x => x.AddressId)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Company>()
-                .HasRequired(x => x.DeliveryAddress)
-                .WithMany(x => x.DeliveryCompanies)
-                .HasForeignKey(x => x.DeliveryAddressId)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<ProductStock>()
+                .HasRequired(x => x.ProductInfo)
+                .WithMany(x => x.ProductStocks);
         }
     }
 }

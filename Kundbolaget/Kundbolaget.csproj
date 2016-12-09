@@ -323,6 +323,10 @@
     <Compile Include="Migrations\201612091010109_AddsIsRemovedToProductGroup.Designer.cs">
       <DependentUpon>201612091010109_AddsIsRemovedToProductGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612091012272_AddsIsRemovedToProductInfo.cs" />
+    <Compile Include="Migrations\201612091012272_AddsIsRemovedToProductInfo.Designer.cs">
+      <DependentUpon>201612091012272_AddsIsRemovedToProductInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -454,6 +458,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612091010109_AddsIsRemovedToProductGroup.resx">
       <DependentUpon>201612091010109_AddsIsRemovedToProductGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091012272_AddsIsRemovedToProductInfo.resx">
+      <DependentUpon>201612091012272_AddsIsRemovedToProductInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

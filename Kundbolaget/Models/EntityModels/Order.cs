@@ -20,5 +20,7 @@ namespace Kundbolaget.Models.EntityModels
 
         [Required]
         public int CompanyId { get; set; }
+        [Required]
+        public bool IsRemoved { get; set; }
     }
 }

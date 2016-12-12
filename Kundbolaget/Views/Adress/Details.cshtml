@@ -1,12 +1,12 @@
 ﻿@model Kundbolaget.Models.EntityModels.Address
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Detaljer";
 }
 
 
-<h3>Är du säker på att du vill ta bort adressen?</h3>
 <div>
+    <h2>Detaljer</h2>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -33,13 +33,8 @@
             @Html.DisplayFor(model => model.ZipCode)
         </dd>
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Ta bort" class="btn btn-default" /> |
-            @Html.ActionLink("Tillbaka", "Index")
-        </div>
-    }
 </div>
+<p>
+    @Html.ActionLink("Ändra adress", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Tillbaka", "Index")
+</p>

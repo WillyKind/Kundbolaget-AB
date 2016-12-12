@@ -188,7 +188,8 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public void CreateEntity(Address newEntity)
         {
-            throw new NotImplementedException();
+            db.Addresses.Add(newEntity);
+            db.SaveChanges();
         }
 
         public void DeleteEntity(int id)

@@ -175,7 +175,7 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public Address[] GetEntities()
         {
-            return db.Addresses.ToArray();
+            return db.Addresses.Where(adress => adress.IsRemoved == false).ToArray();
         }
 
         public Address GetEntity(int id)
@@ -193,7 +193,12 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public void DeleteEntity(int id)
         {
-            throw new NotImplementedException();
+            var product = db.Addresses.SingleOrDefault(p => p.Id == id);
+            if (product != null)
+            {
+                product.IsRemoved = true;
+                db.SaveChanges();
+            }
         }
 
         public void UpdateEntity(Address updatedEntity)

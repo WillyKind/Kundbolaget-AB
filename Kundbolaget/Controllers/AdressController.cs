@@ -38,5 +38,24 @@ namespace Kundbolaget.Controllers
             _adressRepository.UpdateEntity(model);
             return RedirectToAction("Index");
         }
+
+        public ActionResult Delete(int id)
+        {
+            var model = _adressRepository.GetEntity(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Address model, int id)
+        {
+            if (model.Id != id)
+            {
+                ModelState.AddModelError("Name", "Bad Request");
+                return View(model);
+            }
+            _adressRepository.DeleteEntity(id);
+            return RedirectToAction("Index");
+        }
     }
 }

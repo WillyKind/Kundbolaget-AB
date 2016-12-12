@@ -381,6 +381,7 @@
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Adress\Index.cshtml" />
     <Content Include="Views\Adress\Edit.cshtml" />
+    <Content Include="Views\Adress\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

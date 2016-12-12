@@ -13,7 +13,7 @@
         <div class="form-horizontal">
             <h4>ProductStock</h4>
             <hr/>
-            @Html.ValidationSummary(true, "", new {@class = "Test"})
+            @Html.ValidationSummary(true)
             <div class="row">
                 <div class="input-field col s3">
                     <div>
@@ -23,12 +23,12 @@
                             {
                                 @class = "validate",
                                 type = "number",
-                                id = "ammount",
-                                min = "0"
+                                min = "0",
+                                data_val_required = "Antal måste minst vara 0"
                             }
                         })
-                        @Html.ValidationMessageFor(model => model.Amount, "")
-                        @Html.LabelFor(model => model.Amount, "Antal", new {htmlAttributes = new {@for = "ammount"}})
+                        @Html.ValidationMessageFor(model => model.Amount)
+                        @Html.LabelFor(model => model.Amount, "Antal")
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                             @class = "dropdown-content"
                         }
                     })
-                    @Html.ValidationMessageFor(model => model.ProductInfoId, "")
+                    @Html.ValidationMessageFor(model => model.ProductInfoId)
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
                             @class = "dropdown-content"
                         }
                     })
-                    @Html.ValidationMessageFor(model => model.WarehouseId, "")
+                    @Html.ValidationMessageFor(model => model.WarehouseId)
                 </div>
             </div>
             <div class="row">

@@ -164,4 +164,38 @@ namespace Kundbolaget.EntityFramework.Repositories
             throw new NotImplementedException();
         }
     }
+    class DbAdressRepository : IEntityRepository<Address>
+    {
+        private readonly StoreContext db = new StoreContext();
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Address[] GetEntities()
+        {
+            return db.Addresses.ToArray();
+        }
+
+        public Address GetEntity(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateEntity(Address newEntity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteEntity(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateEntity(Address updatedEntity)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

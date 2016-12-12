@@ -28,7 +28,7 @@ namespace Kundbolaget.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            return View(_productInfo.GetEntities());
+            return View(_productInfo.GetEntities().Where(adress => adress.IsRemoved == false));
         }
 
         public ActionResult Edit(int id)

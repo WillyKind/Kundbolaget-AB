@@ -17,6 +17,7 @@ namespace Kundbolaget.EntityFramework.Context
         public DbSet<Warehouse> Warehouses { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Volume> Volumes { get; set; }
 
         public StoreContext()
             : base(@"data source =.\SQLEXPRESS; initial catalog=KundBolaget; integrated security=SSPI") {}

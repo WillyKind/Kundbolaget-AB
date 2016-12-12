@@ -25,6 +25,7 @@ namespace Kundbolaget.EntityFramework.Repositories
                 return db.ProductsInfoes
                     .Include(p => p.ProductGroup)
                     .Include(p => p.Container)
+                    .Include(p => p.Volume)
                     .SingleOrDefault(p => p.Id == id);
             }
         }
@@ -124,6 +125,41 @@ namespace Kundbolaget.EntityFramework.Repositories
         }
 
         public void UpdateEntity(ProductGroup updatedEntity)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    class DbVolumeRepository : IEntityRepository<Volume>
+    {
+        private readonly StoreContext db = new StoreContext();
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Volume[] GetEntities()
+        {
+            return db.Volumes.ToArray();
+        }
+
+        public Volume GetEntity(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateEntity(Volume newEntity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteEntity(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateEntity(Volume updatedEntity)
         {
             throw new NotImplementedException();
         }

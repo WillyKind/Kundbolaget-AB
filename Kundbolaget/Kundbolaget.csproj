@@ -202,8 +202,15 @@
     <Compile Include="Controllers\AdressController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductStockController.cs" />
     <Compile Include="EntityFramework\Context\StoreContext.cs" />
+    <Compile Include="EntityFramework\Repositories\DbAdressRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbContainerRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbProductGroupRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbProductInfoRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbProductStockRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbVolumeRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbWarehouseRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -384,6 +391,10 @@
     <Content Include="Views\Adress\Delete.cshtml" />
     <Content Include="Views\Adress\Create.cshtml" />
     <Content Include="Views\Adress\Details.cshtml" />
+    <Content Include="Views\ProductStock\Create.cshtml" />
+    <Content Include="Views\ProductStock\Index.cshtml" />
+    <Content Include="Views\ProductStock\Details.cshtml" />
+    <Content Include="Views\ProductStock\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

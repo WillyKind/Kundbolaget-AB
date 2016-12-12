@@ -207,6 +207,7 @@
     <Compile Include="EntityFramework\Repositories\DbProductGroupRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbProductInfoRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbProductStockRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbVolumeRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbWarehouseRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

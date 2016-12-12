@@ -24,6 +24,7 @@ namespace Kundbolaget.EntityFramework.Repositories
                 return db.ProductsInfoes
                     .Include(p => p.ProductGroup)
                     .Include(p => p.Container)
+                    .Include(p => p.Volume)
                     .SingleOrDefault(p => p.Id == id);
             }
         }

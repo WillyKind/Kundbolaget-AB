@@ -180,7 +180,10 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public Address GetEntity(int id)
         {
-            throw new NotImplementedException();
+            using (var db = new StoreContext())
+            {
+                return db.Addresses.SingleOrDefault(p => p.Id == id);
+            }
         }
 
         public void CreateEntity(Address newEntity)
@@ -195,7 +198,10 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public void UpdateEntity(Address updatedEntity)
         {
-            throw new NotImplementedException();
+            db.Addresses.Attach(updatedEntity);
+            var entry = db.Entry(updatedEntity);
+            entry.State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }

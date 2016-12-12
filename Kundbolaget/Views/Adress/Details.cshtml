@@ -3,38 +3,30 @@
 @{
     ViewBag.Title = "Detaljer";
 }
-
-
-<div>
-    <h2>Detaljer</h2>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Gata
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Street)
-        </dd>
-
-        <dt>
-            Gatunummer
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Number)
-        </dd>
-
-        <dt>
-            Postkod
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ZipCode)
-        </dd>
-    </dl>
+<div class="row">
+    <div class="col s12 m6">
+        <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">@Html.DisplayFor(model => model.Street) @Html.DisplayFor(model => model.Number)</span>
+                <ul>
+                    <li>
+                        Gata:
+                        @Html.DisplayFor(model => model.Street)
+                    </li>
+                    <li>
+                        Gatunummer:
+                        @Html.DisplayFor(model => model.Number)
+                    </li>
+                    <li>
+                        Postkod:
+                        @Html.DisplayFor(model => model.ZipCode)
+                    </li>
+                </ul>
+                <div class="card-action">
+                    @Html.ActionLink("Tillbaka", "Index")
+                    @Html.ActionLink("Ändra adress", "Edit", new { id = Model.Id }) 
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Ändra adress", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Tillbaka", "Index")
-</p>

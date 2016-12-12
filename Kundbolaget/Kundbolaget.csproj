@@ -199,6 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdressController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="EntityFramework\Context\StoreContext.cs" />
@@ -378,6 +379,11 @@
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Adress\Index.cshtml" />
+    <Content Include="Views\Adress\Edit.cshtml" />
+    <Content Include="Views\Adress\Delete.cshtml" />
+    <Content Include="Views\Adress\Create.cshtml" />
+    <Content Include="Views\Adress\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

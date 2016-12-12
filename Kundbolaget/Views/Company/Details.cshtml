@@ -13,37 +13,41 @@
                 <span class="card-title">@Html.DisplayFor(model => model.Name)</span>
                 <ul>
                     <li>
-                        Behållare:
+                        Namn:
                         @Html.DisplayFor(model => model.Name)
                     </li>
                     <li>
-                        Produktgrupp:
+                        Besöksadress:
                         @Html.DisplayFor(model => model.Address.Street)
                     </li>
                     <li>
-                        Produktnamn:
+                        Land:
                         @Html.DisplayFor(model => model.Country.Name)
                     </li>
                     <li>
-                        Beskrivning:
+                        Kontaktperson:
+                        @Html.DisplayFor(model => model.ContactPerson.FirstName)
+                    <li>
+                    <li>
+                        Email:
                         @Html.DisplayFor(model => model.Email)
                     </li>
                     <li>
-                        Alkoholhalt:
+                        Telefonnummer:
                         @Html.DisplayFor(model => model.PhoneNumber)
                     </li>
                     <li>
-                        TG:
+                        Leveransadress:
                         @Html.DisplayFor(model => model.DeliveryAddress.Street)
                     </li>
                     <li>
-                        Inköpspris:
+                        Moderbolag:
                         @Html.DisplayFor(model => model.ParentCompany.Name)
                     </li>
                 </ul>
 
                 <div class="card-action">
-                    @Html.ActionLink("Företags", "Index")
+                    @Html.ActionLink("Företagsöversikt", "Index")
                 </div>
             </div>
         </div>

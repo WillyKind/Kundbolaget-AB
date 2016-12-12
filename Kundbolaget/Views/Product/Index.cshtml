@@ -18,6 +18,9 @@
             Produktgrupp
         </th>
         <th>
+            Volym i ml
+        </th>
+        <th>
             Produktnamn
         </th>
         <th>
@@ -43,6 +46,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductGroup.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Volume.Milliliter)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

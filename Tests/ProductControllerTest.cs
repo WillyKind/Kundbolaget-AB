@@ -83,17 +83,24 @@ namespace Tests
         [SetUp]
         public void Initializer()
         {
-            var data = ProductInfoList().AsQueryable();
-            _mockSet = new Mock<DbSet<ProductInfo>>();
-            _mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.Provider).Returns(data.Provider);
-            _mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.Expression).Returns(data.Expression);
-            _mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            _mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
             _mockContext = new Mock<StoreContext>();
+            _mockSet = new Mock<DbSet<ProductInfo>>();
+            var data = ProductInfoList().AsQueryable();
+
+            SetupDb(_mockSet, data);
             _mockContext.Setup(x => x.ProductsInfoes).Returns(_mockSet.Object);
             // Injects mock database.
             var dbProductInfoRepository = new DbProductInfoRepository(_mockContext.Object);
             _productController = new ProductController(dbProductInfoRepository);
+        }
+
+        public void SetupDb<T>(Mock<DbSet<T>> mock, IQueryable<T> data) where T : class
+        {
+            mock.As<IQueryable<T>>().Setup(m => m.Provider).Returns(data.Provider);
+            mock.As<IQueryable<T>>().Setup(m => m.Expression).Returns(data.Expression);
+            mock.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mock.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator);
+            _mockContext.Setup(x => x.Set<T>()).Returns(mock.Object);
         }
 
 
@@ -127,5 +134,7 @@ namespace Tests
             Assert.AreEqual(true, result.IsRemoved);
         }
 
+        [Test]
+        public void Edit_Get_Object() {}
     }
 }

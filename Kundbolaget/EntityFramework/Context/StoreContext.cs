@@ -5,7 +5,7 @@ namespace Kundbolaget.EntityFramework.Context
 {
     public class StoreContext : DbContext
     {
-        public DbSet<ProductInfo> ProductsInfoes { get; set; }
+        public virtual DbSet<ProductInfo> ProductsInfoes { get; set; }
         public DbSet<Container> Containers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductGroup> ProductGroups { get; set; }

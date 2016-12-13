@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kundbolaget.EntityFramework.Context;
 using Kundbolaget.Models.EntityModels;
 using Moq;
 using NUnit.Framework;
@@ -19,8 +20,17 @@ namespace Tests
         [Test]
         public void TestTest()
         {
-            var productInfoList = ProductInfoList();
-            var mock = new Mock<DbSet<ProductInfo>>();
+            var data = ProductInfoList().AsQueryable();
+            var mockSet = new Mock<DbSet<ProductInfo>>();
+
+            mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
+            var mockContext = new Mock<StoreContext>();
+            mockContext.Setup(x => x.ProductsInfoes).Returns(mockSet.Object);
+
+
         }
 
         private static List<ProductInfo> ProductInfoList()

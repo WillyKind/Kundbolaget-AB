@@ -76,8 +76,7 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public void CreateEntity(Address newEntity)
         {
-            db.Addresses.Add(newEntity);
-            db.SaveChanges();
+            throw new NotImplementedException();
         }
 
         public void DeleteEntity(int id)
@@ -87,10 +86,6 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public void UpdateEntity(Address updatedEntity)
         {
-            //db.Addresses.Attach(updatedEntity);
-            //var entry = db.Entry(updatedEntity);
-            //entry.State = EntityState.Modified;
-            //db.SaveChanges();
             throw new NotImplementedException();
         }
 
@@ -145,7 +140,7 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public ContactPerson[] GetEntities()
         {
-            throw new NotImplementedException();
+            return db.ContactPersons.ToArray();
         }
 
         public ContactPerson GetEntity(int id)
@@ -206,6 +201,8 @@ namespace Kundbolaget.EntityFramework.Repositories
 
     public class DbDeliveryAddressRepository : IEntityRepository<Address>
     {
+        private readonly StoreContext db = new StoreContext();
+
         public void Dispose()
         {
             throw new NotImplementedException();
@@ -213,7 +210,7 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public Address[] GetEntities()
         {
-            throw new NotImplementedException();
+            return db.Addresses.ToArray();
         }
 
         public Address GetEntity(int id)

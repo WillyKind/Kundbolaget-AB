@@ -39,6 +39,7 @@ namespace Kundbolaget.Controllers
             var model = _companyRepository.GetEntity(id);
             var addresses = _addressRepository.GetEntities();
             var countries = _countryRepository.GetEntities();
+            var parentCompanies = _parentCompanyRepository.GetEntities();
 
             var selectListAddresses = addresses.Select(address => new SelectListItem
             {
@@ -52,8 +53,16 @@ namespace Kundbolaget.Controllers
                 Text = country.Name
             }).ToList();
 
+            var selectListParentCompanies = parentCompanies.Select(parentCompany => new SelectListItem
+            {
+                Value = parentCompany.Id.ToString(),
+                Text = parentCompany.Name,
+            }).ToList();
+            selectListParentCompanies.Add(new SelectListItem { Value = "NULL", Text = "Inget" });
+
             ViewBag.Addresses = selectListAddresses;
             ViewBag.Countries = selectListCountries;
+            ViewBag.ParentCompanies = selectListParentCompanies;
 
             return View(model);
         }

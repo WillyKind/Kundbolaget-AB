@@ -49,6 +49,16 @@ namespace Tests
             Assert.IsTrue(productInfos.All(x => x.ProductGroup.Category.Name == "Öl"));
         }
 
+        [Test]
+        public void Delete_Get_Object()
+        {
+            var actionResult = _productController.Delete(1);
+            var viewResult = actionResult as ViewResult;
+            var productInfo = (ProductInfo) viewResult.Model;
+
+            Assert.AreEqual(1, productInfo.Id);
+        }
+
         private static List<ProductInfo> ProductInfoList()
         {
             var category = new Category

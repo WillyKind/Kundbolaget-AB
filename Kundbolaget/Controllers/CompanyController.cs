@@ -31,6 +31,9 @@ namespace Kundbolaget.Controllers
         // GET: Company
         public ActionResult Index()
         {
+            //var contactPersons = _contactPersonRepository.GetEntities();
+            //var cp = contactPersons.Select(c => c.FirstName + c.LastName);
+            //ViewData.Model = cp; 
             return View(_companyRepository.GetEntities());
         }
 
@@ -65,7 +68,7 @@ namespace Kundbolaget.Controllers
             var selectListAddresses = addresses.Select(address => new SelectListItem
             {
                 Value = address.Id.ToString(),
-                Text = address.Street
+                Text = address.Street + " " + address.Number
             }).ToList();
 
             var selectListCountries = countries.Select(country => new SelectListItem
@@ -77,7 +80,7 @@ namespace Kundbolaget.Controllers
             var selectListContactPersons = contactPersons.Select(contactPerson => new SelectListItem
             {
                 Value = contactPerson.Id.ToString(),
-                Text = contactPerson.FirstName
+                Text = contactPerson.FirstName + " " + contactPerson.LastName
             }).ToList();
 
             var selectListParentCompanies = parentCompanies.Select(parentCompany => new SelectListItem
@@ -131,7 +134,7 @@ namespace Kundbolaget.Controllers
             var selectListAddresses = addresses.Select(address => new SelectListItem
             {
                 Value = address.Id.ToString(),
-                Text = address.Street
+                Text = address.Street + " " + address.Number
             }).ToList();
 
             var selectListCountries = countries.Select(country => new SelectListItem
@@ -143,7 +146,7 @@ namespace Kundbolaget.Controllers
             var selectListContactPersons = contactPersons.Select(contactPerson => new SelectListItem
             {
                 Value = contactPerson.Id.ToString(),
-                Text = contactPerson.FirstName
+                Text = contactPerson.FirstName + " " + contactPerson.LastName
             }).ToList();
 
             var selectListParentCompanies = parentCompanies.Select(parentCompany => new SelectListItem

@@ -17,29 +17,34 @@ namespace Tests
     [TestFixture]
     class ProductControllerTest
     {
+        private Mock<DbSet<ProductInfo>> _mockSet;
+        private ProductController _productController;
+        private Mock<StoreContext> _mockContext;
+
         [SetUp]
-        public void Initializer() {}
+        public void Initializer()
+        {
+            var data = ProductInfoList().AsQueryable();
+            _mockSet = new Mock<DbSet<ProductInfo>>();
+            _mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.Provider).Returns(data.Provider);
+            _mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.Expression).Returns(data.Expression);
+            _mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            _mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
+            _mockContext = new Mock<StoreContext>();
+            _mockContext.Setup(x => x.ProductsInfoes).Returns(_mockSet.Object);
+            // Injects mock database.
+            var dbProductInfoRepository = new DbProductInfoRepository(_mockContext.Object);
+            _productController = new ProductController(dbProductInfoRepository);
+        }
+
 
         [Test]
         public void Index_Retrieve_All_Data()
         {
-            var data = ProductInfoList().AsQueryable();
-            var mockSet = new Mock<DbSet<ProductInfo>>();
-
-            mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
-            var mockContext = new Mock<StoreContext>();
-            mockContext.Setup(x => x.ProductsInfoes).Returns(mockSet.Object);
-            // Injects mock database.
-            var dbProductInfoRepository = new DbProductInfoRepository(mockContext.Object);
-            var productController = new ProductController(dbProductInfoRepository);
-            var actionResult = productController.Index();
+            var actionResult = _productController.Index();
             var viewResult = actionResult as ViewResult;
             var viewResultModel = (ProductInfo[]) viewResult.Model;
             var productInfos = viewResultModel.ToList();
-
             Assert.AreEqual(2, productInfos.Count);
             Assert.IsTrue(productInfos.All(x => x.ProductGroup.Category.Name == "Öl"));
         }

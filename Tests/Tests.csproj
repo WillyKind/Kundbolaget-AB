@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="ProductControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

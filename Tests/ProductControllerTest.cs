@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Kundbolaget.Controllers;
 using Kundbolaget.EntityFramework.Context;
@@ -21,71 +17,13 @@ namespace Tests
         private ProductController _productController;
         private Mock<StoreContext> _mockContext;
 
-        private static List<ProductInfo> ProductInfoList()
-        {
-            var category = new Category
-            {
-                Id = 1,
-                Name = "Öl",
-            };
-            var data = new List<ProductInfo>
-            {
-                new ProductInfo
-                {
-                    Id = 1,
-                    Container = new Container
-                    {
-                        Name = "Flaska"
-                    },
-                    Volume = new Volume
-                    {
-                        Milliliter = 330
-                    },
-                    ProductGroup = new ProductGroup
-                    {
-                        Id = 1,
-                        Category = category,
-                        Name = "Ale",
-                    },
-                    Abv = 7,
-                    Name = "Kalas Oscars finöl",
-                    PurchasePrice = 50,
-                    TradingMargin = 15,
-                    Description = "Kalas ska det vara."
-                },
-                new ProductInfo
-                {
-                    Id = 2,
-                    ProductGroup = new ProductGroup
-                    {
-                        Id = 2,
-                        Category = category,
-                        Name = "Lager",
-                    },
-                    Name = "Sofiero",
-                    Abv = 8,
-                    PurchasePrice = 30,
-                    TradingMargin = 10,
-                    Container = new Container
-                    {
-                        Name = "Burk",
-                    },
-                    Volume = new Volume
-                    {
-                        Milliliter = 500
-                    },
-                    Description = "Sofieros fina goda öl."
-                }
-            };
-            return data;
-        }
 
         [SetUp]
         public void Initializer()
         {
             _mockContext = new Mock<StoreContext>();
             _mockSet = new Mock<DbSet<ProductInfo>>();
-            var data = ProductInfoList().AsQueryable();
+            var data = ResourceData.ProductInfoList.AsQueryable();
 
             SetupDb(_mockSet, data);
             _mockContext.Setup(x => x.ProductsInfoes).Returns(_mockSet.Object);

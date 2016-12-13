@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Kundbolaget.EntityFramework.Context;
+using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.Models.EntityModels;
 using Moq;
 using NUnit.Framework;
@@ -29,7 +30,10 @@ namespace Tests
             mockSet.As<IQueryable<ProductInfo>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
             var mockContext = new Mock<StoreContext>();
             mockContext.Setup(x => x.ProductsInfoes).Returns(mockSet.Object);
-
+            // Injects mock database.
+            var dbProductInfoRepository = new DbProductInfoRepository(mockContext.Object);
+            var productInfos = dbProductInfoRepository.GetEntities();
+            Assert.AreEqual(2, productInfos.Length);
 
         }
 

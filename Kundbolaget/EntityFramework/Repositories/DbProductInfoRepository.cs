@@ -10,7 +10,17 @@ namespace Kundbolaget.EntityFramework.Repositories
 {
     public class DbProductInfoRepository : IEntityRepository<ProductInfo>
     {
-        private readonly StoreContext db = new StoreContext();
+        private readonly StoreContext db;
+
+        public DbProductInfoRepository()
+        {
+            db = new StoreContext();
+        }
+
+        public DbProductInfoRepository(StoreContext fakeContext)
+        {
+            db = fakeContext;
+        }
 
         public ProductInfo[] GetEntities()
         {

@@ -59,6 +59,15 @@ namespace Tests
             Assert.AreEqual(1, productInfo.Id);
         }
 
+        [Test]
+        public void Delete_Change_IsRemoved()
+        {
+            var productInfo = ProductInfoList().First();
+            _productController.Delete(productInfo, productInfo.Id);
+            var result = _mockSet.Object.First(x => x.Id == productInfo.Id);
+            Assert.AreEqual(true, result.IsRemoved);
+        }
+
         private static List<ProductInfo> ProductInfoList()
         {
             var category = new Category

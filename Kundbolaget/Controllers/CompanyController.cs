@@ -39,7 +39,9 @@ namespace Kundbolaget.Controllers
             var model = _companyRepository.GetEntity(id);
             var addresses = _addressRepository.GetEntities();
             var countries = _countryRepository.GetEntities();
+            var contactPersons = _contactPersonRepository.GetEntities();
             var parentCompanies = _parentCompanyRepository.GetEntities();
+            var deliveryAddresses = _dbDeliveryAddressRepository.GetEntities();
 
             var selectListAddresses = addresses.Select(address => new SelectListItem
             {
@@ -53,16 +55,31 @@ namespace Kundbolaget.Controllers
                 Text = country.Name
             }).ToList();
 
+            var selectListContactPersons = contactPersons.Select(contactPerson => new SelectListItem
+            {
+                Value = contactPerson.Id.ToString(),
+                Text = contactPerson.FirstName
+            }).ToList();
+
             var selectListParentCompanies = parentCompanies.Select(parentCompany => new SelectListItem
             {
                 Value = parentCompany.Id.ToString(),
                 Text = parentCompany.Name,
             }).ToList();
+
             selectListParentCompanies.Add(new SelectListItem { Value = "NULL", Text = "Inget" });
+
+            var selectListDeliveryAddresses = deliveryAddresses.Select(deliveryAddress => new SelectListItem
+            {
+                Value = deliveryAddress.Id.ToString(),
+                Text = deliveryAddress.Street
+            }).ToList();
 
             ViewBag.Addresses = selectListAddresses;
             ViewBag.Countries = selectListCountries;
+            ViewBag.ContactPersons = selectListContactPersons;
             ViewBag.ParentCompanies = selectListParentCompanies;
+            ViewBag.DeliveryAddresses = selectListDeliveryAddresses;
 
             return View(model);
         }
@@ -86,15 +103,17 @@ namespace Kundbolaget.Controllers
 
         public ActionResult Create()
         {
-            //var addresses = _addressRepository.GetEntities();
+            var addresses = _addressRepository.GetEntities();
             var countries = _countryRepository.GetEntities();
+            var contactPersons = _contactPersonRepository.GetEntities();
             var parentCompanies = _parentCompanyRepository.GetEntities();
+            var deliveryAddresses = _dbDeliveryAddressRepository.GetEntities();
 
-            //var selectListAddresses = addresses.Select(address => new SelectListItem
-            //{
-            //    Value = address.Id.ToString(),
-            //    Text = address.Street
-            //}).ToList();
+            var selectListAddresses = addresses.Select(address => new SelectListItem
+            {
+                Value = address.Id.ToString(),
+                Text = address.Street
+            }).ToList();
 
             var selectListCountries = countries.Select(country => new SelectListItem
             {
@@ -102,15 +121,32 @@ namespace Kundbolaget.Controllers
                 Text = country.Name
             }).ToList();
 
+            var selectListContactPersons = contactPersons.Select(contactPerson => new SelectListItem
+            {
+                Value = contactPerson.Id.ToString(),
+                Text = contactPerson.FirstName
+            }).ToList();
+
             var selectListParentCompanies = parentCompanies.Select(parentCompany => new SelectListItem
             {
                 Value = parentCompany.Id.ToString(),
                 Text = parentCompany.Name,
             }).ToList();
+
             selectListParentCompanies.Add(new SelectListItem {Value = "NULL", Text = "Inget"});
-            //ViewBag.Addresses = selectListAddresses;
+
+            var selectListDeliveryAddresses = deliveryAddresses.Select(deliveryAddress => new SelectListItem
+            {
+                Value = deliveryAddress.Id.ToString(),
+                Text = deliveryAddress.Street
+            }).ToList();
+
+            ViewBag.Addresses = selectListAddresses;
             ViewBag.Countries = selectListCountries;
+            ViewBag.ContactPersons = selectListContactPersons;
             ViewBag.ParentCompanies = selectListParentCompanies;
+            ViewBag.DeliveryAddresses = selectListDeliveryAddresses;
+
             return View();
         }
 

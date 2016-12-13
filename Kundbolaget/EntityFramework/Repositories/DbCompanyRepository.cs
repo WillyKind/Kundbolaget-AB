@@ -16,7 +16,7 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public Company[] GetEntities()
         {
-            return db.Companies.ToArray();
+            return db.Companies.Include(c => c.Country).ToArray();
         }
 
         public Company GetEntity(int id)

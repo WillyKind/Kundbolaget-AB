@@ -22,13 +22,17 @@ namespace Kundbolaget.Controllers
             _containerRepository = new DbContainerRepository();
             _productGroupRepository = new DbProductGroupRepository();
             _volumeRepository = new DbVolumeRepository();
+        }
 
+        public ProductController(DbProductInfoRepository productInfoRepository)
+        {
+            _productInfo = productInfoRepository;
         }
 
         // GET: Product
         public ActionResult Index()
         {
-            return View(_productInfo.GetEntities().Where(adress => adress.IsRemoved == false));
+            return View(_productInfo.GetEntities());
         }
 
         public ActionResult Edit(int id)

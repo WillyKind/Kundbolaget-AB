@@ -4,6 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
+using Kundbolaget.Controllers;
 using Kundbolaget.EntityFramework.Context;
 using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.Models.EntityModels;
@@ -19,7 +21,7 @@ namespace Tests
         public void Initializer() {}
 
         [Test]
-        public void TestTest()
+        public void Index_Retrieve_All_Data()
         {
             var data = ProductInfoList().AsQueryable();
             var mockSet = new Mock<DbSet<ProductInfo>>();
@@ -32,9 +34,14 @@ namespace Tests
             mockContext.Setup(x => x.ProductsInfoes).Returns(mockSet.Object);
             // Injects mock database.
             var dbProductInfoRepository = new DbProductInfoRepository(mockContext.Object);
-            var productInfos = dbProductInfoRepository.GetEntities();
-            Assert.AreEqual(2, productInfos.Length);
+            var productController = new ProductController(dbProductInfoRepository);
+            var actionResult = productController.Index();
+            var viewResult = actionResult as ViewResult;
+            var viewResultModel = (ProductInfo[]) viewResult.Model;
+            var productInfos = viewResultModel.ToList();
 
+            Assert.AreEqual(2, productInfos.Count);
+            Assert.IsTrue(productInfos.All(x => x.ProductGroup.Category.Name == "Öl"));
         }
 
         private static List<ProductInfo> ProductInfoList()

@@ -200,6 +200,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdressController.cs" />
+    <Compile Include="Controllers\CustomerProductController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductStockController.cs" />
@@ -395,6 +396,7 @@
     <Content Include="Views\ProductStock\Index.cshtml" />
     <Content Include="Views\ProductStock\Details.cshtml" />
     <Content Include="Views\ProductStock\Edit.cshtml" />
+    <Content Include="Views\CustomerProduct\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

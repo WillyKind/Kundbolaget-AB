@@ -1,0 +1,38 @@
+﻿@using System.ComponentModel.DataAnnotations
+@model IEnumerable<Kundbolaget.Models.EntityModels.ProductInfo>
+
+@{
+    ViewBag.Title = "Produkter";
+}
+
+
+
+<div class="row">
+    @foreach (var productInfo in Model)
+    {
+      
+            <div class="card col s12 l4">
+                <div class="card blue-grey darken-1">
+                    <div class="activator card-content white-text">
+                        <p>
+                            @Html.DisplayFor(modelItem => productInfo.Description)
+                            
+                        </p>
+                    </div>
+                </div>
+                <div class="card-content activator">
+                    <span class="card-title activator grey-text text-darken-4">@Html.DisplayFor(modelItem => productInfo.Name) @Html.DisplayFor(modelItem => productInfo.Volume.Milliliter)ml @Html.DisplayFor(modelItem => productInfo.PurchasePrice)kr/st<i class="material-icons right">more_vert</i></span>
+
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">@Html.DisplayFor(modelItem => productInfo.Name) @Html.DisplayFor(modelItem => productInfo.Volume.Milliliter)ml<i class="material-icons right">close</i></span>
+                    <p>Behållare: @Html.DisplayFor(modelItem => productInfo.Container.Name)</p>
+                    <p>Kategori: @Html.DisplayFor(modelItem => productInfo.ProductGroup.Category.Name)</p>
+                    <p>Typ: @Html.DisplayFor(modelItem => productInfo.ProductGroup.Name)</p>
+                    <p>ABV: @Html.DisplayFor(modelItem => productInfo.Abv)%</p>
+                </div>
+            </div>
+    }
+</div>
+    
+

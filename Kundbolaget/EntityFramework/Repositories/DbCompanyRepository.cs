@@ -31,8 +31,6 @@ namespace Kundbolaget.EntityFramework.Repositories
                     .Include(c => c.DeliveryAddress)
                     .SingleOrDefault(c => c.Id == id);
             }
-
-            //return db.Companies.SingleOrDefault(c => c.Id == id);
         }
 
         public void CreateEntity(Company newEntity)
@@ -43,7 +41,9 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public void DeleteEntity(int id)
         {
-            throw new NotImplementedException();
+            var company = db.Companies.SingleOrDefault(c => c.Id == id);
+            db.Companies.Remove(company);
+            db.SaveChanges();
         }
 
         public void UpdateEntity(Company updatedEntity)

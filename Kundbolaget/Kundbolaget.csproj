@@ -407,11 +407,11 @@
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
-    <Content Include="Views\Adress\Index.cshtml" />
-    <Content Include="Views\Adress\Edit.cshtml" />
-    <Content Include="Views\Adress\Delete.cshtml" />
-    <Content Include="Views\Adress\Create.cshtml" />
-    <Content Include="Views\Adress\Details.cshtml" />
+    <Content Include="Views\Address\Index.cshtml" />
+    <Content Include="Views\Address\Edit.cshtml" />
+    <Content Include="Views\Address\Delete.cshtml" />
+    <Content Include="Views\Address\Create.cshtml" />
+    <Content Include="Views\Address\Details.cshtml" />
     <Content Include="Views\ProductStock\Create.cshtml" />
     <Content Include="Views\ProductStock\Index.cshtml" />
     <Content Include="Views\ProductStock\Details.cshtml" />
@@ -429,6 +429,8 @@
     <Content Include="Views\Company\Create.cshtml" />
     <Content Include="Views\Company\Edit.cshtml" />
     <Content Include="Views\Company\Delete.cshtml" />
+    <Content Include="Views\Home\AdminManager.cshtml" />
+    <Content Include="Views\Home\CustomerSite.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

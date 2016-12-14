@@ -13,5 +13,13 @@ namespace Kundbolaget.Controllers
         {
             return View();
         }
+        public ActionResult AdminManager()
+        {
+            return View();
+        }
+        public ActionResult CustomerSite()
+        {
+            return View();
+        }
     }
 }

@@ -3,5 +3,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Välkommen till Nisses Kundbolag</h2>
+
+@Html.ActionLink("Kundsida", "CustomerSite", "Home", null, new { @class = "waves-effect waves-light btn" })
+@Html.ActionLink("Adminsida", "AdminManager", "Home", null, new { @class = "waves-effect waves-light btn" })
 

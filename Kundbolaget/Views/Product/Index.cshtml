@@ -32,7 +32,9 @@
         <th>
             Inköpspris
         </th>
-        <th></th>
+        <th>
+            Utpris
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -58,6 +60,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PurchasePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @Html.ActionLink("Ändra", "Edit", new {id = item.Id}) |

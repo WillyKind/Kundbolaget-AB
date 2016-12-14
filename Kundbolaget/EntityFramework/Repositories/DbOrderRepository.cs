@@ -28,7 +28,9 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public bool ValidateCompanyOrderId(int customerOrderId, int companyId)
         {
-            var ordernumerExists = db.Orders.Where(o => o.Company.ParentCompanyId == companyId && !o.IsRemoved).Any(o => o.CustomerOrderId == customerOrderId);
+            var ordernumerExists =
+                db.Orders.Where(o => o.Company.ParentCompanyId == companyId && !o.IsRemoved)
+                    .Any(o => o.CustomerOrderId == customerOrderId);
             return ordernumerExists;
         }
 
@@ -40,7 +42,12 @@ namespace Kundbolaget.EntityFramework.Repositories
                 var orderedProducts = new List<OrderDetails>();
                 foreach (var products in subOrder.orderedProducts)
                 {
-                    orderedProducts.Add(new OrderDetails {ProductInfoId = products.productId, Amount = products.amount});
+                    orderedProducts.Add(new OrderDetails
+                    {
+                        ProductInfo = db.ProductsInfoes.FirstOrDefault(p => p.Id == products.productId),
+                        ProductInfoId = products.productId,
+                        Amount = products.amount
+                    });
                 }
                 orders.Add(new Order
                 {
@@ -48,7 +55,8 @@ namespace Kundbolaget.EntityFramework.Repositories
                     WishedDeliveryDate = DateTime.Parse(subOrder.deliverDate),
                     CreatedDate = DateTime.Now,
                     CustomerOrderId = order.customerOrderFileId,
-                    OrderDetails = orderedProducts
+                    OrderDetails = orderedProducts,
+                    Price = orderedProducts.Sum(p => p.ProductInfo.Price*p.Amount)
                 });
             }
             db.Orders.AddRange(orders);
@@ -68,6 +76,6 @@ namespace Kundbolaget.EntityFramework.Repositories
         public OrderDetails[] GetOrderDetails(int id)
         {
             return db.OrderDetails.Where(o => o.OrderId == id).ToArray();
-        }     
+        }
     }
 }

@@ -24,9 +24,12 @@ namespace Kundbolaget.Controllers
             _volumeRepository = new DbVolumeRepository();
         }
 
-        public ProductController(DbProductInfoRepository productInfoRepository)
+        public ProductController(DbProductInfoRepository productInfoRepository, DbContainerRepository containerRepository, DbProductGroupRepository productGroupRepository , DbVolumeRepository volumeRepository)
         {
             _productInfo = productInfoRepository;
+            _containerRepository = containerRepository;
+            _productGroupRepository = productGroupRepository;
+            _volumeRepository = volumeRepository;
         }
 
         // GET: Product

@@ -26,6 +26,7 @@ namespace Tests
             var data = ResourceData.ProductInfoList.AsQueryable();
 
             SetupDb(_mockSet, data);
+
             _mockContext.Setup(x => x.ProductsInfoes).Returns(_mockSet.Object);
             // Injects mock database.
             var dbProductInfoRepository = new DbProductInfoRepository(_mockContext.Object);

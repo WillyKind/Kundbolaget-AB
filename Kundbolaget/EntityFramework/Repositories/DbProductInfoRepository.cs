@@ -30,13 +30,10 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public ProductInfo GetEntity(int id)
         {
-            using (var db = new StoreContext())
-            {
-                return db.ProductsInfoes
-                    .Include(p => p.ProductGroup)
-                    .Include(p => p.Container)
-                    .SingleOrDefault(p => p.Id == id);
-            }
+            return db.ProductsInfoes
+                .Include(p => p.ProductGroup)
+                .Include(p => p.Container)
+                .SingleOrDefault(p => p.Id == id);
         }
 
         public void CreateEntity(ProductInfo newEntity)

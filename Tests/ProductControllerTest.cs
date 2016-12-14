@@ -57,6 +57,10 @@ namespace Tests
             _mockContext.Setup(x => x.ProductGroups).Returns(setupDbPg.Object);
             _mockContext.Setup(x => x.Volumes).Returns(setupDbVol.Object);
 
+            //This will make the mock version of the db approve any string given to the include method.
+            //Without this you will get null reference exception when calling include.
+            _mockSetProductInfo.Setup(x => x.Include(It.IsAny<string>())).Returns(_mockSetProductInfo.Object);
+
             // Injects mock database via overloaded ctor
             var dbProductInfoRepository = new DbProductInfoRepository(_mockContext.Object);
             var dbContainerRepository = new DbContainerRepository(_mockContext.Object);

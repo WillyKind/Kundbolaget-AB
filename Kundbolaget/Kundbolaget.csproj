@@ -380,6 +380,10 @@
     <Compile Include="Migrations\201612141334441_AddsPriceToOrder.Designer.cs">
       <DependentUpon>201612141334441_AddsPriceToOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612141429332_AddsPricePropsToOrderDEtails.cs" />
+    <Compile Include="Migrations\201612141429332_AddsPricePropsToOrderDEtails.Designer.cs">
+      <DependentUpon>201612141429332_AddsPricePropsToOrderDEtails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -558,6 +562,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612141334441_AddsPriceToOrder.resx">
       <DependentUpon>201612141334441_AddsPriceToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141429332_AddsPricePropsToOrderDEtails.resx">
+      <DependentUpon>201612141429332_AddsPricePropsToOrderDEtails.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

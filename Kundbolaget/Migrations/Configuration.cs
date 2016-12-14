@@ -231,13 +231,17 @@ namespace Kundbolaget.Migrations
                 new OrderDetails
                 {
                     ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva"),
-                    Amount = 500,
-                    Order = dummyOrder
+                    Amount = 10,
+                    Order = dummyOrder,
+                    UnitPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price,
+                    TotalPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price*10
                 },
                 new OrderDetails
                 {
                     ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld"),
-                    Amount = 500,
+                    Amount = 25,
+                    UnitPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price,
+                    TotalPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price*25,
                     Order = dummyOrder
                 }
             };

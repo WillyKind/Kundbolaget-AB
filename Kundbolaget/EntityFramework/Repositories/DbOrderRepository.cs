@@ -42,11 +42,14 @@ namespace Kundbolaget.EntityFramework.Repositories
                 var orderedProducts = new List<OrderDetails>();
                 foreach (var products in subOrder.orderedProducts)
                 {
+                    var product = db.ProductsInfoes.FirstOrDefault(p => p.Id == products.productId);
                     orderedProducts.Add(new OrderDetails
                     {
-                        ProductInfo = db.ProductsInfoes.FirstOrDefault(p => p.Id == products.productId),
+                        ProductInfo = product,
                         ProductInfoId = products.productId,
-                        Amount = products.amount
+                        Amount = products.amount,
+                        UnitPrice = product.Price,
+                        TotalPrice = product.Price * products.amount
                     });
                 }
                 orders.Add(new Order

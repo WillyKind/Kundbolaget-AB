@@ -14,7 +14,12 @@
         <th>
             Mängd
         </th>
-        <th></th>
+        <th>
+            Pris styck
+        </th>
+        <th>
+            Pris total
+        </th>
     </tr>
 
     @foreach (var item in Model) {
@@ -24,6 +29,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
         </tr>
     }

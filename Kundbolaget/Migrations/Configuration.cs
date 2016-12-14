@@ -174,7 +174,8 @@ namespace Kundbolaget.Migrations
                     Description = "En burk med öl...",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 5.3,
-                    TradingMargin = 10
+                    TradingMargin = 10,
+                    Price = 250
                 },
                 new ProductInfo
                 {
@@ -186,6 +187,7 @@ namespace Kundbolaget.Migrations
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 8.3,
                     TradingMargin = 8,
+                    Price = 325
                 },
                 new ProductInfo
                 {
@@ -196,7 +198,8 @@ namespace Kundbolaget.Migrations
                     Description = "En Flaska sprit...",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
                     PurchasePrice = 35,
-                    TradingMargin = 50
+                    TradingMargin = 50,
+                    Price = 900
                 },
             };
 
@@ -220,7 +223,7 @@ namespace Kundbolaget.Migrations
             {
                 Company = companies.First(c => c.Name == "Ica någonstans"),
                 CreatedDate = DateTime.Now,
-                WishedDeliveryDate = DateTime.Parse("2016-12-12")
+                WishedDeliveryDate = DateTime.Parse("2016-12-12"),
             };
 
             var orderDetails = new[]
@@ -228,16 +231,22 @@ namespace Kundbolaget.Migrations
                 new OrderDetails
                 {
                     ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva"),
-                    Amount = 500,
-                    Order = dummyOrder
+                    Amount = 10,
+                    Order = dummyOrder,
+                    UnitPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price,
+                    TotalPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price*10
                 },
                 new OrderDetails
                 {
                     ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld"),
-                    Amount = 500,
+                    Amount = 25,
+                    UnitPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price,
+                    TotalPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price*25,
                     Order = dummyOrder
                 }
             };
+            dummyOrder.Price += orderDetails.Sum(p => p.ProductInfo.Price*p.Amount);
+
 
             context.Countries.AddOrUpdate(countries);
             context.ContactPersons.AddOrUpdate(contactPersons);

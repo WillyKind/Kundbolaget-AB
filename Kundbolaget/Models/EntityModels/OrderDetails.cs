@@ -24,5 +24,9 @@ namespace Kundbolaget.Models.EntityModels
         public virtual Order Order { get; set; }
         [Required]
         public bool IsRemoved { get; set; }
+        [Required]
+        public double UnitPrice { get; set; }
+        [Required]
+        public double TotalPrice { get; set; }
     }
 }

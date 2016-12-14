@@ -33,7 +33,6 @@ namespace Tests
             _mockSetProductGroup = new Mock<DbSet<ProductGroup>>();
             _mockSetVolume = new Mock<DbSet<Volume>>();
 
-
             var dataProductInfos = ResourceData.ProductInfoList.AsQueryable();
             var dataContainers = ResourceData.Containers.AsQueryable();
             var productGroups = ResourceData.ProductGroups.AsQueryable();
@@ -43,12 +42,6 @@ namespace Tests
             var setupDbCon = SetupDb(_mockSetContainer, dataContainers);
             var setupDbPg = SetupDb(_mockSetProductGroup, productGroups);
             var setupDbVol = SetupDb(_mockSetVolume, volumes);
-
-
-            //SetupDb(_mockSetContainer, dataContainers);
-            //SetupDb(_mockSetProductGroup, productGroups);
-            //SetupDb(_mockSetVolume, volumes);
-
 
             _mockContext.Setup(x => x.ProductsInfoes).Returns(setupDbPi.Object);
             _mockContext.Setup(x => x.Containers).Returns(setupDbCon.Object);
@@ -143,8 +136,8 @@ namespace Tests
                 TradingMargin = 5
             };
             _productController.Create(productInfo);
-            _mockSetProductInfo.Verify(x => x.Add(productInfo));
-            _mockContext.Verify(x => x.SaveChanges());
+            _mockSetProductInfo.Verify(x => x.Add(productInfo), Times.Once);
+            _mockContext.Verify(x => x.SaveChanges(), Times.Once);
         }
 
 

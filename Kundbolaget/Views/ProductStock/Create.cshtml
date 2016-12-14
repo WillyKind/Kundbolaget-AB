@@ -1,53 +1,79 @@
-﻿@model Kundbolaget.Models.EntityModels.ProductStock
+﻿@using Kundbolaget.Models.EntityModels
+@model Kundbolaget.Models.EntityModels.ProductStock
 
 @{
     ViewBag.Title = "Create";
 }
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<div class="row">
+    @using (Html.BeginForm("Create", "ProductStock", FormMethod.Post, new {@class = "col s12"}))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <h4>ProductStock</h4>
+            <hr/>
+            @Html.ValidationSummary(true)
+            <div class="row">
+                <div class="input-field col s3">
+                    <div>
+                        @Html.EditorFor(model => model.Amount, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "validate",
+                                type = "number",
+                                min = "0",
+                                data_val_required = "Antal måste minst vara 0"
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.Amount)
+                        @Html.LabelFor(model => model.Amount, "Antal")
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s10">
+                    @Html.LabelFor(model => model.ProductInfoId, "Produktartikel")
+                    @Html.DropDownListFor(model => model.ProductInfoId, (List<SelectListItem>) ViewBag.ProductInfoes, new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "dropdown-content"
+                        }
+                    })
+                    @Html.ValidationMessageFor(model => model.ProductInfoId)
+                </div>
+            </div>
 
-    <div class="form-horizontal">
-        <h4>ProductStock</h4>
-        <hr/>
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-        <div class="form-group">
-            @Html.LabelFor(model => model.Amount, "Antal", htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Amount, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Amount, "", new {@class = "text-danger"})
+            <div class="row">
+                <div class="col s10">
+                    @Html.LabelFor(model => model.WarehouseId, "Varuhus")
+                    @Html.DropDownListFor(model => model.WarehouseId, (List<SelectListItem>) ViewBag.Warehouses, new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "dropdown-content"
+                        }
+                    })
+                    @Html.ValidationMessageFor(model => model.WarehouseId)
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn waves-effect waves-light" type="submit", name="action">
+                    Skapa
+                    <i class="material-icons right">add</i>
+                </button>
             </div>
         </div>
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProductInfoId, "Produktartikel", htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ProductInfoId, (List<SelectListItem>) ViewBag.ProductInfoes)
-                @Html.ValidationMessageFor(model => model.ProductInfoId, "", new {@class = "text-danger"})
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.WarehouseId, "Varuhus", htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.WarehouseId, (List<SelectListItem>) ViewBag.Warehouses)
-                @Html.ValidationMessageFor(model => model.WarehouseId, "", new {@class = "text-danger"})
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default"/>
-            </div>
-        </div>
+    <div>
+        @Html.ActionLink("Backa", "Index")
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
-
+@*Is required for validation*@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@*Is required for validation*@

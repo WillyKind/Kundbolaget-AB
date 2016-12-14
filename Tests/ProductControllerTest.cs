@@ -14,6 +14,10 @@ namespace Tests
     [TestFixture]
     class ProductControllerTest
     {
+        //FAKE CONTEXT
+        private Mock<StoreContext> _mockContext;
+        
+        //FAKE DbSet
         private Mock<DbSet<ProductInfo>> _mockSetProductInfo;
         private Mock<DbSet<Container>> _mockSetContainer;
         private Mock<DbSet<ProductGroup>> _mockSetProductGroup;
@@ -21,40 +25,46 @@ namespace Tests
 
 
         private ProductController _productController;
-        private Mock<StoreContext> _mockContext;
+        
+        
 
 
         [SetUp]
         public void Initializer()
         {
+            //New that shit up everytime a test runs
             _mockContext = new Mock<StoreContext>();
             _mockSetProductInfo = new Mock<DbSet<ProductInfo>>();
             _mockSetContainer = new Mock<DbSet<Container>>();
             _mockSetProductGroup = new Mock<DbSet<ProductGroup>>();
             _mockSetVolume = new Mock<DbSet<Volume>>();
 
+            //WE NEED DATA
             var dataProductInfos = ResourceData.ProductInfoList.AsQueryable();
             var dataContainers = ResourceData.Containers.AsQueryable();
             var productGroups = ResourceData.ProductGroups.AsQueryable();
             var volumes = ResourceData.Volumes.AsQueryable();
 
+            //Setup behavior
             var setupDbPi = SetupDb(_mockSetProductInfo, dataProductInfos);
             var setupDbCon = SetupDb(_mockSetContainer, dataContainers);
             var setupDbPg = SetupDb(_mockSetProductGroup, productGroups);
             var setupDbVol = SetupDb(_mockSetVolume, volumes);
-
+            
+            //Setup behavior
             _mockContext.Setup(x => x.ProductsInfoes).Returns(setupDbPi.Object);
             _mockContext.Setup(x => x.Containers).Returns(setupDbCon.Object);
             _mockContext.Setup(x => x.ProductGroups).Returns(setupDbPg.Object);
             _mockContext.Setup(x => x.Volumes).Returns(setupDbVol.Object);
 
-            // Injects mock database.
+            // Injects mock database via overloaded ctor
             var dbProductInfoRepository = new DbProductInfoRepository(_mockContext.Object);
             var dbContainerRepository = new DbContainerRepository(_mockContext.Object);
             var dbProductGroupRepository = new DbProductGroupRepository(_mockContext.Object);
             var dbVolumeRepository = new DbVolumeRepository(_mockContext.Object);
 
 
+            //Setup fakerepo via overloaded ctor
             _productController = new ProductController(dbProductInfoRepository, dbContainerRepository,
                 dbProductGroupRepository, dbVolumeRepository);
         }

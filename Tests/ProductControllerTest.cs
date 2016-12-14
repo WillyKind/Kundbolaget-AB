@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Castle.Components.DictionaryAdapter.Xml;
 using Kundbolaget.Controllers;
 using Kundbolaget.EntityFramework.Context;
 using Kundbolaget.EntityFramework.Repositories;
@@ -124,18 +125,26 @@ namespace Tests
             Assert.AreEqual(100, productInfos[0].Abv);
         }
 
+        [Test]
         public void Create()
         {
-            var actionResult = _productController.Create(new ProductInfo
+            var productInfo = new ProductInfo
             {
-                Id = 1,
+                Id = 3,
                 Name = "Cray wine",
                 Container = ResourceData.Containers[0],
                 Volume = new Volume
                 {
+                    Id = 3,
                     Milliliter = 750
-                }
-            });
+                },
+                Abv = 14,
+                PurchasePrice = 30,
+                TradingMargin = 5
+            };
+            _productController.Create(productInfo);
+            _mockSetProductInfo.Verify(x => x.Add(productInfo));
+            _mockContext.Verify(x => x.SaveChanges());
         }
 
 

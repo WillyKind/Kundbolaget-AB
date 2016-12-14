@@ -208,6 +208,7 @@
     <Compile Include="Controllers\AdressController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\CustomerProductController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -217,6 +218,10 @@
     <Compile Include="EntityFramework\Repositories\DbContainerRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbOrderRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbProductGroupRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbAddressRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbCompanyRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbContactPersonRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbCountryRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbProductInfoRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbProductStockRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbVolumeRepository.cs" />
@@ -420,6 +425,11 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\CustomerProduct\Index.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Company\Details.cshtml" />
+    <Content Include="Views\Company\Create.cshtml" />
+    <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Company\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -14,8 +14,7 @@ namespace Kundbolaget.Controllers
         private DbAddressRepository _addressRepository;
         private DbCountryRepository _countryRepository;
         private DbContactPersonRepository _contactPersonRepository;
-        private DbParentCompanyRepository _parentCompanyRepository;
-        private DbDeliveryAddressRepository _dbDeliveryAddressRepository;
+        
 
 
         public CompanyController()
@@ -24,8 +23,7 @@ namespace Kundbolaget.Controllers
             _addressRepository = new DbAddressRepository();
             _countryRepository = new DbCountryRepository();
             _contactPersonRepository = new DbContactPersonRepository();
-            _parentCompanyRepository = new DbParentCompanyRepository();
-            _dbDeliveryAddressRepository = new DbDeliveryAddressRepository();
+            
         }
 
         // GET: Company
@@ -59,8 +57,8 @@ namespace Kundbolaget.Controllers
             var addresses = _addressRepository.GetEntities();
             var countries = _countryRepository.GetEntities();
             var contactPersons = _contactPersonRepository.GetEntities();
-            var parentCompanies = _parentCompanyRepository.GetEntities();
-            var deliveryAddresses = _dbDeliveryAddressRepository.GetEntities();
+            var parentCompanies = _companyRepository.GetEntities();
+            
 
             var selectListAddresses = addresses.Select(address => new SelectListItem
             {
@@ -88,7 +86,7 @@ namespace Kundbolaget.Controllers
 
             selectListParentCompanies.Add(new SelectListItem { Value = "NULL", Text = "Inget" });
 
-            var selectListDeliveryAddresses = deliveryAddresses.Select(deliveryAddress => new SelectListItem
+            var selectListDeliveryAddresses = addresses.Select(deliveryAddress => new SelectListItem
             {
                 Value = deliveryAddress.Id.ToString(),
                 Text = deliveryAddress.Street + " " + deliveryAddress.Number
@@ -125,8 +123,8 @@ namespace Kundbolaget.Controllers
             var addresses = _addressRepository.GetEntities();
             var countries = _countryRepository.GetEntities();
             var contactPersons = _contactPersonRepository.GetEntities();
-            var parentCompanies = _parentCompanyRepository.GetEntities();
-            var deliveryAddresses = _dbDeliveryAddressRepository.GetEntities();
+            var parentCompanies = _companyRepository.GetEntities();
+            
 
             var selectListAddresses = addresses.Select(address => new SelectListItem
             {
@@ -154,7 +152,7 @@ namespace Kundbolaget.Controllers
 
             selectListParentCompanies.Add(new SelectListItem {Value = "NULL", Text = "Inget"});
 
-            var selectListDeliveryAddresses = deliveryAddresses.Select(deliveryAddress => new SelectListItem
+            var selectListDeliveryAddresses = addresses.Select(deliveryAddress => new SelectListItem
             {
                 Value = deliveryAddress.Id.ToString(),
                 Text = deliveryAddress.Street + " " + deliveryAddress.Number

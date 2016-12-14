@@ -11,15 +11,27 @@ namespace Kundbolaget.Controllers
 {
     public class ProductController : Controller
     {
-        private DbProductInfoRepository _productInfo;
-        private DbContainerRepository _containerRepository;
-        private DbProductGroupRepository _productGroupRepository;
+        private readonly DbProductInfoRepository _productInfo;
+        private readonly DbContainerRepository _containerRepository;
+        private readonly DbProductGroupRepository _productGroupRepository;
+        private readonly DbVolumeRepository _volumeRepository;
 
         public ProductController()
         {
             _productInfo = new DbProductInfoRepository();
             _containerRepository = new DbContainerRepository();
             _productGroupRepository = new DbProductGroupRepository();
+            _volumeRepository = new DbVolumeRepository();
+
+        }
+        public ProductController(DbProductInfoRepository productInfoRepository,
+            DbContainerRepository containerRepository, DbProductGroupRepository productGroupRepository,
+            DbVolumeRepository volumeRepository)
+        {
+            _productInfo = productInfoRepository;
+            _containerRepository = containerRepository;
+            _productGroupRepository = productGroupRepository;
+            _volumeRepository = volumeRepository;
         }
 
         // GET: Product
@@ -33,6 +45,7 @@ namespace Kundbolaget.Controllers
             var model = _productInfo.GetEntity(id);
             var containers = _containerRepository.GetEntities();
             var productGroups = _productGroupRepository.GetEntities();
+            var volumes = _volumeRepository.GetEntities();
 
             var selectListContainers = containers.Select(container => new SelectListItem
             {
@@ -46,8 +59,15 @@ namespace Kundbolaget.Controllers
                 Text = p.Name
             }).ToList();
 
+            var selectListVolumes = volumes.Select(volume => new SelectListItem
+            {
+                Value = volume.Id.ToString(),
+                Text = volume.Milliliter.ToString()
+            }).ToList();
+
             ViewBag.Containers = selectListContainers;
             ViewBag.ProductGroups = selectListProductGroups;
+            ViewBag.Volume = selectListVolumes;
 
             return View(model);
         }
@@ -103,6 +123,7 @@ namespace Kundbolaget.Controllers
         {
             var containers = _containerRepository.GetEntities();
             var productGroups = _productGroupRepository.GetEntities();
+            var volumes = _volumeRepository.GetEntities();
 
             var selectListContainers = containers.Select(container => new SelectListItem
             {
@@ -116,8 +137,15 @@ namespace Kundbolaget.Controllers
                 Text = p.Name
             }).ToList();
 
+            var selectListVolumes = volumes.Select(volume => new SelectListItem
+            {
+                Value = volume.Id.ToString(),
+                Text = volume.Milliliter.ToString()
+            }).ToList();
+
             ViewBag.Containers = selectListContainers;
             ViewBag.ProductGroups = selectListProductGroups;
+            ViewBag.Volume = selectListVolumes;
 
             return View();
         }

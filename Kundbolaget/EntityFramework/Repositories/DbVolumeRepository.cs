@@ -6,9 +6,19 @@ using Kundbolaget.Models.EntityModels;
 
 namespace Kundbolaget.EntityFramework.Repositories
 {
-    class DbVolumeRepository : IEntityRepository<Volume>
+    public class DbVolumeRepository : IEntityRepository<Volume>
     {
-        private readonly StoreContext db = new StoreContext();
+        private readonly StoreContext db;
+
+        public DbVolumeRepository(StoreContext fakeDb)
+        {
+            db = fakeDb;
+        }
+
+        public DbVolumeRepository()
+        {
+            db = new StoreContext();
+        }
 
         public void Dispose()
         {

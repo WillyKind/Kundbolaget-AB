@@ -6,10 +6,18 @@ using Kundbolaget.Models.EntityModels;
 
 namespace Kundbolaget.EntityFramework.Repositories
 {
-    class DbContainerRepository : IEntityRepository<Container>
+    public class DbContainerRepository : IEntityRepository<Container>
     {
-        private readonly StoreContext db = new StoreContext();
+        private readonly StoreContext db;
 
+        public DbContainerRepository(StoreContext fakeDbContext)
+        {
+            db = fakeDbContext;
+        }
+        public DbContainerRepository()
+        {
+            db = new StoreContext();
+        }
         public void Dispose()
         {
             throw new NotImplementedException();

@@ -21,11 +21,13 @@ namespace Tests
         {
             new Container
             {
-                Name = "Flaska"
+                Name = "Flaska",
+                Id = 1
             },
             new Container
             {
                 Name = "Burk",
+                Id = 2
             }
         };
 

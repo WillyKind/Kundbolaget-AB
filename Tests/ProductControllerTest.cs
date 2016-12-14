@@ -41,14 +41,22 @@ namespace Tests
             var productGroups = ResourceData.ProductGroups.AsQueryable();
             var volumes = ResourceData.Volumes.AsQueryable();
 
-            var setupDb = SetupDb(_mockSetProductInfo, dataProductInfos);
+            var setupDbPi = SetupDb(_mockSetProductInfo, dataProductInfos);
+            var setupDbCon = SetupDb(_mockSetContainer, dataContainers);
+            var setupDbPg = SetupDb(_mockSetProductGroup, productGroups);
+            var setupDbVol = SetupDb(_mockSetVolume, volumes);
+
 
             //SetupDb(_mockSetContainer, dataContainers);
             //SetupDb(_mockSetProductGroup, productGroups);
             //SetupDb(_mockSetVolume, volumes);
 
-
-            _mockContext.Setup(x => x.ProductsInfoes).Returns(setupDb.Object);
+            
+            _mockContext.Setup(x => x.ProductsInfoes).Returns(setupDbPi.Object);
+            _mockContext.Setup(x => x.Containers).Returns(setupDbCon.Object);
+            _mockContext.Setup(x => x.ProductGroups).Returns(setupDbPg.Object);
+            _mockContext.Setup(x => x.Volumes).Returns(setupDbVol.Object);
+            
             // Injects mock database.
             var dbProductInfoRepository = new DbProductInfoRepository(_mockContext.Object);
             var dbContainerRepository = new DbContainerRepository(_mockContext.Object);
@@ -102,15 +110,15 @@ namespace Tests
         [Test]
         public void Edit_Get_Object()
         {
-            
-
-
+            var actionResult = _productController.Edit(1);
+            var viewResult = actionResult as ViewResult;
+            var result = (ProductInfo) viewResult.Model;
+            Assert.AreEqual(1, result.Id);
         }
 
         [Test]
         public void Details_Get_Object()
         {
-            
             var actionResult = _productController.Details(1);
             var viewResult = actionResult as ViewResult;
             var result = (ProductInfo) viewResult.Model;

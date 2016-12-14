@@ -114,9 +114,14 @@ namespace Tests
             Assert.AreEqual(1, result.Id);
         }
 
+        [Test]
         public void Edit_Update_Db_New_Info_In_Object()
         {
-            //Jag tänkte köra denna efter lunch du kan köra Create =) //JW
+            var productInfos = _mockSetProductInfo.Object.ToList();
+            var tempObj = productInfos[0];
+            tempObj.Abv = 100;
+            _productController.Edit(tempObj);
+            Assert.AreEqual(100, productInfos[0].Abv);
         }
 
         public void Create()

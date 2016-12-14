@@ -8,15 +8,15 @@ using Kundbolaget.Models.EntityModels;
 
 namespace Kundbolaget.Controllers
 {
-    public class AdressController : Controller
+    public class AddressController : Controller
     {
-        private DbAdressRepository _adressRepository;
+        private readonly DbAddressRepository _adressRepository;
 
-        public AdressController()
+        public AddressController()
         {
-            _adressRepository = new DbAdressRepository();
+            _adressRepository = new DbAddressRepository();
         }
-        
+
         public ActionResult Index()
         {
             return View(_adressRepository.GetEntities());

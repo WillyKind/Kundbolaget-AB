@@ -214,7 +214,6 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductStockController.cs" />
     <Compile Include="EntityFramework\Context\StoreContext.cs" />
-    <Compile Include="EntityFramework\Repositories\DbAdressRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbContainerRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbOrderRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbProductGroupRepository.cs" />

@@ -1,4 +1,5 @@
 using System;
+using System.Data.Entity;
 using System.Linq;
 using Kundbolaget.EntityFramework.Context;
 using Kundbolaget.Interfaces;
@@ -8,36 +9,45 @@ namespace Kundbolaget.EntityFramework.Repositories
 {
     public class DbAddressRepository : IEntityRepository<Address>
     {
-        private readonly StoreContext db = new StoreContext();
+        private readonly StoreContext _db = new StoreContext();
+
+        public void Dispose()
+        {
+            _db.Dispose();
+        }
 
         public Address[] GetEntities()
         {
-            return db.Addresses.ToArray();
+            return _db.Addresses.Where(adress => adress.IsRemoved == false).ToArray();
         }
 
         public Address GetEntity(int id)
         {
-            throw new NotImplementedException();
+            return _db.Addresses.SingleOrDefault(p => p.Id == id);
         }
 
         public void CreateEntity(Address newEntity)
         {
-            throw new NotImplementedException();
+            _db.Addresses.Add(newEntity);
+            _db.SaveChanges();
         }
 
         public void DeleteEntity(int id)
         {
-            throw new NotImplementedException();
+            var product = _db.Addresses.SingleOrDefault(p => p.Id == id);
+            if (product != null)
+            {
+                product.IsRemoved = true;
+                _db.SaveChanges();
+            }
         }
 
         public void UpdateEntity(Address updatedEntity)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
+            _db.Addresses.Attach(updatedEntity);
+            var entry = _db.Entry(updatedEntity);
+            entry.State = EntityState.Modified;
+            _db.SaveChanges();
         }
     }
 }

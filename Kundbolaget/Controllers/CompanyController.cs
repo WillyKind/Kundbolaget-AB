@@ -80,10 +80,10 @@ namespace Kundbolaget.Controllers
                 Text = contactPerson.FirstName + " " + contactPerson.LastName
             }).ToList();
 
-            var selectListParentCompanies = parentCompanies.Select(parentCompany => new SelectListItem
+            var selectListParentCompanies = parentCompanies.Where(pCompany => pCompany.ParentCompanyId == null).Select(pCompany=> new SelectListItem
             {
-                Value = parentCompany.Id.ToString(),
-                Text = parentCompany.Name
+                Value = pCompany.Id.ToString(),
+                Text = pCompany.Name
             }).ToList();
 
             selectListParentCompanies.Add(new SelectListItem { Value = "NULL", Text = "Inget" });
@@ -146,11 +146,10 @@ namespace Kundbolaget.Controllers
                 Text = contactPerson.FirstName + " " + contactPerson.LastName
             }).ToList();
 
-            var selectListParentCompanies = parentCompanies.Select(parentCompany => new SelectListItem
+            var selectListParentCompanies = parentCompanies.Where(pCompany => pCompany.ParentCompanyId == null).Select(pCompany => new SelectListItem
             {
-                Value = parentCompany.Id.ToString(),
-                Text = parentCompany.Name
-                
+                Value = pCompany.Id.ToString(),
+                Text = pCompany.Name
             }).ToList();
 
             selectListParentCompanies.Add(new SelectListItem {Value = "NULL", Text = "Inget"});

@@ -22,8 +22,8 @@ namespace Kundbolaget.Controllers
             _containerRepository = new DbContainerRepository();
             _productGroupRepository = new DbProductGroupRepository();
             _volumeRepository = new DbVolumeRepository();
-
         }
+
         public ProductController(DbProductInfoRepository productInfoRepository,
             DbContainerRepository containerRepository, DbProductGroupRepository productGroupRepository,
             DbVolumeRepository volumeRepository)
@@ -37,12 +37,16 @@ namespace Kundbolaget.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            return View(_productInfo.GetEntities());
+            return View("Index", _productInfo.GetEntities());
         }
 
         public ActionResult Edit(int id)
         {
             var model = _productInfo.GetEntity(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
             var containers = _containerRepository.GetEntities();
             var productGroups = _productGroupRepository.GetEntities();
             var volumes = _volumeRepository.GetEntities();
@@ -69,7 +73,7 @@ namespace Kundbolaget.Controllers
             ViewBag.ProductGroups = selectListProductGroups;
             ViewBag.Volume = selectListVolumes;
 
-            return View(model);
+            return View("Edit", model);
         }
 
         [HttpPost]
@@ -86,14 +90,22 @@ namespace Kundbolaget.Controllers
         public ActionResult Details(int id)
         {
             var model = _productInfo.GetEntity(id);
-            return View(model);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Details", model);
         }
 
         public ActionResult Delete(int id)
         {
             var model = _productInfo.GetEntity(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
 
-            return View(model);
+            return View("Delete", model);
         }
 
         [HttpPost]
@@ -147,7 +159,7 @@ namespace Kundbolaget.Controllers
             ViewBag.ProductGroups = selectListProductGroups;
             ViewBag.Volume = selectListVolumes;
 
-            return View();
+            return View("Create");
         }
     }
 }

@@ -21,13 +21,11 @@ namespace Tests
         {
             new Container
             {
-                Name = "Flaska",
-                Id = 1
+                Name = "Flaska"
             },
             new Container
             {
-                Name = "Burk",
-                Id = 2
+                Name = "Burk"
             }
         };
 
@@ -44,12 +42,14 @@ namespace Tests
                 Id = 1,
                 Category = Category,
                 Name = "Ale",
+                CategoryId = Category.Id
             },
             new ProductGroup
             {
                 Id = 2,
                 Category = Category,
                 Name = "Lager",
+                CategoryId = Category.Id
             }
         };
 
@@ -65,7 +65,8 @@ namespace Tests
                 Name = "Kalas Oscars finöl",
                 PurchasePrice = 50,
                 TradingMargin = 15,
-                Description = "Kalas ska det vara."
+                Description = "Kalas ska det vara.",
+                ProductGroupId = ProductGroups[0].Id,
             },
             new ProductInfo
             {
@@ -77,7 +78,8 @@ namespace Tests
                 TradingMargin = 10,
                 Container = Containers[1],
                 Volume = Volumes[1],
-                Description = "Sofieros fina goda öl."
+                Description = "Sofieros fina goda öl.",
+                ProductGroupId = ProductGroups[1].Id
             }
         };
     }

@@ -43,6 +43,8 @@ namespace Kundbolaget.Models.EntityModels
 
         [Required]
         public bool IsRemoved { get; set; }
+        [Required]
+        public int Price { get; set; }
 
         public virtual ICollection<ProductStock> ProductStocks { get; set; }
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }

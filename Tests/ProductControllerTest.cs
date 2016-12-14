@@ -116,6 +116,12 @@ namespace Tests
             Assert.AreEqual(1, result.Id);
         }
 
+        public void Edit_Update_Db_New_Info_In_Object()
+        {
+            //Jag tänkte köra denna efter lunch du kan köra Create =) //JW
+        }
+
+
         [Test]
         public void Details_Get_Object()
         {
@@ -124,6 +130,8 @@ namespace Tests
             var result = (ProductInfo) viewResult.Model;
             Assert.AreEqual(1 , result.Id);
         }
+
+
 
     }
 }

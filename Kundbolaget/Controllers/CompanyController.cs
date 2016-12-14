@@ -31,9 +31,6 @@ namespace Kundbolaget.Controllers
         // GET: Company
         public ActionResult Index()
         {
-            //var contactPersons = _contactPersonRepository.GetEntities();
-            //var cp = contactPersons.Select(c => c.FirstName + c.LastName);
-            //ViewData.Model = cp; 
             return View(_companyRepository.GetEntities());
         }
 
@@ -86,7 +83,7 @@ namespace Kundbolaget.Controllers
             var selectListParentCompanies = parentCompanies.Select(parentCompany => new SelectListItem
             {
                 Value = parentCompany.Id.ToString(),
-                Text = parentCompany.Name,
+                Text = parentCompany.Name
             }).ToList();
 
             selectListParentCompanies.Add(new SelectListItem { Value = "NULL", Text = "Inget" });
@@ -94,7 +91,7 @@ namespace Kundbolaget.Controllers
             var selectListDeliveryAddresses = deliveryAddresses.Select(deliveryAddress => new SelectListItem
             {
                 Value = deliveryAddress.Id.ToString(),
-                Text = deliveryAddress.Street
+                Text = deliveryAddress.Street + " " + deliveryAddress.Number
             }).ToList();
 
             ViewBag.Addresses = selectListAddresses;
@@ -152,7 +149,8 @@ namespace Kundbolaget.Controllers
             var selectListParentCompanies = parentCompanies.Select(parentCompany => new SelectListItem
             {
                 Value = parentCompany.Id.ToString(),
-                Text = parentCompany.Name,
+                Text = parentCompany.Name
+                
             }).ToList();
 
             selectListParentCompanies.Add(new SelectListItem {Value = "NULL", Text = "Inget"});
@@ -160,7 +158,7 @@ namespace Kundbolaget.Controllers
             var selectListDeliveryAddresses = deliveryAddresses.Select(deliveryAddress => new SelectListItem
             {
                 Value = deliveryAddress.Id.ToString(),
-                Text = deliveryAddress.Street
+                Text = deliveryAddress.Street + " " + deliveryAddress.Number
             }).ToList();
 
             ViewBag.Addresses = selectListAddresses;

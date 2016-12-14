@@ -223,7 +223,7 @@ namespace Kundbolaget.Migrations
             {
                 Company = companies.First(c => c.Name == "Ica någonstans"),
                 CreatedDate = DateTime.Now,
-                WishedDeliveryDate = DateTime.Parse("2016-12-12")
+                WishedDeliveryDate = DateTime.Parse("2016-12-12"),
             };
 
             var orderDetails = new[]
@@ -241,6 +241,8 @@ namespace Kundbolaget.Migrations
                     Order = dummyOrder
                 }
             };
+            dummyOrder.Price += orderDetails.Sum(p => p.ProductInfo.Price*p.Amount);
+
 
             context.Countries.AddOrUpdate(countries);
             context.ContactPersons.AddOrUpdate(contactPersons);

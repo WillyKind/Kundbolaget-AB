@@ -33,9 +33,6 @@ namespace Tests
             _mockSetVolume = new Mock<DbSet<Volume>>();
 
 
-
-
-
             var dataProductInfos = ResourceData.ProductInfoList.AsQueryable();
             var dataContainers = ResourceData.Containers.AsQueryable();
             var productGroups = ResourceData.ProductGroups.AsQueryable();
@@ -51,12 +48,12 @@ namespace Tests
             //SetupDb(_mockSetProductGroup, productGroups);
             //SetupDb(_mockSetVolume, volumes);
 
-            
+
             _mockContext.Setup(x => x.ProductsInfoes).Returns(setupDbPi.Object);
             _mockContext.Setup(x => x.Containers).Returns(setupDbCon.Object);
             _mockContext.Setup(x => x.ProductGroups).Returns(setupDbPg.Object);
             _mockContext.Setup(x => x.Volumes).Returns(setupDbVol.Object);
-            
+
             // Injects mock database.
             var dbProductInfoRepository = new DbProductInfoRepository(_mockContext.Object);
             var dbContainerRepository = new DbContainerRepository(_mockContext.Object);
@@ -64,7 +61,8 @@ namespace Tests
             var dbVolumeRepository = new DbVolumeRepository(_mockContext.Object);
 
 
-            _productController = new ProductController(dbProductInfoRepository, dbContainerRepository, dbProductGroupRepository, dbVolumeRepository);
+            _productController = new ProductController(dbProductInfoRepository, dbContainerRepository,
+                dbProductGroupRepository, dbVolumeRepository);
         }
 
         public Mock<DbSet<T>> SetupDb<T>(Mock<DbSet<T>> mock, IQueryable<T> data) where T : class
@@ -121,6 +119,20 @@ namespace Tests
             //Jag tänkte köra denna efter lunch du kan köra Create =) //JW
         }
 
+        public void Create()
+        {
+            var actionResult = _productController.Create(new ProductInfo
+            {
+                Id = 1,
+                Name = "Cray wine",
+                Container = ResourceData.Containers[0],
+                Volume = new Volume
+                {
+                    Milliliter = 750
+                }
+            });
+        }
+
 
         [Test]
         public void Details_Get_Object()
@@ -128,10 +140,7 @@ namespace Tests
             var actionResult = _productController.Details(1);
             var viewResult = actionResult as ViewResult;
             var result = (ProductInfo) viewResult.Model;
-            Assert.AreEqual(1 , result.Id);
+            Assert.AreEqual(1, result.Id);
         }
-
-
-
     }
 }

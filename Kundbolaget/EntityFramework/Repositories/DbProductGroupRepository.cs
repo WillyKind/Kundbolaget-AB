@@ -6,9 +6,19 @@ using Kundbolaget.Models.EntityModels;
 
 namespace Kundbolaget.EntityFramework.Repositories
 {
-    class DbProductGroupRepository : IEntityRepository<ProductGroup>
+    public class DbProductGroupRepository : IEntityRepository<ProductGroup>
     {
         private readonly StoreContext db = new StoreContext();
+
+        public DbProductGroupRepository(StoreContext fakeDb)
+        {
+            db = fakeDb;
+        }
+
+        public DbProductGroupRepository()
+        {
+            db = new StoreContext();
+        }
 
         public void Dispose()
         {

@@ -12,6 +12,10 @@ namespace Kundbolaget.Models.EntityModels
 
         [Required]
         public DateTime CreatedDate { get; set; }
+        [Required]
+        public int CustomerOrderId { get; set; }
+        [Required]
+        public DateTime WishedDeliveryDate { get; set; }
 
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
 

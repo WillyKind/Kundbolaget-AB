@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Kundbolaget.Models.EntityModels.Order>
+
+@{
+    ViewBag.Title = "FilteredOrders";
+}
+
+<hr/>
+<table class="table">
+    <tr>
+        <th>
+            Företag
+        </th>
+        <th>
+            Order skapad
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerOrderId)
+        </th>
+        <th>
+            Önskat leveransdatum
+        </th>
+        <th>
+            Mer information
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerOrderId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
+        </td>
+        <td>
+            @Html.ActionLink("Mer information","OrderDetails", new {id = item.Id, companyId=item.Company.ParentCompanyId})
+        </td>
+    </tr>
+}
+</table>
+<div>
+    @Html.ActionLink("Åter till Koncerner", "Index")    
+</div>

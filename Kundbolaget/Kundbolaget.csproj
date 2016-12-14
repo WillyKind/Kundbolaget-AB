@@ -88,6 +88,10 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -136,6 +140,7 @@
     <Content Include="content\materialize\font\material-design-icons\Material-Design-Icons.svg" />
     <Content Include="content\Styles.css" />
     <Content Include="Global.asax" />
+    <Content Include="packages.config" />
     <Content Include="content\materialize\font\roboto\Roboto-Thin.woff2" />
     <Content Include="content\materialize\font\roboto\Roboto-Thin.woff" />
     <Content Include="content\materialize\font\roboto\Roboto-Thin.ttf" />
@@ -187,6 +192,7 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <None Include="Scripts\jquery-3.1.1-vsdoc.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -200,12 +206,15 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdressController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductStockController.cs" />
     <Compile Include="EntityFramework\Context\StoreContext.cs" />
     <Compile Include="EntityFramework\Repositories\DbAdressRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbContainerRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbOrderRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbProductGroupRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbProductInfoRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbProductStockRepository.cs" />
@@ -215,6 +224,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IEntityRepository.cs" />
+    <Compile Include="JsonEntityModels\OrderFile.cs" />
+    <Compile Include="JsonEntityModels\OrderRow.cs" />
+    <Compile Include="JsonEntityModels\SubOrder.cs" />
     <Compile Include="Migrations\201612020945526_InitialModel.cs" />
     <Compile Include="Migrations\201612020945526_InitialModel.Designer.cs">
       <DependentUpon>201612020945526_InitialModel.cs</DependentUpon>
@@ -351,6 +363,10 @@
     <Compile Include="Migrations\201612091925105_AddVolumeEntity.Designer.cs">
       <DependentUpon>201612091925105_AddVolumeEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612141002496_SetupOrderFiles.cs" />
+    <Compile Include="Migrations\201612141002496_SetupOrderFiles.Designer.cs">
+      <DependentUpon>201612141002496_SetupOrderFiles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -366,6 +382,7 @@
     <Compile Include="Models\EntityModels\Volume.cs" />
     <Compile Include="Models\EntityModels\Warehouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\FileUploadVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
@@ -377,7 +394,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="packages.config" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
@@ -395,6 +411,13 @@
     <Content Include="Views\ProductStock\Index.cshtml" />
     <Content Include="Views\ProductStock\Details.cshtml" />
     <Content Include="Views\ProductStock\Edit.cshtml" />
+    <Content Include="Views\Order\FilteredOrders.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\OrderDetails.cshtml" />
+    <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\File\UploadJson.cshtml" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -507,6 +530,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612091925105_AddVolumeEntity.resx">
       <DependentUpon>201612091925105_AddVolumeEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141002496_SetupOrderFiles.resx">
+      <DependentUpon>201612141002496_SetupOrderFiles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

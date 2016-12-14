@@ -23,14 +23,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.VolumeId, "Volume i ml", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.VolumeId, (List<SelectListItem>)ViewBag.Volume)
-                @Html.ValidationMessageFor(model => model.VolumeId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.ProductGroupId, "Produktgrupp", htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.ProductGroupId, (List<SelectListItem>) ViewBag.ProductGroups)
@@ -88,7 +80,3 @@
 <div>
     @Html.ActionLink("Produktöversikt", "Index")
 </div>
-
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

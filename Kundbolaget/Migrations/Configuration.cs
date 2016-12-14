@@ -220,6 +220,7 @@ namespace Kundbolaget.Migrations
             {
                 Company = companies.First(c => c.Name == "Ica någonstans"),
                 CreatedDate = DateTime.Now,
+                WishedDeliveryDate = DateTime.Parse("2016-12-12")
             };
 
             var orderDetails = new[]

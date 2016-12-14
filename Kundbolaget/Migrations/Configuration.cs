@@ -174,7 +174,8 @@ namespace Kundbolaget.Migrations
                     Description = "En burk med öl...",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 5.3,
-                    TradingMargin = 10
+                    TradingMargin = 10,
+                    Price = 250
                 },
                 new ProductInfo
                 {
@@ -186,6 +187,7 @@ namespace Kundbolaget.Migrations
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 8.3,
                     TradingMargin = 8,
+                    Price = 325
                 },
                 new ProductInfo
                 {
@@ -196,7 +198,8 @@ namespace Kundbolaget.Migrations
                     Description = "En Flaska sprit...",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
                     PurchasePrice = 35,
-                    TradingMargin = 50
+                    TradingMargin = 50,
+                    Price = 900
                 },
             };
 

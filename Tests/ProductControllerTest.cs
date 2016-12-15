@@ -161,7 +161,10 @@ namespace Tests
             var actionResult = _productController.Details(1);
             var viewResult = actionResult as ViewResult;
             var result = (ProductInfo) viewResult.Model;
+
+            Assert.AreEqual(ResourceData.ProductInfoList[0].Description, result.Description);
             Assert.AreEqual(1, result.Id);
+            Assert.AreEqual(ResourceData.ProductInfoList[0].Name, result.Name);
         }
     }
 }

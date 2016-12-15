@@ -49,7 +49,6 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Mer information","OrderDetails", new {id = item.Id, companyId=item.Company.ParentCompanyId})
             @Html.ActionLink("Mer information","OrderDetails", new {id = item.Id, companyId=item.Company.ParentCompanyId}, new { @class = "orange-text" })
         </td>
     </tr>

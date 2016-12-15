@@ -7,8 +7,11 @@
 <div>
     @Html.ActionLink("Tillbaka", "Index", null, new { @class = "orange-text" })
 </div>
-@Html.ActionLink("Hantera produkter", "Index", "Product", null, new { @class = "waves-effect waves-light btn" })
-@Html.ActionLink("Hantera ordrar", "Index", "Order", null, new { @class = "waves-effect waves-light btn" })
-@Html.ActionLink("Hantera kunder", "Index", "Company", null, new { @class = "waves-effect waves-light btn" })
-@Html.ActionLink("Hantera lagerprodukter", "Index", "ProductStock", null, new { @class = "waves-effect waves-light btn" })
-@Html.ActionLink("Hantera adresser", "Index", "Address", null, new { @class = "waves-effect waves-light btn" })
+<div>
+            @Html.ActionLink("Hantera produkter", "Index", "Product", null, new { @class = "waves-effect waves-light btn",style="margin-bottom:20px" })
+            @Html.ActionLink("Hantera ordrar", "Index", "Order", null, new { @class = "waves-effect waves-light btn", style = "margin-bottom:20px" })
+            @Html.ActionLink("Hantera kunder", "Index", "Company", null, new { @class = "waves-effect waves-light btn", style = "margin-bottom:20px" })
+            @Html.ActionLink("Hantera lagerprodukter", "Index", "ProductStock", null, new { @class = "waves-effect waves-light btn", style = "margin-bottom:20px" })
+            @Html.ActionLink("Hantera adresser", "Index", "Address", null, new { @class = "waves-effect waves-light btn", style = "margin-bottom:20px" })
+</div>
+

@@ -17,10 +17,13 @@ namespace Kundbolaget.Migrations
         {
             var volumes = new[]
             {
-                new Volume {Milliliter = 33},
-                new Volume {Milliliter = 5},
-                new Volume {Milliliter = 75},
-                new Volume {Milliliter = 100}
+                new Volume {Milliliter = 330},
+                new Volume {Milliliter = 500},
+                new Volume {Milliliter = 750},
+                new Volume {Milliliter = 350},
+                new Volume {Milliliter = 3000},
+                new Volume {Milliliter = 1000},
+                new Volume {Milliliter = 250}
             };
             var containers = new[]
             {

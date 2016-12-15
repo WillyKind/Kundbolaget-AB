@@ -4,11 +4,12 @@
     ViewBag.Title = "Produkter";
 }
 
-<h2>Produkter</h2>
+<h4>Produkter</h4>
 
-<p>
-    @Html.ActionLink("Skapa Ny", "Create")
-</p>
+<div>
+    @Html.ActionLink("Skapa Ny", "Create", null, new { @class = "orange-text" }) |
+        @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new { @class = "orange-text" })
+</div>
 <table class="table">
     <tr>
         <th>
@@ -60,9 +61,9 @@
                 @Html.DisplayFor(modelItem => item.PurchasePrice)
             </td>
             <td>
-                @Html.ActionLink("Ändra", "Edit", new {id = item.Id}) |
-                @Html.ActionLink("Detaljer", "Details", new {id = item.Id}) |
-                @Html.ActionLink("Ta bort", "Delete", new {id = item.Id})
+                @Html.ActionLink("Ändra", "Edit", new {id = item.Id}, new { @class = "orange-text" }) |
+                @Html.ActionLink("Detaljer", "Details", new {id = item.Id}, new { @class = "orange-text" }) |
+                @Html.ActionLink("Ta bort", "Delete", new {id = item.Id}, new { @class = "orange-text" })
             </td>
         </tr>
     }

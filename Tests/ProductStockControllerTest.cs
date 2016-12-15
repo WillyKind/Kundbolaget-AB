@@ -38,8 +38,6 @@ namespace Tests
             var productStockList = ResourceData.ProductStockList.AsQueryable();
             var productInfoList = ResourceData.ProductInfoList.AsQueryable();
             var warehouse = ResourceData.WareHouseList.AsQueryable();
-
-
             //Setup behavior
             var setupDbPiS = Helper.SetupDb(_mockSetProductStock, productStockList);
             var setupDbPi = Helper.SetupDb(_mockSetProductInfo, productInfoList);
@@ -58,8 +56,6 @@ namespace Tests
             var dbProductInfoRepository = new DbProductStockRepository(_mockContext.Object);
             var productInfoRepository = new DbProductInfoRepository(_mockContext.Object);
             var dbWarehouseRepository = new DbWarehouseRepository(_mockContext.Object);
-
-
             //Setup fakerepo via overloaded ctor
             _productStockController = new ProductStockController(dbProductInfoRepository, productInfoRepository , dbWarehouseRepository);
         }
@@ -81,50 +77,34 @@ namespace Tests
             Assert.AreEqual(1, result.Id);
         }
 
-        //    [Test]
-        //    public void Edit_Update_Db_New_Info_In_Object()
-        //    {
-        //        var productInfos = _mockSetProductInfo.Object.ToList();
-        //        var tempObj = productInfos[0];
-        //        tempObj.Abv = 100;
-        //        _productController.Edit(tempObj);
-        //        Assert.AreEqual(100, productInfos[0].Abv);
-        //    }
+        [Test]
+        public void Edit_Update_Db_New_Info_In_Object()
+        {
+            var productInfos = _mockSetProductStock.Object.ToList();
+            var tempObj = productInfos[0];
+            tempObj.Amount = 2000;
+            _productStockController.Edit(tempObj);
+            Assert.AreEqual(2000, productInfos[0].Amount);
+        }
 
-        //    [Test]
-        //    public void Create()
-        //    {
-        //        var productInfo = new ProductInfo
-        //        {
-        //            Id = 3,
-        //            Name = "Cray wine",
-        //            Container = ResourceData.Containers[0],
-        //            Volume = new Volume
-        //            {
-        //                Id = 3,
-        //                Milliliter = 750
-        //            },
-        //            Abv = 14,
-        //            PurchasePrice = 30,
-        //            TradingMargin = 5
-        //        };
-        //        _productController.Create(productInfo);
-        //        _mockSetProductInfo.Verify(x => x.Add(productInfo), Times.Once);
-        //        _mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        //    }
+        [Test]
+        public void Create()
+        {
+            var productStock = ResourceData.ProductStockList.First();
+            _productStockController.Create(productStock);
+            _mockSetProductStock.Verify(x => x.Add(productStock), Times.Once);
+            _mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
 
 
-        //    [Test]
-        //    public void Details_Get_Object()
-        //    {
-        //        var actionResult = _productController.Details(1);
-        //        var viewResult = actionResult as ViewResult;
-        //        var result = (ProductInfo)viewResult.Model;
-
-        //        Assert.AreEqual(ResourceData.ProductInfoList[0].Description, result.Description);
-        //        Assert.AreEqual(1, result.Id);
-        //        Assert.AreEqual(ResourceData.ProductInfoList[0].Name, result.Name);
-        //    }
+        [Test]
+        public void Details_Get_Object()
+        {
+            var actionResult = _productStockController.Details(1);
+            var viewResult = actionResult as ViewResult;
+            var result = (ProductStock)viewResult.Model;
+            Assert.AreEqual(1, result.Id);
+        }
 
     }
 }

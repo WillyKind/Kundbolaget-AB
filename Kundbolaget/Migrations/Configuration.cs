@@ -152,13 +152,24 @@ namespace Kundbolaget.Migrations
             var anyIca = new Company
             {
                 Address = addresses.First(a => a.Street == "Glimmervägen"),
-                ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Robert"),
                 Country = countries.First(c => c.Name == "Sweden"),
                 DeliveryAddress = addresses.First(a => a.Street == "Leveransvägen" && a.Number == "2B"),
-                Email = "Icanågonstans@ica.com",
+                Email = "icavarberg@ica.com",
                 PhoneNumber = "+46899 11 11",
                 ParentCompany = icaGruppen,
-                Name = "Ica någonstans"
+                Name = "Ica Vårberg"
+            };
+
+            var coop = new Company
+            {
+                Address = addresses.First(a => a.Street == "Besöksvägen"),
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
+                Country = countries.First(c => c.Name == "Sweden"),
+                DeliveryAddress = addresses.First(a => a.Street == "Besöksvägen"),
+                Email = "Coop@medmera.com",
+                Name = "Coop",
+                PhoneNumber = "+56899 22 11"
             };
 
             var companies = new[]

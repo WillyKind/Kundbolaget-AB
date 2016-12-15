@@ -5,13 +5,18 @@ using Kundbolaget.Models.EntityModels;
 
 namespace Kundbolaget.EntityFramework.Repositories
 {
-    class DbWarehouseRepository : IEntityRepository<Warehouse>
+    public class DbWarehouseRepository : IEntityRepository<Warehouse>
+
     {
         private readonly StoreContext _storeContext;
 
         public DbWarehouseRepository()
         {
             _storeContext = new StoreContext();
+        }
+        public DbWarehouseRepository(StoreContext fakeDb)
+        {
+            _storeContext = fakeDb;
         }
 
         public void Dispose()

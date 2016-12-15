@@ -46,10 +46,10 @@ namespace Tests
             var volumes = ResourceData.Volumes.AsQueryable();
 
             //Setup behavior
-            var setupDbPi = SetupDb(_mockSetProductInfo, dataProductInfos);
-            var setupDbCon = SetupDb(_mockSetContainer, dataContainers);
-            var setupDbPg = SetupDb(_mockSetProductGroup, productGroups);
-            var setupDbVol = SetupDb(_mockSetVolume, volumes);
+            var setupDbPi = Helper.SetupDb(_mockSetProductInfo, dataProductInfos);
+            var setupDbCon = Helper.SetupDb(_mockSetContainer, dataContainers);
+            var setupDbPg = Helper.SetupDb(_mockSetProductGroup, productGroups);
+            var setupDbVol = Helper.SetupDb(_mockSetVolume, volumes);
             
             //Setup behavior
             _mockContext.Setup(x => x.ProductsInfoes).Returns(setupDbPi.Object);
@@ -73,14 +73,7 @@ namespace Tests
                 dbProductGroupRepository, dbVolumeRepository);
         }
 
-        public Mock<DbSet<T>> SetupDb<T>(Mock<DbSet<T>> mock, IQueryable<T> data) where T : class
-        {
-            mock.As<IQueryable<T>>().Setup(m => m.Provider).Returns(data.Provider);
-            mock.As<IQueryable<T>>().Setup(m => m.Expression).Returns(data.Expression);
-            mock.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mock.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator);
-            return mock;
-        }
+        
 
 
         [Test]

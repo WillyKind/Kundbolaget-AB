@@ -84,7 +84,7 @@ namespace Kundbolaget.Controllers
                 Text = pCompany.Name
             }).ToList();
 
-            selectListParentCompanies.Add(new SelectListItem { Value = "NULL", Text = "Inget" });
+            selectListParentCompanies.Add(new SelectListItem { Value = "", Text = "Inget" });
 
             var selectListDeliveryAddresses = addresses.Select(deliveryAddress => new SelectListItem
             {
@@ -150,7 +150,7 @@ namespace Kundbolaget.Controllers
                 Text = pCompany.Name
             }).ToList();
 
-            selectListParentCompanies.Add(new SelectListItem {Value = "NULL", Text = "Inget"});
+            selectListParentCompanies.Add(new SelectListItem {Value = "", Text = "Inget"});
 
             var selectListDeliveryAddresses = addresses.Select(deliveryAddress => new SelectListItem
             {

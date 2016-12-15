@@ -17,13 +17,15 @@ namespace Kundbolaget.Migrations
         {
             var volumes = new[]
             {
+                new Volume {Milliliter = 250},
                 new Volume {Milliliter = 330},
-                new Volume {Milliliter = 500},
-                new Volume {Milliliter = 750},
                 new Volume {Milliliter = 350},
-                new Volume {Milliliter = 3000},
+                new Volume {Milliliter = 355},
+                new Volume {Milliliter = 500},
+                new Volume {Milliliter = 700},
+                new Volume {Milliliter = 750},
                 new Volume {Milliliter = 1000},
-                new Volume {Milliliter = 250}
+                new Volume {Milliliter = 3000},
             };
             var containers = new[]
             {
@@ -184,8 +186,8 @@ namespace Kundbolaget.Migrations
                     Name = "Norrlandsguld",
                     Abv = 5.3,
                     Container = containers.First(c => c.Name == "Burk"),
-                    Volume = volumes[0],
-                    Description = "En burk med öl...",
+                    Volume = volumes.First(v => v.Milliliter == 350),
+                    Description = "Öl",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 5.3,
                     TradingMargin = 10,
@@ -196,8 +198,8 @@ namespace Kundbolaget.Migrations
                     Name = "Norrlandsguld",
                     Abv = 5.3,
                     Container = containers.First(c => c.Name == "Burk"),
-                    Volume = volumes[1],
-                    Description = "En burk med öl...",
+                    Volume = volumes.First(v => v.Milliliter == 500),
+                    Description = "Öl",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 8.3,
                     TradingMargin = 8,
@@ -205,15 +207,87 @@ namespace Kundbolaget.Migrations
                 },
                 new ProductInfo
                 {
+                    Name = "Nääs APA",
+                    Abv = 5.8,
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 330),
+                    Description = "APA",
+                    ProductGroup = productGroups.First(pg => pg.Name == "APA"),
+                    PurchasePrice = 8.3,
+                    TradingMargin = 8,
+                    Price = 325
+                },
+                new ProductInfo
+                {
+                    Name = "Lagunitas IPA",
+                    Abv = 6.2,
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 330),
+                    Description = "IPA",
+                    ProductGroup = productGroups.First(pg => pg.Name == "IPA"),
+                    PurchasePrice = 8.3,
+                    TradingMargin = 8,
+                    Price = 400
+                },
+                new ProductInfo
+                {
                     Name = "Koskenkorva",
                     Abv = 40,
                     Container = containers.First(c => c.Name == "Flaska"),
-                    Volume = volumes[2],
-                    Description = "En Flaska sprit...",
+                    Volume = volumes.First(v => v.Milliliter == 700),
+                    Description = "Vodka",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
                     PurchasePrice = 35,
                     TradingMargin = 50,
                     Price = 900
+                },
+                new ProductInfo
+                {
+                    Name = "Absolut Vodka",
+                    Abv = 40,
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 700),
+                    Description = "Vodka",
+                    ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
+                    PurchasePrice = 35,
+                    TradingMargin = 50,
+                    Price = 1200
+                },
+                new ProductInfo
+                {
+                    Name = "Smirnoff Vodka",
+                    Abv = 40,
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 700),
+                    Description = "Vodka",
+                    ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
+                    PurchasePrice = 35,
+                    TradingMargin = 50,
+                    Price = 1250
+                },
+                new ProductInfo
+                {
+                    Name = " Dreissigacker",
+                    Abv = 12,
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 700),
+                    Description = "Riesling",
+                    ProductGroup = productGroups.First(pg => pg.Name == "Vitt vin"),
+                    PurchasePrice = 35,
+                    TradingMargin = 50,
+                    Price = 1250
+                },
+                new ProductInfo
+                {
+                    Name = " Vino Nobile di Montepulciano",
+                    Abv = 13.5,
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 700),
+                    Description = "Sangiovese",
+                    ProductGroup = productGroups.First(pg => pg.Name == "Rött vin"),
+                    PurchasePrice = 35,
+                    TradingMargin = 50,
+                    Price = 1250
                 },
             };
 

@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Koncerner";
 }
-<h2>Koncerner</h2>
+<h4>Koncerner</h4>
+<div>
+    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new { @class = "orange-text" })
+</div>
 <div class="row">
     @foreach (var item in Model)
     {

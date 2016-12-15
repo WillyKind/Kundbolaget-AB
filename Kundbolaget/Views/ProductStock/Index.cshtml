@@ -6,9 +6,10 @@
 
 <h4>Produktlager</h4>
 
-<p>
-    @Html.ActionLink("Skapa ny", "Create")
-</p>
+<div>
+    @Html.ActionLink("Skapa Ny", "Create", null, new { @class = "orange-text" }) |
+    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new { @class = "orange-text" })
+</div>
 <table class="table">
     <tr>
         <th>
@@ -35,8 +36,8 @@
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
             <td>
-                @Html.ActionLink("Ändra", "Edit", new {id = item.Id}) |
-                @Html.ActionLink("Detaljer", "Details", new {id = item.Id}) 
+                @Html.ActionLink("Ändra", "Edit", new {id = item.Id}, new { @class = "orange-text" }) |
+                @Html.ActionLink("Detaljer", "Details", new {id = item.Id}, new { @class = "orange-text" }) 
             </td>
         </tr>
     }

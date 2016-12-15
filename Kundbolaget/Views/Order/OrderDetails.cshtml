@@ -5,7 +5,9 @@
 }
 
 <h2>Orderdetaljer</h2>
-
+<div>
+    @Html.ActionLink("Åter till ordrar", "FilteredOrders", new { id = ViewBag.parentCompanyId }, new { @class = "orange-text" })
+</div>
 <table class="table">
     <tr>
         <th>
@@ -41,5 +43,5 @@
 </table>
 
 <div>
-    @Html.ActionLink("Åter till ordrar", "FilteredOrders",new {id = ViewBag.parentCompanyId})
+    
 </div>

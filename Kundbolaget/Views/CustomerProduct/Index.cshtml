@@ -7,8 +7,9 @@
 
 <h4>Sortiment</h4>
 <div>
-    @Html.ActionLink("Tillbaka", "CustomerSite", "Home") |
-    @Html.ActionLink("Lägg beställning", "UploadJson", "File")
+    @Html.ActionLink("Lägg beställning", "UploadJson", "File", null, new { @class = "orange-text" }) |
+    @Html.ActionLink("Tillbaka", "CustomerSite", "Home", null, new { @class = "orange-text" }) 
+
 </div>
 <div class="row">
     @foreach (var productInfo in Model)

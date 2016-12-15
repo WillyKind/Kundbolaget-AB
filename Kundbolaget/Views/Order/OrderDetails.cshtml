@@ -14,10 +14,16 @@
             Produkt
         </th>
         <th>
+            Behållare
+        </th>
+        <th>
+            Volym
+        </th>
+        <th>
             Mängd
         </th>
         <th>
-            Pris styck
+            Pris per kolli
         </th>
         <th>
             Pris total
@@ -28,6 +34,12 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductInfo.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductInfo.Container.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductInfo.Volume.Milliliter)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Amount)

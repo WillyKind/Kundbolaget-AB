@@ -16,21 +16,15 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public Company[] GetEntities()
         {
-            return db.Companies.Include(c => c.Country).ToArray();
+            return db.Companies.Where(a => a.IsRemoved ==false).Include(c => c.Country).ToArray();
         }
 
         public Company GetEntity(int id)
         {
-            using (var db = new StoreContext())
-            {
-                return db.Companies
-                    .Include(c => c.Address)
+            return db.Companies
                     .Include(c => c.Country)
-                    .Include(c => c.ContactPerson)
                     .Include(c => c.ParentCompany)
-                    .Include(c => c.DeliveryAddress)
                     .SingleOrDefault(c => c.Id == id);
-            }
         }
 
         public void CreateEntity(Company newEntity)
@@ -42,8 +36,11 @@ namespace Kundbolaget.EntityFramework.Repositories
         public void DeleteEntity(int id)
         {
             var company = db.Companies.SingleOrDefault(c => c.Id == id);
-            db.Companies.Remove(company);
-            db.SaveChanges();
+            if (company != null)
+            {
+                company.IsRemoved = true;
+                db.SaveChanges();
+            }
         }
 
         public void UpdateEntity(Company updatedEntity)

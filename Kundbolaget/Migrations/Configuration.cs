@@ -152,7 +152,7 @@ namespace Kundbolaget.Migrations
             var anyIca = new Company
             {
                 Address = addresses.First(a => a.Street == "Glimmervägen"),
-                ContactPerson = contactPersons.First(cp => cp.FirstName == "Robert"),
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
                 Country = countries.First(c => c.Name == "Sweden"),
                 DeliveryAddress = addresses.First(a => a.Street == "Leveransvägen" && a.Number == "2B"),
                 Email = "icavarberg@ica.com",
@@ -174,7 +174,7 @@ namespace Kundbolaget.Migrations
 
             var companies = new[]
             {
-                icaGruppen, anyIca
+                icaGruppen, anyIca, coop
             };
 
             var productInfoes = new[]
@@ -235,7 +235,7 @@ namespace Kundbolaget.Migrations
 
             var dummyOrder = new Order
             {
-                Company = companies.First(c => c.Name == "Ica någonstans"),
+                Company = companies.First(c => c.Name == "Ica Vårberg"),
                 CreatedDate = DateTime.Now,
                 WishedDeliveryDate = DateTime.Parse("2016-12-12"),
             };
@@ -273,6 +273,7 @@ namespace Kundbolaget.Migrations
             context.ProductStocks.AddOrUpdate(stock);
             context.Addresses.AddOrUpdate(addresses);
             context.OrderDetails.AddOrUpdate(orderDetails);
+            context.Volumes.AddOrUpdate(volumes);
             context.SaveChanges();
         }
     }

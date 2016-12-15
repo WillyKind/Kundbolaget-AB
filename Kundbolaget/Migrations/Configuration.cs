@@ -151,7 +151,7 @@ namespace Kundbolaget.Migrations
                 PhoneNumber = "+56899 22 22"
             };
 
-            var anyIca = new Company
+            var icaVarberg = new Company
             {
                 Address = addresses.First(a => a.Street == "Glimmervägen"),
                 ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
@@ -166,7 +166,7 @@ namespace Kundbolaget.Migrations
             var coop = new Company
             {
                 Address = addresses.First(a => a.Street == "Besöksvägen"),
-                ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Michel"),
                 Country = countries.First(c => c.Name == "Sweden"),
                 DeliveryAddress = addresses.First(a => a.Street == "Besöksvägen"),
                 Email = "Coop@medmera.com",
@@ -174,9 +174,43 @@ namespace Kundbolaget.Migrations
                 PhoneNumber = "+56899 22 11"
             };
 
+            var coopHaggvik = new Company
+            {
+                Address = addresses.First(a => a.Street == "Stadsvägen"),
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Robert"),
+                Country = countries.First(c => c.Name == "Sweden"),
+                DeliveryAddress = addresses.First(a => a.Street == "Stadsvägen" && a.Number == "1C"),
+                Email = "Coophaggvik@coop.com",
+                PhoneNumber = "+46899 11 33",
+                ParentCompany = coop,
+                Name = "Coop Häggvik"
+            };
+            var coopLiljeholmen = new Company
+            {
+                Address = addresses.First(a => a.Street == "Besöksvägen"),
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Robert"),
+                Country = countries.First(c => c.Name == "Sweden"),
+                DeliveryAddress = addresses.First(a => a.Street == "Lagervägen" && a.Number == "1A"),
+                Email = "coopliljeholmen@coop.com",
+                PhoneNumber = "+46899 33 33",
+                ParentCompany = coop,
+                Name = "Coop Liljeholmen"
+            };
+            var icaLiljeholmen = new Company
+            {
+                Address = addresses.First(a => a.Street == "Besöksvägen"),
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
+                Country = countries.First(c => c.Name == "Sweden"),
+                DeliveryAddress = addresses.First(a => a.Street == "Lagervägen" && a.Number == "1A"),
+                Email = "icaliljeholmen@ica.com",
+                PhoneNumber = "+46899 11 54",
+                ParentCompany = icaGruppen,
+                Name = "Ica Liljeholmen"
+            };
+
             var companies = new[]
             {
-                icaGruppen, anyIca, coop
+                icaGruppen, icaVarberg, coop, coopLiljeholmen,coopHaggvik, icaLiljeholmen
             };
 
             var productInfoes = new[]

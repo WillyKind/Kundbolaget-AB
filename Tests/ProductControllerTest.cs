@@ -92,6 +92,27 @@ namespace Tests
         }
 
         [Test]
+        public void Create_Post_Redirect_To_Index()
+        {
+            var result = _productController.Create(new ProductInfo
+                {
+                    Id = 3,
+                    Name = "Cray wine",
+                    Container = ResourceData.Containers[0],
+                    Volume = new Volume
+                    {
+                        Id = 3,
+                        Milliliter = 750
+                    },
+                    Abv = 14,
+                    PurchasePrice = 30,
+                    TradingMargin = 5
+                }
+            ) as RedirectToRouteResult;
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+        }
+
+        [Test]
         public void Delete_Change_IsRemoved()
         {
             var productInfo = _mockSetProductInfo.Object.First(x => x.Id == 1);
@@ -119,6 +140,13 @@ namespace Tests
             _mockSetProductInfo.Verify(x => x.Remove(productInfo), Times.Never);
         }
 
+        [Test]
+        public void Delete_Post_Redirect_To_Index()
+        {
+            var result = _productController.Delete(ResourceData.ProductInfoList[0], 1) as RedirectToRouteResult;
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+        }
+
 
         [Test]
         public void Details_Get_Object()
@@ -142,6 +170,13 @@ namespace Tests
             Assert.AreEqual(ResourceData.ProductInfoList[0].Name, result.Name);
             Assert.AreEqual(ResourceData.ProductInfoList[0].Description, result.Description);
             Assert.AreEqual(ResourceData.ProductInfoList[0].Abv, result.Abv);
+        }
+
+        [Test]
+        public void Edit_Post_Redirect_To_Index()
+        {
+            var result = _productController.Edit(ResourceData.ProductInfoList[0]) as RedirectToRouteResult;
+            Assert.AreEqual("Index", result.RouteValues["action"]);
         }
 
         [Test]

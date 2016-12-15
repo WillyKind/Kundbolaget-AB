@@ -84,7 +84,7 @@ namespace Kundbolaget.Controllers
                 return View(model);
             }
             _productInfo.UpdateEntity(model);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Product");
         }
 
         public ActionResult Details(int id)
@@ -117,7 +117,7 @@ namespace Kundbolaget.Controllers
                 return View(model);
             }
             _productInfo.DeleteEntity(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Product");
         }
 
         [HttpPost]
@@ -128,7 +128,7 @@ namespace Kundbolaget.Controllers
                 return View(model);
             }
             _productInfo.CreateEntity(model);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Product");
         }
 
         public ActionResult Create()

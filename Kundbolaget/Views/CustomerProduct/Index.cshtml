@@ -6,6 +6,10 @@
 }
 
 <h4>Sortiment</h4>
+<div>
+    @Html.ActionLink("Tillbaka", "CustomerSite", "Home") |
+    @Html.ActionLink("Lägg beställning", "UploadJson", "File")
+</div>
 <div class="row">
     @foreach (var productInfo in Model)
     {

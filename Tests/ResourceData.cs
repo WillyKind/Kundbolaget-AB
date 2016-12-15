@@ -82,5 +82,68 @@ namespace Tests
                 ProductGroupId = ProductGroups[1].Id
             }
         };
+
+        public static List<ProductStock> ProductStockList => new List<ProductStock>
+        {
+            new ProductStock
+            {
+                Id = 1,
+                ProductInfo = ProductInfoList[0],
+                ProductInfoId = 1,
+                Amount = 500,
+                Warehouse = WareHouseList[0],
+                WarehouseId = 1
+            },
+            new ProductStock
+            {
+                Id = 2,
+                ProductInfo = ProductInfoList[1],
+                ProductInfoId = 2,
+                Amount = 500,
+                Warehouse = WareHouseList[0],
+                WarehouseId = 1
+            }
+        };
+
+        public static List<Warehouse> WareHouseList => new List<Warehouse>
+        {
+            new Warehouse
+            {
+               Id = 1,
+               Name = "BarkarbyWarehouse",
+               //Address = AdressList[0],
+               AddressId = 1,
+               AmmountOfStorageSpace = 400,
+               Email = "barkarbywarehouse@gmail.com",
+               PhoneNumber = "0701121212",
+               //ContactPerson = ContactPersonList[0]
+            }
+
+        };
+
+        //public static List<Address> AdressList => new List<Address>
+        //{
+        //    new Address()
+        //    {
+        //       Id = 1,
+        //       Street = "Barkarbyvägen",
+        //       Number = "44",
+        //       ZipCode = "15569",
+        //    }
+        //};
+
+        //public static List<ContactPerson> ContactPersonList => new List<ContactPerson>
+        //{
+        //    new ContactPerson()
+        //    {
+        //       Id = 1,
+        //       Email = "johan.wanstrom@gmail.com",
+        //       FirstName = "Johan",
+        //       LastName = "Wänström",
+        //       PhoneNumber = "0703334455"
+        //    }
+        //};
+
+
     }
 }

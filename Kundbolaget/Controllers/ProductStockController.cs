@@ -10,10 +10,22 @@ namespace Kundbolaget.Controllers
     public class ProductStockController : Controller
     {
         private readonly IEntityRepository<ProductStock> _stockRepository;
+        private readonly IEntityRepository<ProductInfo> _productInfoRepository;
+        private readonly IEntityRepository<Warehouse> _warehouseRepository;
 
         public ProductStockController()
         {
             _stockRepository = new DbProductStockRepository();
+            _productInfoRepository = new DbProductInfoRepository();
+            _warehouseRepository = new DbWarehouseRepository();
+        }
+
+        public ProductStockController(DbProductStockRepository dbProductStockRepository, DbProductInfoRepository dbProductInfoRepository, DbWarehouseRepository dbWarehouseRepository)
+        {
+            _stockRepository = dbProductStockRepository;
+            _productInfoRepository = dbProductInfoRepository;
+            _warehouseRepository = dbWarehouseRepository;
+
         }
 
         // GET: ProductStock
@@ -35,13 +47,13 @@ namespace Kundbolaget.Controllers
 
         public ActionResult Create()
         {
-            var productinfoSelectListItems = new DbProductInfoRepository().GetEntities().Select(x => new SelectListItem
+            var productinfoSelectListItems = _productInfoRepository.GetEntities().Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
                 Text = x.Name
             }).ToList();
 
-            var warehouseSelectListItems = new DbWarehouseRepository().GetEntities().Select(x => new SelectListItem
+            var warehouseSelectListItems = _warehouseRepository.GetEntities().Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
                 Text = x.Name
@@ -54,13 +66,15 @@ namespace Kundbolaget.Controllers
 
         public ActionResult Edit(int id)
         {
-            var productinfoSelectListItems = new DbProductInfoRepository().GetEntities().Select(x => new SelectListItem
+
+
+            var productinfoSelectListItems = _productInfoRepository.GetEntities().Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
                 Text = x.Name
             }).ToList();
 
-            var warehouseSelectListItems = new DbWarehouseRepository().GetEntities().Select(x => new SelectListItem
+            var warehouseSelectListItems = _warehouseRepository.GetEntities().Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
                 Text = x.Name

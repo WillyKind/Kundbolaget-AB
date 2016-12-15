@@ -18,11 +18,16 @@ namespace Kundbolaget.EntityFramework.Repositories
             _storeContext = new StoreContext();
         }
 
+        public DbProductStockRepository(StoreContext fakeDB)
+        {
+            _storeContext = fakeDB;
+        }
+
         public void Dispose() => _storeContext.Dispose();
 
         public ProductStock[] GetEntities() => _storeContext.ProductStocks.ToArray();
 
-        public ProductStock GetEntity(int id) => _storeContext.ProductStocks.Find(id);
+        public ProductStock GetEntity(int id) => _storeContext.ProductStocks.FirstOrDefault(x => x.Id == id);
 
         public void CreateEntity(ProductStock newEntity)
         {

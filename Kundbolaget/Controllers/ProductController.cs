@@ -11,28 +11,45 @@ namespace Kundbolaget.Controllers
 {
     public class ProductController : Controller
     {
-        private DbProductInfoRepository _productInfo;
-        private DbContainerRepository _containerRepository;
-        private DbProductGroupRepository _productGroupRepository;
+        private readonly DbProductInfoRepository _productInfo;
+        private readonly DbContainerRepository _containerRepository;
+        private readonly DbProductGroupRepository _productGroupRepository;
+        private readonly DbVolumeRepository _volumeRepository;
 
         public ProductController()
         {
             _productInfo = new DbProductInfoRepository();
             _containerRepository = new DbContainerRepository();
             _productGroupRepository = new DbProductGroupRepository();
+            _volumeRepository = new DbVolumeRepository();
+        }
+
+        public ProductController(DbProductInfoRepository productInfoRepository,
+            DbContainerRepository containerRepository, DbProductGroupRepository productGroupRepository,
+            DbVolumeRepository volumeRepository)
+        {
+            _productInfo = productInfoRepository;
+            _containerRepository = containerRepository;
+            _productGroupRepository = productGroupRepository;
+            _volumeRepository = volumeRepository;
         }
 
         // GET: Product
         public ActionResult Index()
         {
-            return View(_productInfo.GetEntities());
+            return View("Index", _productInfo.GetEntities());
         }
 
         public ActionResult Edit(int id)
         {
             var model = _productInfo.GetEntity(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
             var containers = _containerRepository.GetEntities();
             var productGroups = _productGroupRepository.GetEntities();
+            var volumes = _volumeRepository.GetEntities();
 
             var selectListContainers = containers.Select(container => new SelectListItem
             {
@@ -46,10 +63,17 @@ namespace Kundbolaget.Controllers
                 Text = p.Name
             }).ToList();
 
+            var selectListVolumes = volumes.Select(volume => new SelectListItem
+            {
+                Value = volume.Id.ToString(),
+                Text = volume.Milliliter.ToString()
+            }).ToList();
+
             ViewBag.Containers = selectListContainers;
             ViewBag.ProductGroups = selectListProductGroups;
+            ViewBag.Volume = selectListVolumes;
 
-            return View(model);
+            return View("Edit", model);
         }
 
         [HttpPost]
@@ -60,20 +84,28 @@ namespace Kundbolaget.Controllers
                 return View(model);
             }
             _productInfo.UpdateEntity(model);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Product");
         }
 
         public ActionResult Details(int id)
         {
             var model = _productInfo.GetEntity(id);
-            return View(model);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Details", model);
         }
 
         public ActionResult Delete(int id)
         {
             var model = _productInfo.GetEntity(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
 
-            return View(model);
+            return View("Delete", model);
         }
 
         [HttpPost]
@@ -85,7 +117,7 @@ namespace Kundbolaget.Controllers
                 return View(model);
             }
             _productInfo.DeleteEntity(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Product");
         }
 
         [HttpPost]
@@ -96,13 +128,14 @@ namespace Kundbolaget.Controllers
                 return View(model);
             }
             _productInfo.CreateEntity(model);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Product");
         }
 
         public ActionResult Create()
         {
             var containers = _containerRepository.GetEntities();
             var productGroups = _productGroupRepository.GetEntities();
+            var volumes = _volumeRepository.GetEntities();
 
             var selectListContainers = containers.Select(container => new SelectListItem
             {
@@ -116,10 +149,17 @@ namespace Kundbolaget.Controllers
                 Text = p.Name
             }).ToList();
 
+            var selectListVolumes = volumes.Select(volume => new SelectListItem
+            {
+                Value = volume.Id.ToString(),
+                Text = volume.Milliliter.ToString()
+            }).ToList();
+
             ViewBag.Containers = selectListContainers;
             ViewBag.ProductGroups = selectListProductGroups;
+            ViewBag.Volume = selectListVolumes;
 
-            return View();
+            return View("Create");
         }
     }
 }

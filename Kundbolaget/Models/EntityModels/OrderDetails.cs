@@ -22,5 +22,11 @@ namespace Kundbolaget.Models.EntityModels
 
         [ForeignKey("OrderId")]
         public virtual Order Order { get; set; }
+        [Required]
+        public bool IsRemoved { get; set; }
+        [Required]
+        public double UnitPrice { get; set; }
+        [Required]
+        public double TotalPrice { get; set; }
     }
 }

@@ -40,10 +40,14 @@
                         Inköpspris:
                         @Html.DisplayFor(model => model.PurchasePrice)
                     </li>
+                    <li>
+                        Utpris:
+                        @Html.DisplayFor(model => model.Price)
+                    </li>
                 </ul>
                 
                 <div class="card-action">
-                    @Html.ActionLink("Produktöversikt", "Index")
+                    @Html.ActionLink("Tillbaka", "Index", null, new { @class = "orange-text" })
                 </div>
             </div>
         </div>

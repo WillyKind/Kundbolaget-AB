@@ -1,15 +1,11 @@
 using Kundbolaget.EntityFramework.Context;
 using Kundbolaget.Models.EntityModels;
-using System.Collections.Generic;
-using Kundbolaget.Models;
+using System;
+using System.Data.Entity.Migrations;
+using System.Linq;
 
 namespace Kundbolaget.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
     internal sealed class Configuration : DbMigrationsConfiguration<StoreContext>
     {
         public Configuration()
@@ -19,26 +15,33 @@ namespace Kundbolaget.Migrations
 
         protected override void Seed(StoreContext context)
         {
-            var containers = new Container[]
+            var volumes = new[]
             {
-                new Container {Name = "Burk 0.33L", Volume = 0.33},
-                new Container {Name = "Burk 0.5L", Volume = 0.5},
-                new Container {Name = "Flaska 0.33L", Volume = 0.33},
-                new Container {Name = "Flaska 0.5L", Volume = 0.5},
-                new Container {Name = "Flaska 0.75L", Volume = 0.75},
-                new Container {Name = "Flaska 1L", Volume = 1},
-                new Container {Name = "Flaska 0.7L", Volume = 0.7},
-                new Container {Name = "Flaska 0.35L", Volume = 0.35},
+                new Volume {Milliliter = 250},
+                new Volume {Milliliter = 330},
+                new Volume {Milliliter = 350},
+                new Volume {Milliliter = 355},
+                new Volume {Milliliter = 500},
+                new Volume {Milliliter = 700},
+                new Volume {Milliliter = 750},
+                new Volume {Milliliter = 1000},
+                new Volume {Milliliter = 3000},
+            };
+            var containers = new[]
+            {
+                new Container {Name = "Burk"},
+                new Container {Name = "Flaska"},
+                new Container {Name = "Box"}
             };
 
-            var categories = new Category[]
+            var categories = new[]
             {
                 new Category {Name = "Öl"},
                 new Category {Name = "Sprit"},
                 new Category {Name = "Vin"},
             };
 
-            var productGroups = new ProductGroup[]
+            var productGroups = new[]
             {
                 new ProductGroup {Name = "Vitt vin", Category = categories[2]},
                 new ProductGroup {Name = "Rött vin", Category = categories[2]},
@@ -59,7 +62,7 @@ namespace Kundbolaget.Migrations
                 new ProductGroup {Name = "Calvados", Category = categories[1]},
             };
 
-            var countries = new Country[]
+            var countries = new[]
             {
                 new Country {Name = "Sweden", CountryCode = "+46", Region = "EMEA"},
                 new Country {Name = "Norway", CountryCode = "+47", Region = "EMEA"},
@@ -67,7 +70,7 @@ namespace Kundbolaget.Migrations
                 new Country {Name = "Denmark", CountryCode = "+45", Region = "EMEA"},
             };
 
-            var contactPersons = new ContactPerson[]
+            var contactPersons = new[]
             {
                 new ContactPerson
                 {
@@ -106,13 +109,14 @@ namespace Kundbolaget.Migrations
                 }
             };
 
-            var addresses = new Address[]
+            var addresses = new[]
             {
                 new Address {Street = "Besöksvägen", Number = "1A", ZipCode = "111 11"},
                 new Address {Street = "Lagervägen", Number = "1A", ZipCode = "000 00"},
                 new Address {Street = "Leveransvägen", Number = "2B", ZipCode = "111 12"},
                 new Address {Street = "Glimmervägen", Number = "1A", ZipCode = "111 11"},
-                new Address {Street = "Leveransvägen", Number = "1A", ZipCode = "111 11"}
+                new Address {Street = "Leveransvägen", Number = "1A", ZipCode = "111 11"},
+                new Address {Street = "Stadsvägen", Number = "1C", ZipCode = "112 11"}
             };
 
 
@@ -126,6 +130,15 @@ namespace Kundbolaget.Migrations
                 Address = addresses.First(a => a.Street == "Lagervägen")
             };
 
+            var wareHouse2 = new Warehouse
+            {
+                Name = "Kundbolagets mindre lager",
+                AmmountOfStorageSpace = 200,
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
+                Email = "mindreLager@kundbolaget.se",
+                PhoneNumber = "+46899 00 01",
+                Address = addresses.First(a => a.Street == "Stadsvägen")
+            };
 
             var icaGruppen = new Company
             {
@@ -138,103 +151,237 @@ namespace Kundbolaget.Migrations
                 PhoneNumber = "+56899 22 22"
             };
 
-            var anyIca = new Company
+            var icaVarberg = new Company
             {
                 Address = addresses.First(a => a.Street == "Glimmervägen"),
                 ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
                 Country = countries.First(c => c.Name == "Sweden"),
                 DeliveryAddress = addresses.First(a => a.Street == "Leveransvägen" && a.Number == "2B"),
-                Email = "Icanågonstans@ica.com",
+                Email = "icavarberg@ica.com",
                 PhoneNumber = "+46899 11 11",
                 ParentCompany = icaGruppen,
-                Name = "Ica någonstans"
+                Name = "Ica Vårberg"
             };
 
-            var companies = new Company[]
+            var coop = new Company
             {
-                icaGruppen, anyIca
+                Address = addresses.First(a => a.Street == "Besöksvägen"),
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Michel"),
+                Country = countries.First(c => c.Name == "Sweden"),
+                DeliveryAddress = addresses.First(a => a.Street == "Besöksvägen"),
+                Email = "Coop@medmera.com",
+                Name = "Coop",
+                PhoneNumber = "+56899 22 11"
             };
 
-            var productInfoes = new ProductInfo[]
+            var coopHaggvik = new Company
+            {
+                Address = addresses.First(a => a.Street == "Stadsvägen"),
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Robert"),
+                Country = countries.First(c => c.Name == "Sweden"),
+                DeliveryAddress = addresses.First(a => a.Street == "Stadsvägen" && a.Number == "1C"),
+                Email = "Coophaggvik@coop.com",
+                PhoneNumber = "+46899 11 33",
+                ParentCompany = coop,
+                Name = "Coop Häggvik"
+            };
+            var coopLiljeholmen = new Company
+            {
+                Address = addresses.First(a => a.Street == "Besöksvägen"),
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Robert"),
+                Country = countries.First(c => c.Name == "Sweden"),
+                DeliveryAddress = addresses.First(a => a.Street == "Lagervägen" && a.Number == "1A"),
+                Email = "coopliljeholmen@coop.com",
+                PhoneNumber = "+46899 33 33",
+                ParentCompany = coop,
+                Name = "Coop Liljeholmen"
+            };
+            var icaLiljeholmen = new Company
+            {
+                Address = addresses.First(a => a.Street == "Besöksvägen"),
+                ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
+                Country = countries.First(c => c.Name == "Sweden"),
+                DeliveryAddress = addresses.First(a => a.Street == "Lagervägen" && a.Number == "1A"),
+                Email = "icaliljeholmen@ica.com",
+                PhoneNumber = "+46899 11 54",
+                ParentCompany = icaGruppen,
+                Name = "Ica Liljeholmen"
+            };
+
+            var companies = new[]
+            {
+                icaGruppen, icaVarberg, coop, coopLiljeholmen,coopHaggvik, icaLiljeholmen
+            };
+
+            var productInfoes = new[]
             {
                 new ProductInfo
                 {
-                    Name = "Norrlandsguld 33cl",
+                    Name = "Norrlandsguld",
                     Abv = 5.3,
-                    Container = containers.First(c => c.Name == "Burk 0.33L"),
-                    Description = "En burk med öl...",
+                    Container = containers.First(c => c.Name == "Burk"),
+                    Volume = volumes.First(v => v.Milliliter == 350),
+                    Description = "Öl",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 5.3,
                     TradingMargin = 10,
-                    Removed = false
+                    Price = 250
                 },
                 new ProductInfo
                 {
-                    Name = "Norrlandsguld 50cl",
+                    Name = "Norrlandsguld",
                     Abv = 5.3,
-                    Container = containers.First(c => c.Name == "Burk 0.5L"),
-                    Description = "En burk med öl...",
+                    Container = containers.First(c => c.Name == "Burk"),
+                    Volume = volumes.First(v => v.Milliliter == 500),
+                    Description = "Öl",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 8.3,
                     TradingMargin = 8,
-                    Removed = false
+                    Price = 325
                 },
                 new ProductInfo
                 {
-                    Name = "Koskenkorva 0.7L",
+                    Name = "Nääs APA",
+                    Abv = 5.8,
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 330),
+                    Description = "APA",
+                    ProductGroup = productGroups.First(pg => pg.Name == "APA"),
+                    PurchasePrice = 8.3,
+                    TradingMargin = 8,
+                    Price = 325
+                },
+                new ProductInfo
+                {
+                    Name = "Lagunitas IPA",
+                    Abv = 6.2,
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 330),
+                    Description = "IPA",
+                    ProductGroup = productGroups.First(pg => pg.Name == "IPA"),
+                    PurchasePrice = 8.3,
+                    TradingMargin = 8,
+                    Price = 400
+                },
+                new ProductInfo
+                {
+                    Name = "Koskenkorva",
                     Abv = 40,
-                    Container = containers.First(c => c.Name == "Flaska 0.7L"),
-                    Description = "En Flaska sprit...",
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 700),
+                    Description = "Vodka",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
                     PurchasePrice = 35,
                     TradingMargin = 50,
-                    Removed = false
+                    Price = 900
+                },
+                new ProductInfo
+                {
+                    Name = "Absolut Vodka",
+                    Abv = 40,
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 700),
+                    Description = "Vodka",
+                    ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
+                    PurchasePrice = 35,
+                    TradingMargin = 50,
+                    Price = 1200
+                },
+                new ProductInfo
+                {
+                    Name = "Smirnoff Vodka",
+                    Abv = 40,
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 700),
+                    Description = "Vodka",
+                    ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
+                    PurchasePrice = 35,
+                    TradingMargin = 50,
+                    Price = 1250
+                },
+                new ProductInfo
+                {
+                    Name = " Dreissigacker",
+                    Abv = 12,
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 700),
+                    Description = "Riesling",
+                    ProductGroup = productGroups.First(pg => pg.Name == "Vitt vin"),
+                    PurchasePrice = 35,
+                    TradingMargin = 50,
+                    Price = 1250
+                },
+                new ProductInfo
+                {
+                    Name = " Vino Nobile di Montepulciano",
+                    Abv = 13.5,
+                    Container = containers.First(c => c.Name == "Flaska"),
+                    Volume = volumes.First(v => v.Milliliter == 700),
+                    Description = "Sangiovese",
+                    ProductGroup = productGroups.First(pg => pg.Name == "Rött vin"),
+                    PurchasePrice = 35,
+                    TradingMargin = 50,
+                    Price = 1250
                 },
             };
 
-            var stock = new ProductStock[]
+            var stock = new[]
             {
                 new ProductStock
                 {
                     Amount = 500,
-                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld 33cl"),
-                    Warehouses = new List<Warehouse> {warehouse}
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld"),
+                    Warehouse = warehouse
                 },
                 new ProductStock
                 {
                     Amount = 200,
-                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva 0.7L"),
-                    Warehouses = new List<Warehouse> {warehouse}
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva"),
+                    Warehouse = warehouse
                 }
             };
 
             var dummyOrder = new Order
             {
-                Company = companies.First(c => c.Name == "Ica någonstans"),
+                Company = companies.First(c => c.Name == "Ica Vårberg"),
                 CreatedDate = DateTime.Now,
+                WishedDeliveryDate = DateTime.Parse("2016-12-12"),
             };
 
-            var orderDetails = new OrderDetails[]
+            var orderDetails = new[]
             {
-                new OrderDetails {ProductInfo = productInfoes.First(pi=>pi.Name=="Koskenkorva 0.7L"),
-                    Amount = 500,
-                    Order = dummyOrder},
-                 new OrderDetails {ProductInfo = productInfoes.First(pi=>pi.Name=="Norrlandsguld 33cl"),
-                    Amount = 500,
-                    Order = dummyOrder}
+                new OrderDetails
+                {
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva"),
+                    Amount = 10,
+                    Order = dummyOrder,
+                    UnitPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price,
+                    TotalPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price*10
+                },
+                new OrderDetails
+                {
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld"),
+                    Amount = 25,
+                    UnitPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price,
+                    TotalPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price*25,
+                    Order = dummyOrder
+                }
             };
+            dummyOrder.Price += orderDetails.Sum(p => p.ProductInfo.Price*p.Amount);
+
 
             context.Countries.AddOrUpdate(countries);
             context.ContactPersons.AddOrUpdate(contactPersons);
             context.Categories.AddOrUpdate(categories);
             context.ProductGroups.AddOrUpdate(productGroups);
             context.Containers.AddOrUpdate(containers);
-            context.Warehouses.AddOrUpdate(warehouse);
+            context.Warehouses.AddOrUpdate(warehouse, wareHouse2);
             context.Companies.AddOrUpdate(companies);
             context.ProductsInfoes.AddOrUpdate(productInfoes);
             context.ProductStocks.AddOrUpdate(stock);
             context.Addresses.AddOrUpdate(addresses);
             context.OrderDetails.AddOrUpdate(orderDetails);
+            context.Volumes.AddOrUpdate(volumes);
             context.SaveChanges();
         }
     }

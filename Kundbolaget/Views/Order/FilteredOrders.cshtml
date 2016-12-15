@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Kundbolaget.Models.EntityModels.Order>
+
+@{
+    ViewBag.Title = "FilteredOrders";
+}
+<h4>Ordrar</h4>
+<div>
+    @Html.ActionLink("Tillbaka", "Index", null, new { @class = "orange-text" })
+</div>
+<hr/>
+<table class="table">
+    <tr>
+        <th>
+            Företag
+        </th>
+        <th>
+            Order skapad
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerOrderId)
+        </th>
+        <th>
+            Önskat leveransdatum
+        </th>
+        <th>
+            Pris
+        </th>
+        <th>
+            Mer information
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerOrderId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
+        </td>
+        <td>
+
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.ActionLink("Mer information","OrderDetails", new {id = item.Id, companyId=item.Company.ParentCompanyId}, new { @class = "orange-text" })
+        </td>
+    </tr>
+}
+</table>
+

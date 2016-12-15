@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "AdminManager";
+}
+
+<h2>Inställningar</h2>
+<div>
+    @Html.ActionLink("Tillbaka", "Index", null, new { @class = "orange-text" })
+</div>
+<div>
+            @Html.ActionLink("Hantera produkter", "Index", "Product", null, new { @class = "waves-effect waves-light btn",style="margin-bottom:20px" })
+            @Html.ActionLink("Hantera ordrar", "Index", "Order", null, new { @class = "waves-effect waves-light btn", style = "margin-bottom:20px" })
+            @Html.ActionLink("Hantera kunder", "Index", "Company", null, new { @class = "waves-effect waves-light btn", style = "margin-bottom:20px" })
+            @Html.ActionLink("Hantera lagerprodukter", "Index", "ProductStock", null, new { @class = "waves-effect waves-light btn", style = "margin-bottom:20px" })
+            @Html.ActionLink("Hantera adresser", "Index", "Address", null, new { @class = "waves-effect waves-light btn", style = "margin-bottom:20px" })
+</div>
+

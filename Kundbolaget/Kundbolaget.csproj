@@ -88,6 +88,14 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Schema, Version=2.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Schema.2.0.7\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -136,6 +144,7 @@
     <Content Include="content\materialize\font\material-design-icons\Material-Design-Icons.svg" />
     <Content Include="content\Styles.css" />
     <Content Include="Global.asax" />
+    <Content Include="packages.config" />
     <Content Include="content\materialize\font\roboto\Roboto-Thin.woff2" />
     <Content Include="content\materialize\font\roboto\Roboto-Thin.woff" />
     <Content Include="content\materialize\font\roboto\Roboto-Thin.ttf" />
@@ -187,6 +196,7 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <None Include="Scripts\jquery-3.1.1-vsdoc.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -199,14 +209,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdressController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\CustomerProductController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductStockController.cs" />
     <Compile Include="EntityFramework\Context\StoreContext.cs" />
+    <Compile Include="EntityFramework\Repositories\DbContainerRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbOrderRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbProductGroupRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbAddressRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbCompanyRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbContactPersonRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbCountryRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbProductInfoRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbProductStockRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbVolumeRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbWarehouseRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IEntityRepository.cs" />
+    <Compile Include="JsonEntityModels\OrderFile.cs" />
+    <Compile Include="JsonEntityModels\OrderRow.cs" />
+    <Compile Include="JsonEntityModels\SubOrder.cs" />
     <Compile Include="Migrations\201612020945526_InitialModel.cs" />
     <Compile Include="Migrations\201612020945526_InitialModel.Designer.cs">
       <DependentUpon>201612020945526_InitialModel.cs</DependentUpon>
@@ -287,6 +316,78 @@
     <Compile Include="Migrations\201612060944313_OneToManyOrderCompany.Designer.cs">
       <DependentUpon>201612060944313_OneToManyOrderCompany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612090935024_AddsIsRemovedToAddress.cs" />
+    <Compile Include="Migrations\201612090935024_AddsIsRemovedToAddress.Designer.cs">
+      <DependentUpon>201612090935024_AddsIsRemovedToAddress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612090943147_AddsIsRemovedToCategories.cs" />
+    <Compile Include="Migrations\201612090943147_AddsIsRemovedToCategories.Designer.cs">
+      <DependentUpon>201612090943147_AddsIsRemovedToCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612090958527_AddsIsRemovedToCompanies.cs" />
+    <Compile Include="Migrations\201612090958527_AddsIsRemovedToCompanies.Designer.cs">
+      <DependentUpon>201612090958527_AddsIsRemovedToCompanies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612091000380_AddsIsRemovedToContactPerson.cs" />
+    <Compile Include="Migrations\201612091000380_AddsIsRemovedToContactPerson.Designer.cs">
+      <DependentUpon>201612091000380_AddsIsRemovedToContactPerson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612091002126_AddsIsRemovedToContainer.cs" />
+    <Compile Include="Migrations\201612091002126_AddsIsRemovedToContainer.Designer.cs">
+      <DependentUpon>201612091002126_AddsIsRemovedToContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612091004084_AddsIsRemovedToCountry.cs" />
+    <Compile Include="Migrations\201612091004084_AddsIsRemovedToCountry.Designer.cs">
+      <DependentUpon>201612091004084_AddsIsRemovedToCountry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612091006308_AddsIsRemovedToOrder.cs" />
+    <Compile Include="Migrations\201612091006308_AddsIsRemovedToOrder.Designer.cs">
+      <DependentUpon>201612091006308_AddsIsRemovedToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612091008446_AddsIsRemovedToOrderDetails.cs" />
+    <Compile Include="Migrations\201612091008446_AddsIsRemovedToOrderDetails.Designer.cs">
+      <DependentUpon>201612091008446_AddsIsRemovedToOrderDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612091010109_AddsIsRemovedToProductGroup.cs" />
+    <Compile Include="Migrations\201612091010109_AddsIsRemovedToProductGroup.Designer.cs">
+      <DependentUpon>201612091010109_AddsIsRemovedToProductGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612091012272_AddsIsRemovedToProductInfo.cs" />
+    <Compile Include="Migrations\201612091012272_AddsIsRemovedToProductInfo.Designer.cs">
+      <DependentUpon>201612091012272_AddsIsRemovedToProductInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612091015004_AddsIsRemovedToProductStock.cs" />
+    <Compile Include="Migrations\201612091015004_AddsIsRemovedToProductStock.Designer.cs">
+      <DependentUpon>201612091015004_AddsIsRemovedToProductStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612091016349_AddsIsRemovedToWarehouse.cs" />
+    <Compile Include="Migrations\201612091016349_AddsIsRemovedToWarehouse.Designer.cs">
+      <DependentUpon>201612091016349_AddsIsRemovedToWarehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612091246479_ChangeManyToManyWareHouseProductStockToOneToMany.cs" />
+    <Compile Include="Migrations\201612091246479_ChangeManyToManyWareHouseProductStockToOneToMany.Designer.cs">
+      <DependentUpon>201612091246479_ChangeManyToManyWareHouseProductStockToOneToMany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612091925105_AddVolumeEntity.cs" />
+    <Compile Include="Migrations\201612091925105_AddVolumeEntity.Designer.cs">
+      <DependentUpon>201612091925105_AddVolumeEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141002496_SetupOrderFiles.cs" />
+    <Compile Include="Migrations\201612141002496_SetupOrderFiles.Designer.cs">
+      <DependentUpon>201612141002496_SetupOrderFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141320133_AddsPriceToProductInfo.cs" />
+    <Compile Include="Migrations\201612141320133_AddsPriceToProductInfo.Designer.cs">
+      <DependentUpon>201612141320133_AddsPriceToProductInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141334441_AddsPriceToOrder.cs" />
+    <Compile Include="Migrations\201612141334441_AddsPriceToOrder.Designer.cs">
+      <DependentUpon>201612141334441_AddsPriceToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141429332_AddsPricePropsToOrderDEtails.cs" />
+    <Compile Include="Migrations\201612141429332_AddsPricePropsToOrderDEtails.Designer.cs">
+      <DependentUpon>201612141429332_AddsPricePropsToOrderDEtails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -299,8 +400,10 @@
     <Compile Include="Models\EntityModels\ProductInfo.cs" />
     <Compile Include="Models\EntityModels\ProductGroup.cs" />
     <Compile Include="Models\EntityModels\ProductStock.cs" />
+    <Compile Include="Models\EntityModels\Volume.cs" />
     <Compile Include="Models\EntityModels\Warehouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\FileUploadVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
@@ -312,7 +415,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="packages.config" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
@@ -321,6 +423,30 @@
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Address\Index.cshtml" />
+    <Content Include="Views\Address\Edit.cshtml" />
+    <Content Include="Views\Address\Delete.cshtml" />
+    <Content Include="Views\Address\Create.cshtml" />
+    <Content Include="Views\Address\Details.cshtml" />
+    <Content Include="Views\ProductStock\Create.cshtml" />
+    <Content Include="Views\ProductStock\Index.cshtml" />
+    <Content Include="Views\ProductStock\Details.cshtml" />
+    <Content Include="Views\ProductStock\Edit.cshtml" />
+    <Content Include="Views\Order\FilteredOrders.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\OrderDetails.cshtml" />
+    <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\File\UploadJson.cshtml" />
+    <Content Include="Views\CustomerProduct\Index.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Company\Details.cshtml" />
+    <Content Include="Views\Company\Create.cshtml" />
+    <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Company\Delete.cshtml" />
+    <Content Include="Views\Home\AdminManager.cshtml" />
+    <Content Include="Views\Home\CustomerSite.cshtml" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -391,6 +517,60 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612060944313_OneToManyOrderCompany.resx">
       <DependentUpon>201612060944313_OneToManyOrderCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612090935024_AddsIsRemovedToAddress.resx">
+      <DependentUpon>201612090935024_AddsIsRemovedToAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612090943147_AddsIsRemovedToCategories.resx">
+      <DependentUpon>201612090943147_AddsIsRemovedToCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612090958527_AddsIsRemovedToCompanies.resx">
+      <DependentUpon>201612090958527_AddsIsRemovedToCompanies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091000380_AddsIsRemovedToContactPerson.resx">
+      <DependentUpon>201612091000380_AddsIsRemovedToContactPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091002126_AddsIsRemovedToContainer.resx">
+      <DependentUpon>201612091002126_AddsIsRemovedToContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091004084_AddsIsRemovedToCountry.resx">
+      <DependentUpon>201612091004084_AddsIsRemovedToCountry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091006308_AddsIsRemovedToOrder.resx">
+      <DependentUpon>201612091006308_AddsIsRemovedToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091008446_AddsIsRemovedToOrderDetails.resx">
+      <DependentUpon>201612091008446_AddsIsRemovedToOrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091010109_AddsIsRemovedToProductGroup.resx">
+      <DependentUpon>201612091010109_AddsIsRemovedToProductGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091012272_AddsIsRemovedToProductInfo.resx">
+      <DependentUpon>201612091012272_AddsIsRemovedToProductInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091015004_AddsIsRemovedToProductStock.resx">
+      <DependentUpon>201612091015004_AddsIsRemovedToProductStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091016349_AddsIsRemovedToWarehouse.resx">
+      <DependentUpon>201612091016349_AddsIsRemovedToWarehouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091246479_ChangeManyToManyWareHouseProductStockToOneToMany.resx">
+      <DependentUpon>201612091246479_ChangeManyToManyWareHouseProductStockToOneToMany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612091925105_AddVolumeEntity.resx">
+      <DependentUpon>201612091925105_AddVolumeEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141002496_SetupOrderFiles.resx">
+      <DependentUpon>201612141002496_SetupOrderFiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141320133_AddsPriceToProductInfo.resx">
+      <DependentUpon>201612141320133_AddsPriceToProductInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141334441_AddsPriceToOrder.resx">
+      <DependentUpon>201612141334441_AddsPriceToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141429332_AddsPricePropsToOrderDEtails.resx">
+      <DependentUpon>201612141429332_AddsPricePropsToOrderDEtails.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

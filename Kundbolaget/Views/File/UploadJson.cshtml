@@ -1,0 +1,28 @@
+﻿@model Kundbolaget.ViewModels.FileUploadVM
+@{
+    ViewBag.Title = "Ladda upp fil";
+}
+
+@using (Html.BeginForm("UploadJson", "File",
+                                   FormMethod.Post,
+                                   new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Ladda upp orderfil</h4>
+        <div>
+            @Html.ActionLink("Produktöversikt", "Index", "CustomerProduct", null, new { @class = "orange-text" }) |
+            @Html.ActionLink("Tillbaka", "CustomerSite", "Home", null, new { @class = "orange-text" })
+        </div>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.TextBoxFor(model => model.File, new { type = "file" })
+                @Html.ValidationMessageFor(model => model.File)
+                <input type="submit" value="Ladda upp" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

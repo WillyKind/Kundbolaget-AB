@@ -18,6 +18,12 @@ namespace Kundbolaget.Models.EntityModels
         [Required]
         public int ProductInfoId { get; set; }
 
-        public virtual ICollection<Warehouse> Warehouses { get; set; }
+        public int WarehouseId { get; set; }
+        [ForeignKey("WarehouseId")]
+
+        public virtual Warehouse Warehouse { get; set; }
+
+        [Required]
+        public bool IsRemoved { get; set; }
     }
 }

@@ -17,15 +17,23 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ContainerId, "Behållare", htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ContainerId, (List<SelectListItem>) ViewBag.Containers)
+                @Html.DropDownListFor(model => model.ContainerId, (List<SelectListItem>)ViewBag.Containers)
                 @Html.ValidationMessageFor(model => model.ContainerId, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VolumeId, "Volume", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.VolumeId, (List<SelectListItem>)ViewBag.Volume)
+                @Html.ValidationMessageFor(model => model.VolumeId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.ProductGroupId, "Produktgrupp", htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ProductGroupId, (List<SelectListItem>) ViewBag.ProductGroups)
+                @Html.DropDownListFor(model => model.ProductGroupId, (List<SelectListItem>)ViewBag.ProductGroups)
                 @Html.ValidationMessageFor(model => model.ProductGroupId, "", new {@class = "text-danger"})
             </div>
         </div>
@@ -69,6 +77,13 @@
                 @Html.ValidationMessageFor(model => model.PurchasePrice, "", new {@class = "text-danger"})
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, "Utpris", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
 
         <div class="form-group">
@@ -80,7 +95,7 @@
 }
 
 <div>
-    @Html.ActionLink("Produktöversikt", "Index")
+    @Html.ActionLink("Tillbaka", "Index", null, new { @class = "orange-text" })
 </div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>

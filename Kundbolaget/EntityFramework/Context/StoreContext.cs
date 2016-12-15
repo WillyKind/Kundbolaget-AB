@@ -5,20 +5,22 @@ namespace Kundbolaget.EntityFramework.Context
 {
     public class StoreContext : DbContext
     {
-        public DbSet<ProductInfo> ProductsInfoes { get; set; }
-        public DbSet<Container> Containers { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<ProductGroup> ProductGroups { get; set; }
-        public DbSet<Company> Companies { get; set; }
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<ContactPerson> ContactPersons { get; set; }
-        public DbSet<Country> Countries { get; set; } 
-        public DbSet<ProductStock> ProductStocks { get; set; }
-        public DbSet<Warehouse> Warehouses { get; set; }
-        public DbSet<OrderDetails> OrderDetails { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public virtual DbSet<ProductInfo> ProductsInfoes { get; set; }
+        public virtual DbSet<Container> Containers { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<ProductGroup> ProductGroups { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<ContactPerson> ContactPersons { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<ProductStock> ProductStocks { get; set; }
+        public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Volume> Volumes { get; set; }
 
         public StoreContext() : base(@"data source =.\SQLEXPRESS; initial catalog=KundBolagetDemo; integrated security=SSPI") {}
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -32,12 +34,9 @@ namespace Kundbolaget.EntityFramework.Context
                 .WithMany(x => x.Companies)
                 .HasForeignKey(x => x.AddressId)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Company>()
-                .HasRequired(x => x.DeliveryAddress)
-                .WithMany(x => x.DeliveryCompanies)
-                .HasForeignKey(x => x.DeliveryAddressId)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<ProductStock>()
+                .HasRequired(x => x.ProductInfo)
+                .WithMany(x => x.ProductStocks);
         }
     }
 }

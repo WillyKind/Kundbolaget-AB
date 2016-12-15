@@ -34,5 +34,7 @@ namespace Kundbolaget.Models.EntityModels
         public virtual Address Address { get; set; }
 
         public virtual ICollection<ProductStock> ProductStocks { get; set; }
+        [Required]
+        public bool IsRemoved { get; set; }
     }
 }

@@ -14,5 +14,7 @@ namespace Kundbolaget.Models.EntityModels
         [Required]
         public string Region { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
+        [Required]
+        public bool IsRemoved { get; set; }
     }
 }

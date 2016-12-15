@@ -10,7 +10,8 @@ namespace Kundbolaget.Models.EntityModels
 
         [Required]
         public string Name { get; set; }
-
+        [Required]
+        public bool IsRemoved { get; set; }
         public virtual ICollection<ProductGroup> ProductGroups { get; set; }
     }
 }

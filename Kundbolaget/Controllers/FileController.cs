@@ -33,6 +33,7 @@ namespace Kundbolaget.Controllers
         [HttpPost]
         public ActionResult UploadJson(FileUploadVM model)
         {
+
             if (model.File == null ||
                 model.File.FileName.Substring(Math.Max(0, model.File.FileName.Length - 4)) != "json")
                 return View(model);

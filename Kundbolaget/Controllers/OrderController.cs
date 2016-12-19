@@ -35,5 +35,12 @@ namespace Kundbolaget.Controllers
             var model = _orders.GetOrderDetails(id);
             return View(model);
         }
+
+        public ActionResult GetAllUnpickedOrders()
+        {
+            var model = _orders.GetUnpickedOrders();
+            return View(model);
+        }
+
     }
 }

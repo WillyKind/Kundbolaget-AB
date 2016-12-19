@@ -13,6 +13,17 @@ namespace Tests
     [TestFixture]
     internal class ProductControllerTest
     {
+        //FAKE CONTEXT
+        private Mock<StoreContext> _mockContext;
+        private ProductController _productController;
+
+
+        //FAKE DbSet
+        private Mock<DbSet<ProductInfo>> _mockSetProductInfo;
+        private Mock<DbSet<Container>> _mockSetContainer;
+        private Mock<DbSet<ProductGroup>> _mockSetProductGroup;
+        private Mock<DbSet<Volume>> _mockSetVolume;
+
         [SetUp]
         public void Initializer()
         {
@@ -57,17 +68,7 @@ namespace Tests
                 dbProductGroupRepository, dbVolumeRepository);
         }
 
-        //FAKE CONTEXT
-        private Mock<StoreContext> _mockContext;
-
-        //FAKE DbSet
-        private Mock<DbSet<ProductInfo>> _mockSetProductInfo;
-        private Mock<DbSet<Container>> _mockSetContainer;
-        private Mock<DbSet<ProductGroup>> _mockSetProductGroup;
-        private Mock<DbSet<Volume>> _mockSetVolume;
-
-
-        private ProductController _productController;
+        
 
         [Test]
         public void Create()
@@ -116,6 +117,7 @@ namespace Tests
         public void Delete_Change_IsRemoved()
         {
             var productInfo = _mockSetProductInfo.Object.First(x => x.Id == 1);
+
             _productController.Delete(productInfo, productInfo.Id);
             var result = _mockSetProductInfo.Object.First(x => x.Id == productInfo.Id);
             Assert.AreEqual(true, result.IsRemoved);

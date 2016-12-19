@@ -80,5 +80,12 @@ namespace Kundbolaget.EntityFramework.Repositories
         {
             return db.OrderDetails.Where(o => o.OrderId == id).ToArray();
         }
+
+        public Order[] GetUnpickedOrders()
+        {
+            //Meed more logic for new Picked-propterty
+            return db.Orders.Where(o => !o.IsRemoved).ToArray();
+        }
+
     }
 }

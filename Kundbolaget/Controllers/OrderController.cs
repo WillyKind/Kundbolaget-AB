@@ -15,6 +15,12 @@ namespace Kundbolaget.Controllers
         {
             _orders = new DbOrderRepository();
         }
+
+        //Constructor for tests
+        public OrderController(DbOrderRepository dbOrderRepository)
+        {
+            _orders = dbOrderRepository;
+        }
         // GET: Order
         public ActionResult Index()
         {

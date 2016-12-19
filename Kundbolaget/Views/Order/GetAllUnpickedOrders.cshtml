@@ -24,30 +24,39 @@
 
     @foreach (var item in Model)
     {
+        
+             <tr>
+                 
+                 <td>
+                     @foreach (var detail in item.OrderDetails)
+                     {
+                         @detail.ProductInfo.Name
+                     }
+                 </td>
+             </tr>
+
+        <tr id="@item.Id">
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a onclick="OrderPicked(@item.Id)" class="waves-effect waves-light btn">Plockad</a>
+            </td>
+        </tr>
+
 
 
         
-            <tr id="@item.Id">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Company.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    
-                    <a onclick="OrderPicked(@item.Id)" class="waves-effect waves-light btn">Plockad</a>
-
-                </td>
-              
-            </tr>
     }
-
+    @Html.ActionLink("Tillbaka", "Index", "Home")
 </table>
 <script src="~/Scripts/CallOrderPicked.js"></script>

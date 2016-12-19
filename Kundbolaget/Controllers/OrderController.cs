@@ -4,16 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Kundbolaget.EntityFramework.Repositories;
+using Kundbolaget.Models.EntityModels;
+using Kundbolaget.ViewModels;
 
 namespace Kundbolaget.Controllers
 {
     public class OrderController : Controller
     {
         private DbOrderRepository _orders;
+        private DbCompanyRepository _companies;
 
         public OrderController()
         {
             _orders = new DbOrderRepository();
+            _companies = new DbCompanyRepository();
         }
 
         //Constructor for tests
@@ -33,6 +37,25 @@ namespace Kundbolaget.Controllers
             var model = _orders.GetCompanyOrders(id);
 
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Create(OrderViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            model.Order.CreatedDate = DateTime.Now;
+            _orders.CreateEntity(model.Order);
+            return RedirectToAction("Index", "Order");
+        }
+
+        public ActionResult Create()
+        {
+            var model = new OrderViewModel();
+            model.Companies = _companies.GetEntities().Where(c=>c.IsRemoved == false && c.ParentCompanyId != null).ToArray();       
+            return View("Create", model);
         }
 
         public ActionResult OrderDetails(int id, int companyId)

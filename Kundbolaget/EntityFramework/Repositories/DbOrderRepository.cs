@@ -13,13 +13,21 @@ namespace Kundbolaget.EntityFramework.Repositories
 {
     public class DbOrderRepository
     {
-        StoreContext db = new StoreContext();
+        private StoreContext db;
 
         public void Dispose()
         {
             db.Dispose();
         }
 
+        public DbOrderRepository()
+        {
+            db = new StoreContext();
+        }
+        public DbOrderRepository(StoreContext fakeContext)
+        {
+            db = fakeContext;
+        }
         public bool ValidateCompanyId(int id)
         {
             var companyExists = db.Companies.Any(c => c.Id == id && !c.IsRemoved);
@@ -33,6 +41,13 @@ namespace Kundbolaget.EntityFramework.Repositories
                     .Any(o => o.CustomerOrderId == customerOrderId);
             return ordernumerExists;
         }
+
+        public void CreateEntity(Order newEntity)
+        {
+            db.Orders.Add(newEntity);
+            db.SaveChanges();
+        }
+
 
         public void CreateOrder(OrderFile order)
         {

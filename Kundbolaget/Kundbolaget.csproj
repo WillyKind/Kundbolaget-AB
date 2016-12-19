@@ -190,6 +190,7 @@
     <Content Include="content\materialize\fonts\roboto\Roboto-Bold.ttf" />
     <Content Include="content\materialize\fonts\roboto\Roboto-Bold.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\CallOrderPicked.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />

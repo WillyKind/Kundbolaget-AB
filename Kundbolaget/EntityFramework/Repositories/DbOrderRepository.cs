@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Web;
@@ -84,6 +85,19 @@ namespace Kundbolaget.EntityFramework.Repositories
         public Order[] GetUnpickedOrders()
         {
             return db.Orders.Where(o => !o.IsRemoved && o.OrderPicked == null).ToArray();
+        }
+
+        public Order GetOrder(int orderId)
+        {
+            return db.Orders.FirstOrDefault(o => o.Id == orderId);
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            db.Orders.Attach(order);
+            var entry = db.Entry(order);
+            entry.State = EntityState.Modified;
+            db.SaveChanges();
         }
 
     }

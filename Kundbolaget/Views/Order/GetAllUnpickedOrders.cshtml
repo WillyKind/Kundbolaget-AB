@@ -1,45 +1,53 @@
-﻿@model IEnumerable<Kundbolaget.Models.EntityModels.Order>
+﻿@using Kundbolaget.Controllers
+@using Kundbolaget.Models.EntityModels
+@model IEnumerable<Kundbolaget.Models.EntityModels.Order>
+<h2>Oplockade ordrar</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="highlight">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Company.Name)
+            Butik
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
+            Orderdatum
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.WishedDeliveryDate)
+            Önskat leveransdatum
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            Totalpris
         </th>
-        <th></th>
+        <th>
+            Plockad
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Company.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+
+
+        
+            <tr id="@item.Id">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    
+                    <a onclick="OrderPicked(@item.Id)" class="waves-effect waves-light btn">Plockad</a>
+
+                </td>
+              
+            </tr>
+    }
 
 </table>
+<script src="~/Scripts/CallOrderPicked.js"></script>

@@ -42,5 +42,15 @@ namespace Kundbolaget.Controllers
             return View(model);
         }
 
+
+        [HttpPost]
+        public string OrderPicked(int id)
+        {
+            var order = _orders.GetOrder(id);
+            order.OrderPicked = DateTime.Now;
+            _orders.UpdateOrder(order);
+            return "Success " + id;
+        }
+
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Kundbolaget.EntityFramework.Repositories;
+using Kundbolaget.PDFGenerator;
 
 namespace Kundbolaget.Controllers
 {
@@ -34,6 +35,21 @@ namespace Kundbolaget.Controllers
             ViewBag.parentCompanyId = companyId;
             var model = _orders.GetOrderDetails(id);
             return View(model);
+        }
+
+        public ActionResult ExportPdf(int id, int companyId)
+        {
+            //ViewBag.parentCompanyId = companyId;
+            //var model = _orders.GetOrderDetails(id);
+            //return View(model);
+            PdfGenerator pdfGenerator = new PdfGenerator();
+
+            pdfGenerator.ExportToPdf(id);
+            //return View("FilteredOrders");
+            return RedirectToAction("FilteredOrders", companyId);
+
+
+
         }
     }
 }

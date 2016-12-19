@@ -49,7 +49,10 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Mer information","OrderDetails", new {id = item.Id, companyId=item.Company.ParentCompanyId}, new { @class = "orange-text" })
+            @Html.ActionLink("Mer information", "OrderDetails", new {id = item.Id, companyId = item.Company.ParentCompanyId}, new {@class = "orange-text"})
+        </td>
+        <td>
+            @Html.ActionLink("Skapa PDF", "ExportPdf", new { id = item.Id, companyId = ViewBag.parentCompanyId }, new { @class = "orange-text" })
         </td>
     </tr>
 }

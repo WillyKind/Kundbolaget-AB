@@ -83,8 +83,7 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public Order[] GetUnpickedOrders()
         {
-            //Meed more logic for new Picked-propterty
-            return db.Orders.Where(o => !o.IsRemoved).ToArray();
+            return db.Orders.Where(o => !o.IsRemoved && o.OrderPicked == null).ToArray();
         }
 
     }

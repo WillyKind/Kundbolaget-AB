@@ -408,6 +408,7 @@
     <Compile Include="Models\EntityModels\Volume.cs" />
     <Compile Include="Models\EntityModels\Warehouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CompanyViewModel.cs" />
     <Compile Include="ViewModels\FileUploadVM.cs" />
   </ItemGroup>
   <ItemGroup>

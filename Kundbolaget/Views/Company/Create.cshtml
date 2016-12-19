@@ -1,85 +1,162 @@
-﻿@model Kundbolaget.Models.EntityModels.Company
+﻿@model Kundbolaget.ViewModels.CompanyViewModel
 
 @{
     ViewBag.Title = "Skapa";
 }
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Company", FormMethod.Post, new {@class = "col s12"}))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h5>Fyll i information</h5>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, "Namn", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+    <div >
+        <h4>Skapa företag</h4>
+        <div>
+            @Html.ActionLink("Företagsöversikt", "Index", null, new {@class = "orange-text"})
+        </div>
+        <hr/>
+        @Html.ValidationSummary(true)
+
+        <div class="row">
+            <div class="col s10 input-field">
+                <div>
+                    @Html.EditorFor(model => model.Company.Name, new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "validate",
+                            type = "text",
+                            data_val_required = "Måste fyllas i."
+                        }
+                    })
+                    @Html.LabelFor(model => model.Company.Name, "Namn")
+                    @Html.ValidationMessageFor(model => model.Company.Name)
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col s10 input-field">
+                @Html.EditorFor(model => model.Company.Email, new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "validate",
+                        type = "text",
+                        data_val_required = "Måste fyllas i."
+                    }
+                })
+                @Html.LabelFor(model => model.Company.Email, "MailAddress")
+                @Html.ValidationMessageFor(model => model.Company.Email)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNumber, "Telefonnummer", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col s10 input-field">
+                @Html.EditorFor(model => model.Company.PhoneNumber, new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "validate",
+                        type = "text",
+                        data_val_required = "Måste fyllas i."
+                    }
+                })
+                @Html.LabelFor(model => model.Company.PhoneNumber, "Telefonnummer")
+                @Html.ValidationMessageFor(model => model.Company.PhoneNumber)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.AddressId, "Besöksadress", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.AddressId, (List<SelectListItem>)ViewBag.Addresses)
-                @Html.ValidationMessageFor(model => model.AddressId, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col s10">
+                <h5>Besöksaddress</h5>
+            </div>
+            @Html.HiddenFor(model => model.Company.AddressId)
+            @Html.HiddenFor(model => model.Company.Address.Id)
+            <div class="input-field col s10">
+                @Html.EditorFor(model => model.Company.Address.Street)
+                @Html.LabelFor(model => model.Company.Address.Street)
+            </div>
+            <div class="input-field col s10">
+                @Html.EditorFor(model => model.Company.Address.Number)
+                @Html.LabelFor(model => model.Company.Address.Number)
+            </div>
+            <div class="input-field col s10">
+                @Html.EditorFor(model => model.Company.Address.ZipCode)
+                @Html.LabelFor(model => model.Company.Address.ZipCode)
+                @Html.ValidationMessageFor(model => model.Company.Address)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ContactPersonId, "Kontaktperson", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ContactPersonId, (List<SelectListItem>)ViewBag.ContactPersons)
-                @Html.ValidationMessageFor(model => model.ContactPersonId, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col s10">
+                @Html.LabelFor(model => model.Company.ContactPersonId, "Kontaktperson")
+                @Html.DropDownListFor(model => model.Company.ContactPersonId, new SelectList(Model.ContactPersons.Select(person => new
+                {
+                    person.Id, FullName = $"{person.FirstName} {person.LastName}"
+                }), "Id", "FullName"), new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "dropdown-content"
+                    }
+                })
+                @Html.ValidationMessageFor(model => model.Company.ContactPersonId)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CountryId, "Land", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CountryId, (List<SelectListItem>)ViewBag.Countries)
-                @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col s10">
+                @Html.LabelFor(model => model.Company.CountryId, "Land")
+                @Html.DropDownListFor(model => model.Company.CountryId, new SelectList(Model.Countries, "Id", "Name"), new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "dropdown-content"
+                    }
+                })
+                @Html.ValidationMessageFor(model => model.Company.CountryId)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DeliveryAddressId, "Leveransadress", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.DeliveryAddressId, (List<SelectListItem>)ViewBag.Addresses)
-                @Html.ValidationMessageFor(model => model.DeliveryAddressId, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col s10">
+                <h5>Leveransaddress</h5>
+            </div>
+            @Html.HiddenFor(model => model.Company.DeliveryAddressId)
+            @Html.HiddenFor(model => model.Company.DeliveryAddress.Id)
+            <div class="input-field col s10">
+                @Html.EditorFor(model => model.Company.DeliveryAddress.Street)
+                @Html.LabelFor(model => model.Company.DeliveryAddress.Street)
+            </div>
+            <div class="input-field col s10">
+                @Html.EditorFor(model => model.Company.DeliveryAddress.Number)
+                @Html.LabelFor(model => model.Company.DeliveryAddress.Number)
+            </div>
+            <div class="input-field col s10">
+                @Html.EditorFor(model => model.Company.DeliveryAddress.ZipCode)
+                @Html.LabelFor(model => model.Company.DeliveryAddress.ZipCode)
+            </div>
+            @Html.ValidationMessageFor(model => model.Company.Address)
+        </div>
+
+        <div class="row">
+            <div class="col s10">
+                @Html.LabelFor(model => model.Company.ParentCompanyId, "Moderbolag")
+                @Html.DropDownListFor(model => model.Company.ParentCompanyId, new SelectList(Model.ParentCompanies, "Id", "Name"), new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "dropdown-content"
+                    }
+                })
+                @Html.ValidationMessageFor(model => model.Company.ParentCompanyId)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ParentCompanyId, "Moderbolag", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ParentCompanyId, (List<SelectListItem>)ViewBag.ParentCompanies)
-                @Html.ValidationMessageFor(model => model.ParentCompanyId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Spara" class="btn btn-default" />
+        <div class="row">
+            <div class="col s10">
+                <input type="submit" value="Spara" class="btn"/>
             </div>
         </div>
     </div>

@@ -9,7 +9,16 @@ namespace Kundbolaget.EntityFramework.Repositories
 {
     public class DbAddressRepository : IEntityRepository<Address>
     {
-        private readonly StoreContext _db = new StoreContext();
+        private readonly StoreContext _db;
+
+        public DbAddressRepository(StoreContext mockContextObject) {
+            _db = mockContextObject;
+
+        }
+
+        public DbAddressRepository() {
+            _db = new StoreContext();
+        }
 
         public void Dispose()
         {

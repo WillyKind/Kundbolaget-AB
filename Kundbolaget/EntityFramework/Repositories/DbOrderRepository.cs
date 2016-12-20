@@ -100,5 +100,25 @@ namespace Kundbolaget.EntityFramework.Repositories
             db.SaveChanges();
         }
 
+        public Order[] GetPickedOrders()
+        {
+            return db.Orders.Where(o => !o.IsRemoved && o.OrderTransported == null && o.OrderPicked != null).ToArray();
+        }
+
+        public Order[] GetShippedOrders()
+        {
+            return db.Orders.Where(o => !o.IsRemoved &&
+                                        o.OrderTransported != null &&
+                                        o.OrderPicked != null &&
+                                        o.OrderDelivered == null).ToArray();
+        }
+
+        public Order[] GetOrderHistory()
+        {
+            return db.Orders.Where(o => !o.IsRemoved &&
+                                       o.OrderTransported != null &&
+                                       o.OrderPicked != null &&
+                                       o.OrderDelivered != null).ToArray();
+        }
     }
 }

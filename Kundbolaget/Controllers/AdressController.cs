@@ -17,6 +17,11 @@ namespace Kundbolaget.Controllers
             _adressRepository = new DbAddressRepository();
         }
 
+        public AddressController(DbAddressRepository dbAddressRepository)
+        {
+            _adressRepository = dbAddressRepository;
+        }
+
         public ActionResult Index()
         {
             return View(_adressRepository.GetEntities());

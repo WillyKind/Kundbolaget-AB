@@ -42,7 +42,7 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a onclick="ShipOrder(@item.Id)" class="waves-effect waves-light btn">Order skickad</a>
+                <a onclick="OrderController(@item.Id,'OrderShipped')" class="waves-effect waves-light btn">Order skickad</a>
             </td>
             <td>
                 @Html.ActionLink("Detaljer", "OrderDetailsPickedOrder", "Order", new { id = item.Id} , new { @class = "orange-text" })
@@ -55,4 +55,4 @@
     }
     @Html.ActionLink("Tillbaka", "Index", "Home")
 </table>
-<script src="~/Scripts/CallOrderPicked.js"></script>
+<script src="~/Scripts/CallOrderController.js"></script>

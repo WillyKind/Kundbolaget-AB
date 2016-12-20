@@ -10,9 +10,7 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    @*@Html.HiddenFor(model=>model.OrderDetails)
-    @Html.HiddenFor(model=>model.OrderDetails.ProductInfoId)
-    @Html.HiddenFor(model=>model.OrderDetails.Order)*@
+    @Html.HiddenFor(model=>model.OrderDetails.OrderId)
     <div class="form-horizontal">
         <h4>OrderDetails</h4>
         <hr />
@@ -48,7 +46,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List","Index","Order")
 </div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>

@@ -34,10 +34,11 @@ namespace Kundbolaget.Controllers
             return View();
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             var model = new OrderDetailsViewModel();
             model.ProductInfos = _products.GetEntities();
+            model.OrderDetails.OrderId = id;
 
             return View(model);
         }
@@ -47,8 +48,15 @@ namespace Kundbolaget.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
+            var product = _products.GetEntity(model.OrderDetails.ProductInfoId);
+            model.OrderDetails.UnitPrice = product.Price;
+            model.OrderDetails.TotalPrice = model.OrderDetails.Amount*model.OrderDetails.UnitPrice;
+            var updatedOrder = _orders.GetEntity(model.OrderDetails.OrderId);
+            updatedOrder.Price +=(int) model.OrderDetails.TotalPrice;
 
-            return View();
+            _orders.UpdateEntity(updatedOrder);
+            _orderDetails.CreateEntity(model.OrderDetails);
+            return RedirectToAction("Create","OrderDetails",new {id=updatedOrder.Id});
         }
 
 
@@ -75,7 +83,7 @@ namespace Kundbolaget.Controllers
             updatedOrder.Price= updatedOrder.OrderDetails.Sum(updateOrderOrderDetail => (int) updateOrderOrderDetail.TotalPrice);
 
             _orders.UpdateEntity(updatedOrder);
-            return RedirectToAction("Index", "Order");
+            return RedirectToAction("OrderDetails", "Order", new {id=updatedOrder.Id, companyId= updatedOrder.Company.ParentCompanyId});
         }
 
         public ActionResult Delete(int id)
@@ -101,7 +109,7 @@ namespace Kundbolaget.Controllers
             updatedOrder.Price = updatedOrder.Price - (int)model.TotalPrice;
             _orders.UpdateEntity(updatedOrder);
             _orderDetails.DeleteEntity(id);
-            return RedirectToAction("FilteredOrders", "Order", new {id= model.Order.Company.ParentCompanyId});
+            return RedirectToAction("OrderDetails", "Order", new {id=updatedOrder.Id,companyId= model.Order.Company.ParentCompanyId});
         }
     }
 }

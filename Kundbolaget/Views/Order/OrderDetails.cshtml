@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Kundbolaget.Models.EntityModels.OrderDetails>
+﻿@model Kundbolaget.ViewModels.OrderDetailsViewModel
 
 @{
     ViewBag.Title = "Orderdetaljer";
@@ -30,7 +30,7 @@
         </th>
     </tr>
 
-    @foreach (var item in Model) {
+    @foreach (var item in Model.OrderDetailses) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductInfo.Name)
@@ -58,8 +58,7 @@
         </tr>
     }
 </table>
-
     <div>
-        @Html.ActionLink("Skapa Ny", "Create","OrderDetails",null , new { @class = "orange-text" })
+        @Html.ActionLink("Skapa Ny", "Create","OrderDetails", new {id=Model.OrderId} , new { @class = "orange-text" })
     </div>  
 

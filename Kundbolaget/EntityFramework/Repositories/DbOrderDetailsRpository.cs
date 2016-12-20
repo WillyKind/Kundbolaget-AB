@@ -27,6 +27,11 @@ namespace Kundbolaget.EntityFramework.Repositories
             return db.OrderDetails.FirstOrDefault(od => od.Id == id);
 
         }
+        public void CreateEntity(OrderDetails newEntity)
+        {
+            db.OrderDetails.Add(newEntity);
+            db.SaveChanges();
+        }
         public void UpdateEntity(OrderDetails updatedEntity)
         {
             db.OrderDetails.Attach(updatedEntity);

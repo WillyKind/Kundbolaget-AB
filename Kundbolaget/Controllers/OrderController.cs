@@ -62,7 +62,10 @@ namespace Kundbolaget.Controllers
         public ActionResult OrderDetails(int id, int companyId)
         {
             ViewBag.parentCompanyId = companyId;
-            var model = _orders.GetOrderDetails(id);
+            var model = new OrderDetailsViewModel(); 
+            model.OrderDetailses = _orders.GetOrderDetails(id);
+            model.OrderId = id; 
+            
             return View(model);
         }
     }

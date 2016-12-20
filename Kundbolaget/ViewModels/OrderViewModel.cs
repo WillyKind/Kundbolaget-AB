@@ -9,7 +9,8 @@ namespace Kundbolaget.ViewModels
 {
     public class OrderViewModel
     {
-        public Company[] Companies { get; set; }
-        public Order Order { get; set; }     
+        //public Company[] Companies { get; set; }
+        public Order Order { get; set; }
+        public int CustomerId { get; set; }    
     }
 }

@@ -31,7 +31,6 @@ namespace Kundbolaget.Controllers
         // GET: OrderDetails
         public ActionResult Index(int id, int companyId)
         {
-            //ViewBag.parentCompanyId = companyId;
             var model = new OrderDetailsViewModel();
             model.OrderDetailses = _orders.GetOrderDetails(id);
             model.OrderId = id;

@@ -47,14 +47,15 @@ namespace Kundbolaget.Controllers
                 return View(model);
             }
             model.Order.CreatedDate = DateTime.Now;
+            model.Order.CompanyId = model.CustomerId;
             _orders.CreateEntity(model.Order);
             return RedirectToAction("Index", "Order");
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             var model = new OrderViewModel();
-            model.Companies = _companies.GetEntities().Where(c=>c.IsRemoved == false && c.ParentCompanyId != null).ToArray();       
+            model.CustomerId = id;
             return View("Create", model);
         }
 

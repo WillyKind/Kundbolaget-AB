@@ -9,5 +9,10 @@ namespace Kundbolaget.ViewModels
     public class OrderDetailsViewModel
     {
         public OrderDetails OrderDetails { get; set; }
+        public ProductInfo[] ProductInfos { get; set; }
+        public OrderDetailsViewModel()
+        {
+            OrderDetails = new OrderDetails();
+        }
     }
 }

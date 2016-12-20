@@ -13,23 +13,44 @@ namespace Kundbolaget.Controllers
     {
         private DbOrderDetailsRpository _orderDetails;
         private DbOrderRepository _orders;
+        private DbProductInfoRepository _products;
 
         public OrderDetailsController()
         {
             _orderDetails = new DbOrderDetailsRpository();
             _orders = new DbOrderRepository();
+            _products = new DbProductInfoRepository();
         }
 
-        public OrderDetailsController(DbOrderDetailsRpository orderDetailsRpository, DbOrderRepository dbOrderRepository)
+        public OrderDetailsController(DbOrderDetailsRpository orderDetailsRpository, DbOrderRepository dbOrderRepository,DbProductInfoRepository dbProductInfoRepository)
         {
             _orderDetails = orderDetailsRpository;
             _orders = dbOrderRepository;
+            _products = dbProductInfoRepository;
         }
         // GET: OrderDetails
         public ActionResult Index()
         {
             return View();
         }
+
+        public ActionResult Create()
+        {
+            var model = new OrderDetailsViewModel();
+            model.ProductInfos = _products.GetEntities();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Create(OrderDetailsViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            return View();
+        }
+
 
         public ActionResult Edit(int id)
         {

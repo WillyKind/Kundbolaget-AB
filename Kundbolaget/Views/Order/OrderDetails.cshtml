@@ -50,6 +50,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
+            <td>
+                @Html.ActionLink("Ändra","Edit","OrderDetails",new {id = item.Id}, new { @class = "orange-text" }) |
+                @Html.ActionLink("Ta bort", "Delete", "OrderDetails", new { id = item.Id }, new { @class = "orange-text" })
+
+            </td>
         </tr>
     }
 </table>

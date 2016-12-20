@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Web;
@@ -48,6 +49,18 @@ namespace Kundbolaget.EntityFramework.Repositories
             db.SaveChanges();
         }
 
+        public Order GetEntity(int id)
+        {
+            return db.Orders.FirstOrDefault(o => o.Id == id);
+        }
+
+        public void UpdateEntity(Order updatedEntity)
+        {
+            db.Orders.Attach(updatedEntity);
+            var entry = db.Entry(updatedEntity);
+            entry.State = EntityState.Modified;
+            db.SaveChanges();
+        }
 
         public void CreateOrder(OrderFile order)
         {

@@ -5,7 +5,7 @@
 }
 <h4>Koncerner</h4>
 <div>
-    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new { @class = "orange-text" })
+    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new {@class = "orange-text"})
 </div>
 <div class="row">
     @foreach (var item in Model)
@@ -15,7 +15,7 @@
                 <div class="card-content white-text">
                     <span class="card-title">@item.Name</span>
                     <p>
-                        Kontaktperson: @Html.DisplayFor(modelItem=>item.ContactPerson.FirstName) @Html.DisplayFor(modelItem => item.ContactPerson.LastName)
+                        Kontaktperson: @Html.DisplayFor(modelItem => item.ContactPerson.FirstName) @Html.DisplayFor(modelItem => item.ContactPerson.LastName)
                     </p>
                     <p>
                         Epost: @Html.DisplayFor(modelItem => item.Email)
@@ -28,4 +28,3 @@
         </div>
     }
 </div>
-

@@ -5,7 +5,8 @@
 }
 <h4>Ordrar</h4>
 <div>
-    @Html.ActionLink("Tillbaka", "Index", null, new { @class = "orange-text" })
+    @Html.ActionLink("Skapa ny", "Create", "Order", null, new { @class = "orange-text" }) |
+    @Html.ActionLink("Tillbaka", "Index", null, new {@class = "orange-text"})
 </div>
 <hr/>
 <table class="table">

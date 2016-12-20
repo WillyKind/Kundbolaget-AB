@@ -121,28 +121,35 @@ namespace Tests
 
         };
 
-        //public static List<Address> AdressList => new List<Address>
-        //{
-        //    new Address()
-        //    {
-        //       Id = 1,
-        //       Street = "Barkarbyvägen",
-        //       Number = "44",
-        //       ZipCode = "15569",
-        //    }
-        //};
+        public static List<Address> AdressList => new List<Address>
+        {
+            new Address()
+            {
+               Id = 1,
+               Street = "Barkarbyvägen",
+               Number = "44",
+               ZipCode = "15569",
+            },
+            new Address
+            {
+               Id = 2,
+               Street = "Fasanvägen",
+               Number = "4",
+               ZipCode = "13545",
+            }
+        };
 
-        //public static List<ContactPerson> ContactPersonList => new List<ContactPerson>
-        //{
-        //    new ContactPerson()
-        //    {
-        //       Id = 1,
-        //       Email = "johan.wanstrom@gmail.com",
-        //       FirstName = "Johan",
-        //       LastName = "Wänström",
-        //       PhoneNumber = "0703334455"
-        //    }
-        //};
+        public static List<ContactPerson> ContactPersonList => new List<ContactPerson>
+        {
+            new ContactPerson()
+            {
+               Id = 1,
+               Email = "johan.wanstrom@gmail.com",
+               FirstName = "Johan",
+               LastName = "Wänström",
+               PhoneNumber = "0703334455"
+            }
+        };
 
 
     }

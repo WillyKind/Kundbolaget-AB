@@ -34,7 +34,7 @@ namespace Kundbolaget.Controllers
             var model = new OrderDetailsViewModel();
             model.OrderDetailses = _orders.GetOrderDetails(id);
             model.OrderId = id;
-            model.ParentCompanyId = _orders.GetEntity(id).Company.ParentCompany.Id;
+            model.ParentCompanyId = _orders.GetEntity(id).Company.ParentCompanyId.Value;
 
             return View(model);
         }

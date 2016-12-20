@@ -59,9 +59,27 @@ namespace Kundbolaget.Controllers
             return View("Create", model);
         }
 
-        //public ActionResult OrderDetails(int id, int companyId)
-        //{
-           
-        //}
+        public ActionResult Delete(int id)
+        {
+            var model = _orders.GetEntity(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View("Delete", model);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(ProductInfo model, int id)
+        {
+            if (model.Id != id)
+            {
+                ModelState.AddModelError("Name", "Bad Request");
+                return View(model);
+            }
+            _orders.DeleteEntity(id);
+            return RedirectToAction("Index");
+        }
     }
 }

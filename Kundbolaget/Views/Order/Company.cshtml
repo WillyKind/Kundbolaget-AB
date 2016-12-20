@@ -51,6 +51,9 @@
         <td>
             @Html.ActionLink("Ny Order", "Create", new {id = item.Company.Id}, new { @class = "orange-text" })
         </td>
+        <td>
+            @Html.ActionLink("Ta bort", "Delete", new { id = item.Id}, new { @class = "orange-text" })
+        </td>
     </tr>
 }
 </table>

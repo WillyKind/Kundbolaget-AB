@@ -459,6 +459,7 @@
     <Content Include="Views\OrderDetails\Edit.cshtml" />
     <Content Include="Views\OrderDetails\Delete.cshtml" />
     <Content Include="Views\OrderDetails\Create.cshtml" />
+    <Content Include="Views\Order\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

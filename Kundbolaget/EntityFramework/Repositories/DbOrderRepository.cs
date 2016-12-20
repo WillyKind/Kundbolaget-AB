@@ -93,7 +93,15 @@ namespace Kundbolaget.EntityFramework.Repositories
             db.Orders.AddRange(orders);
             db.SaveChanges();
         }
-
+        public void DeleteEntity(int id)
+        {
+            var product = db.Orders.SingleOrDefault(p => p.Id == id);
+            if (product != null)
+            {
+                product.IsRemoved = true;
+                db.SaveChanges();
+            }
+        }
         public Company[] GetParentCompanies()
         {
             return db.Companies.Where(c => c.ParentCompany == null && !c.IsRemoved).ToArray();

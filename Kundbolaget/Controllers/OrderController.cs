@@ -52,5 +52,11 @@ namespace Kundbolaget.Controllers
             return "Success " + id;
         }
 
+        public ActionResult OrderDetailsUnpickedOrder(int id)
+        {
+            var model = _orders.GetOrderDetails(id);
+            return View(model);
+        }
+
     }
 }

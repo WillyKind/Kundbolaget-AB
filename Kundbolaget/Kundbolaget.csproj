@@ -440,9 +440,9 @@
     <Content Include="Views\ProductStock\Index.cshtml" />
     <Content Include="Views\ProductStock\Details.cshtml" />
     <Content Include="Views\ProductStock\Edit.cshtml" />
-    <Content Include="Views\Order\FilteredOrders.cshtml" />
+    <Content Include="Views\Order\Company.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
-    <Content Include="Views\Order\OrderDetails.cshtml" />
+    <Content Include="Views\OrderDetails\Index.cshtml" />
     <Content Include="Views\File\Index.cshtml" />
     <Content Include="Views\File\UploadJson.cshtml" />
     <Content Include="Views\CustomerProduct\Index.cshtml" />

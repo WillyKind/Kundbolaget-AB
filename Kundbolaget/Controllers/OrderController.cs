@@ -32,7 +32,7 @@ namespace Kundbolaget.Controllers
             return View(model);
         }
 
-        public ActionResult FilteredOrders(int id)
+        public ActionResult Company(int id)
         {
             var model = _orders.GetCompanyOrders(id);
 
@@ -59,14 +59,9 @@ namespace Kundbolaget.Controllers
             return View("Create", model);
         }
 
-        public ActionResult OrderDetails(int id, int companyId)
-        {
-            ViewBag.parentCompanyId = companyId;
-            var model = new OrderDetailsViewModel(); 
-            model.OrderDetailses = _orders.GetOrderDetails(id);
-            model.OrderId = id; 
-            
-            return View(model);
-        }
+        //public ActionResult OrderDetails(int id, int companyId)
+        //{
+           
+        //}
     }
 }

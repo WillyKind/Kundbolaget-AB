@@ -29,9 +29,15 @@ namespace Kundbolaget.Controllers
             _products = dbProductInfoRepository;
         }
         // GET: OrderDetails
-        public ActionResult Index()
+        public ActionResult Index(int id, int companyId)
         {
-            return View();
+            //ViewBag.parentCompanyId = companyId;
+            var model = new OrderDetailsViewModel();
+            model.OrderDetailses = _orders.GetOrderDetails(id);
+            model.OrderId = id;
+            model.ParentCompanyId = _orders.GetEntity(id).Company.ParentCompany.Id;
+
+            return View(model);
         }
 
         public ActionResult Create(int id)
@@ -83,7 +89,7 @@ namespace Kundbolaget.Controllers
             updatedOrder.Price= updatedOrder.OrderDetails.Sum(updateOrderOrderDetail => (int) updateOrderOrderDetail.TotalPrice);
 
             _orders.UpdateEntity(updatedOrder);
-            return RedirectToAction("OrderDetails", "Order", new {id=updatedOrder.Id, companyId= updatedOrder.Company.ParentCompanyId});
+            return RedirectToAction("Index", new {id=updatedOrder.Id, companyId= updatedOrder.Company.ParentCompanyId});
         }
 
         public ActionResult Delete(int id)
@@ -109,7 +115,7 @@ namespace Kundbolaget.Controllers
             updatedOrder.Price = updatedOrder.Price - (int)model.TotalPrice;
             _orders.UpdateEntity(updatedOrder);
             _orderDetails.DeleteEntity(id);
-            return RedirectToAction("OrderDetails", "Order", new {id=updatedOrder.Id,companyId= model.Order.Company.ParentCompanyId});
+            return RedirectToAction("Index", new {id=updatedOrder.Id,companyId= model.Order.Company.ParentCompanyId});
         }
     }
 }

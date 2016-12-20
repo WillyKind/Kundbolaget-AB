@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Kundbolaget.Models.EntityModels.Order>
 
 @{
-    ViewBag.Title = "FilteredOrders";
+    ViewBag.Title = "Company";
 }
 <h4>Ordrar</h4>
 <div>
@@ -46,7 +46,7 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Info","OrderDetails", new {id = item.Id, companyId=item.Company.ParentCompanyId}, new { @class = "orange-text" })
+            @Html.ActionLink("Info","Index","OrderDetails", new {id = item.Id, companyId=item.Company.ParentCompanyId}, new { @class = "orange-text" })
         </td>
         <td>
             @Html.ActionLink("Ny Order", "Create", new {id = item.Company.Id}, new { @class = "orange-text" })

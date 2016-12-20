@@ -6,7 +6,7 @@
 
 <h2>Orderdetaljer</h2>
 <div>
-    @Html.ActionLink("Åter till ordrar", "FilteredOrders", new { id = ViewBag.parentCompanyId }, new { @class = "orange-text" })
+    @Html.ActionLink("Åter till ordrar", "Company","Order", new { id = Model.ParentCompanyId}, new { @class = "orange-text" })
 </div>
 <table class="table">
     <tr>
@@ -31,7 +31,7 @@
     </tr>
 
     @foreach (var item in Model.OrderDetailses) {
-        <tr>
+        <tr class="row">
             <td>
                 @Html.DisplayFor(modelItem => item.ProductInfo.Name)
             </td>
@@ -42,7 +42,7 @@
                 @Html.DisplayFor(modelItem => item.ProductInfo.Volume.Milliliter)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
+                @Html.EditorFor(model => model.OrderDetails.Amount, new { htmlAttributes = new { Value=item.Amount } })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UnitPrice)
@@ -59,6 +59,6 @@
     }
 </table>
     <div>
-        @Html.ActionLink("Skapa Ny", "Create","OrderDetails", new {id=Model.OrderId} , new { @class = "orange-text" })
+        @Html.ActionLink("Skapa Ny", "Create","OrderDetails", new {id=Model.OrderId} , new { @class = "orange-text" }) |
     </div>  
 

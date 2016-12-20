@@ -12,6 +12,7 @@ namespace Kundbolaget.ViewModels
         public ProductInfo[] ProductInfos { get; set; }
         public OrderDetails[] OrderDetailses { get; set; }
         public int OrderId { get; set; }
+        public int ParentCompanyId { get; set; }
         public OrderDetailsViewModel()
         {
             OrderDetails = new OrderDetails();

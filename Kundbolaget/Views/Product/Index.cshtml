@@ -8,20 +8,20 @@
 
 <div>
     @Html.ActionLink("Skapa Ny", "Create", null, new { @class = "orange-text" }) |
-        @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new { @class = "orange-text" })
+    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new { @class = "orange-text" })
 </div>
 <table class="highlight responsive-table">
     <thead>
-    <tr>
-        <th>Behållare</th>
-        <th>Produktgrupp</th>
-        <th>Produktnamn</th>
-        <th>Beskrivning</th>
-        <th>Alkoholhalt</th>
-        <th>TG</th>
-        <th>Inköpspris </th>
-        <th>Utpris</th>
-    </tr>
+        <tr>
+            <th>Behållare</th>
+            <th>Produktgrupp</th>
+            <th>Produktnamn</th>
+            <th>Beskrivning</th>
+            <th>Alkoholhalt</th>
+            <th>TG</th>
+            <th>Inköpspris</th>
+            <th>Utpris</th>
+        </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)

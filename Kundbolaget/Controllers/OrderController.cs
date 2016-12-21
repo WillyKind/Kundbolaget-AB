@@ -114,5 +114,13 @@ namespace Kundbolaget.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public string ExportPdf(int id)
+        {
+            PdfGenerator pdfGenerator = new PdfGenerator();
+            pdfGenerator.ExportToPdf(id);
+            return "Success " + id;
+        }
+
     }
 }

@@ -47,9 +47,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
+            @*<td>
+                <a onclick="OrderController(@item.Id, 'ExportPdf')" class="waves-effect waves-light btn">Skapa PDF</a>
+            </td>*@
         </tr>
     }
 </table>
+<a onclick="OrderController(@Model.First().OrderId, 'ExportPdf')" class="waves-effect waves-light btn">Skapa PDF</a>
+<script src="~/Scripts/CallOrderController.js"></script>
 
 <div>
 

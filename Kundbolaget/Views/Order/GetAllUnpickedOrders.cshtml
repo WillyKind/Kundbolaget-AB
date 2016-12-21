@@ -42,8 +42,11 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a onclick="OrderController(@item.Id,'OrderPicked')" class="waves-effect waves-light btn">Plockad</a>
+                <a onclick="OrderController(@item.Id, 'OrderPicked')" class="waves-effect waves-light btn">Plockad</a>
             </td>
+            @*<td>
+                <a onclick="OrderController(@item.Id, 'ExportPdf')" class="waves-effect waves-light btn">Skapa PDF</a>
+            </td>*@ 
             <td>
                @Html.ActionLink("Detaljer", "OrderDetailsUnpickedOrder" , "Order", new { id = item.Id, companyId = item.Company.ParentCompanyId }, new { @class = "orange-text" }) 
             </td>

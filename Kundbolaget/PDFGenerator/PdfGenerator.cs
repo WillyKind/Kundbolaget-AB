@@ -36,7 +36,11 @@ namespace Kundbolaget.PDFGenerator
                         };
 
             Document doc = new Document();
-            PdfWriter.GetInstance(doc, new FileStream("C:/Users/Shkomi/Documents/Följesedel.pdf", FileMode.Create));
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "_Följesedel.pdf";
+            FileStream fS = File.Create(path);
+            PdfWriter.GetInstance(doc, fS);
+            //Document doc = new Document();
+            //PdfWriter.GetInstance(doc, new FileStream("Följesedel.pdf", FileMode.Create));
             doc.Open();
 
             var fs20 = FontFactory.GetFont(FontFactory.HELVETICA, 20);

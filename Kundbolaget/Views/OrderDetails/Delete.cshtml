@@ -1,4 +1,4 @@
-﻿@model Kundbolaget.Models.EntityModels.OrderDetails
+﻿@model Kundbolaget.ViewModels.OrderDetailsViewModel
 
 @{
     ViewBag.Title = "Delete";
@@ -15,7 +15,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ProductInfo.Name)
+            @Html.DisplayFor(model => model.OrderDetails.ProductInfo.Name)
         </dd>
 
         <dt>
@@ -23,14 +23,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Amount)
+            @Html.DisplayFor(model => model.OrderDetails.Amount)
         </dd>
         <dt>
             Enhetspris:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UnitPrice)
+            @Html.DisplayFor(model => model.OrderDetails.UnitPrice)
         </dd>
 
         <dt>
@@ -38,7 +38,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TotalPrice)
+            @Html.DisplayFor(model => model.OrderDetails.TotalPrice)
         </dd>
 
     </dl>
@@ -46,12 +46,12 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model=>model.OrderId)
-        @Html.HiddenFor(model=>model.TotalPrice)
-        @Html.HiddenFor(model=>model.Order.Company.ParentCompanyId)
+        @Html.HiddenFor(model=>model.OrderDetails.TotalPrice)
+        @Html.HiddenFor(model=>model.ParentCompanyId)
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Tillbaka till order", "Index", "OrderDetails", new { id = Model.OrderId, companyId = Model.ParentCompanyId }, new { @class = "orange-text" })
         </div>
     }
 </div>

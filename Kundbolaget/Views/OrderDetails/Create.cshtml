@@ -4,19 +4,17 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model=>model.OrderDetails.OrderId)
     <div class="form-horizontal">
-        <h4>OrderDetails</h4>
+        <h4>Ny orderrad</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.OrderDetails.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.OrderDetails.Amount,"Antal kollin", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.OrderDetails.Amount, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OrderDetails.Amount, "", new { @class = "text-danger" })
@@ -36,18 +34,16 @@
                 @Html.ValidationMessageFor(model => model.OrderDetails.ProductInfoId, "", new {@class = "text-danger"})
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Skapa orderrad" class="btn btn-default" /> |
+                @Html.ActionLink("Tillbaka till order", "Index", "OrderDetails", new { id = Model.OrderId, companyId = Model.ParentCompanyId }, new { @class = "orange-text" })
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List","Index","Order")
-</div>
+
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>

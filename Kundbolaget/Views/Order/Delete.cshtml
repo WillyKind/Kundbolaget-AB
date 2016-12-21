@@ -87,10 +87,9 @@
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Company","Order", new {id=Model.Company.ParentCompanyId}, new { @class = "orange-text" })
         </div>
     }
 </div>

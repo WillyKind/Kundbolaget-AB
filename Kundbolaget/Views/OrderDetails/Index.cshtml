@@ -42,7 +42,7 @@
                 @Html.DisplayFor(modelItem => item.ProductInfo.Volume.Milliliter)
             </td>
             <td>
-                @Html.EditorFor(model => model.OrderDetails.Amount, new { htmlAttributes = new { Value=item.Amount } })
+                @Html.EditorFor(model => model.OrderDetails.Amount, new { htmlAttributes = new { Value=item.Amount,id=item.Id } })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UnitPrice)
@@ -51,14 +51,14 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
-                @Html.ActionLink("Ändra","Edit","OrderDetails",new {id = item.Id}, new { @class = "orange-text" }) |
-                @Html.ActionLink("Ta bort", "Delete", "OrderDetails", new { id = item.Id }, new { @class = "orange-text" })
+                @Html.ActionLink("Ändra", "Edit", "OrderDetails", new {id = item.Id, orderId = Model.OrderId}, new {@class = "orange-text"}) |
+                @Html.ActionLink("Ta bort", "Delete", "OrderDetails", new {id = item.Id, orderId = Model.OrderId}, new {@class = "orange-text"})
 
             </td>
         </tr>
     }
 </table>
     <div>
-        @Html.ActionLink("Skapa Ny", "Create","OrderDetails", new {id=Model.OrderId} , new { @class = "orange-text" }) |
+        @Html.ActionLink("Skapa Ny", "Create","OrderDetails", new {id=Model.OrderId} , new { @class = "orange-text" }) 
     </div>  
 

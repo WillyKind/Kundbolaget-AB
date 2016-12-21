@@ -44,6 +44,8 @@ namespace Kundbolaget.Controllers
             var model = new OrderDetailsViewModel();
             model.ProductInfos = _products.GetEntities();
             model.OrderDetails.OrderId = id;
+            model.OrderId = id;
+            model.ParentCompanyId = _orders.GetEntity(id).Company.ParentCompanyId.Value;
 
             return View(model);
         }
@@ -65,10 +67,13 @@ namespace Kundbolaget.Controllers
         }
 
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, int orderId)
         {
             var model = new OrderDetailsViewModel();
             model.OrderDetails = _orderDetails.GetEntity(id);
+            model.OrderId = orderId;
+            model.ParentCompanyId = _orders.GetEntity(orderId).Company.ParentCompanyId.Value;
+
             return View(model);
         }
 
@@ -91,9 +96,13 @@ namespace Kundbolaget.Controllers
             return RedirectToAction("Index", new {id=updatedOrder.Id, companyId= updatedOrder.Company.ParentCompanyId});
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, int orderId)
         {
-            var model = _orderDetails.GetEntity(id);
+            var model = new OrderDetailsViewModel();
+            model.OrderDetails = _orderDetails.GetEntity(id);
+            model.OrderId = orderId;
+            model.ParentCompanyId = _orders.GetEntity(orderId).Company.ParentCompanyId.Value;
+
             if (model == null)
             {
                 return HttpNotFound();
@@ -103,18 +112,18 @@ namespace Kundbolaget.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(OrderDetails model, int id)
+        public ActionResult Delete(OrderDetailsViewModel model, int id)
         {
-            if (model.Id != id)
+            if (model.OrderDetails.Id != id)
             {
                 ModelState.AddModelError("Name", "Bad Request");
                 return View(model);
             }
             var updatedOrder = _orders.GetEntity(model.OrderId);
-            updatedOrder.Price = updatedOrder.Price - (int)model.TotalPrice;
+            updatedOrder.Price = updatedOrder.Price - (int)model.OrderDetails.TotalPrice;
             _orders.UpdateEntity(updatedOrder);
             _orderDetails.DeleteEntity(id);
-            return RedirectToAction("Index", new {id=updatedOrder.Id,companyId= model.Order.Company.ParentCompanyId});
+            return RedirectToAction("Index", new {id=updatedOrder.Id,companyId= model.OrderDetails.Order.Company.ParentCompanyId});
         }
     }
 }

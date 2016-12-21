@@ -49,6 +49,14 @@ namespace Tests
         }
 
         [Test]
+        public void Index_Correct_View()
+        {
+            var viewResult = (ViewResult) _adressController.Index();
+            Assert.AreSame("Index", viewResult.ViewName);
+        }
+
+
+        [Test]
         public void Edit_Get_Specific_Adress()
         {
             var actionResult = _adressController.Edit(1);
@@ -66,6 +74,21 @@ namespace Tests
         }
 
         [Test]
+        public void Edit_Correct_View()
+        {
+            var viewResult = (ViewResult) _adressController.Edit(1);
+            Assert.AreSame("Edit", viewResult.ViewName);
+        }
+
+        [Test]
+        public void Edit_Redirect_To_Action()
+        {
+            var result = _adressController.Edit(ResourceData.AdressList[0]) as RedirectToRouteResult;
+            Assert.AreSame("Index", result.RouteValues["action"]);
+        }
+
+
+        [Test]
         public void Delete_Get_Adress()
         {
             var actionResult = _adressController.Delete(1);
@@ -81,6 +104,42 @@ namespace Tests
             _adressController.Delete(addresses[0], addresses[0].Id);
             Assert.AreEqual(true , _mockAdress.Object.First().IsRemoved);
         }
+
+        [Test]
+        public void Delete_Correct_View()
+        {
+            var viewResult = (ViewResult) _adressController.Delete(1);
+            Assert.AreSame("Delete", viewResult.ViewName);
+        }
+
+        [Test]
+        public void Delete_Redirect_To_Action()
+        {
+            var result = _adressController.Delete(ResourceData.AdressList[0], ResourceData.AdressList[0].Id) as RedirectToRouteResult;
+            Assert.AreSame("Index", result.RouteValues["action"]);
+        }
+
+        [Test]
+        public void Create_Correct_Empty_View()
+        {
+            var viewResult = (ViewResult) _adressController.Create();
+            Assert.AreEqual("Create", viewResult.ViewName);
+        }
+
+        [Test]
+        public void Create_Redirect_To_Action()
+        {
+            var result = _adressController.Create(ResourceData.AdressList[0]) as RedirectToRouteResult;
+            Assert.AreSame("Index", result.RouteValues["action"]);
+        }
+
+        [Test]
+        public void Details_Correct_View()
+        {
+            var viewResult = (ViewResult) _adressController.Details(1);
+            Assert.AreEqual("Details", viewResult.ViewName);
+        }
+
 
         [Test]
         public void Create()

@@ -24,13 +24,13 @@ namespace Kundbolaget.Controllers
 
         public ActionResult Index()
         {
-            return View(_adressRepository.GetEntities());
+            return View("Index", _adressRepository.GetEntities());
         }
 
         public ActionResult Edit(int id)
         {
             var model = _adressRepository.GetEntity(id);
-            return View(model);
+            return View("Edit", model);
         }
 
         [HttpPost]
@@ -41,14 +41,13 @@ namespace Kundbolaget.Controllers
                 return View(model);
             }
             _adressRepository.UpdateEntity(model);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Address");
         }
 
         public ActionResult Delete(int id)
         {
             var model = _adressRepository.GetEntity(id);
-
-            return View(model);
+            return View("Delete",model);
         }
 
         [HttpPost]
@@ -60,12 +59,12 @@ namespace Kundbolaget.Controllers
                 return View(model);
             }
             _adressRepository.DeleteEntity(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Address");
         }
 
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         [HttpPost]
@@ -76,13 +75,13 @@ namespace Kundbolaget.Controllers
                 return View(model);
             }
             _adressRepository.CreateEntity(model);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Address");
         }
 
         public ActionResult Details(int id)
         {
             var model = _adressRepository.GetEntity(id);
-            return View(model);
+            return View("Details",model);
         }
     }
 }

@@ -52,27 +52,12 @@
             <td>
                 @Html.ActionLink("Mer information", "OrderDetails", new {id = item.Id, companyId = item.Company.ParentCompanyId}, new {@class = "orange-text"})
             </td>
-            <td>
-                @Html.ActionLink("Skapa PDF", "ExportPdf", "Order", new {id = item.Id}, new {@class = "waves-effect waves-light btn", style = "margin-bottom:15px"})
-            </td>
-            @*<td>
-                <a onclick="OrderController(@item.Id, 'ExportPdf')" class="waves-effect waves-light btn">Skapa PDF</a>
-            </td>*@
         </tr>
 
 
     }
 </table>
 
-@*function OrderController(id, method) {
-    $.ajax({
-        url: "/Order/"+method+"/" + id,
-        type: 'POST',
-        success: function (data) {
-            $("#" + id).fadeOut("slow", function()  {
-            });
-        }
 
-    });*@
 
 

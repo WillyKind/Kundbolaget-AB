@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.Interfaces;
 using Kundbolaget.Models.EntityModels;
+using Kundbolaget.ViewModels;
 
 namespace Kundbolaget.Controllers
 {
@@ -49,21 +50,10 @@ namespace Kundbolaget.Controllers
 
         public ActionResult Create()
         {
-            var productinfoSelectListItems = _productInfoRepository.GetEntities().Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.Name
-            }).ToList();
-
-            var warehouseSelectListItems = _warehouseRepository.GetEntities().Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.Name
-            }).ToList();
-
-            ViewBag.ProductInfoes = productinfoSelectListItems;
-            ViewBag.Warehouses = warehouseSelectListItems;
-            return View();
+            var model = new ProductStockVM();
+            model.ProductInfos = _productInfoRepository.GetEntities();
+            model.Warehouses = _warehouseRepository.GetEntities();
+            return View(model);
         }
 
         public ActionResult Edit(int id)

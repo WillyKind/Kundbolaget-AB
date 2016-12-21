@@ -9,9 +9,11 @@ namespace Kundbolaget.Controllers
 {
     public class ProductStockController : Controller
     {
+
         private readonly DbProductStockRepository _stockRepository;
         private readonly DbProductInfoRepository _productInfoRepository;
         private readonly DbWarehouseRepository _warehouseRepository;
+
 
         public ProductStockController()
         {

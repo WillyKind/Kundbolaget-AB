@@ -1,0 +1,55 @@
+﻿@using Kundbolaget.Controllers
+@using Kundbolaget.Models.EntityModels
+@model IEnumerable<Kundbolaget.Models.EntityModels.Order>
+<h2>Orderhistorik</h2>
+
+<table class="highlight">
+    <tr>
+        <th>
+            Ordernummer
+        </th>
+        <th>
+            Butik
+        </th>
+        <th>
+            Orderdatum
+        </th>
+        <th>
+            Önskat leveransdatum
+        </th>
+        <th>
+            Totalpris
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="@item.Id">
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Detaljer", "OrderDetailsHistory", "Order", new { id = item.Id }, new { @class = "orange-text" })
+            </td>
+        </tr>
+
+
+
+
+    }
+    @Html.ActionLink("Tillbaka", "Index", "Home")
+</table>
+

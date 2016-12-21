@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Web;
@@ -79,6 +80,45 @@ namespace Kundbolaget.EntityFramework.Repositories
         public OrderDetails[] GetOrderDetails(int id)
         {
             return db.OrderDetails.Where(o => o.OrderId == id).ToArray();
+        }
+
+        public Order[] GetUnpickedOrders()
+        {
+            return db.Orders.Where(o => !o.IsRemoved && o.OrderPicked == null).ToArray();
+        }
+
+        public Order GetOrder(int orderId)
+        {
+            return db.Orders.FirstOrDefault(o => o.Id == orderId);
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            db.Orders.Attach(order);
+            var entry = db.Entry(order);
+            entry.State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public Order[] GetPickedOrders()
+        {
+            return db.Orders.Where(o => !o.IsRemoved && o.OrderTransported == null && o.OrderPicked != null).ToArray();
+        }
+
+        public Order[] GetShippedOrders()
+        {
+            return db.Orders.Where(o => !o.IsRemoved &&
+                                        o.OrderTransported != null &&
+                                        o.OrderPicked != null &&
+                                        o.OrderDelivered == null).ToArray();
+        }
+
+        public Order[] GetOrderHistory()
+        {
+            return db.Orders.Where(o => !o.IsRemoved &&
+                                       o.OrderTransported != null &&
+                                       o.OrderPicked != null &&
+                                       o.OrderDelivered != null).ToArray();
         }
     }
 }

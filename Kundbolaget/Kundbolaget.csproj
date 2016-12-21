@@ -194,6 +194,7 @@
     <Content Include="content\materialize\fonts\roboto\Roboto-Bold.ttf" />
     <Content Include="content\materialize\fonts\roboto\Roboto-Bold.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\CallOrderController.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -392,6 +393,10 @@
     <Compile Include="Migrations\201612141429332_AddsPricePropsToOrderDEtails.Designer.cs">
       <DependentUpon>201612141429332_AddsPricePropsToOrderDEtails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612191014006_AddsNullableDateTimeStampsToOrder.cs" />
+    <Compile Include="Migrations\201612191014006_AddsNullableDateTimeStampsToOrder.Designer.cs">
+      <DependentUpon>201612191014006_AddsNullableDateTimeStampsToOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -452,6 +457,14 @@
     <Content Include="Views\Home\CustomerSite.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Order\GetAllUnpickedOrders.cshtml" />
+    <Content Include="Views\Order\OrderDetailsUnpickedOrder.cshtml" />
+    <Content Include="Views\Order\GetPickedOrders.cshtml" />
+    <Content Include="Views\Order\OrderDetailsPickedOrder.cshtml" />
+    <Content Include="Views\Order\GetShippedOrders.cshtml" />
+    <Content Include="Views\Order\OrderDetailsShippedOrder.cshtml" />
+    <Content Include="Views\Order\GetOrderHistory.cshtml" />
+    <Content Include="Views\Order\OrderDetailsHistory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -576,6 +589,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612141429332_AddsPricePropsToOrderDEtails.resx">
       <DependentUpon>201612141429332_AddsPricePropsToOrderDEtails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612191014006_AddsNullableDateTimeStampsToOrder.resx">
+      <DependentUpon>201612191014006_AddsNullableDateTimeStampsToOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

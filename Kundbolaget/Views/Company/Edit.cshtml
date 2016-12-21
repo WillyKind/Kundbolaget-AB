@@ -12,12 +12,52 @@
     @Html.HiddenFor(x => x.Company.Id)
     <div >
         <h4>Ändra företagsinformation</h4>
-        <div>
-            @Html.ActionLink("Företagsöversikt", "Index", null, new {@class = "orange-text"})
-        </div>
-        <hr/>
         @Html.ValidationSummary(true)
 
+        <div class="row">
+            <div class="col s10">
+                @Html.LabelFor(model => model.Company.ParentCompanyId, "Moderbolag")
+                @Html.DropDownListFor(model => model.Company.ParentCompanyId, new SelectList(Model.ParentCompanies, "Id", "Name"), new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "dropdown-content"
+                    }
+                })
+                @Html.ValidationMessageFor(model => model.Company.ParentCompanyId)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s10">
+                @Html.LabelFor(model => model.Company.ContactPersonId, "Kontaktperson")
+                @Html.DropDownListFor(model => model.Company.ContactPersonId, new SelectList(Model.ContactPersons.Select(person => new
+                {
+                    person.Id, FullName = $"{person.FirstName} {person.LastName}"
+                }), "Id", "FullName"), new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "dropdown-content"
+                    }
+                })
+                @Html.ValidationMessageFor(model => model.Company.ContactPersonId)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s10">
+                @Html.LabelFor(model => model.Company.CountryId, "Land")
+                @Html.DropDownListFor(model => model.Company.CountryId, new SelectList(Model.Countries, "Id", "Name"), new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "dropdown-content"
+                    }
+                })
+                @Html.ValidationMessageFor(model => model.Company.CountryId)
+            </div>
+        </div>
         <div class="row">
             <div class="col s10 input-field">
                 <div>
@@ -91,37 +131,6 @@
 
         <div class="row">
             <div class="col s10">
-                @Html.LabelFor(model => model.Company.ContactPersonId, "Kontaktperson")
-                @Html.DropDownListFor(model => model.Company.ContactPersonId, new SelectList(Model.ContactPersons.Select(person => new
-                {
-                    person.Id, FullName = $"{person.FirstName} {person.LastName}"
-                }), "Id", "FullName"), new
-                {
-                    htmlAttributes = new
-                    {
-                        @class = "dropdown-content"
-                    }
-                })
-                @Html.ValidationMessageFor(model => model.Company.ContactPersonId)
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col s10">
-                @Html.LabelFor(model => model.Company.CountryId, "Land")
-                @Html.DropDownListFor(model => model.Company.CountryId, new SelectList(Model.Countries, "Id", "Name"), new
-                {
-                    htmlAttributes = new
-                    {
-                        @class = "dropdown-content"
-                    }
-                })
-                @Html.ValidationMessageFor(model => model.Company.CountryId)
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col s10">
                 <h5>Leveransaddress</h5>
             </div>
             @Html.HiddenFor(model => model.Company.DeliveryAddressId)
@@ -141,23 +150,11 @@
             @Html.ValidationMessageFor(model => model.Company.Address)
         </div>
 
-        <div class="row">
-            <div class="col s10">
-                @Html.LabelFor(model => model.Company.ParentCompanyId, "Moderbolag")
-                @Html.DropDownListFor(model => model.Company.ParentCompanyId, new SelectList(Model.ParentCompanies, "Id", "Name"), new
-                {
-                    htmlAttributes = new
-                    {
-                        @class = "dropdown-content"
-                    }
-                })
-                @Html.ValidationMessageFor(model => model.Company.ParentCompanyId)
-            </div>
-        </div>
 
         <div class="row">
             <div class="col s10">
-                <input type="submit" value="Spara" class="btn"/>
+                <input type="submit" value="Spara" class="btn"/> |
+                @Html.ActionLink("Företagsöversikt", "Index", null, new {@class = "orange-text"})
             </div>
         </div>
     </div>

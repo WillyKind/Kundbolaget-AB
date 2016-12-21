@@ -52,9 +52,10 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
-                <a onclick="OrderDetailsController(@item.Id,'SaveOrderDetail')" class="waves-effect waves-light btn">Spara</a> |
-                @Html.ActionLink("Ta bort", "Delete", "OrderDetails", new {id = item.Id, orderId = Model.OrderId}, new {@class = "orange-text"})
+                <a onclick="OrderDetailsController(@item.Id, 'SaveOrderDetail')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">check</i></a>
+                <a href="@Url.Action("Delete", new { id = item.Id, orderId = Model.OrderId })"class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">clear</i></a>
             </td>
+
         </tr>
     }
 </table>

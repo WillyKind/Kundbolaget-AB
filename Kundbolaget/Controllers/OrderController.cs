@@ -34,20 +34,20 @@ namespace Kundbolaget.Controllers
 
         public ActionResult Company(int id)
         {
-            var model = _orders.GetCompanyOrders(id);
-
+            var model = new OrderViewModel();
+            model.Orders = _orders.GetCompanyOrders(id);
+            model.ParentCompanyId = id;
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Create(OrderViewModel model)
+        public ActionResult Create(OrderViewModel model, int id)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
             model.Order.CreatedDate = DateTime.Now;
-            model.Order.CompanyId = model.CustomerId;
             _orders.CreateEntity(model.Order);
             return RedirectToAction("Index", "Order");
         }
@@ -55,7 +55,8 @@ namespace Kundbolaget.Controllers
         public ActionResult Create(int id)
         {
             var model = new OrderViewModel();
-            model.CustomerId = id;
+            model.ChildCompanies = _orders.GetChildCompanies(id);
+            model.ParentCompanyId = id;
             return View("Create", model);
         }
 

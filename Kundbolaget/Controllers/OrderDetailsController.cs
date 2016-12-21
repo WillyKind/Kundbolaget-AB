@@ -108,7 +108,7 @@ namespace Kundbolaget.Controllers
                 return HttpNotFound();
             }
 
-            return View("Delete",model);
+            return View(model);
         }
 
         [HttpPost]
@@ -123,7 +123,7 @@ namespace Kundbolaget.Controllers
             updatedOrder.Price = updatedOrder.Price - (int)model.OrderDetails.TotalPrice;
             _orders.UpdateEntity(updatedOrder);
             _orderDetails.DeleteEntity(id);
-            return RedirectToAction("Index", new {id=updatedOrder.Id,companyId= model.OrderDetails.Order.Company.ParentCompanyId});
+            return RedirectToAction("Index", new {id=updatedOrder.Id, companyId=updatedOrder.Company.ParentCompanyId});
         }
     }
 }

@@ -102,6 +102,11 @@ namespace Kundbolaget.EntityFramework.Repositories
                 db.SaveChanges();
             }
         }
+
+        public Company[] GetChildCompanies(int id)
+        {
+            return db.Companies.Where(c => c.ParentCompanyId == id && !c.IsRemoved).ToArray();
+        }
         public Company[] GetParentCompanies()
         {
             return db.Companies.Where(c => c.ParentCompany == null && !c.IsRemoved).ToArray();

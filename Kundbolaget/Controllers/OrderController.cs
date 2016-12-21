@@ -39,18 +39,9 @@ namespace Kundbolaget.Controllers
 
         public ActionResult ExportPdf(int id)
         {
-            //ViewBag.parentCompanyId = companyId;
-            //var model = _orders.GetOrderDetails(id);
-            //return View(model);
             PdfGenerator pdfGenerator = new PdfGenerator();
-
             pdfGenerator.ExportToPdf(id);
-
-            //return RedirectToAction("FilteredOrders");
             return RedirectToAction("Index");
-
-
-
         }
     }
 }

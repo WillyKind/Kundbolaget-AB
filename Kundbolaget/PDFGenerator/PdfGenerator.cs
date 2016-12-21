@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.draw;
 using Kundbolaget.EntityFramework.Context;
 using Kundbolaget.Models.EntityModels;
 
@@ -14,49 +15,59 @@ namespace Kundbolaget.PDFGenerator
     public class PdfGenerator
     {
         private static StoreContext db;
+
         public void ExportToPdf(int id)
         {
             db = new StoreContext();
-            //var query = from c in db.OrderDetails where c.OrderId == id
-            //            select c;
-            var query = from od in db.OrderDetails where od.OrderId == id
+      
+            var product = from od in db.OrderDetails where od.OrderId == id
                 join p in db.ProductsInfoes on od.ProductInfoId equals p.Id
-                select new {od.OrderId, p.Name, od.Amount, od.UnitPrice, od.TotalPrice, Container = p.Container.Name, p.Volume, Comp= od.Order.Company.Name};
+                select new
+                {
+                    od.OrderId, p.Name, od.Amount, od.UnitPrice, od.TotalPrice, Container = p.Container.Name, p.Volume
+                };
 
-            var compinfo = from od in db.OrderDetails
+            var company = from od in db.OrderDetails
                         where od.OrderId == id
-                        //join p in db.ProductsInfoes on od.ProductInfoId equals p.Id
-                        select new { od.OrderId, od.Order.Company.Name};
-
+                        select new
+                        {
+                            od.OrderId, od.Order.Company.Name, od.Order.Company.DeliveryAddress.Street, od.Order.Company.DeliveryAddress.Number,
+                            od.Order.Company.DeliveryAddress.ZipCode
+                        };
 
             Document doc = new Document();
-            PdfWriter.GetInstance(doc, new FileStream("C:/Users/Shkomi/Documents/test03.pdf", FileMode.Create));
-            
+            PdfWriter.GetInstance(doc, new FileStream("C:/Users/Shkomi/Documents/Följesedel.pdf", FileMode.Create));
             doc.Open();
-            var f = iTextSharp.text.FontFactory.GetFont(FontFactory.HELVETICA, 18);
-            Paragraph paragraph = new Paragraph("Följesedel", f) {Alignment = Element.ALIGN_CENTER};
 
-            //doc.Add(new Paragraph("Följesedel", f));
-            doc.Add(paragraph);
+            var fs20 = FontFactory.GetFont(FontFactory.HELVETICA, 20);
+            var fs14 = FontFactory.GetFont(FontFactory.HELVETICA, 14);
+            doc.Add(new Paragraph("Följesedel", fs20) { Alignment = Element.ALIGN_CENTER});
+            doc.Add(new Paragraph("\n"));
 
-
-
-            foreach (var c in compinfo)
+            foreach (var c in company)
             {
-                doc.Add(new Paragraph($"Beställare: {c.Name}, Ordernummer: {c.OrderId}") {Alignment = Element.ALIGN_JUSTIFIED});
+                doc.Add(new Paragraph($"Beställare: {c.Name} ", fs14) { Alignment = Element.ALIGN_LEFT });
+                doc.Add(new Paragraph($"Ordernummer: {c.OrderId} ", fs14) { Alignment = Element.ALIGN_LEFT });
+                doc.Add(new Paragraph($"Leveransadress: {c.Street} {c.Number} {c.ZipCode} ", fs14) { Alignment = Element.ALIGN_LEFT });
                 break;
             }
-            foreach (var item in query)
+
+            doc.Add(new Paragraph("\n\n"));
+            foreach (var item in product)
             {
-                doc.Add(new Paragraph($"Produkt: {item.Name} Antal: {item.Amount} Behållare: {item.Container} {item.Volume.Milliliter}ml Pris per kolli: {item.UnitPrice} Totalpris: {item.TotalPrice}"));
-                //doc.Add(new Paragraph($"{item.Comp}"));
-
+                doc.Add(new Paragraph($"\n Produkt: {item.Name}, Antal: {item.Amount}, Behållare: {item.Container} {item.Volume.Milliliter}ml, Pris per kolli: {item.UnitPrice}, Totalpris: {item.TotalPrice}"));
             }
-
-
             doc.Close();
 
-
+            //Chunk glue = new Chunk(new VerticalPositionMark());
+            //Paragraph p12 = new Paragraph("Kundbolaget AB", fs16)
+            //    {
+            //        new Chunk(glue),
+            //        $"Beställare: {c.Name}",Chunk.NEWLINE,
+            //        new Chunk(glue),
+            //        $"Ordernummer: {c.OrderId}"
+            //    };
+            //doc.Add(p12);
 
         }
     }

@@ -10,7 +10,6 @@ namespace Kundbolaget.ViewModels
     {
         public ProductInfo ProductInfo { get; set; }
         public Container[] Containers { get; set; }
-        public Category[] Categories { get; set; }
         public ProductGroup[] ProductGroups { get; set; }
         public Volume[] Volumes { get; set; }
     }

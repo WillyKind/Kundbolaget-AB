@@ -5,6 +5,7 @@ using Kundbolaget.Controllers;
 using Kundbolaget.EntityFramework.Context;
 using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.Models.EntityModels;
+using Kundbolaget.ViewModels;
 using Moq;
 using NUnit.Framework;
 
@@ -177,7 +178,7 @@ namespace Tests
         [Test]
         public void Edit_Post_Redirect_To_Index()
         {
-            var result = _productController.Edit(ResourceData.ProductInfoList[0]) as RedirectToRouteResult;
+            var result = _productController.Edit(new ManageProductInfosViewModel {ProductInfo = ResourceData.ProductInfoList[0] }) as RedirectToRouteResult;
             Assert.AreEqual("Index", result.RouteValues["action"]);
         }
 
@@ -187,7 +188,7 @@ namespace Tests
             var productInfos = _mockSetProductInfo.Object.ToList();
             var tempObj = productInfos[0];
             tempObj.Abv = 100;
-            _productController.Edit(tempObj);
+            _productController.Edit( new ManageProductInfosViewModel {ProductInfo = tempObj });
 
             Assert.AreEqual(100, productInfos[0].Abv);
             _mockSetProductInfo.Verify(x => x.Attach(tempObj), Times.Once);

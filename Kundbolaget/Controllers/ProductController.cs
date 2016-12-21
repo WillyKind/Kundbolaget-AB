@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.Models.EntityModels;
+using Kundbolaget.ViewModels;
 
 namespace Kundbolaget.Controllers
 {
@@ -42,48 +43,27 @@ namespace Kundbolaget.Controllers
 
         public ActionResult Edit(int id)
         {
-            var model = _productInfo.GetEntity(id);
-            if (model == null)
+            var model = new ManageProductInfosViewModel();
+            model.ProductInfo = _productInfo.GetEntity(id);
+            if (model.ProductInfo == null)
             {
                 return HttpNotFound();
             }
-            var containers = _containerRepository.GetEntities();
-            var productGroups = _productGroupRepository.GetEntities();
-            var volumes = _volumeRepository.GetEntities();
-
-            var selectListContainers = containers.Select(container => new SelectListItem
-            {
-                Value = container.Id.ToString(),
-                Text = container.Name
-            }).ToList();
-
-            var selectListProductGroups = productGroups.Select(p => new SelectListItem
-            {
-                Value = p.Id.ToString(),
-                Text = p.Name
-            }).ToList();
-
-            var selectListVolumes = volumes.Select(volume => new SelectListItem
-            {
-                Value = volume.Id.ToString(),
-                Text = volume.Milliliter.ToString()
-            }).ToList();
-
-            ViewBag.Containers = selectListContainers;
-            ViewBag.ProductGroups = selectListProductGroups;
-            ViewBag.Volume = selectListVolumes;
-
+            model.Containers = _containerRepository.GetEntities();
+            model.ProductGroups = _productGroupRepository.GetEntities();
+            model.Volumes = _volumeRepository.GetEntities();
+            
             return View("Edit", model);
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductInfo model)
+        public ActionResult Edit(ManageProductInfosViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            _productInfo.UpdateEntity(model);
+            _productInfo.UpdateEntity(model.ProductInfo);
             return RedirectToAction("Index", "Product");
         }
 

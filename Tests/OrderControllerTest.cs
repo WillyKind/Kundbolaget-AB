@@ -89,7 +89,7 @@ namespace Tests
                 WishedDeliveryDate = DateTime.Parse("2016-12-12"),
             };
             orderViewModel.Order = order;
-            _orderController.Create(orderViewModel);
+            _orderController.Create(orderViewModel.Order.Id);
             _mockOrder.Verify(x => x.Add(order), Times.Once);
             _mockContext.Verify(x => x.SaveChanges(), Times.Once);
         }

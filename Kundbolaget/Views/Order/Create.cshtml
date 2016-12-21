@@ -10,6 +10,7 @@
 
     <div class="form-horizontal">
         <h4>Skapa order</h4>
+        @Html.ActionLink("Tillbaka", "Company", "Order", new { id = Model.ParentCompanyId }, new { @class = "orange-text" })
         <hr/>
         @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
@@ -30,7 +31,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Order.CompanyId, "CompanyId", htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.Order.CompanyId, "Företag", htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.Order.CompanyId, new SelectList(Model.ChildCompanies, "Id", "Name"), new
                 {
@@ -50,10 +51,6 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Orderöversikt", "Company","Order", new {id = Model.ParentCompanyId}, new { @class = "orange-text" })
-</div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>

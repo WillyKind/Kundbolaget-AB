@@ -4,15 +4,16 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Är du säker på att du vill ta bort hela ordern?</h3>
 <div>
-    <h4>Order</h4>
+    <h4>Ordernummer @Model.Id</h4>
+    <div>
+        @Html.ActionLink("Orderöversikt", "Company", "Order", new { id = Model.Company.ParentCompanyId }, new { @class = "orange-text" })
+    </div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Company.Name)
+            Företag
         </dt>
 
         <dd>
@@ -20,7 +21,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
+            Order skapad
         </dt>
 
         <dd>
@@ -28,7 +29,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CustomerOrderId)
+            Ordernummer från kund
         </dt>
 
         <dd>
@@ -36,51 +37,18 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WishedDeliveryDate)
+            Önskat leveransdatum
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.WishedDeliveryDate)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.IsRemoved)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsRemoved)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
+            Totalt pris
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.OrderPicked)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OrderPicked)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.OrderTransported)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OrderTransported)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.OrderDelivered)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OrderDelivered)
         </dd>
 
     </dl>
@@ -88,8 +56,7 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Company","Order", new {id=Model.Company.ParentCompanyId}, new { @class = "orange-text" })
+            <input type="submit" value="Ta bort" class="btn btn-default" />
         </div>
     }
 </div>

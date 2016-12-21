@@ -4,10 +4,9 @@
     ViewBag.Title = "Delete";
 }
 
-
-<h3>Är du säker på att du vill ta bort denna orderrad?</h3>
 <div>
-    <h4>Orderrad</h4>
+    <h4>Ta bort denna orderrad?</h4>
+    @Html.ActionLink("Tillbaka", "Index", "OrderDetails", new { id = Model.OrderId, companyId = Model.ParentCompanyId }, new { @class = "orange-text" })
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -51,8 +50,7 @@
         @Html.HiddenFor(model=>model.OrderDetails.Id)
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Tillbaka till order", "Index", "OrderDetails", new { id = Model.OrderId, companyId = Model.ParentCompanyId }, new { @class = "orange-text" })
+            <input type="submit" value="Ta bort" class="btn btn-default" />
         </div>
     }
 </div>

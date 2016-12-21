@@ -46,15 +46,12 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Info","Index","OrderDetails", new {id = item.Id, companyId=item.Company.ParentCompanyId}, new { @class = "orange-text" })
-        </td>
-        <td>
-            @Html.ActionLink("Ta bort", "Delete", new { id = item.Id}, new { @class = "orange-text" })
+            @Html.ActionLink("Info","Index","OrderDetails", new {id = item.Id, companyId=item.Company.ParentCompanyId}, new { @class = "orange-text" }) | @Html.ActionLink("Ta bort", "Delete", new { id = item.Id }, new { @class = "orange-text" })
         </td>
     </tr>
 }
 </table>
 <div>
-    @Html.ActionLink("Ny Order", "Create", new {id = Model.ParentCompanyId}, new { @class = "orange-text" })
+    @Html.ActionLink("Skapa +", "Create", new {id = Model.ParentCompanyId}, new { @class = "waves-effect waves-light btn" })
 </div>
 

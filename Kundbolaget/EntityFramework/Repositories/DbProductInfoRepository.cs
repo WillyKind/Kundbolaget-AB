@@ -9,7 +9,7 @@ using Kundbolaget.Models.EntityModels;
 
 namespace Kundbolaget.EntityFramework.Repositories
 {
-    public class DbProductInfoRepository : IEntityRepository<ProductInfo>
+    public class DbProductInfoRepository 
     {
         private readonly StoreContext db;
 

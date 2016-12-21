@@ -74,6 +74,7 @@ namespace Tests
         [Test]
         public void Create()
         {
+            var model = new ManageProductInfosViewModel();
             var productInfo = new ProductInfo
             {
                 Id = 3,
@@ -88,7 +89,8 @@ namespace Tests
                 PurchasePrice = 30,
                 TradingMargin = 5
             };
-            _productController.Create(productInfo);
+            model.ProductInfo = productInfo;
+            _productController.Create(model);
             _mockSetProductInfo.Verify(x => x.Add(productInfo), Times.Once);
             _mockContext.Verify(x => x.SaveChanges(), Times.Once);
         }
@@ -96,21 +98,23 @@ namespace Tests
         [Test]
         public void Create_Post_Redirect_To_Index()
         {
-            var result = _productController.Create(new ProductInfo
+            var prod = new ProductInfo
+            {
+                Id = 3,
+                Name = "Cray wine",
+                Container = ResourceData.Containers[0],
+                Volume = new Volume
                 {
                     Id = 3,
-                    Name = "Cray wine",
-                    Container = ResourceData.Containers[0],
-                    Volume = new Volume
-                    {
-                        Id = 3,
-                        Milliliter = 750
-                    },
-                    Abv = 14,
-                    PurchasePrice = 30,
-                    TradingMargin = 5
-                }
-            ) as RedirectToRouteResult;
+                    Milliliter = 750
+                },
+                Abv = 14,
+                PurchasePrice = 30,
+                TradingMargin = 5
+            };
+            var testmodel = new ManageProductInfosViewModel();
+            testmodel.ProductInfo = prod;
+            var result = _productController.Create(testmodel) as RedirectToRouteResult;
             Assert.AreEqual("Index", result.RouteValues["action"]);
         }
 
@@ -168,11 +172,11 @@ namespace Tests
         {
             var actionResult = _productController.Edit(1);
             var viewResult = actionResult as ViewResult;
-            var result = (ProductInfo) viewResult.Model;
-            Assert.AreEqual(1, result.Id);
-            Assert.AreEqual(ResourceData.ProductInfoList[0].Name, result.Name);
-            Assert.AreEqual(ResourceData.ProductInfoList[0].Description, result.Description);
-            Assert.AreEqual(ResourceData.ProductInfoList[0].Abv, result.Abv);
+             var result = (ManageProductInfosViewModel) viewResult.Model;
+            Assert.AreEqual(1, result.ProductInfo.Id);
+            Assert.AreEqual(ResourceData.ProductInfoList[0].Name, result.ProductInfo.Name);
+            Assert.AreEqual(ResourceData.ProductInfoList[0].Description, result.ProductInfo.Description);
+            Assert.AreEqual(ResourceData.ProductInfoList[0].Abv, result.ProductInfo.Abv);
         }
 
         [Test]

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Kundbolaget.Controllers;
 using Kundbolaget.EntityFramework.Context;
@@ -19,10 +16,9 @@ namespace Tests
     [TestFixture]
     public class CompanyControllerTest
     {
-        private Mock<StoreContext> _mockContext;
-
         [SetUp]
-        public void Initalizer() {
+        public void Initalizer()
+        {
             //New that shit up everytime a test runs
             _mockContext = new Mock<StoreContext>();
             _mockAddresses = new Mock<DbSet<Address>>();
@@ -41,7 +37,7 @@ namespace Tests
                         Id = 1,
                         Street = "TestGatan1",
                         Number = "1A",
-                        ZipCode = "00323",
+                        ZipCode = "00323"
                     },
                     DeliveryAddressId = 2,
                     DeliveryAddress = new Address
@@ -49,7 +45,7 @@ namespace Tests
                         Id = 2,
                         Street = "TestGatan2",
                         Number = "2A",
-                        ZipCode = "99323",
+                        ZipCode = "99323"
                     },
                     ContactPersonId = 1,
                     ContactPerson = new ContactPerson
@@ -83,7 +79,7 @@ namespace Tests
                         Id = 3,
                         Street = "TestingWay1",
                         Number = "1A",
-                        ZipCode = "00323",
+                        ZipCode = "00323"
                     },
                     DeliveryAddressId = 4,
                     DeliveryAddress = new Address
@@ -91,7 +87,7 @@ namespace Tests
                         Id = 4,
                         Street = "TestinWay3",
                         Number = "2A",
-                        ZipCode = "99323",
+                        ZipCode = "99323"
                     },
                     ContactPersonId = 2,
                     ContactPerson = new ContactPerson
@@ -115,7 +111,7 @@ namespace Tests
                     Email = "coop@testing.com",
                     Name = "Coop",
                     PhoneNumber = "0903232301"
-                },
+                }
             }.AsQueryable();
             var setupCompany = SetupDb(_mockCompanies, companies).Object;
             SetupDb(_mockAddresses, setupCompany.Select(x => x.Address));
@@ -142,77 +138,17 @@ namespace Tests
                 dbContactPersonRepository);
         }
 
+        private Mock<StoreContext> _mockContext;
+
         private CompanyController _companyController;
         private Mock<DbSet<Company>> _mockCompanies;
         private Mock<DbSet<Address>> _mockAddresses;
         private Mock<DbSet<ContactPerson>> _mockContactPersons;
         private Mock<DbSet<Country>> _mockCountries;
 
-        [Test]
-        public void Edit_ViewResult_Model_Is_CompanyViewModel() {
-            var viewResult = (ViewResult) _companyController.Edit(1);
-            Assert.IsInstanceOf<CompanyViewModel>(viewResult.Model);
-        }
-
-        [Test]
-        public void Edit_View_With_Existing_Entity() {
-            var viewResult = (ViewResult) _companyController.Edit(1);
-            Assert.AreEqual("Edit", viewResult.ViewName);
-        }
-
-        [Test]
-        public void Edit_View_With_None_Existing_Entity() {
-            var viewResult = _companyController.Edit(2000);
-            Assert.AreEqual(typeof(HttpNotFoundResult), viewResult.GetType());
-        }
-
-        [Test]
-        public void Edit_Change_Company_Object() {
-            var viewResult = (ViewResult) _companyController.Edit(1);
-            var companyViewModel = (CompanyViewModel) viewResult.Model;
-            companyViewModel.Company.Name = "TestName";
-            _companyController.Edit(companyViewModel);
-            var company = _mockCompanies.Object.First(c => c.Id == 1);
-            Assert.AreEqual("TestName", company.Name);
-            _mockCompanies.Verify(c => c.Attach(companyViewModel.Company));
-            _mockContext.Verify(c => c.SaveChanges(), Times.Once);
-        }
-
-        [Test]
-        public void Edit_Change_Company_Navigation_Property_Address_Object() {
-            var viewResult = (ViewResult) _companyController.Edit(1);
-            var companyViewModel = (CompanyViewModel) viewResult.Model;
-            companyViewModel.Company.Address.Street = "TestStreet";
-            _companyController.Edit(companyViewModel);
-            var company = _mockCompanies.Object.First(c => c.Id == 1);
-            Assert.AreEqual("TestStreet", company.Address.Street);
-            Assert.AreNotEqual("TestStreet", company.DeliveryAddress.Street);
-            _mockCompanies.Verify(c => c.Attach(companyViewModel.Company), Times.Once);
-            _mockAddresses.Verify(c => c.Attach(companyViewModel.Company.Address), Times.Once);
-            _mockContext.Verify(c => c.SaveChanges(), Times.Once);
-        }
-
-        [Test]
-        public void Edit_Change_Company_Navigation_Property_DeliveryAddress_Object() {
-            var viewResult = (ViewResult) _companyController.Edit(1);
-            var companyViewModel = (CompanyViewModel) viewResult.Model;
-            companyViewModel.Company.DeliveryAddress.Street = "TestStreet";
-            _companyController.Edit(companyViewModel);
-            var company = _mockCompanies.Object.First(c => c.Id == 1);
-            Assert.AreSame("TestStreet", company.DeliveryAddress.Street);
-            Assert.AreNotEqual("TestStreet", company.Address.Street);
-            _mockCompanies.Verify(c => c.Attach(companyViewModel.Company), Times.Once);
-            _mockAddresses.Verify(c => c.Attach(companyViewModel.Company.DeliveryAddress), Times.Once);
-            _mockAddresses.Verify(c => c.Attach(companyViewModel.Company.Address), Times.Once);
-            _mockContext.Verify(c => c.SaveChanges(), Times.Once);
-        }
-
-        [Test] //TODO
-        public void Edit_Change_Company_Navigation_Property_Address_Sharing_Id_With_DeliveryAddress() {
-        }
-
         [Ignore("This test is relevant when Choosing a contactperson is no longer a dropdown.")]
-        public void Edit_Change_Company_Navigation_Property_ContactPerson() {
+        public void Edit_Change_Company_Navigation_Property_ContactPerson()
+        {
             var viewResult = (ViewResult) _companyController.Edit(1);
             var companyViewModel = (CompanyViewModel) viewResult.Model;
             companyViewModel.Company.ContactPerson.FirstName = "TestBob";
@@ -225,18 +161,8 @@ namespace Tests
         }
 
         [Test]
-        public void Edit_Post_Redirection() {
-            var viewResult =
-                (RedirectToRouteResult)
-                _companyController.Edit(new CompanyViewModel
-                {
-                    Company = new Company {Address = new Address(), DeliveryAddress = new Address()}
-                });
-            Assert.AreEqual("Index", viewResult.RouteValues["action"]);
-        }
-
-        [Test]
-        public void Create_Object() {
+        public void Create_Object()
+        {
             var companyViewModel = new CompanyViewModel
             {
                 Company = new Company(),
@@ -252,15 +178,99 @@ namespace Tests
         }
 
         [Test]
-        public void Create_View() {
+        public void Create_Post_Redirection()
+        {
+            var viewResult = (RedirectToRouteResult) _companyController.Create(new CompanyViewModel());
+            Assert.AreEqual("Index", viewResult.RouteValues["action"]);
+        }
+
+        [Test]
+        public void Create_View()
+        {
             var viewResult = (ViewResult) _companyController.Create();
             Assert.AreEqual("Create", viewResult.ViewName);
         }
 
         [Test]
-        public void Create_Post_Redirection() {
-            var viewResult = (RedirectToRouteResult) _companyController.Create(new CompanyViewModel());
+        public void Edit_Change_Company_Navigation_Property_Address_Object()
+        {
+            var viewResult = (ViewResult) _companyController.Edit(1);
+            var companyViewModel = (CompanyViewModel) viewResult.Model;
+            companyViewModel.Company.Address.Street = "TestStreet";
+            _companyController.Edit(companyViewModel);
+            var company = _mockCompanies.Object.First(c => c.Id == 1);
+            Assert.AreEqual("TestStreet", company.Address.Street);
+            Assert.AreNotEqual("TestStreet", company.DeliveryAddress.Street);
+            _mockCompanies.Verify(c => c.Attach(companyViewModel.Company), Times.Once);
+            _mockAddresses.Verify(c => c.Attach(companyViewModel.Company.Address), Times.Once);
+            _mockContext.Verify(c => c.SaveChanges(), Times.Once);
+        }
+
+        [Test] //TODO
+        public void Edit_Change_Company_Navigation_Property_Address_Sharing_Id_With_DeliveryAddress()
+        {
+        }
+
+        [Test]
+        public void Edit_Change_Company_Navigation_Property_DeliveryAddress_Object()
+        {
+            var viewResult = (ViewResult) _companyController.Edit(1);
+            var companyViewModel = (CompanyViewModel) viewResult.Model;
+            companyViewModel.Company.DeliveryAddress.Street = "TestStreet";
+            _companyController.Edit(companyViewModel);
+            var company = _mockCompanies.Object.First(c => c.Id == 1);
+            Assert.AreSame("TestStreet", company.DeliveryAddress.Street);
+            Assert.AreNotEqual("TestStreet", company.Address.Street);
+            _mockCompanies.Verify(c => c.Attach(companyViewModel.Company), Times.Once);
+            _mockAddresses.Verify(c => c.Attach(companyViewModel.Company.DeliveryAddress), Times.Once);
+            _mockAddresses.Verify(c => c.Attach(companyViewModel.Company.Address), Times.Once);
+            _mockContext.Verify(c => c.SaveChanges(), Times.Once);
+        }
+
+        [Test]
+        public void Edit_Change_Company_Object()
+        {
+            var viewResult = (ViewResult) _companyController.Edit(1);
+            var companyViewModel = (CompanyViewModel) viewResult.Model;
+            companyViewModel.Company.Name = "TestName";
+            _companyController.Edit(companyViewModel);
+            var company = _mockCompanies.Object.First(c => c.Id == 1);
+            Assert.AreEqual("TestName", company.Name);
+            _mockCompanies.Verify(c => c.Attach(companyViewModel.Company));
+            _mockContext.Verify(c => c.SaveChanges(), Times.Once);
+        }
+
+        [Test]
+        public void Edit_Post_Redirection()
+        {
+            var viewResult =
+                (RedirectToRouteResult)
+                _companyController.Edit(new CompanyViewModel
+                {
+                    Company = new Company {Address = new Address(), DeliveryAddress = new Address()}
+                });
             Assert.AreEqual("Index", viewResult.RouteValues["action"]);
+        }
+
+        [Test]
+        public void Edit_View_With_Existing_Entity()
+        {
+            var viewResult = (ViewResult) _companyController.Edit(1);
+            Assert.AreEqual("Edit", viewResult.ViewName);
+        }
+
+        [Test]
+        public void Edit_View_With_None_Existing_Entity()
+        {
+            var viewResult = _companyController.Edit(2000);
+            Assert.AreEqual(typeof(HttpNotFoundResult), viewResult.GetType());
+        }
+
+        [Test]
+        public void Edit_ViewResult_Model_Is_CompanyViewModel()
+        {
+            var viewResult = (ViewResult) _companyController.Edit(1);
+            Assert.IsInstanceOf<CompanyViewModel>(viewResult.Model);
         }
     }
 }

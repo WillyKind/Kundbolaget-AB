@@ -21,8 +21,8 @@
                         @Html.DisplayFor(model => model.Country.Name)
                     </li>
                     <li>
-                        Kontaktperson:
-                        @Html.DisplayFor(model => model.ContactPerson.FirstName)
+                    Kontaktperson:
+                    @Html.DisplayFor(model => model.ContactPerson.FirstName)
                     <li>
                     <li>
                         Email:
@@ -47,7 +47,7 @@
                         @Html.AntiForgeryToken()
 
                         <div class="form-actions no-color">
-                            <input type="submit" value="Ta Bort" class="btn btn-default" />
+                            <input type="submit" value="Ta Bort" class="btn btn-default"/>
                             @Html.ActionLink("Företagsöversikt", "Index")
                         </div>
                     }

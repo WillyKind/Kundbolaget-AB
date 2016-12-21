@@ -101,45 +101,24 @@ namespace Kundbolaget.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(ProductInfo model)
+        public ActionResult Create(ManageProductInfosViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            _productInfo.CreateEntity(model);
+            _productInfo.CreateEntity(model.ProductInfo);
             return RedirectToAction("Index", "Product");
         }
 
         public ActionResult Create()
         {
-            var containers = _containerRepository.GetEntities();
-            var productGroups = _productGroupRepository.GetEntities();
-            var volumes = _volumeRepository.GetEntities();
+            var model = new ManageProductInfosViewModel();
+            model.Containers = _containerRepository.GetEntities();
+            model.ProductGroups = _productGroupRepository.GetEntities();
+            model.Volumes = _volumeRepository.GetEntities();
 
-            var selectListContainers = containers.Select(container => new SelectListItem
-            {
-                Value = container.Id.ToString(),
-                Text = container.Name
-            }).ToList();
-
-            var selectListProductGroups = productGroups.Select(p => new SelectListItem
-            {
-                Value = p.Id.ToString(),
-                Text = p.Name
-            }).ToList();
-
-            var selectListVolumes = volumes.Select(volume => new SelectListItem
-            {
-                Value = volume.Id.ToString(),
-                Text = volume.Milliliter.ToString()
-            }).ToList();
-
-            ViewBag.Containers = selectListContainers;
-            ViewBag.ProductGroups = selectListProductGroups;
-            ViewBag.Volume = selectListVolumes;
-
-            return View("Create");
+            return View("Create", model);
         }
     }
 }

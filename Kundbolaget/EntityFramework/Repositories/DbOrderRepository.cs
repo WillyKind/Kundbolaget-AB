@@ -29,11 +29,7 @@ namespace Kundbolaget.EntityFramework.Repositories
         {
             db = fakeContext;
         }
-        public bool ValidateCompanyId(int id)
-        {
-            var companyExists = db.Companies.Any(c => c.Id == id && !c.IsRemoved);
-            return companyExists;
-        }
+
 
         public bool ValidateCompanyOrderId(int customerOrderId, int companyId)
         {
@@ -103,14 +99,7 @@ namespace Kundbolaget.EntityFramework.Repositories
             }
         }
 
-        public Company[] GetChildCompanies(int id)
-        {
-            return db.Companies.Where(c => c.ParentCompanyId == id && !c.IsRemoved).ToArray();
-        }
-        public Company[] GetParentCompanies()
-        {
-            return db.Companies.Where(c => c.ParentCompany == null && !c.IsRemoved).ToArray();
-        }
+
 
         public Order[] GetCompanyOrders(int id)
         {

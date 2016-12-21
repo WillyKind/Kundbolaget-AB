@@ -18,7 +18,19 @@ namespace Kundbolaget.EntityFramework.Repositories
         {
             return db.Companies.Where(a => a.IsRemoved ==false).Include(c => c.Country).ToArray();
         }
-
+        public bool ValidateCompanyId(int id)
+        {
+            var companyExists = db.Companies.Any(c => c.Id == id && !c.IsRemoved);
+            return companyExists;
+        }
+        public Company[] GetChildCompanies(int id)
+        {
+            return db.Companies.Where(c => c.ParentCompanyId == id && !c.IsRemoved).ToArray();
+        }
+        public Company[] GetParentCompanies()
+        {
+            return db.Companies.Where(c => c.ParentCompany == null && !c.IsRemoved).ToArray();
+        }
         public Company GetEntity(int id)
         {
             return db.Companies

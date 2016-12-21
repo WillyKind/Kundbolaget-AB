@@ -28,7 +28,7 @@ namespace Kundbolaget.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            var model = _orders.GetParentCompanies();
+            var model = _companies.GetParentCompanies();
             return View(model);
         }
 
@@ -55,7 +55,7 @@ namespace Kundbolaget.Controllers
         public ActionResult Create(int id)
         {
             var model = new OrderViewModel();
-            model.ChildCompanies = _orders.GetChildCompanies(id);
+            model.ChildCompanies = _companies.GetChildCompanies(id);
             model.ParentCompanyId = id;
             return View("Create", model);
         }

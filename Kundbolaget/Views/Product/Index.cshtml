@@ -8,70 +8,39 @@
 
 <div>
     @Html.ActionLink("Skapa Ny", "Create", null, new { @class = "orange-text" }) |
-        @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new { @class = "orange-text" })
+    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new { @class = "orange-text" })
 </div>
-<table class="table">
-    <tr>
-        <th>
-            Behållare
-        </th>
-        <th>
-            Produktgrupp
-        </th>
-        <th>
-            Produktnamn
-        </th>
-        <th>
-           Beskrivning
-        </th>
-        <th>
-            Alkoholhalt
-        </th>
-        <th>
-            TG
-        </th>
-        <th>
-            Inköpspris
-        </th>
-        <th>
-            Utpris
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table class="responsive-table">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Container.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductGroup.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Abv)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TradingMargin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PurchasePrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-
-                @Html.ActionLink("Ändra", "Edit", new {id = item.Id}, new { @class = "orange-text" }) |
-                @Html.ActionLink("Detaljer", "Details", new {id = item.Id}, new { @class = "orange-text" }) |
-                @Html.ActionLink("Ta bort", "Delete", new {id = item.Id}, new { @class = "orange-text" })
-            </td>
+            <th>Behållare</th>
+            <th>Produktgrupp</th>
+            <th>Produktnamn</th>
+            <th>Beskrivning</th>
+            <th>Alkoholhalt</th>
+            <th>TG</th>
+            <th>Inköpspris</th>
+            <th>Utpris</th>
         </tr>
-    }
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Container.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductGroup.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Abv)</td>
+                <td>@Html.DisplayFor(modelItem => item.TradingMargin)</td>
+                <td>@Html.DisplayFor(modelItem => item.PurchasePrice)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>
+                    @Html.ActionLink("Ändra", "Edit", new { id = item.Id }, new { @class = "orange-text" }) |
+                    @Html.ActionLink("Detaljer", "Details", new { id = item.Id }, new { @class = "orange-text" }) |
+                    @Html.ActionLink("Ta bort", "Delete", new { id = item.Id }, new { @class = "orange-text" })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

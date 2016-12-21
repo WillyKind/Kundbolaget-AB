@@ -409,6 +409,7 @@
     <Compile Include="Models\EntityModels\Warehouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\FileUploadVM.cs" />
+    <Compile Include="ViewModels\ManageProductInfosViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">

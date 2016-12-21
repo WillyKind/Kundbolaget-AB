@@ -78,6 +78,21 @@ namespace Kundbolaget.Controllers
         }
 
         [HttpPost]
+        public bool SaveOrderDetail(int id, int newAmount) {
+
+            var orderDetail = _orderDetails.GetEntity(id);
+            orderDetail.Amount = newAmount;
+            orderDetail.TotalPrice = orderDetail.UnitPrice*newAmount;
+            _orderDetails.UpdateEntity(orderDetail);
+
+            var updatedOrder = _orders.GetEntity(orderDetail.OrderId);
+            updatedOrder.Price = updatedOrder.OrderDetails.Sum(updateOrderOrderDetail => (int)updateOrderOrderDetail.TotalPrice);
+
+            _orders.UpdateEntity(updatedOrder);
+            return true;
+        }
+
+        [HttpPost]
         public ActionResult Edit(int id, OrderDetailsViewModel model)
         {
             if (model == null)

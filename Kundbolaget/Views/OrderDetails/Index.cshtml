@@ -43,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.ProductInfo.Volume.Milliliter)
             </td>
             <td>
-                @Html.EditorFor(model => model.OrderDetails.Amount, new { htmlAttributes = new { Value=item.Amount,id=item.Id } })
+                @Html.EditorFor(model => model.OrderDetails.Amount, new { htmlAttributes = new { Value=item.Amount, id="amount"+item.Id } })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UnitPrice)
@@ -52,9 +52,8 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
-                @Html.ActionLink("Ändra", "Edit", "OrderDetails", new {id = item.Id, orderId = Model.OrderId}, new {@class = "orange-text"}) |
+                <a onclick="OrderDetailsController(@item.Id,'SaveOrderDetail')" class="waves-effect waves-light btn">Spara</a> |
                 @Html.ActionLink("Ta bort", "Delete", "OrderDetails", new {id = item.Id, orderId = Model.OrderId}, new {@class = "orange-text"})
-
             </td>
         </tr>
     }
@@ -63,3 +62,4 @@
     @Html.ActionLink("Skapa +", "Create", "OrderDetails", new { id = Model.OrderId }, new { @class = "waves-effect waves-light btn" })
 </div>  
 
+<script src="~/Scripts/CallOrderDetailsController.js"></script>

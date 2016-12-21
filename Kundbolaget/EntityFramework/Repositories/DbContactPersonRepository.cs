@@ -8,7 +8,15 @@ namespace Kundbolaget.EntityFramework.Repositories
 {
     public class DbContactPersonRepository : IEntityRepository<ContactPerson>
     {
-        private readonly StoreContext db = new StoreContext();
+        private readonly StoreContext _db;
+
+        public DbContactPersonRepository(StoreContext mockContextObject) {
+            _db = mockContextObject;
+        }
+
+        public DbContactPersonRepository() {
+            _db = new StoreContext();
+        }
 
         public void Dispose()
         {
@@ -17,7 +25,7 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public ContactPerson[] GetEntities()
         {
-            return db.ContactPersons.ToArray();
+            return _db.ContactPersons.ToArray();
         }
 
         public ContactPerson GetEntity(int id)

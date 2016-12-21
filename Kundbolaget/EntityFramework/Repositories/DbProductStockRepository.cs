@@ -9,7 +9,7 @@ using Kundbolaget.Models.EntityModels;
 
 namespace Kundbolaget.EntityFramework.Repositories
 {
-    public class DbProductStockRepository : IEntityRepository<ProductStock>
+    public class DbProductStockRepository 
     {
         private readonly StoreContext _storeContext;
 

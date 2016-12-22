@@ -14,7 +14,8 @@ namespace Kundbolaget.EntityFramework.Repositories
     {
         private readonly StoreContext _db;
 
-        public DbCompanyRepository(StoreContext mockContextObject) {
+        public DbCompanyRepository(StoreContext mockContextObject)
+        {
             _db = mockContextObject;
         }
 
@@ -28,31 +29,41 @@ namespace Kundbolaget.EntityFramework.Repositories
             var companyExists = _db.Companies.Any(c => c.Id == id && !c.IsRemoved);
             return companyExists;
         }
+
         public Company[] GetChildCompanies(int id)
         {
             return _db.Companies.Where(c => c.ParentCompanyId == id && !c.IsRemoved).ToArray();
         }
+
         public Company[] GetParentCompanies()
         {
             return _db.Companies.Where(c => c.ParentCompany == null && !c.IsRemoved).ToArray();
         }
-        public Company[] GetEntities() {
+
+        public Company[] GetEntities()
+        {
             return _db.Companies.Where(a => a.IsRemoved == false).Include(c => c.Country).ToArray();
         }
 
-        public Company GetEntity(int id) {
+        public Company[] GetParentCompanies(int companyId)
+            => _db.Companies.Where(company => company.Id != companyId && !company.IsRemoved).ToArray();
+
+        public Company GetEntity(int id)
+        {
             return _db.Companies
                 .Include(c => c.Country)
                 .Include(c => c.ParentCompany)
                 .SingleOrDefault(c => c.Id == id);
         }
 
-        public void CreateEntity(Company newEntity) {
+        public void CreateEntity(Company newEntity)
+        {
             _db.Companies.Add(newEntity);
             _db.SaveChanges();
         }
 
-        public void DeleteEntity(int id) {
+        public void DeleteEntity(int id)
+        {
             var company = _db.Companies.SingleOrDefault(c => c.Id == id);
             if (company != null)
             {
@@ -61,7 +72,8 @@ namespace Kundbolaget.EntityFramework.Repositories
             }
         }
 
-        public void UpdateEntity(Company updatedEntity) {
+        public void UpdateEntity(Company updatedEntity)
+        {
             if (updatedEntity.AddressId == updatedEntity.DeliveryAddressId)
             {
                 _db.Addresses.Add(updatedEntity.DeliveryAddress);
@@ -79,7 +91,8 @@ namespace Kundbolaget.EntityFramework.Repositories
             _db.SaveChanges();
         }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             _db.Dispose();
         }
     }

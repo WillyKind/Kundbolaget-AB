@@ -21,9 +21,9 @@
                         @Html.DisplayFor(model => model.Country.Name)
                     </li>
                     <li>
-                    Kontaktperson:
-                    @Html.DisplayFor(model => model.ContactPerson.FirstName)
-                    <li>
+                        Kontaktperson:
+                        @Html.DisplayFor(model => model.ContactPerson.FirstName)
+                    </li>
                     <li>
                         Email:
                         @Html.DisplayFor(model => model.Email)
@@ -38,7 +38,7 @@
                     </li>
                     <li>
                         Moderbolag:
-                        @Html.DisplayFor(model => model.ParentCompany.Name)
+                        @(Model.ParentCompanyId == null ? Html.DisplayName("Inget") : Html.DisplayName(Model.ParentCompany.Name))
                     </li>
                 </ul>
                 <div class="card-action">
@@ -46,8 +46,8 @@
                     {
                         @Html.AntiForgeryToken()
 
-                        <div class="form-actions no-color">
-                            <input type="submit" value="Ta Bort" class="btn btn-default"/>
+                        <div>
+                            <input type="submit" value="Ta Bort" class="btn"/>
                             @Html.ActionLink("Företagsöversikt", "Index")
                         </div>
                     }
@@ -56,83 +56,3 @@
         </div>
     </div>
 </div>
-
-@*<div>
-    <h4>Company</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Address.Street)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address.Street)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ContactPerson.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ContactPerson.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Country.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Country.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeliveryAddress.Street)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeliveryAddress.Street)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ParentCompany.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ParentCompany.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
-</div>*@

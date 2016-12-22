@@ -11,15 +11,15 @@ namespace Kundbolaget.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            return View("Index");
         }
         public ActionResult AdminManager()
         {
-            return View();
+            return View("AdminManager");
         }
         public ActionResult CustomerSite()
         {
-            return View();
+            return View("CustomerSite");
         }
     }
 }

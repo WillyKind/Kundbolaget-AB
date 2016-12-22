@@ -41,7 +41,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr id="@("companyTableRow" + item.Id)">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -74,11 +74,36 @@
                 <a href="@Url.Action("Details", new {id = item.Id})" class="btn btn-floating small waves-effect waves-light">
                     <i class="material-icons">info_outline</i>
                 </a>
-                <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-floating small waves-effect waves-light">
+                <a onclick="openRemovalModal(@item.Id)" href="#" class="btn btn-floating small waves-effect waves-light">
                     <i class="material-icons">clear</i>
                 </a>
+                <div id="@("modal" + item.Id)" class="modal">
+                    <div class="modal-content">
+                        <h4>Ta bort @item.Name</h4>
+                        <button onclick="deleteCompany(@item.Id)" class="btn">Ja</button>
+                        <button onclick="closeRemovalModal(@item.Id)" class="btn">Nej</button>
+                    </div>
+                </div>
             </td>
         </tr>
     }
 
 </table>
+<script>
+
+    var openRemovalModal = id => $("#modal" + id).openModal()
+
+    var closeRemovalModal = id => $("#modal" + id).closeModal()
+
+    var deleteCompany = function(id) {
+        $.ajax({
+            url: "/Company/DeleteEntity/" + id,
+            method: "POST",
+            success: function() {
+                closeRemovalModal(id)
+                $("#companyTableRow" + id).hide("slow")
+            }
+        })
+    }
+
+</script>

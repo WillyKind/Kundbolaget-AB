@@ -51,6 +51,13 @@ namespace Kundbolaget.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public string DeleteEntity(int id)
+        {
+            _companyRepository.DeleteEntity(id);
+            return "Sucess";
+        }
+
         public ActionResult Edit(int id)
         {
             var company = _companyRepository.GetEntity(id);

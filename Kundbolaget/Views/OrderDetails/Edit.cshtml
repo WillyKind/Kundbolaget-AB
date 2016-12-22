@@ -1,0 +1,37 @@
+﻿@model Kundbolaget.ViewModels.OrderDetailsViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+   
+    <div class="form-horizontal">
+        <h4>Ändra: @Html.DisplayFor(model=>model.OrderDetails.ProductInfo.Name) @Html.DisplayFor(model=>model.OrderDetails.ProductInfo.Volume.Milliliter)ml</h4>
+        @Html.ActionLink("Tillbaka", "Index", "OrderDetails", new { id = Model.OrderId, companyId = Model.ParentCompanyId }, new { @class = "orange-text" })
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.OrderDetails.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderDetails.Amount,"Antal kollin", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrderDetails.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OrderDetails.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Spara" class="btn btn-default" />
+               
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

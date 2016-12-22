@@ -11,6 +11,7 @@ namespace Kundbolaget.EntityFramework.Repositories
     {
         private readonly StoreContext _db;
 
+
         public DbAddressRepository()
         {
             _db = new StoreContext();

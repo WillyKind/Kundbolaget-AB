@@ -1,0 +1,56 @@
+﻿@model Kundbolaget.ViewModels.OrderDetailsViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <h4>Ta bort denna orderrad?</h4>
+    @Html.ActionLink("Tillbaka", "Index", "OrderDetails", new { id = Model.OrderId, companyId = Model.ParentCompanyId }, new { @class = "orange-text" })
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Produkt:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDetails.ProductInfo.Name)
+        </dd>
+
+        <dt>
+            Mängd:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDetails.Amount)
+        </dd>
+        <dt>
+            Enhetspris:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDetails.UnitPrice)
+        </dd>
+
+        <dt>
+            Totalpris:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDetails.TotalPrice)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model=>model.OrderId)
+        @Html.HiddenFor(model=>model.OrderDetails.TotalPrice)
+        @Html.HiddenFor(model=>model.ParentCompanyId)
+        @Html.HiddenFor(model=>model.OrderDetails.Id)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Ta bort" class="btn btn-default" />
+        </div>
+    }
+</div>

@@ -1,11 +1,11 @@
-﻿@model IEnumerable<Kundbolaget.Models.EntityModels.Order>
+﻿@model Kundbolaget.ViewModels.OrderViewModel
 
 @{
-    ViewBag.Title = "FilteredOrders";
+    ViewBag.Title = "Company";
 }
 <h4>Ordrar</h4>
 <div>
-    @Html.ActionLink("Tillbaka", "Index", null, new { @class = "orange-text" })
+    @Html.ActionLink("Tillbaka", "Index", null, new {@class = "orange-text"})
 </div>
 <hr/>
 <table class="table">
@@ -17,7 +17,7 @@
             Order skapad
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerOrderId)
+            Ordernummer från kund
         </th>
         <th>
             Önskat leveransdatum
@@ -25,12 +25,9 @@
         <th>
             Pris
         </th>
-        <th>
-            Mer information
-        </th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Orders) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Company.Name)
@@ -49,9 +46,13 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Mer information","OrderDetails", new {id = item.Id, companyId=item.Company.ParentCompanyId}, new { @class = "orange-text" })
+            <a href="@Url.Action("Index","OrderDetails", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">info_outline</i></a>
+            <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">clear</i></a>
         </td>
     </tr>
 }
 </table>
+<div>
+    @Html.ActionLink("Skapa +", "Create", new {id = Model.ParentCompanyId}, new { @class = "waves-effect waves-light btn" })
+</div>
 

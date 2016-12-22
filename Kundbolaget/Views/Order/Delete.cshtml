@@ -1,0 +1,62 @@
+﻿@model Kundbolaget.Models.EntityModels.Order
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Är du säker på att du vill ta bort hela ordern?</h3>
+<div>
+    <h4>Ordernummer @Model.Id</h4>
+    <div>
+        @Html.ActionLink("Orderöversikt", "Company", "Order", new { id = Model.Company.ParentCompanyId }, new { @class = "orange-text" })
+    </div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Företag
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company.Name)
+        </dd>
+
+        <dt>
+            Order skapad
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            Ordernummer från kund
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerOrderId)
+        </dd>
+
+        <dt>
+            Önskat leveransdatum
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WishedDeliveryDate)
+        </dd>
+        <dt>
+            Totalt pris
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <input type="submit" value="Ta bort" class="btn btn-default" />
+        </div>
+    }
+</div>

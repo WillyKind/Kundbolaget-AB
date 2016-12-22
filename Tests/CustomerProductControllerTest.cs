@@ -23,7 +23,6 @@ namespace Tests
         private Mock<StoreContext> _mockContext;
         private CustomerProductController _customerProductController;
 
-
         //FAKE DbSet
         private Mock<DbSet<ProductInfo>> _mockSetProductInfo;
         private Mock<DbSet<Container>> _mockSetContainer;
@@ -74,6 +73,7 @@ namespace Tests
             var result = _customerProductController.Index() as ViewResult;
             Assert.AreEqual("Index", result.ViewName);
         }
+
         [Test]
         public void Index_Retrieve_All_Data()
         {

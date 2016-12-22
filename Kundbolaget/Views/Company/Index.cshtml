@@ -101,7 +101,10 @@
             method: "POST",
             success: function() {
                 closeRemovalModal(id)
-                $("#companyTableRow" + id).hide("slow")
+                $("#companyTableRow" + id).hide("slow",
+                    () => {
+                        location.reload(true)
+                    })
             }
         })
     }

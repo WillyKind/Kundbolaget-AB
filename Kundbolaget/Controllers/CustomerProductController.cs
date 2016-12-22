@@ -20,7 +20,7 @@ namespace Kundbolaget.Controllers
         // GET: CustomerProduct
         public ActionResult Index()
         {
-            return View(_productInfo.GetEntities().Where(adress => adress.IsRemoved == false));
+            return View("Index", _productInfo.GetEntities().Where(adress => adress.IsRemoved == false));
         }
     }
 }

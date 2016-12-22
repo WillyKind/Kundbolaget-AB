@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompanyControllerTest.cs" />
+    <Compile Include="CustomerProductControllerTest.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="OrderControllerTest.cs" />
     <Compile Include="OrderResourcesData.cs" />

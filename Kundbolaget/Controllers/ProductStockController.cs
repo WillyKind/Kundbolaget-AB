@@ -58,8 +58,6 @@ namespace Kundbolaget.Controllers
 
         public ActionResult Edit(int id)
         {
-
-
             var productinfoSelectListItems = _productInfoRepository.GetEntities().Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),

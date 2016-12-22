@@ -207,6 +207,7 @@
     <Content Include="Scripts\materialize\materialize.js" />
     <Content Include="Scripts\materialize\materialize.min.js" />
     <Content Include="Scripts\CallOrderDetailsController.js" />
+    <Content Include="Scripts\PreviousPage.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

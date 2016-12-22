@@ -2,7 +2,8 @@
 @using Kundbolaget.Models.EntityModels
 @model IEnumerable<Kundbolaget.Models.EntityModels.Order>
 <h2>Orderhistorik</h2>
-
+@Html.ActionLink("Tillbaka", "Index", "Home", null, new { @class = "orange-text" })
+<hr/>
 <table class="highlight">
     <tr>
         <th>
@@ -20,7 +21,9 @@
         <th>
             Totalpris
         </th>
-        <th></th>
+        <th>
+            Info
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -42,14 +45,10 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.ActionLink("Detaljer", "OrderDetails", "Order", new { id = item.Id }, new { @class = "orange-text" })
+                <a href="@Url.Action("OrderDetails", "Order", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">info_outline</i></a>
             </td>
         </tr>
 
-
-
-
     }
-    @Html.ActionLink("Tillbaka", "Index", "Home")
 </table>
 

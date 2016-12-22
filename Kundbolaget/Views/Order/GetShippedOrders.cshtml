@@ -1,8 +1,9 @@
 ﻿@using Kundbolaget.Controllers
 @using Kundbolaget.Models.EntityModels
 @model IEnumerable<Kundbolaget.Models.EntityModels.Order>
-<h2>Skickade ordrar</h2>
-
+<h2>Bekräfta leverans</h2>
+@Html.ActionLink("Tillbaka", "Index", "Home", null, new { @class = "orange-text" })
+<hr/>
 <table class="highlight">
     <tr>
         <th>
@@ -20,7 +21,18 @@
         <th>
             Totalpris
         </th>
-        <th></th>
+        <th>
+            Levererad
+        </th>
+        <th>
+            Ändra
+        </th>
+        <th>
+            Info
+        </th>
+        <th>
+            Skapa ny
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -42,10 +54,16 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a onclick="OrderController(@item.Id,'OrderDelivered')" class="waves-effect waves-light btn">Order levererad</a>
+                <a onclick="OrderController(@item.Id,'OrderDelivered')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">check</i></a>
             </td>
             <td>
-                @Html.ActionLink("Detaljer", "OrderDetails", "Order", new { id = item.Id }, new { @class = "orange-text" })
+                <a href="@Url.Action("Index","OrderDetails", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">update</i></a>
+            </td>
+            <td>
+                <a href="@Url.Action("OrderDetails", "Order", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">info_outline</i></a>
+            </td>
+            <td>
+                <a href="@Url.Action("Create", "Order", new { id = item.Company.ParentCompanyId})" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">add_circle_outline</i></a>
             </td>
         </tr>
 
@@ -53,7 +71,6 @@
 
 
     }
-    @Html.ActionLink("Tillbaka", "Index", "Home")
 </table>
 <script src="~/Scripts/CallOrderController.js"></script>
 

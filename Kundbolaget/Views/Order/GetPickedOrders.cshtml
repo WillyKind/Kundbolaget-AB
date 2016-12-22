@@ -42,10 +42,10 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a onclick="OrderController(@item.Id,'OrderShipped')" class="waves-effect waves-light btn">Order skickad</a>
+                <a onclick="OrderController(@item.Id,'OrderShipped')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">check</i></a>
             </td>
             <td>
-                @Html.ActionLink("Detaljer", "OrderDetailsPickedOrder", "Order", new { id = item.Id} , new { @class = "orange-text" })
+                @Html.ActionLink("Detaljer", "OrderDetails", "Order", new { id = item.Id }, new { @class = "orange-text" })
             </td>
         </tr>
 

@@ -109,18 +109,6 @@ namespace Kundbolaget.Controllers
             return "Success " + id;
         }
 
-        public ActionResult OrderDetailsUnpickedOrder(int id)
-        {
-            var model = _orders.GetOrderDetails(id);
-            return View(model);
-        }
-
-        public ActionResult OrderDetailsPickedOrder(int id)
-        {
-            var model = _orders.GetOrderDetails(id);
-            return View(model);
-        }
-
         public ActionResult GetPickedOrders()
         {
             var model = _orders.GetPickedOrders();
@@ -133,7 +121,7 @@ namespace Kundbolaget.Controllers
             return View(model);
         }
 
-        public ActionResult OrderDetailsShippedOrder(int id)
+        public ActionResult OrderDetails(int id)
         {
             var model = _orders.GetOrderDetails(id);
             return View(model);
@@ -153,12 +141,5 @@ namespace Kundbolaget.Controllers
             var model = _orders.GetOrderHistory();
             return View(model);
         }
-
-        public ActionResult OrderDetailsHistory(int id)
-        {
-            var model = _orders.GetOrderDetails(id);
-            return View(model);
-        }
-
     }
 }

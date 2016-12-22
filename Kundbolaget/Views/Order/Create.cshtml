@@ -1,0 +1,57 @@
+﻿@model Kundbolaget.ViewModels.OrderViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Skapa order</h4>
+        @Html.ActionLink("Tillbaka", "Company", "Order", new { id = Model.ParentCompanyId }, new { @class = "orange-text" })
+        <hr/>
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Order.CustomerOrderId,"Ordernummer från kund", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Order.CustomerOrderId, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Order.CustomerOrderId, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Order.WishedDeliveryDate,"Önskat leveransdatum", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Order.WishedDeliveryDate, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Order.WishedDeliveryDate, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Order.CompanyId, "Företag", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Order.CompanyId, new SelectList(Model.ChildCompanies, "Id", "Name"), new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "dropdown-content"
+                    }
+                })
+                @Html.ValidationMessageFor(model => model.Order.CompanyId, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Skapa +" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

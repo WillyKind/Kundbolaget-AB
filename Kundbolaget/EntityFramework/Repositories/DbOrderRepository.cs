@@ -14,18 +14,22 @@ namespace Kundbolaget.EntityFramework.Repositories
 {
     public class DbOrderRepository
     {
-        StoreContext db = new StoreContext();
+        private StoreContext db;
 
         public void Dispose()
         {
             db.Dispose();
         }
 
-        public bool ValidateCompanyId(int id)
+        public DbOrderRepository()
         {
-            var companyExists = db.Companies.Any(c => c.Id == id && !c.IsRemoved);
-            return companyExists;
+            db = new StoreContext();
         }
+        public DbOrderRepository(StoreContext fakeContext)
+        {
+            db = fakeContext;
+        }
+
 
         public bool ValidateCompanyOrderId(int customerOrderId, int companyId)
         {
@@ -33,6 +37,25 @@ namespace Kundbolaget.EntityFramework.Repositories
                 db.Orders.Where(o => o.Company.ParentCompanyId == companyId && !o.IsRemoved)
                     .Any(o => o.CustomerOrderId == customerOrderId);
             return ordernumerExists;
+        }
+
+        public void CreateEntity(Order newEntity)
+        {
+            db.Orders.Add(newEntity);
+            db.SaveChanges();
+        }
+
+        public Order GetEntity(int id)
+        {
+            return db.Orders.FirstOrDefault(o => o.Id == id);
+        }
+
+        public void UpdateEntity(Order updatedEntity)
+        {
+            db.Orders.Attach(updatedEntity);
+            var entry = db.Entry(updatedEntity);
+            entry.State = EntityState.Modified;
+            db.SaveChanges();
         }
 
         public void CreateOrder(OrderFile order)
@@ -66,11 +89,17 @@ namespace Kundbolaget.EntityFramework.Repositories
             db.Orders.AddRange(orders);
             db.SaveChanges();
         }
-
-        public Company[] GetParentCompanies()
+        public void DeleteEntity(int id)
         {
-            return db.Companies.Where(c => c.ParentCompany == null && !c.IsRemoved).ToArray();
+            var product = db.Orders.SingleOrDefault(p => p.Id == id);
+            if (product != null)
+            {
+                product.IsRemoved = true;
+                db.SaveChanges();
+            }
         }
+
+
 
         public Order[] GetCompanyOrders(int id)
         {

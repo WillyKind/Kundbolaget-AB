@@ -206,6 +206,7 @@
     <Content Include="Scripts\materalizeNavBar.js" />
     <Content Include="Scripts\materialize\materialize.js" />
     <Content Include="Scripts\materialize\materialize.min.js" />
+    <Content Include="Scripts\CallOrderDetailsController.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -216,10 +217,12 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OrderDetailsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductStockController.cs" />
     <Compile Include="EntityFramework\Context\StoreContext.cs" />
     <Compile Include="EntityFramework\Repositories\DbContainerRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\DbOrderDetailsRpository.cs" />
     <Compile Include="EntityFramework\Repositories\DbOrderRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbProductGroupRepository.cs" />
     <Compile Include="EntityFramework\Repositories\DbAddressRepository.cs" />
@@ -411,6 +414,8 @@
     <Compile Include="ViewModels\CompanyViewModel.cs" />
     <Compile Include="ViewModels\FileUploadVM.cs" />
     <Compile Include="ViewModels\ManageProductInfosViewModel.cs" />
+    <Compile Include="ViewModels\OrderDetailsViewModel.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
@@ -439,9 +444,9 @@
     <Content Include="Views\ProductStock\Index.cshtml" />
     <Content Include="Views\ProductStock\Details.cshtml" />
     <Content Include="Views\ProductStock\Edit.cshtml" />
-    <Content Include="Views\Order\FilteredOrders.cshtml" />
+    <Content Include="Views\Order\Company.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
-    <Content Include="Views\Order\OrderDetails.cshtml" />
+    <Content Include="Views\OrderDetails\Index.cshtml" />
     <Content Include="Views\File\Index.cshtml" />
     <Content Include="Views\File\UploadJson.cshtml" />
     <Content Include="Views\CustomerProduct\Index.cshtml" />
@@ -462,6 +467,11 @@
     <Content Include="Views\Order\OrderDetailsShippedOrder.cshtml" />
     <Content Include="Views\Order\GetOrderHistory.cshtml" />
     <Content Include="Views\Order\OrderDetailsHistory.cshtml" />
+    <Content Include="Views\Order\Create.cshtml" />
+    <Content Include="Views\OrderDetails\Edit.cshtml" />
+    <Content Include="Views\OrderDetails\Delete.cshtml" />
+    <Content Include="Views\OrderDetails\Create.cshtml" />
+    <Content Include="Views\Order\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

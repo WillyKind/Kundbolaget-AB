@@ -19,6 +19,7 @@ namespace Kundbolaget.Controllers
     public class FileController : Controller
     {
         private DbOrderRepository _orders = new DbOrderRepository();
+        private DbCompanyRepository _companies = new DbCompanyRepository();
         // GET: File
         public ActionResult Index()
         {
@@ -57,7 +58,7 @@ namespace Kundbolaget.Controllers
 
             var entity = JsonConvert.DeserializeObject<OrderFile>(json);
             _orders = new DbOrderRepository();
-            var companyExists = _orders.ValidateCompanyId(int.Parse(entity.companyId));
+            var companyExists = _companies.ValidateCompanyId(int.Parse(entity.companyId));
             var orderExists = _orders.ValidateCompanyOrderId(entity.customerOrderFileId, int.Parse(entity.companyId));
 
             if (companyExists && !orderExists)

@@ -18,10 +18,24 @@ namespace Kundbolaget.EntityFramework.Repositories
             _db = mockContextObject;
         }
 
-        public DbCompanyRepository() {
+        public DbCompanyRepository()
+        {
             _db = new StoreContext();
         }
 
+        public bool ValidateCompanyId(int id)
+        {
+            var companyExists = _db.Companies.Any(c => c.Id == id && !c.IsRemoved);
+            return companyExists;
+        }
+        public Company[] GetChildCompanies(int id)
+        {
+            return _db.Companies.Where(c => c.ParentCompanyId == id && !c.IsRemoved).ToArray();
+        }
+        public Company[] GetParentCompanies()
+        {
+            return _db.Companies.Where(c => c.ParentCompany == null && !c.IsRemoved).ToArray();
+        }
         public Company[] GetEntities() {
             return _db.Companies.Where(a => a.IsRemoved == false).Include(c => c.Country).ToArray();
         }

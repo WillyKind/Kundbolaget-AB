@@ -15,12 +15,16 @@ namespace Kundbolaget.Controllers
         public CustomerProductController()
         {
             _productInfo = new DbProductInfoRepository();
-           
+        }
+
+        public CustomerProductController(DbProductInfoRepository productInfoRepository)
+        {
+            _productInfo = productInfoRepository;
         }
         // GET: CustomerProduct
         public ActionResult Index()
         {
-            return View("Index", _productInfo.GetEntities().Where(adress => adress.IsRemoved == false));
+            return View("Index", _productInfo.GetEntities());
         }
     }
 }

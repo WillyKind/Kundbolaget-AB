@@ -14,31 +14,39 @@ namespace Kundbolaget.EntityFramework.Repositories
     {
         private readonly StoreContext _db;
 
-        public DbCompanyRepository(StoreContext mockContextObject) {
+        public DbCompanyRepository(StoreContext mockContextObject)
+        {
             _db = mockContextObject;
         }
 
-        public DbCompanyRepository() {
+        public DbCompanyRepository()
+        {
             _db = new StoreContext();
         }
 
-        public Company[] GetEntities() {
+        public Company[] GetEntities()
+        {
             return _db.Companies.Where(a => a.IsRemoved == false).Include(c => c.Country).ToArray();
         }
 
-        public Company GetEntity(int id) {
+        public Company[] GetParentCompanies(int companyId) => _db.Companies.Where(company => company.Id != companyId && !company.IsRemoved).ToArray();
+
+        public Company GetEntity(int id)
+        {
             return _db.Companies
                 .Include(c => c.Country)
                 .Include(c => c.ParentCompany)
                 .SingleOrDefault(c => c.Id == id);
         }
 
-        public void CreateEntity(Company newEntity) {
+        public void CreateEntity(Company newEntity)
+        {
             _db.Companies.Add(newEntity);
             _db.SaveChanges();
         }
 
-        public void DeleteEntity(int id) {
+        public void DeleteEntity(int id)
+        {
             var company = _db.Companies.SingleOrDefault(c => c.Id == id);
             if (company != null)
             {
@@ -47,7 +55,8 @@ namespace Kundbolaget.EntityFramework.Repositories
             }
         }
 
-        public void UpdateEntity(Company updatedEntity) {
+        public void UpdateEntity(Company updatedEntity)
+        {
             if (updatedEntity.AddressId == updatedEntity.DeliveryAddressId)
             {
                 _db.Addresses.Add(updatedEntity.DeliveryAddress);
@@ -65,7 +74,8 @@ namespace Kundbolaget.EntityFramework.Repositories
             _db.SaveChanges();
         }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             _db.Dispose();
         }
     }

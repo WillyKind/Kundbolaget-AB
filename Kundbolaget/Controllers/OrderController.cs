@@ -49,14 +49,17 @@ namespace Kundbolaget.Controllers
             }
             model.Order.CreatedDate = DateTime.Now;
             _orders.CreateEntity(model.Order);
-            return RedirectToAction("Index", "Order");
+            return RedirectToAction("Delivery", "Home");
         }
 
-        public ActionResult Create(int id)
+        public ActionResult Create(int id, int customerOrderId, int companyId)
         {
             var model = new OrderViewModel();
-            model.ChildCompanies = _companies.GetChildCompanies(id);
             model.ParentCompanyId = id;
+            model.Order = _orders.GetCompanyOrders(id).FirstOrDefault(o => o.CustomerOrderId == customerOrderId);
+            model.Order.CustomerOrderId = customerOrderId;
+            model.Order.CompanyId = companyId;
+            model.Order.WishedDeliveryDate=DateTime.MinValue;
             return View("Create", model);
         }
 

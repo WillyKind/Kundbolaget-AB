@@ -6,6 +6,7 @@
         success: function (result) {
             if (result) {
                 location.reload(true);
+                //parent.history.back();
             }
         }
     });

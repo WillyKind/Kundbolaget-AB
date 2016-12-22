@@ -6,7 +6,7 @@
 
 <h4>Orderdetaljer</h4>
 <div>
-    @Html.ActionLink("Tillbaka", "Company","Order", new { id = Model.ParentCompanyId}, new { @class = "orange-text" })
+    <a href="javascript:GoBack();" class="orange-text">Tillbaka</a>
 </div>
 <hr/>
 <table class="table">
@@ -64,3 +64,4 @@
 </div>  
 
 <script src="~/Scripts/CallOrderDetailsController.js"></script>
+<script src="~/Scripts/PreviousPage.js"></script>

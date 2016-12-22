@@ -2,8 +2,10 @@
 
 <h2>Orderdetaljer för order: @Model.First().OrderId</h2>
 <div>
-    @Html.ActionLink("Åter till oplockade ordrar", "GetAllUnpickedOrders", "Order")
+    <a href="javascript:GoBack();"class="orange-text" >Tillbaka</a>
+    @*@Html.ActionLink("Tillbaka", "GetAllUnpickedOrders", "Order", null, new { onclick = "GoBack();" })*@
 </div>
+<hr/>
 <table class="table">
     <tr>
         <th>
@@ -54,3 +56,4 @@
 <div>
 
 </div>
+<script src="~/Scripts/PreviousPage.js"></script>

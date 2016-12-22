@@ -2,7 +2,8 @@
 @using Kundbolaget.Models.EntityModels
 @model IEnumerable<Kundbolaget.Models.EntityModels.Order>
 <h2>Oplockade ordrar</h2>
-
+@Html.ActionLink("Tillbaka", "Index", "Home", null, new {@class="orange-text"})
+<hr/>
 <table class="highlight">
     <tr>
         <th>
@@ -20,7 +21,15 @@
         <th>
             Totalpris
         </th>
-        <th></th>
+        <th>
+            Plockad
+        </th>
+        <th>
+            Ändra
+        </th>
+        <th>
+            Info
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -42,10 +51,13 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a onclick="OrderController(@item.Id,'OrderPicked')" class="waves-effect waves-light btn">Plockad</a>
+                <a onclick="OrderController(@item.Id,'OrderPicked')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">check</i></a>
             </td>
             <td>
-               @Html.ActionLink("Detaljer", "OrderDetailsUnpickedOrder" , "Order", new { id = item.Id, companyId = item.Company.ParentCompanyId }, new { @class = "orange-text" }) 
+                <a href="@Url.Action("Index","OrderDetails", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">update</i></a>
+            </td>
+            <td>
+                <a href="@Url.Action("OrderDetailsUnpickedOrder", "Order", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">info_outline</i></a>
             </td>
         </tr>
 
@@ -53,6 +65,5 @@
 
         
     }
-    @Html.ActionLink("Tillbaka", "Index", "Home")
 </table>
 <script src="~/Scripts/CallOrderController.js"></script>

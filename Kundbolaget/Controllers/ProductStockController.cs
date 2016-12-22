@@ -58,32 +58,26 @@ namespace Kundbolaget.Controllers
 
         public ActionResult Edit(int id)
         {
-            var productinfoSelectListItems = _productInfoRepository.GetEntities().Select(x => new SelectListItem
+            var stockVm = new ProductStockVM();
+
+            stockVm.ProductInfos = _productInfoRepository.GetEntities();
+            stockVm.Warehouses = _warehouseRepository.GetEntities();
+            stockVm.ProductStock = _stockRepository.GetEntity(id);
+            if (stockVm.ProductStock == null)
             {
-                Value = x.Id.ToString(),
-                Text = x.Name
-            }).ToList();
-
-            var warehouseSelectListItems = _warehouseRepository.GetEntities().Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.Name
-            }).ToList();
-
-            ViewBag.ProductInfoes = productinfoSelectListItems;
-            ViewBag.Warehouses = warehouseSelectListItems;
-
-            return View(_stockRepository.GetEntity(id));
+                return HttpNotFound();
+            }
+            return View(stockVm);
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductStock model)
+        public ActionResult Edit(ProductStockVM model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            _stockRepository.UpdateEntity(model);
+            _stockRepository.UpdateEntity(model.ProductStock);
             return RedirectToAction("Index");
         }
 

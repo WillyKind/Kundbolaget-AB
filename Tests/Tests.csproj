@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper.cs" />
+    <Compile Include="HomeContollerTest.cs" />
     <Compile Include="ProductControllerTest.cs" />
     <Compile Include="ProductStockControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

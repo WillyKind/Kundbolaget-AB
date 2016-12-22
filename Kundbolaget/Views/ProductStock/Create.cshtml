@@ -1,5 +1,5 @@
-﻿@using Kundbolaget.Models.EntityModels
-@model Kundbolaget.Models.EntityModels.ProductStock
+﻿@model Kundbolaget.ViewModels.ProductStockVM
+
 
 @{
     ViewBag.Title = "Create";
@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="input-field col s3">
                     <div>
-                        @Html.EditorFor(model => model.Amount, new
+                        @Html.EditorFor(model => model.ProductStock.Amount, new
                         {
                             htmlAttributes = new
                             {
@@ -27,36 +27,36 @@
                                 data_val_required = "Antal måste minst vara 0"
                             }
                         })
-                        @Html.ValidationMessageFor(model => model.Amount)
-                        @Html.LabelFor(model => model.Amount, "Antal")
+                        @Html.ValidationMessageFor(model => model.ProductStock.Amount)
+                        @Html.LabelFor(model => model.ProductStock.Amount, "Antal")
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col s10">
-                    @Html.LabelFor(model => model.ProductInfoId, "Produktartikel")
-                    @Html.DropDownListFor(model => model.ProductInfoId, (List<SelectListItem>) ViewBag.ProductInfoes, new
+                    @Html.LabelFor(model => model.ProductStock.ProductInfoId, "Produktartikel")
+                    @Html.DropDownListFor(model => model.ProductStock.ProductInfoId, new SelectList(Model.ProductInfos , "Id", "Name"), new
                     {
                         htmlAttributes = new
                         {
                             @class = "dropdown-content"
                         }
                     })
-                    @Html.ValidationMessageFor(model => model.ProductInfoId)
+                    @Html.ValidationMessageFor(model => model.ProductStock.ProductInfoId)
                 </div>
             </div>
 
             <div class="row">
                 <div class="col s10">
-                    @Html.LabelFor(model => model.WarehouseId, "Varuhus")
-                    @Html.DropDownListFor(model => model.WarehouseId, (List<SelectListItem>) ViewBag.Warehouses, new
+                    @Html.LabelFor(model => model.ProductStock.WarehouseId, "Varuhus")
+                    @Html.DropDownListFor(model => model.ProductStock.WarehouseId, new SelectList(Model.Warehouses, "Id" , "Name"), new
                     {
                         htmlAttributes = new
                         {
                             @class = "dropdown-content"
                         }
                     })
-                    @Html.ValidationMessageFor(model => model.WarehouseId)
+                    @Html.ValidationMessageFor(model => model.ProductStock.WarehouseId)
                 </div>
             </div>
             <div class="row">

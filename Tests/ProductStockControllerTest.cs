@@ -9,6 +9,7 @@ using Kundbolaget.Controllers;
 using Kundbolaget.EntityFramework.Context;
 using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.Models.EntityModels;
+using Kundbolaget.ViewModels;
 using Moq;
 using NUnit.Framework.Internal;
 using NUnit.Framework;
@@ -73,18 +74,18 @@ namespace Tests
         {
             var actionResult = _productStockController.Edit(1);
             var viewResult = actionResult as ViewResult;
-            var result = (ProductStock)viewResult.Model;
-            Assert.AreEqual(1, result.Id);
+            var result = (ProductStockVM)viewResult.Model;
+            Assert.AreEqual(1, result.ProductStock.Id);
         }
 
         [Test]
         public void Edit_Update_Db_New_Info_In_Object()
         {
-            var productInfos = _mockSetProductStock.Object.ToList();
-            var tempObj = productInfos[0];
-            tempObj.Amount = 2000;
-            _productStockController.Edit(tempObj);
-            Assert.AreEqual(2000, productInfos[0].Amount);
+            var productStockVm = new ProductStockVM();
+            productStockVm.ProductStock = _mockSetProductStock.Object.First();
+            productStockVm.ProductStock.Amount = 2000;
+            _productStockController.Edit(productStockVm);
+            Assert.AreEqual(2000, productStockVm.ProductStock.Amount);
         }
 
         [Test]

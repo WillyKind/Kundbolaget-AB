@@ -417,6 +417,7 @@
     <Compile Include="ViewModels\ManageProductInfosViewModel.cs" />
     <Compile Include="ViewModels\OrderDetailsViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\ProductStockVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">

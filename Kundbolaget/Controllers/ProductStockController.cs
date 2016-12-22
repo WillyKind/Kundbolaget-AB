@@ -4,14 +4,17 @@ using System.Web.UI.WebControls;
 using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.Interfaces;
 using Kundbolaget.Models.EntityModels;
+using Kundbolaget.ViewModels;
 
 namespace Kundbolaget.Controllers
 {
     public class ProductStockController : Controller
     {
-        private readonly IEntityRepository<ProductStock> _stockRepository;
+
+        private readonly DbProductStockRepository _stockRepository;
         private readonly DbProductInfoRepository _productInfoRepository;
-        private readonly IEntityRepository<Warehouse> _warehouseRepository;
+        private readonly DbWarehouseRepository _warehouseRepository;
+
 
         public ProductStockController()
         {
@@ -47,53 +50,34 @@ namespace Kundbolaget.Controllers
 
         public ActionResult Create()
         {
-            var productinfoSelectListItems = _productInfoRepository.GetEntities().Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.Name
-            }).ToList();
-
-            var warehouseSelectListItems = _warehouseRepository.GetEntities().Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.Name
-            }).ToList();
-
-            ViewBag.ProductInfoes = productinfoSelectListItems;
-            ViewBag.Warehouses = warehouseSelectListItems;
-            return View();
+            var model = new ProductStockVM();
+            model.ProductInfos = _productInfoRepository.GetEntities();
+            model.Warehouses = _warehouseRepository.GetEntities();
+            return View(model);
         }
 
         public ActionResult Edit(int id)
         {
+            var stockVm = new ProductStockVM();
 
-
-            var productinfoSelectListItems = _productInfoRepository.GetEntities().Select(x => new SelectListItem
+            stockVm.ProductInfos = _productInfoRepository.GetEntities();
+            stockVm.Warehouses = _warehouseRepository.GetEntities();
+            stockVm.ProductStock = _stockRepository.GetEntity(id);
+            if (stockVm.ProductStock == null)
             {
-                Value = x.Id.ToString(),
-                Text = x.Name
-            }).ToList();
-
-            var warehouseSelectListItems = _warehouseRepository.GetEntities().Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.Name
-            }).ToList();
-
-            ViewBag.ProductInfoes = productinfoSelectListItems;
-            ViewBag.Warehouses = warehouseSelectListItems;
-
-            return View(_stockRepository.GetEntity(id));
+                return HttpNotFound();
+            }
+            return View(stockVm);
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductStock model)
+        public ActionResult Edit(ProductStockVM model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            _stockRepository.UpdateEntity(model);
+            _stockRepository.UpdateEntity(model.ProductStock);
             return RedirectToAction("Index");
         }
 

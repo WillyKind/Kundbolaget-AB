@@ -1,4 +1,4 @@
-﻿@model Kundbolaget.Models.EntityModels.ProductStock
+﻿@model Kundbolaget.ViewModels.ProductStockVM
 
 @{
     ViewBag.Title = "Edit";
@@ -8,45 +8,42 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Ändra Produktlager</h4>
+    <div>
         <div>
-            @Html.ActionLink("Tillbaka", "Index", null, new { @class = "orange-text" })
+            
         </div>
-        <hr/>
         @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-        @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Amount, "Antal", htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Amount, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Amount, "", new {@class = "text-danger"})
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProductInfoId, "Produktartikel", htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ProductInfoId, (List<SelectListItem>) ViewBag.ProductInfoes)
-                @Html.ValidationMessageFor(model => model.ProductInfoId, "", new {@class = "text-danger"})
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.WarehouseId, "Lager", htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.WarehouseId, (List<SelectListItem>) ViewBag.Warehouses)
-                @Html.ValidationMessageFor(model => model.WarehouseId, "", new {@class = "text-danger"})
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Spara" class="btn btn-default"/>
-            </div>
+        @Html.HiddenFor(model => model.ProductStock.Id)
+        <div class="row">
+            <h4>Ändra produktlager</h4>
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        @Html.LabelFor(model => model.ProductStock.Amount, "Antal", htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.EditorFor(model => model.ProductStock.Amount, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.ProductStock.Amount, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="col s12">
+                        @Html.LabelFor(model => model.ProductStock.ProductInfoId, "Produktartikel", htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.DropDownListFor(model => model.ProductStock.ProductInfoId, new SelectList(Model.ProductInfos, "Id", "Name"), new {htmlAttributes = new {@class = "dropdown-content"}})
+                        @Html.ValidationMessageFor(model => model.ProductStock.ProductInfoId, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="col s12">
+                        @Html.LabelFor(model => model.ProductStock.WarehouseId, "Lager", htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.DropDownListFor(model => model.ProductStock.WarehouseId, new SelectList(Model.Warehouses, "Id", "Name"), new {htmlAttributes = new {@class = "dropdown-content"}})
+                        @Html.ValidationMessageFor(model => model.ProductStock.WarehouseId, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="submit" value="Spara" class="btn btn-default" />
+                        @Html.ActionLink("Tillbaka", "Index", null, new { @class = "orange-text" })
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+
+           
 }
 

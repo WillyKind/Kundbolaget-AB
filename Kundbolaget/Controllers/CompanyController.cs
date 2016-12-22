@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.Models.EntityModels;
 using Kundbolaget.ViewModels;
@@ -30,16 +31,12 @@ namespace Kundbolaget.Controllers
         }
 
         // GET: Company
-        public ActionResult Index()
-        {
-            return View(_companyRepository.GetEntities());
-        }
+        public ActionResult Index() => View(_companyRepository.GetEntities());
 
         public ActionResult Delete(int id)
         {
-            var model = _companyRepository.GetEntity(id);
-
-            return View(model);
+            var company = _companyRepository.GetEntity(id);
+            return company == null ? (ActionResult) HttpNotFound() : View(company);
         }
 
         [HttpPost]
@@ -56,9 +53,8 @@ namespace Kundbolaget.Controllers
 
         public ActionResult Edit(int id)
         {
-            var model = _companyRepository.GetEntity(id);
-            if (model == null)
-                return HttpNotFound();
+            var company = _companyRepository.GetEntity(id);
+            if (company == null) return HttpNotFound();
             var addresses = _addressRepository.GetEntities();
             var countries = _countryRepository.GetEntities();
             var contactPersons = _contactPersonRepository.GetEntities();
@@ -66,7 +62,7 @@ namespace Kundbolaget.Controllers
 
             var companyViewModel = new CompanyViewModel
             {
-                Company = model,
+                Company = company,
                 Addresses = addresses,
                 ParentCompanies = parentCompanies,
                 Countries = countries,
@@ -87,8 +83,8 @@ namespace Kundbolaget.Controllers
 
         public ActionResult Details(int id)
         {
-            var model = _companyRepository.GetEntity(id);
-            return View(model);
+            var company = _companyRepository.GetEntity(id);
+            return company == null ? (ActionResult) HttpNotFound() : View(company);
         }
 
         public ActionResult Create()

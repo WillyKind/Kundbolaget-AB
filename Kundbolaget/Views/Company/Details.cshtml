@@ -40,11 +40,49 @@
                         @(Model.ParentCompanyId == null ? Html.DisplayName("Inget") : Html.DisplayName(Model.ParentCompany.Name))
                     </li>
                 </ul>
-
                 <div class="card-action">
                     @Html.ActionLink("Företagsöversikt", "Index")
                 </div>
             </div>
         </div>
+
+        @* Visa alla dotterbolag ifall företaget är ett moderbolag *@
+
     </div>
+
+    @if (Model.SubCompanies.Any())
+    {
+        <div class="col m6">
+            <h5>
+                Dotterbolag
+            </h5>
+            <table >
+                <tr>
+                    <th>Detaljer</th>
+                    <th>Namn</th>
+                    <th>Mail</th>
+                    <th>Telefon</th>
+                </tr>
+                @foreach (var subCompany in Model.SubCompanies)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Details", new {id = subCompany.Id})" class="btn btn-floating small waves-effect waves-light">
+                                <i class="material-icons">link</i>
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => subCompany.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => subCompany.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => subCompany.PhoneNumber)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
 </div>

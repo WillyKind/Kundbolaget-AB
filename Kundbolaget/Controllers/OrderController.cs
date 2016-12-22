@@ -35,7 +35,7 @@ namespace Kundbolaget.Controllers
         public ActionResult Company(int id)
         {
             var model = new OrderViewModel();
-            model.Orders = _orders.GetCompanyOrders(id);
+            model.Orders = _orders.GetOrderHistoryForCompany(id);
             model.ParentCompanyId = id;
             return View(model);
         }
@@ -60,27 +60,13 @@ namespace Kundbolaget.Controllers
             return View("Create", model);
         }
 
-        public ActionResult Delete(int id)
-        {
-            var model = _orders.GetEntity(id);
-            if (model == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View("Delete", model);
-        }
-
         [HttpPost]
-        public ActionResult Delete(ProductInfo model, int id)
+        public string Delete(int id)
         {
-            if (model.Id != id)
-            {
-                ModelState.AddModelError("Name", "Bad Request");
-                return View(model);
-            }
-            _orders.DeleteEntity(id);
-            return RedirectToAction("Index");
+            var entity = _orders.GetEntity(id);
+            entity.IsRemoved = true;
+            _orders.UpdateEntity(entity);
+            return "Success";
         }
 
         public ActionResult GetAllUnpickedOrders()
@@ -134,12 +120,6 @@ namespace Kundbolaget.Controllers
             order.OrderDelivered = DateTime.Now;
             _orders.UpdateOrder(order);
             return "Success " + id;
-        }
-
-        public ActionResult GetOrderHistory()
-        {
-            var model = _orders.GetOrderHistory();
-            return View(model);
         }
     }
 }

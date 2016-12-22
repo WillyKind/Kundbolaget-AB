@@ -21,5 +21,10 @@ namespace Kundbolaget.Controllers
         {
             return View("CustomerSite");
         }
+
+        public ActionResult Delivery()
+        {
+            return View();
+        }
     }
 }

@@ -464,12 +464,11 @@
     <Content Include="Views\Order\OrderDetails.cshtml" />
     <Content Include="Views\Order\GetPickedOrders.cshtml" />
     <Content Include="Views\Order\GetShippedOrders.cshtml" />
-    <Content Include="Views\Order\GetOrderHistory.cshtml" />
     <Content Include="Views\Order\Create.cshtml" />
     <Content Include="Views\OrderDetails\Edit.cshtml" />
     <Content Include="Views\OrderDetails\Delete.cshtml" />
     <Content Include="Views\OrderDetails\Create.cshtml" />
-    <Content Include="Views\Order\Delete.cshtml" />
+    <Content Include="Views\Home\Delivery.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

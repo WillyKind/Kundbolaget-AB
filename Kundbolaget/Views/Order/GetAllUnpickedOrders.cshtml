@@ -2,7 +2,7 @@
 @using Kundbolaget.Models.EntityModels
 @model IEnumerable<Kundbolaget.Models.EntityModels.Order>
 <h2>Oplockade ordrar</h2>
-@Html.ActionLink("Tillbaka", "Index", "Home", null, new {@class="orange-text"})
+@Html.ActionLink("Tillbaka", "Delivery", "Home", null, new {@class="orange-text"})
 <hr/>
 <table class="highlight">
     <tr>
@@ -29,6 +29,9 @@
         </th>
         <th>
             Plocklista
+        </th>
+        <th>
+            Ta bort
         </th>
     </tr>
 
@@ -58,6 +61,9 @@
             </td>
             <td>
                 <a href="@Url.Action("OrderDetails", "Order", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">info_outline</i></a>
+            </td>
+            <td>
+                <a onclick="OrderController(@item.Id,'Delete')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">delete</i></a>                                
             </td>
         </tr>
 

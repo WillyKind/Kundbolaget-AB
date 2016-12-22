@@ -149,5 +149,14 @@ namespace Kundbolaget.EntityFramework.Repositories
                                        o.OrderPicked != null &&
                                        o.OrderDelivered != null).ToArray();
         }
+
+        public Order[] GetOrderHistoryForCompany(int id)
+        {
+            return db.Orders.Where(o => o.Company.ParentCompany.Id==id &&
+                                       !o.IsRemoved &&
+                                       o.OrderTransported != null &&
+                                       o.OrderPicked != null &&
+                                       o.OrderDelivered != null).ToArray();
+        }
     }
 }

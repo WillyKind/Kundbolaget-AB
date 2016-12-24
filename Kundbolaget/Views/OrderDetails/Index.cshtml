@@ -51,16 +51,26 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
-                <a onclick="OrderDetailsController(@item.Id, 'SaveOrderDetail')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">check</i></a>
+                <a onclick="OrderDetailsController(@item.Id, 'SaveOrderDetail'), closeEditModal(@item.Order.Id)" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">check</i></a>
                 <a href="@Url.Action("Delete", new { id = item.Id, orderId = Model.OrderId })"class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">clear</i></a>
             </td>
-
         </tr>
     }
-</table>
-<div>
-    @Html.ActionLink("Skapa +", "Create", "OrderDetails", new { id = Model.OrderId }, new { @class = "waves-effect waves-light btn" })
-</div>  
 
+</table>
+        @Html.ActionLink("Skapa +", "Create", "OrderDetails", new { id = Model.OrderId }, new { @class = "waves-effect waves-light btn" })
+<div class="row">
+    @Html.Action("Create", "OrderDetails", new { id = Model.OrderId })
+</div>
 <script src="~/Scripts/CallOrderDetailsController.js"></script>
 <script src="~/Scripts/PreviousPage.js"></script>
+
+<script>
+    var closeEditModal = id => $("#modal" + id).closeModal({
+        complete: function() {
+            location.reload(true)
+            }
+    })
+    var openRemovalModal = id => $("#modal" + id).openModal()
+
+</script>

@@ -81,7 +81,7 @@
                     <div class="modal-content">
                         <h4>Ta bort @item.Name</h4>
                         <button onclick="deleteCompany(@item.Id)" class="btn">Ja</button>
-                        <button onclick="closeRemovalModal(@item.Id)" class="btn">Nej</button>
+                        <button onclick="closeEditModal(@item.Id)" class="btn">Nej</button>
                     </div>
                 </div>
             </td>
@@ -93,14 +93,14 @@
 
     var openRemovalModal = id => $("#modal" + id).openModal()
 
-    var closeRemovalModal = id => $("#modal" + id).closeModal()
+    var closeEditModal = id => $("#modal" + id).closeModal()
 
     var deleteCompany = function(id) {
         $.ajax({
             url: "/Company/DeleteEntity/" + id,
             method: "POST",
             success: function() {
-                closeRemovalModal(id)
+                closeEditModal(id)
                 $("#companyTableRow" + id).hide("slow",
                     () => {
                         location.reload(true)

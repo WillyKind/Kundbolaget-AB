@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.Models.EntityModels;
 using Kundbolaget.ViewModels;
+using Newtonsoft.Json;
 
 namespace Kundbolaget.Controllers
 {
@@ -50,22 +51,37 @@ namespace Kundbolaget.Controllers
             return View(model);
         }
 
+
+        //[HttpPost]
+        //public ActionResult Create(OrderDetailsViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //       return View(model);
+        //    var product = _products.GetEntity(model.OrderDetails.ProductInfoId);
+        //    model.OrderDetails.UnitPrice = product.Price;
+        //    model.OrderDetails.TotalPrice = model.OrderDetails.Amount * model.OrderDetails.UnitPrice;
+        //    var updatedOrder = _orders.GetEntity(model.OrderDetails.OrderId);
+        //    updatedOrder.Price += (int)model.OrderDetails.TotalPrice;
+
+        //    _orders.UpdateEntity(updatedOrder);
+        //    _orderDetails.CreateEntity(model.OrderDetails);
+        //    return RedirectToAction("Create","OrderDetails",new {id=updatedOrder.Id});
+        //}
+
         [HttpPost]
-        public ActionResult Create(OrderDetailsViewModel model)
-        {
-            if (!ModelState.IsValid)
-                return View(model);
-            var product = _products.GetEntity(model.OrderDetails.ProductInfoId);
-            model.OrderDetails.UnitPrice = product.Price;
-            model.OrderDetails.TotalPrice = model.OrderDetails.Amount*model.OrderDetails.UnitPrice;
-            var updatedOrder = _orders.GetEntity(model.OrderDetails.OrderId);
-            updatedOrder.Price +=(int) model.OrderDetails.TotalPrice;
+        public void Create(string json) {
+            var model = JsonConvert.DeserializeObject<OrderDetails>(json);
+            
+            var product = _products.GetEntity(model.ProductInfoId);
+            model.UnitPrice = product.Price;
+            model.TotalPrice = model.Amount * model.UnitPrice;
+            var updatedOrder = _orders.GetEntity(model.OrderId);
+            updatedOrder.Price += (int)model.TotalPrice;
 
             _orders.UpdateEntity(updatedOrder);
-            _orderDetails.CreateEntity(model.OrderDetails);
-            return RedirectToAction("Create","OrderDetails",new {id=updatedOrder.Id});
+            _orderDetails.CreateEntity(model);
+            RedirectToAction("Create", "OrderDetails", new { id = updatedOrder.Id });
         }
-
 
         public ActionResult Edit(int id, int orderId)
         {

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.Models.EntityModels;
 using Kundbolaget.ViewModels;
+using Kundbolaget.PDFGenerator;
 
 namespace Kundbolaget.Controllers
 {
@@ -124,5 +125,26 @@ namespace Kundbolaget.Controllers
             _orders.UpdateOrder(order);
             return "Success " + id;
         }
+
+        public ActionResult GetOrderHistory()
+        {
+            var model = _orders.GetOrderHistory();
+            return View(model);
+        }
+
+        public ActionResult OrderDetailsHistory(int id)
+        {
+            var model = _orders.GetOrderDetails(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public string ExportPdf(int id)
+        {
+            PdfGenerator pdfGenerator = new PdfGenerator();
+            pdfGenerator.ExportToPdf(id);
+            return "Success " + id;
+        }
+
     }
 }

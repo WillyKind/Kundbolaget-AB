@@ -57,71 +57,15 @@
                 <a onclick="OrderController(@item.Id,'OrderPicked')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">check</i></a>
             </td>
             <td>
-                <a href="@Url.Action("Index","OrderDetails", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">update</i></a>
+                @*<a href="@Url.Action("Index","OrderDetails", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">update</i></a>*@
 
                 <a onclick="openEditModal(@item.Id)" href="#" class="btn btn-floating small waves-effect waves-light">
-                    <i class="material-icons">clear</i>
+                    <i class="material-icons">update</i>
                 </a>
                 <div id="@("modal" + item.Id)" class="modal">
                     <div class="modal-content">
-                        <h4>Orderdetaljer</h4>
-                        <hr />
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    Produkt
-                                </th>
-                                <th>
-                                    Behållare
-                                </th>
-                                <th>
-                                    Volym
-                                </th>
-                                <th>
-                                    Mängd
-                                </th>
-                                <th>
-                                    Pris per kolli
-                                </th>
-                                <th>
-                                    Pris total
-                                </th>
-                            </tr>
-
-                            @foreach (var orderDetails in item.OrderDetails)
-                            {
-                                <tr class="row">
-                                    <td>
-                                        @Html.DisplayFor(modelItem => orderDetails.ProductInfo.Name)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => orderDetails.ProductInfo.Container.Name)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => orderDetails.ProductInfo.Volume.Milliliter)
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(model => orderDetails.Amount, new { htmlAttributes = new { Value = orderDetails.Amount, id = "amount" + orderDetails.Id } })
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => orderDetails.UnitPrice)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => orderDetails.TotalPrice)
-                                    </td>
-                                    <td>
-                                        <a onclick="OrderDetailsController(@orderDetails.Id, 'SaveOrderDetail')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">check</i></a>
-                                        <a href="@Url.Action("Delete", new { id = orderDetails.Id, orderId = orderDetails.OrderId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">clear</i></a>
-                                    </td>
-
-                                </tr>
-                            }
-                        </table>
-                        <div>
-                            @Html.ActionLink("Skapa +", "Create", "OrderDetails", new { id = item.Id }, new { @class = "waves-effect waves-light btn" })
-                        </div>  
-
-                    </div>
+                        @Html.Action("Index","OrderDetails",new {id=item.Id, companyId=item.CompanyId})
+                      </div>
                 </div>
             </td>
             <td>
@@ -137,27 +81,9 @@
 <script src="~/Scripts/CallOrderDetailsController.js"></script>
 
 <script>
-
-    var openEditModal = id => $("#modal" + id).openModal()
-
-    var closeEditModal = id => $("#modal" + id).hidden()
-
-    $("#modal" + id).on('hidden.bs.modal', function () {
-        window.alert('hidden event fired!');
-    });
-
-
-    var editOrder = function(id) {
-        $.ajax({
-            url: "/Order/OrderDetails/" + id,
-            method: "POST",
-            success: function() {
-                closeEditModal(id)
-                $("#companyTableRow" + id).hide("slow",
-                    () => {
-                        location.reload(true)
-                    })
-            }
-        })
-    }
+    var openEditModal = id => $("#modal" + id).openModal({
+        complete: function() {
+            location.reload(true)
+        }
+    })
 </script>

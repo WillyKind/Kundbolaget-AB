@@ -36,7 +36,7 @@ namespace Kundbolaget.PDFGenerator
                         };
 
             Document doc = new Document();
-            string path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\_Följesedel_o{id}_c{company.FirstOrDefault().Name}.pdf";
+            string path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\_Följesedel_o{id}_c{company.FirstOrDefault().Name}{DateTime.Now.ToShortDateString()}.pdf";
             FileStream fS = File.Create(path);
             PdfWriter.GetInstance(doc, fS);
             //Document doc = new Document();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -43,8 +44,13 @@ namespace Kundbolaget.Models.EntityModels
 
         [Required]
         public bool IsRemoved { get; set; }
+
         [Required]
         public int Price { get; set; }
+
+        public int? NewPrice { get; set; }
+
+        public DateTime? PriceStart { get; set; }
 
         public virtual ICollection<ProductStock> ProductStocks { get; set; }
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }

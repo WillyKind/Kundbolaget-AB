@@ -9,7 +9,7 @@ using Kundbolaget.Models.EntityModels;
 
 namespace Kundbolaget.EntityFramework.Repositories
 {
-    public class DbProductInfoRepository 
+    public class DbProductInfoRepository
     {
         private readonly StoreContext db;
 
@@ -25,21 +25,36 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public ProductInfo[] GetEntities()
         {
-            return db.ProductsInfoes.Where(x => x.IsRemoved == false).ToArray();
+            return db.ProductsInfoes
+                .Where(x => x.IsRemoved == false)
+                .ToArray()
+                .Select(UpdatePrice)
+                .ToArray();
         }
 
         public ProductInfo GetEntity(int id)
         {
-            return db.ProductsInfoes
+            return UpdatePrice(db.ProductsInfoes
                 .Include(p => p.ProductGroup)
                 .Include(p => p.Container)
-                .SingleOrDefault(p => p.Id == id);
+                .SingleOrDefault(p => p.Id == id));
         }
 
         public void CreateEntity(ProductInfo newEntity)
         {
             db.ProductsInfoes.Add(newEntity);
             db.SaveChanges();
+        }
+
+        public ProductInfo UpdatePrice(ProductInfo product)
+        {
+            if (!product.NewPrice.HasValue || !product.PriceStart.HasValue || !(product.PriceStart <= DateTime.Now))
+                return product;
+            product.Price = product.NewPrice.Value;
+            product.NewPrice = null;
+            product.PriceStart = null;
+            UpdateEntity(product);
+            return product;
         }
 
         public void DeleteEntity(int id)
@@ -58,11 +73,6 @@ namespace Kundbolaget.EntityFramework.Repositories
             var entry = db.Entry(updatedEntity);
             entry.State = EntityState.Modified;
             db.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            db.Dispose();
         }
     }
 }

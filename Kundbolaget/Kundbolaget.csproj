@@ -397,6 +397,10 @@
     <Compile Include="Migrations\201612191014006_AddsNullableDateTimeStampsToOrder.Designer.cs">
       <DependentUpon>201612191014006_AddsNullableDateTimeStampsToOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701031222366_AddPropertyNewPriceAndPriceStart.cs" />
+    <Compile Include="Migrations\201701031222366_AddPropertyNewPriceAndPriceStart.Designer.cs">
+      <DependentUpon>201701031222366_AddPropertyNewPriceAndPriceStart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -597,6 +601,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612191014006_AddsNullableDateTimeStampsToOrder.resx">
       <DependentUpon>201612191014006_AddsNullableDateTimeStampsToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701031222366_AddPropertyNewPriceAndPriceStart.resx">
+      <DependentUpon>201701031222366_AddPropertyNewPriceAndPriceStart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -31,6 +31,9 @@
             Plocklista
         </th>
         <th>
+            Skapa Pdf
+        </th>
+        <th>
             Ta bort
         </th>
     </tr>
@@ -60,7 +63,10 @@
                 <a href="@Url.Action("Index","OrderDetails", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">update</i></a>
             </td>
             <td>
-                <a href="@Url.Action("OrderDetails", "Order", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">info_outline</i></a>
+                <a href="@Url.Action("OrderDetails", "Order", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">info_outline</i></a>
+            </td>
+            <td>
+                <a onclick="CreatePdf(@item.Id,'ExportPdf')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">store</i></a>
             </td>
             <td>
                 <a onclick="OrderController(@item.Id,'Delete')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">delete</i></a>                                

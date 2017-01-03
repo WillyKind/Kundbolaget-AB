@@ -124,5 +124,13 @@ namespace Kundbolaget.Controllers
             _orders.UpdateOrder(order);
             return "Success " + id;
         }
+
+        [HttpPost]
+        public string ExportPdf(int id)
+        {
+            PdfGenerator.PdfGenerator pdfGenerator = new PdfGenerator.PdfGenerator();
+            pdfGenerator.ExportToPdf(id);
+            return "Success " + id;
+        }
     }
 }

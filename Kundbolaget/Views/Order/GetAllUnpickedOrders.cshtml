@@ -91,18 +91,18 @@
 
 <script>
     function OrderComment(method, id) {
-
-        var comment = $("#textArea"+id).val();
+        var comment = $("#textArea" + id).val();
         console.log(comment);
         $.ajax({
-            url: "/Order/" + method + "/"+id,
+            url: "/Order/" + method + "/" + id,
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify({comment}),
-            dataType : 'json'
+            data: JSON.stringify({ comment }),
+            dataType: 'json'
         });
     }
 </script>
+
 
 
 

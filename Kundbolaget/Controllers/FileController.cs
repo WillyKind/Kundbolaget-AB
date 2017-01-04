@@ -59,21 +59,28 @@ namespace Kundbolaget.Controllers
             var entity = JsonConvert.DeserializeObject<OrderFile>(json);
             var companyExists = _companies.ValidateCompanyId(int.Parse(entity.companyId));
             var orderExists = _orders.ValidateCompanyOrderId(entity.customerOrderFileId, int.Parse(entity.companyId));
-            var subCompaniesExist = true;
-            var childCompanies = _companies.GetChildCompanies(int.Parse(entity.companyId));
 
-            foreach (var subOrder in entity.orders) {
-                if (childCompanies.Any(cc=>cc.Id != int.Parse(subOrder.deliverTo))) {
-                    subCompaniesExist = false;
-                    break;
+            //check if companies in orderfile exist as childcompanies to parent company that placed order
+            var subCompaniesExist = true;
+            if (companyExists && !orderExists) {
+                var childCompanies = _companies.GetChildCompanies(int.Parse(entity.companyId));
+                foreach (var subOrder in entity.orders)
+                {
+                    if (childCompanies.Any(cc => cc.Id != int.Parse(subOrder.deliverTo)))
+                    {
+                        subCompaniesExist = false;
+                        break;
+                    }
                 }
             }
+            
            
             if (companyExists && !orderExists && subCompaniesExist)
             {
                 _orders.CreateOrder(entity);
             }
             else {
+
                 return View(model);
             }
 

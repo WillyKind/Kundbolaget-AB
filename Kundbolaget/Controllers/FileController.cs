@@ -48,7 +48,8 @@ namespace Kundbolaget.Controllers
                 data = ms.ToArray();
             }
 
-            string jsonSchema = @"{'$schema':'http://json-schema.org/draft-04/schema#','type':'object','properties':{'companyId':{'type':'string'},'customerOrderFileId':{'type':'integer'},'orders':{'type':'array','items':{'type':'object','properties':{'deliverTo':{'type':'string'},'deliverDate':{'type':'string'},'orderedProducts':{'type':'array','items':{'type':'object','properties':{'productId':{'type':'integer'},'amount':{'type':'integer'}},'required':['productId','amount']}}},'required':['deliverTo','deliverDate','orderedProducts']}}},'required':['companyId','customerOrderFileId','orders']}";
+            string jsonSchema =
+                @"{'$schema':'http://json-schema.org/draft-04/schema#','type':'object','properties':{'companyId':{'type':'string'},'customerOrderFileId':{'type':'integer'},'orders':{'type':'array','items':{'type':'object','properties':{'deliverTo':{'type':'string'},'deliverDate':{'type':'string'},'orderedProducts':{'type':'array','items':{'type':'object','properties':{'productId':{'type':'integer'},'amount':{'type':'integer'}},'required':['productId','amount']}}},'required':['deliverTo','deliverDate','orderedProducts']}}},'required':['companyId','customerOrderFileId','orders']}";
             var schema = JSchema.Parse(jsonSchema);
             var json = Encoding.Default.GetString(data);
             var jObj = JObject.Parse(json);
@@ -58,49 +59,34 @@ namespace Kundbolaget.Controllers
             }
 
             var entity = JsonConvert.DeserializeObject<OrderFile>(json);
-            var companyExists = _companies.ValidateCompanyId(int.Parse(entity.companyId));
-            var orderExists = _orders.ValidateCompanyOrderId(entity.customerOrderFileId, int.Parse(entity.companyId));
-
-            //check if companies in orderfile exist as childcompanies to parent company that placed order
-            var subCompaniesExist = true;
-            if (companyExists && !orderExists) {
-                var childCompanies = _companies.GetChildCompanies(int.Parse(entity.companyId));
-                foreach (var subOrder in entity.orders)
-                {
-                    if (childCompanies.Any(cc => cc.Id != int.Parse(subOrder.deliverTo)))
-                    {
-                        subCompaniesExist = false;
-                        break;
-                    }
-                }
-            }
-
-            //Very bad validation of product ID. 
-            var productsExists = true;
-            if (companyExists && !orderExists && subCompaniesExist) {
-                var products = _products.GetEntities();
-                foreach (var subOrder in entity.orders)
-                {
-                    foreach (var product in subOrder.orderedProducts)
-                    {
-                        if (products.Any(p => p.Id != product.productId))
-                        {
-                            productsExists = false;
-                            break;
-                        }
-                    }
-                }
-            }
-            
-           
-            if (companyExists && !orderExists && subCompaniesExist && productsExists)
+            //check if company that places order is a company in database
+            var company = _companies.ValidateCompanyId(int.Parse(entity.companyId));
+            if (company == null)
             {
-                _orders.CreateOrder(entity);
+                return Content("Företaget finns ej");
             }
-            else {
-
-                return View(model);
+            //check if order has been registered in database before
+            var orderExists = _orders.ValidateCompanyOrderId(entity.customerOrderFileId, int.Parse(entity.companyId));
+            if (orderExists)
+            {
+                return Content("Redan inläst order");
             }
+            //check if companies in orderfile exist as childcompanies to parent company that placed order
+            var subCompaniesExist =
+                entity.orders.All(subOrder => company.SubCompanies.Any(cc => cc.Id == int.Parse(subOrder.deliverTo)));
+            if (!subCompaniesExist)
+            {
+                return Content("Underföretag finns ej");
+            }
+            //check if ordered product exists in database
+            var products = _products.GetEntities().ToDictionary(p => p.Id);
+            var productsExists =
+                entity.orders.All(so => so.orderedProducts.All(product => products.ContainsKey(product.productId)));
+            if (!productsExists)
+            {
+                return Content("Fel i produkter");
+            }
+            _orders.CreateOrder(entity);
 
             return RedirectToAction("Index", "Home");
         }

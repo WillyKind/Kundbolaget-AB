@@ -24,10 +24,10 @@ namespace Kundbolaget.EntityFramework.Repositories
             _db = new StoreContext();
         }
 
-        public bool ValidateCompanyId(int id)
+        public Company ValidateCompanyId(int id)
         {
-            var companyExists = _db.Companies.Any(c => c.Id == id && !c.IsRemoved);
-            return companyExists;
+            var company = _db.Companies.FirstOrDefault(c => c.Id == id && !c.IsRemoved);
+            return company;
         }
 
         public Company[] GetChildCompanies(int id)

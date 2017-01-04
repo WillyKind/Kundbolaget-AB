@@ -18,7 +18,7 @@ namespace Kundbolaget.Controllers
 {
     public class FileController : Controller
     {
-        private DbOrderRepository _orders = new DbOrderRepository();
+        private DbOrderRepository _orders;
         private DbCompanyRepository _companies = new DbCompanyRepository();
         // GET: File
         public ActionResult Index()
@@ -34,7 +34,7 @@ namespace Kundbolaget.Controllers
         [HttpPost]
         public ActionResult UploadJson(FileUploadVM model)
         {
-
+            //check if file ends with ".json"
             if (model.File == null ||
                 model.File.FileName.Substring(Math.Max(0, model.File.FileName.Length - 4)) != "json")
                 return View(model);
@@ -60,10 +60,21 @@ namespace Kundbolaget.Controllers
             _orders = new DbOrderRepository();
             var companyExists = _companies.ValidateCompanyId(int.Parse(entity.companyId));
             var orderExists = _orders.ValidateCompanyOrderId(entity.customerOrderFileId, int.Parse(entity.companyId));
+            var subCompaniesExist = true;
 
-            if (companyExists && !orderExists)
+            foreach (var subOrder in entity.orders) {
+                if (!_companies.ValidateCompanyId(int.Parse(subOrder.deliverTo))) {
+                    subCompaniesExist = false;
+                    break;
+                }
+            }
+           
+            if (companyExists && !orderExists && subCompaniesExist)
             {
                 _orders.CreateOrder(entity);
+            }
+            else {
+                return View(model);
             }
 
             return RedirectToAction("Index", "Home");

@@ -20,6 +20,7 @@ namespace Kundbolaget.Controllers
     {
         private DbOrderRepository _orders = new DbOrderRepository();
         private DbCompanyRepository _companies = new DbCompanyRepository();
+        private DbProductInfoRepository _products = new DbProductInfoRepository();
         // GET: File
         public ActionResult Index()
         {
@@ -73,9 +74,26 @@ namespace Kundbolaget.Controllers
                     }
                 }
             }
+
+            //Very bad validation of product ID. 
+            var productsExists = true;
+            if (companyExists && !orderExists && subCompaniesExist) {
+                var products = _products.GetEntities();
+                foreach (var subOrder in entity.orders)
+                {
+                    foreach (var product in subOrder.orderedProducts)
+                    {
+                        if (products.Any(p => p.Id != product.productId))
+                        {
+                            productsExists = false;
+                            break;
+                        }
+                    }
+                }
+            }
             
            
-            if (companyExists && !orderExists && subCompaniesExist)
+            if (companyExists && !orderExists && subCompaniesExist && productsExists)
             {
                 _orders.CreateOrder(entity);
             }

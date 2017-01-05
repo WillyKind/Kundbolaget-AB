@@ -225,7 +225,9 @@ namespace Kundbolaget.Migrations
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     PurchasePrice = 5.3,
                     TradingMargin = 10,
-                    Price = 250
+                    Price = 250,
+                    NewPrice = 1337,
+                    PriceStart = DateTime.Now.AddMinutes(1)
                 },
                 new ProductInfo
                 {

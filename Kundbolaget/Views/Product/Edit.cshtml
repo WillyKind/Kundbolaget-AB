@@ -4,87 +4,124 @@
     ViewBag.Title = "Ändra";
 }
 
-@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { @class = "col s12" }))
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new {@class = "col s12"}))
 {
     @Html.AntiForgeryToken()
-<div>
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.ProductInfo.Id)
-    <div class="row">
-        <h4>Produktinformation</h4>
-        <form class="col s12">
-            <div class="row">
-                <div class="col s12">
-                    @Html.LabelFor(model => model.ProductInfo.ContainerId, "Behållare", htmlAttributes: new {@class = "control-label col-md-2"})
-                    @Html.DropDownListFor(model => model.ProductInfo.ContainerId, new SelectList(Model.Containers, "Id", "Name"), new {htmlAttributes = new {@class = "dropdown-content"}})
-                    @Html.ValidationMessageFor(model => model.Containers, "", new {@class = "text-danger"})
+    <div>
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        @Html.HiddenFor(model => model.ProductInfo.Id)
+        <div class="row">
+            <h4>Produktinformation</h4>
+            <form class="col s12">
+                <div class="row">
+                    <div class="col s12">
+                        @Html.LabelFor(model => model.ProductInfo.ContainerId, "Behållare")
+                        @Html.DropDownListFor(model => model.ProductInfo.ContainerId, new SelectList(Model.Containers, "Id", "Name"), new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "dropdown-content"
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.Containers)
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    @Html.LabelFor(model => model.ProductInfo.VolumeId, "Volume", htmlAttributes: new {@class = "control-label col-md-2"})
-                    @Html.DropDownListFor(model => model.ProductInfo.VolumeId, new SelectList(Model.Volumes, "Id", "Milliliter"), new {htmlAttributes = new {@class = "dropdown-content"}})
-                    @Html.ValidationMessageFor(model => model.Volumes, "", new {@class = "text-danger"})
+                <div class="row">
+                    <div class="col s12">
+                        @Html.LabelFor(model => model.ProductInfo.VolumeId, "Volume")
+                        @Html.DropDownListFor(model => model.ProductInfo.VolumeId, new SelectList(Model.Volumes, "Id", "Milliliter"), new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "dropdown-content"
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.Volumes)
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    @Html.LabelFor(model => model.ProductInfo.ProductGroupId, "Produktgrupp", htmlAttributes: new {@class = "control-label col-md-2"})
-                    @Html.DropDownListFor(model => model.ProductInfo.ProductGroupId, new SelectList(Model.ProductGroups, "Id", "Name"), new {htmlAttributes = new {@class = "dropdown-content"}})
-                    @Html.ValidationMessageFor(model => model.ProductGroups, "", new {@class = "text-danger"})
+                <div class="row">
+                    <div class="col s12">
+                        @Html.LabelFor(model => model.ProductInfo.ProductGroupId, "Produktgrupp")
+                        @Html.DropDownListFor(model => model.ProductInfo.ProductGroupId, new SelectList(Model.ProductGroups, "Id", "Name"), new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "dropdown-content"
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.ProductGroups)
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    @Html.LabelFor(model => model.ProductInfo.Name, "Produktnamn", htmlAttributes: new {@class = "control-label col-md-2"})
-                    @Html.EditorFor(model => model.ProductInfo.Name, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.ProductInfo.Name, "", new {@class = "text-danger"})
+                <div class="row">
+                    <div class="input-field col s12">
+                        @Html.LabelFor(model => model.ProductInfo.Name, "Produktnamn")
+                        @Html.EditorFor(model => model.ProductInfo.Name)
+                        @Html.ValidationMessageFor(model => model.ProductInfo.Name)
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    @Html.LabelFor(model => model.ProductInfo.Description, "Beskrivning", htmlAttributes: new {@class = "control-label col-md-2"})
-                    @Html.EditorFor(model => model.ProductInfo.Description, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.ProductInfo.Description, "", new {@class = "text-danger"})
+                <div class="row">
+                    <div class="input-field col s12">
+                        @Html.LabelFor(model => model.ProductInfo.Description, "Beskrivning")
+                        @Html.EditorFor(model => model.ProductInfo.Description)
+                        @Html.ValidationMessageFor(model => model.ProductInfo.Description)
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    @Html.LabelFor(model => model.ProductInfo.Abv, "Alkoholhalt", htmlAttributes: new {@class = "control-label col-md-2"})
-                    @Html.EditorFor(model => model.ProductInfo.Abv, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.ProductInfo.Abv, "", new {@class = "text-danger"})
+                <div class="row">
+                    <div class="input-field col s12">
+                        @Html.LabelFor(model => model.ProductInfo.Abv, "Alkoholhalt")
+                        @Html.EditorFor(model => model.ProductInfo.Abv)
+                        @Html.ValidationMessageFor(model => model.ProductInfo.Abv)
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    @Html.LabelFor(model => model.ProductInfo.TradingMargin, "TG", htmlAttributes: new {@class = "control-label col-md-2"})
-                    @Html.EditorFor(model => model.ProductInfo.TradingMargin, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.ProductInfo.TradingMargin, "", new {@class = "text-danger"})
+                <div class="row">
+                    <div class="input-field col s12">
+                        @Html.LabelFor(model => model.ProductInfo.TradingMargin, "TG")
+                        @Html.EditorFor(model => model.ProductInfo.TradingMargin)
+                        @Html.ValidationMessageFor(model => model.ProductInfo.TradingMargin)
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    @Html.LabelFor(model => model.ProductInfo.PurchasePrice, "Inköpspris", htmlAttributes: new {@class = "control-label col-md-2"})
-                    @Html.EditorFor(model => model.ProductInfo.PurchasePrice, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.ProductInfo.PurchasePrice, "", new {@class = "text-danger"})
+                <div class="row">
+                    <div class="input-field col s12">
+                        @Html.LabelFor(model => model.ProductInfo.PurchasePrice, "Inköpspris")
+                        @Html.EditorFor(model => model.ProductInfo.PurchasePrice)
+                        @Html.ValidationMessageFor(model => model.ProductInfo.PurchasePrice)
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    @Html.LabelFor(model => model.ProductInfo.Price, "Utpris", htmlAttributes: new {@class = "control-label col-md-2"})
-                    @Html.EditorFor(model => model.ProductInfo.Price, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.ProductInfo.Price, "", new {@class = "text-danger"})
+                <div class="row">
+                    <div class="input-field col s12">
+                        @Html.LabelFor(model => model.ProductInfo.Price, "Utpris")
+                        @Html.EditorFor(model => model.ProductInfo.Price)
+                        @Html.ValidationMessageFor(model => model.ProductInfo.Price)
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input type="submit" value="Spara" class="btn btn-default"/> |
-                    @Html.ActionLink("Tillbaka", "Index", null, new { @class = "orange-text" })
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        @Html.LabelFor(model => model.ProductInfo.NewPrice, "Pris för kommande datum")
+                        @Html.EditorFor(model => model.ProductInfo.NewPrice)
+                        @Html.ValidationMessageFor(model => model.ProductInfo.NewPrice)
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">date_range</i>
+                        @Html.EditorFor(model => model.ProductInfo.PriceStart, new
+                        {
+                            HtmlAttributes = new
+                            {
+                                @class = "datepicker",
+                                Value = Model.ProductInfo.PriceStart?.ToString("yyyy/MM/dd")
+                            }
+                        })
+                    </div>
                 </div>
-            </div>
-        </form>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="submit" value="Spara" class="btn"/> |
+                        @Html.ActionLink("Tillbaka", "Index", null, new {@class = "orange-text"})
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 }
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>

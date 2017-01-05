@@ -10,6 +10,8 @@ using Kundbolaget.EntityFramework.Context;
 using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.JsonEntityModels;
 using Kundbolaget.Models;
+using Kundbolaget.Models.EntityModels;
+using Kundbolaget.OrderUtility;
 using Kundbolaget.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -105,7 +107,8 @@ namespace Kundbolaget.Controllers
             }
             var orders = _orders.CreateOrder(entity);
 
-            AllocateProductsToOrder(orders);
+            //Allocates productsStockAmount to OrderDetailsAmount
+            ProductAllocater.ProductsToOrder(orders);
 
             foreach (var order1 in orders)
             {
@@ -115,26 +118,7 @@ namespace Kundbolaget.Controllers
             return View("OrderFileSuccess", model);
         }
 
-        private static void AllocateProductsToOrder(List<Models.EntityModels.Order> orders)
-        {
-            var orderDetails = orders.SelectMany(x => x.OrderDetails);
-            foreach (var detail in orderDetails)
-            {
-                foreach (var stock in detail.ProductInfo.ProductStocks)
-                {
-                    if (stock.Amount >= detail.Amount)
-                    {
-                        detail.ReservedAmount = detail.Amount;
-                        stock.Amount -= detail.Amount;
-                    }
-                    else if (stock.Amount >= 0 && detail.Amount > stock.Amount)
-                    {
-                        detail.ReservedAmount = stock.Amount;
-                        stock.Amount = 0;
-                    }
-                }
-            }
-        }
+        
 
         protected override void Dispose(bool disposing)
         {

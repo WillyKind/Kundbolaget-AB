@@ -140,5 +140,7 @@ namespace Kundbolaget.Controllers
             _orderDetails.DeleteEntity(id);
             return RedirectToAction("Index", new {id=updatedOrder.Id, companyId=updatedOrder.Company.ParentCompanyId});
         }
+
+        
     }
 }

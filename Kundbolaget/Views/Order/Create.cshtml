@@ -17,9 +17,16 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Order.WishedDeliveryDate,"Önskat leveransdatum", htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Order.WishedDeliveryDate, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Order.WishedDeliveryDate, "", new {@class = "text-danger"})
+            <div class="input-field col s6">
+                <i class="material-icons prefix">date_range</i>
+                @Html.EditorFor(model => model.Order.WishedDeliveryDate, new
+                   {
+                       HtmlAttributes = new
+                       {
+                           @class = "datepicker",
+                           Value = Model.Order.WishedDeliveryDate.ToString("yyyy/MM/dd")
+                       }
+                   })
             </div>
         </div>
 

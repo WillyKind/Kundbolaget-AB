@@ -7,13 +7,13 @@ namespace Kundbolaget.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CorrectsAttributesForCompleteOrderAndReservedAmount : IMigrationMetadata
+    public sealed partial class AddsReservedAmountToOrderDetails : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CorrectsAttributesForCompleteOrderAndReservedAmount));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddsReservedAmountToOrderDetails));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701051015499_CorrectsAttributesForCompleteOrderAndReservedAmount"; }
+            get { return "201701051210545_AddsReservedAmountToOrderDetails"; }
         }
         
         string IMigrationMetadata.Source

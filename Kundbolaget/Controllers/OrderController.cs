@@ -124,5 +124,13 @@ namespace Kundbolaget.Controllers
             _orders.UpdateOrder(order);
             return "Success " + id;
         }
+
+        [HttpPost]
+        public void SetComment(string comment, int id)
+        {
+            var order = _orders.GetOrder(id);
+            order.Comment = comment;
+            _orders.UpdateOrder(order);
+        } 
     }
 }

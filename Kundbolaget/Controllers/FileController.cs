@@ -34,7 +34,7 @@ namespace Kundbolaget.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadJson(FileUploadVM model)
+        public ActionResult UploadJson(FileUploadViewModel model)
         {
             //check if file ends with ".json"
             if (model.File == null ||
@@ -92,8 +92,9 @@ namespace Kundbolaget.Controllers
                 return View("OrderFileError", _errorViewModel);
             }
             _orders.CreateOrder(entity);
+            model.OrderFile = entity;
 
-            return View("OrderFileSuccess");
+            return View("OrderFileSuccess",model);
         }
 
 

@@ -1,5 +1,8 @@
-﻿<h4>Orderinläsning korrekt slutförd!</h4>
+﻿@model Kundbolaget.ViewModels.FileUploadViewModel
+
+<h4>Orderinläsning korrekt slutförd!</h4>
 <div>
     @Html.ActionLink("Tillbaka", "CustomerSite", "Home", null, new { @class = "orange-text" })
     <p>Er order har registrerats korrekt i vårt system. Tack för er beställning!</p>
+    <p>Referensnummer ni anget: @Model.OrderFile.customerOrderFileId</p>
 </div>

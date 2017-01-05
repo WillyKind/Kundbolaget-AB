@@ -67,13 +67,7 @@ namespace Kundbolaget.Controllers
                 _errorViewModel.Message = "Det moderbolag ni angett är ej giltigt.";
                 return View("OrderFileError", _errorViewModel);
             }
-            //check if order has been registered in database before
-            var orderExists = _orders.ValidateCompanyOrderId(entity.customerOrderFileId, int.Parse(entity.companyId));
-            if (orderExists)
-            {
-                _errorViewModel.Message = "Denna order har redan registrerats i vår databas, vänligen kontrollera ert referensnummer.";
-                return View("OrderFileError", _errorViewModel);
-            }
+
             //check if companies in orderfile exist as childcompanies to parent company that placed order
             var subCompaniesExist =
                 entity.orders.All(subOrder => company.SubCompanies.Any(cc => cc.Id == int.Parse(subOrder.deliverTo)));
@@ -91,12 +85,19 @@ namespace Kundbolaget.Controllers
                 _errorViewModel.Message = "En eller flera av de produkter ni försöker beställa finns ej.";
                 return View("OrderFileError", _errorViewModel);
             }
+            //check if order has been registered in database before
+            var orderExists = _orders.ValidateCompanyOrderId(entity.customerOrderFileId, int.Parse(entity.companyId));
+            if (orderExists)
+            {
+                _errorViewModel.Message =
+                    "Denna order har redan registrerats i vår databas, vänligen kontrollera ert referensnummer.";
+                return View("OrderFileError", _errorViewModel);
+            }
             _orders.CreateOrder(entity);
             model.OrderFile = entity;
 
-            return View("OrderFileSuccess",model);
+            return View("OrderFileSuccess", model);
         }
-
 
 
         protected override void Dispose(bool disposing)

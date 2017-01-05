@@ -28,11 +28,6 @@ namespace Kundbolaget.Controllers
             return View();
         }
 
-        public ActionResult OrderFileError(ErrorViewModel model)
-        {
-            return View(model);
-        }
-
         public ActionResult UploadJson()
         {
             return View();
@@ -98,8 +93,10 @@ namespace Kundbolaget.Controllers
             }
             _orders.CreateOrder(entity);
 
-            return RedirectToAction("Index", "Home");
+            return View("OrderFileSuccess");
         }
+
+
 
         protected override void Dispose(bool disposing)
         {

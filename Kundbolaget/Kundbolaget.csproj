@@ -476,6 +476,7 @@
     <Content Include="Views\OrderDetails\Create.cshtml" />
     <Content Include="Views\Home\Delivery.cshtml" />
     <Content Include="Views\File\OrderFileError.cshtml" />
+    <Content Include="Views\File\OrderFileSuccess.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

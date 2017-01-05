@@ -58,7 +58,7 @@ namespace Kundbolaget.EntityFramework.Repositories
             db.SaveChanges();
         }
 
-        public void CreateOrder(OrderFile order)
+        public List<Order> CreateOrder(OrderFile order)
         {
             var orders = new List<Order>();
             foreach (var subOrder in order.orders)
@@ -73,7 +73,7 @@ namespace Kundbolaget.EntityFramework.Repositories
                         ProductInfoId = products.productId,
                         Amount = products.amount,
                         UnitPrice = product.Price,
-                        TotalPrice = product.Price * products.amount
+                        TotalPrice = product.Price * products.amount,
                     });
                 }
                 orders.Add(new Order
@@ -88,6 +88,7 @@ namespace Kundbolaget.EntityFramework.Repositories
             }
             db.Orders.AddRange(orders);
             db.SaveChanges();
+            return orders;
         }
         public void DeleteEntity(int id)
         {
@@ -98,7 +99,6 @@ namespace Kundbolaget.EntityFramework.Repositories
                 db.SaveChanges();
             }
         }
-
 
 
         public Order[] GetCompanyOrders(int id)

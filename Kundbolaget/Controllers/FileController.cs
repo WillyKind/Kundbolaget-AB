@@ -63,7 +63,26 @@ namespace Kundbolaget.Controllers
 
             if (companyExists && !orderExists)
             {
-                _orders.CreateOrder(entity);
+                var orders = _orders.CreateOrder(entity);
+                foreach (var order in orders)
+                {
+                    foreach (var details in order.OrderDetails)
+                    {
+                        foreach (var productInfoProductStock in details.ProductInfo.ProductStocks)
+                        {
+                            if (productInfoProductStock.Amount >= details.Amount)
+                            {
+                                details.ReservedAmount = details.Amount;
+                                productInfoProductStock.Amount -= details.Amount;
+                            }
+                        }
+                    }
+                   
+                }
+                    foreach (var order1 in orders)
+                    {
+                        _orders.UpdateOrder(order1);
+                    }
             }
 
             return RedirectToAction("Index", "Home");

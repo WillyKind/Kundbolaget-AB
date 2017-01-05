@@ -10,7 +10,6 @@ namespace Kundbolaget.Controllers
 {
     public class ProductStockController : Controller
     {
-
         private readonly DbProductStockRepository _stockRepository;
         private readonly DbProductInfoRepository _productInfoRepository;
         private readonly DbWarehouseRepository _warehouseRepository;
@@ -23,12 +22,12 @@ namespace Kundbolaget.Controllers
             _warehouseRepository = new DbWarehouseRepository();
         }
 
-        public ProductStockController(DbProductStockRepository dbProductStockRepository, DbProductInfoRepository dbProductInfoRepository, DbWarehouseRepository dbWarehouseRepository)
+        public ProductStockController(DbProductStockRepository dbProductStockRepository,
+            DbProductInfoRepository dbProductInfoRepository, DbWarehouseRepository dbWarehouseRepository)
         {
             _stockRepository = dbProductStockRepository;
             _productInfoRepository = dbProductInfoRepository;
             _warehouseRepository = dbWarehouseRepository;
-
         }
 
         // GET: ProductStock
@@ -42,7 +41,7 @@ namespace Kundbolaget.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(productStock);
+                return View(new ProductStockVM {ProductStock = productStock});
             }
             _stockRepository.CreateEntity(productStock);
             return RedirectToAction("Index");

@@ -346,6 +346,7 @@ namespace Kundbolaget.Migrations
                 Company = companies.First(c => c.Name == "Ica Vårberg"),
                 CreatedDate = DateTime.Now,
                 WishedDeliveryDate = DateTime.Parse("2016-12-12"),
+                OrderComplete = false
             };
 
             var orderDetails = new[]
@@ -356,7 +357,8 @@ namespace Kundbolaget.Migrations
                     Amount = 10,
                     Order = dummyOrder,
                     UnitPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price,
-                    TotalPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price*10
+                    TotalPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price*10,
+                    ReservedAmount = 0
                 },
                 new OrderDetails
                 {
@@ -364,7 +366,8 @@ namespace Kundbolaget.Migrations
                     Amount = 25,
                     UnitPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price,
                     TotalPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price*25,
-                    Order = dummyOrder
+                    Order = dummyOrder,
+                    ReservedAmount = 0
                 }
             };
             dummyOrder.Price += orderDetails.Sum(p => p.ProductInfo.Price*p.Amount);

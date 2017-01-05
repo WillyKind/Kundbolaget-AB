@@ -25,6 +25,7 @@ namespace Kundbolaget.Controllers
         {
             _orders = dbOrderRepository;
         }
+
         // GET: Order
         public ActionResult Index()
         {
@@ -59,7 +60,7 @@ namespace Kundbolaget.Controllers
             model.Order = _orders.GetCompanyOrders(id).FirstOrDefault(o => o.CustomerOrderId == customerOrderId);
             model.Order.CustomerOrderId = customerOrderId;
             model.Order.CompanyId = companyId;
-            model.Order.WishedDeliveryDate=DateTime.Now;
+            model.Order.WishedDeliveryDate = DateTime.Now;
             return View("Create", model);
         }
 
@@ -125,12 +126,25 @@ namespace Kundbolaget.Controllers
             return "Success " + id;
         }
 
+        private static void CalculatePallets(Order order)
+        {
+            var pallets = order.OrderDetails.Where(details => details.Amount >= 10).ToArray();
+            if (pallets.Any())
+            {
+                foreach (var orderDetails in pallets)
+                {
+                    var remainder = orderDetails.Amount % 10;
+                    var totalPallets = (orderDetails.Amount - remainder) / 10;
+                }
+            }
+        }
+
         [HttpPost]
         public void SetComment(string comment, int id)
         {
             var order = _orders.GetOrder(id);
             order.Comment = comment;
             _orders.UpdateOrder(order);
-        } 
+        }
     }
 }

@@ -59,7 +59,7 @@ namespace Kundbolaget.Controllers
             model.Order = _orders.GetCompanyOrders(id).FirstOrDefault(o => o.CustomerOrderId == customerOrderId);
             model.Order.CustomerOrderId = customerOrderId;
             model.Order.CompanyId = companyId;
-            model.Order.WishedDeliveryDate=DateTime.MinValue;
+            model.Order.WishedDeliveryDate=DateTime.Now;
             return View("Create", model);
         }
 

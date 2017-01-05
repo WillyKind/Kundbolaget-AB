@@ -86,6 +86,16 @@ namespace Kundbolaget.Controllers
                 _errorViewModel.Message = "En eller flera av de produkter ni försöker beställa finns ej.";
                 return View("OrderFileError", _errorViewModel);
             }
+
+            //check if order contains negative values for order amount
+            var containsNegatives = entity.orders.All(so => so.orderedProducts.Any(p => p.amount < 0));
+            if (containsNegatives)
+            {
+                _errorViewModel.Message =
+                    "En eller flera orderrader innehåller negativa tal för antal beställda produkter.";
+                return View("OrderFileError", _errorViewModel);
+            }
+
             //check if order has been registered in database before
             var orderExists = _orders.ValidateCompanyOrderId(entity.customerOrderFileId, int.Parse(entity.companyId));
             if (orderExists)

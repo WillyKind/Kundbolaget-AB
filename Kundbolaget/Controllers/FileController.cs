@@ -21,10 +21,16 @@ namespace Kundbolaget.Controllers
         private DbOrderRepository _orders = new DbOrderRepository();
         private DbCompanyRepository _companies = new DbCompanyRepository();
         private DbProductInfoRepository _products = new DbProductInfoRepository();
+        private ErrorViewModel _errorViewModel = new ErrorViewModel();
         // GET: File
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult OrderFileError(ErrorViewModel model)
+        {
+            return View(model);
         }
 
         public ActionResult UploadJson()
@@ -63,20 +69,23 @@ namespace Kundbolaget.Controllers
             var company = _companies.ValidateCompanyId(int.Parse(entity.companyId));
             if (company == null)
             {
-                return Content("Företaget finns ej");
+                _errorViewModel.Message = "Det moderbolag ni angett är ej giltigt.";
+                return View("OrderFileError", _errorViewModel);
             }
             //check if order has been registered in database before
             var orderExists = _orders.ValidateCompanyOrderId(entity.customerOrderFileId, int.Parse(entity.companyId));
             if (orderExists)
             {
-                return Content("Redan inläst order");
+                _errorViewModel.Message = "Denna order har redan registrerats i vår databas, vänligen kontrollera ert referensnummer.";
+                return View("OrderFileError", _errorViewModel);
             }
             //check if companies in orderfile exist as childcompanies to parent company that placed order
             var subCompaniesExist =
                 entity.orders.All(subOrder => company.SubCompanies.Any(cc => cc.Id == int.Parse(subOrder.deliverTo)));
             if (!subCompaniesExist)
             {
-                return Content("Underföretag finns ej");
+                _errorViewModel.Message = "En eller flera underföretag ni angett existerar ej som kund.";
+                return View("OrderFileError", _errorViewModel);
             }
             //check if ordered product exists in database
             var products = _products.GetEntities().ToDictionary(p => p.Id);
@@ -84,7 +93,8 @@ namespace Kundbolaget.Controllers
                 entity.orders.All(so => so.orderedProducts.All(product => products.ContainsKey(product.productId)));
             if (!productsExists)
             {
-                return Content("Fel i produkter");
+                _errorViewModel.Message = "En eller flera av de produkter ni försöker beställa finns ej.";
+                return View("OrderFileError", _errorViewModel);
             }
             _orders.CreateOrder(entity);
 

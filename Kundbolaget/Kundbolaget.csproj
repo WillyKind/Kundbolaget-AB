@@ -417,6 +417,7 @@
     <Compile Include="Models\EntityModels\Warehouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CompanyViewModel.cs" />
+    <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\FileUploadVM.cs" />
     <Compile Include="ViewModels\ManageProductInfosViewModel.cs" />
     <Compile Include="ViewModels\OrderDetailsViewModel.cs" />
@@ -474,6 +475,7 @@
     <Content Include="Views\OrderDetails\Delete.cshtml" />
     <Content Include="Views\OrderDetails\Create.cshtml" />
     <Content Include="Views\Home\Delivery.cshtml" />
+    <Content Include="Views\File\OrderFileError.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

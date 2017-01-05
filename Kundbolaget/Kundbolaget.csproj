@@ -401,6 +401,14 @@
     <Compile Include="Migrations\201701030843243_CommentPropertyOrder.Designer.cs">
       <DependentUpon>201701030843243_CommentPropertyOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701051013092_AddsTwoPropsToOrderAndOrderDetails.cs" />
+    <Compile Include="Migrations\201701051013092_AddsTwoPropsToOrderAndOrderDetails.Designer.cs">
+      <DependentUpon>201701051013092_AddsTwoPropsToOrderAndOrderDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701051015499_CorrectsAttributesForCompleteOrderAndReservedAmount.cs" />
+    <Compile Include="Migrations\201701051015499_CorrectsAttributesForCompleteOrderAndReservedAmount.Designer.cs">
+      <DependentUpon>201701051015499_CorrectsAttributesForCompleteOrderAndReservedAmount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -604,6 +612,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701030843243_CommentPropertyOrder.resx">
       <DependentUpon>201701030843243_CommentPropertyOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701051013092_AddsTwoPropsToOrderAndOrderDetails.resx">
+      <DependentUpon>201701051013092_AddsTwoPropsToOrderAndOrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701051015499_CorrectsAttributesForCompleteOrderAndReservedAmount.resx">
+      <DependentUpon>201701051015499_CorrectsAttributesForCompleteOrderAndReservedAmount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

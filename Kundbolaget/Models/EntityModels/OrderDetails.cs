@@ -28,5 +28,6 @@ namespace Kundbolaget.Models.EntityModels
         public double UnitPrice { get; set; }
         [Required]
         public double TotalPrice { get; set; }
+        public int? ReservedAmount { get; set; }
     }
 }

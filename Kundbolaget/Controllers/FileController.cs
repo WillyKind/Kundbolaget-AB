@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using Kundbolaget.EntityFramework.Context;
 using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.JsonEntityModels;
@@ -91,6 +92,15 @@ namespace Kundbolaget.Controllers
             {
                 _errorViewModel.Message =
                     "Denna order har redan registrerats i vår databas, vänligen kontrollera ert referensnummer.";
+                return View("OrderFileError", _errorViewModel);
+            }
+
+            //check that datetime has not passed for order
+            var datePassed = entity.orders.Any(o => DateTime.Parse(o.deliverDate) < DateTime.Now);
+            if (datePassed)
+            {
+                _errorViewModel.Message =
+                    "Denna order innehåller önskade leveransdatum som redan har passerat.";
                 return View("OrderFileError", _errorViewModel);
             }
             _orders.CreateOrder(entity);

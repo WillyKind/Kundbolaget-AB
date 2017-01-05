@@ -413,6 +413,7 @@
     <Compile Include="Models\EntityModels\Category.cs" />
     <Compile Include="Models\EntityModels\Container.cs" />
     <Compile Include="Models\EntityModels\Country.cs" />
+    <Compile Include="Models\EntityModels\Invoice.cs" />
     <Compile Include="Models\EntityModels\Order.cs" />
     <Compile Include="Models\EntityModels\OrderDetails.cs" />
     <Compile Include="Models\EntityModels\ProductInfo.cs" />

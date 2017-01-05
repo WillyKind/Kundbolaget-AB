@@ -5,10 +5,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kundbolaget.Models.EntityModels
 {
-    public class Order
+    public class Invoice
     {
         [Key]
         public int Id { get; set; }
+
+        [ForeignKey("OrderId")]
+        public Order Order { get; set; }
+
+        public int Orderid { get; set; }
+
+        [Required]
+        public int Price { get; set; }
 
         [Required]
         public DateTime CreatedDate { get; set; }
@@ -17,26 +25,14 @@ namespace Kundbolaget.Models.EntityModels
         public int CustomerOrderId { get; set; }
 
         [Required]
-        public DateTime WishedDeliveryDate { get; set; }
+        public DateTime DueDate { get; set; }
 
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
-
-        [ForeignKey("CompanyId")]
-        public virtual Company Company { get; set; }
 
         [Required]
         public int CompanyId { get; set; }
 
         [Required]
         public bool IsRemoved { get; set; }
-
-        [Required]
-        public int Price { get; set; }
-
-        public DateTime? OrderPicked { get; set; }
-        public DateTime? OrderTransported { get; set; }
-        public DateTime? OrderDelivered { get; set; }
-        public string Comment { get; set; }
     }
-
 }

@@ -110,10 +110,11 @@ namespace Kundbolaget.Controllers
             //Allocates productsStockAmount to OrderDetailsAmount
             ProductAllocater.ProductsToOrder(orders);
 
-            foreach (var order1 in orders)
+            foreach (var order in orders)
             {
-                _orders.UpdateOrder(order1);
+                _orders.UpdateOrder(order);
             }
+
             model.OrderFile = entity;
             return View("OrderFileSuccess", model);
         }

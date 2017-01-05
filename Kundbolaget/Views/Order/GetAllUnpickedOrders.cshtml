@@ -77,7 +77,7 @@
                 </a>
             </td>
             <td>
-               @Html.TextArea("txtValue",item.Comment , new { id = "textArea"+@item.Id ,  @class = "materialize-textarea" } )
+               @Html.TextArea("txtValue",item.Comment , new { id = "textArea"+@item.Id} )
             </td>
             <td>
                 <a onclick="OrderComment('SetComment', @item.Id)" class="btn btn-floating btn-small waves-effect waves-light">

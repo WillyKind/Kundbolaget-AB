@@ -51,11 +51,8 @@ namespace Kundbolaget.PdfGenerator
             string path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\_Följesedel_o{id}_c{company.FirstOrDefault().Name}{DateTime.Now.ToShortDateString()}.pdf";
 
             FileStream fS = File.Create(path);
-            //PdfWriter writer = new PdfWriter();
             var pb = new PdfContentByte(PdfWriter.GetInstance(doc, fS));
             //PdfWriter.GetInstance(doc, fS);
-            
-            
             doc.Open();
 
             var fs1 = FontFactory.GetFont(FontFactory.HELVETICA, 20);
@@ -71,16 +68,14 @@ namespace Kundbolaget.PdfGenerator
                 break;
             }
 
-            
             doc.Add(new Paragraph("\n\n"));
 
             PdfPTable table = new PdfPTable(4);
-            
             table.HorizontalAlignment = 0;
+
             PdfPCell cell = new PdfPCell(new Phrase("Detaljer"));
             cell.Colspan = 4;
             cell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
-            
             table.AddCell(cell);
 
             table.AddCell("Artikelnr");
@@ -99,15 +94,10 @@ namespace Kundbolaget.PdfGenerator
             doc.Add(table);
             doc.Add(new Paragraph("\n\n"));
 
-            
-
             var table2 = new PdfPTable(2);
             table2.HorizontalAlignment = 0;
-            table2.TotalWidth = doc.PageSize.Width - doc.LeftMargin;
+            //table2.TotalWidth = doc.PageSize.Width - doc.LeftMargin;
             
-            
-
-
             List<PdfPCell> cells = new List<PdfPCell>();
             cells.Add(new PdfPCell(new Phrase("Kundbolaget AB", fs2)) { Border = 0 });
             cells.Add(new PdfPCell(new Phrase("Innehar F-skattesedel", fs2)) { Border = 0 });
@@ -123,26 +113,8 @@ namespace Kundbolaget.PdfGenerator
                 table2.AddCell(pdfCell);
             }
             //table2.WriteSelectedRows(0, -1, doc.LeftMargin, doc.PageSize.Height - 400, pb.PdfWriter.DirectContent);
-
-
             doc.Add(table2);
-
             doc.Close();
-
-
-
-
-
-            //Chunk glue = new Chunk(new VerticalPositionMark());
-            //Paragraph p12 = new Paragraph("Kundbolaget AB", fs16)
-            //    {
-            //        new Chunk(glue),
-            //        $"Beställare: {c.Name}",Chunk.NEWLINE,
-            //        new Chunk(glue),
-            //        $"Ordernummer: {c.OrderId}"
-            //    };
-            //doc.Add(p12);
-
         }
     }
 }

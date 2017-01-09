@@ -15,7 +15,7 @@ namespace Kundbolaget.Models.EntityModels
         public virtual Invoice Invoice { get; set; }
 
         [Required]
-        public double FinalPrice { get; set; }
+        public decimal FinalPrice { get; set; }
 
         [ForeignKey("ProductInfoId")]
         public ProductInfo ProductInfo { get; set; }

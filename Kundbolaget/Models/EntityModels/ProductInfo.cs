@@ -34,26 +34,26 @@ namespace Kundbolaget.Models.EntityModels
         public string Description { get; set; }
 
         [Required]
-        public double Abv { get; set; }
+        public decimal Abv { get; set; }
 
         [Required]
         public double TradingMargin { get; set; }
 
         [Required]
-        public double PurchasePrice { get; set; }
+        public decimal PurchasePrice { get; set; }
 
         [Required]
         public bool IsRemoved { get; set; }
 
         [Required]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
-        public double? NewPrice { get; set; }
+        public decimal? NewPrice { get; set; }
 
         public DateTime? PriceStart { get; set; }
 
 
-        public double? PalletDiscount { get; set; }
+        public decimal? PalletDiscount { get; set; }
 
         public virtual ICollection<ProductStock> ProductStocks { get; set; }
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }

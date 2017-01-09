@@ -13,7 +13,7 @@ namespace Kundbolaget.Models.EntityModels
         public Order Order { get; set; }
 
         [Required]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         [Required]
         public DateTime CreatedDate { get; set; }

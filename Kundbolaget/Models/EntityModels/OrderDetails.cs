@@ -25,8 +25,8 @@ namespace Kundbolaget.Models.EntityModels
         [Required]
         public bool IsRemoved { get; set; }
         [Required]
-        public double UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }
         [Required]
-        public double TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }

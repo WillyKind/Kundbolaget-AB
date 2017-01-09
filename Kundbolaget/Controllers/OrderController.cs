@@ -169,7 +169,7 @@ namespace Kundbolaget.Controllers
 
             foreach (var orderDetail in orderViewModel.Order.OrderDetails)
             {
-                double finalPrice;
+                decimal finalPrice;
 
                 if (orderDetail.Amount >= 10 && orderDetail.ProductInfo.PalletDiscount.HasValue)
                 {

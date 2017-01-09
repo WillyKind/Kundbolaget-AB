@@ -36,7 +36,7 @@ namespace Kundbolaget.Migrations
 
             var categories = new[]
             {
-                new Category {Name = "Öl"},
+                new Category {Name = "Ã–l"},
                 new Category {Name = "Sprit"},
                 new Category {Name = "Vin"},
             };
@@ -44,8 +44,8 @@ namespace Kundbolaget.Migrations
             var productGroups = new[]
             {
                 new ProductGroup {Name = "Vitt vin", Category = categories[2]},
-                new ProductGroup {Name = "Rött vin", Category = categories[2]},
-                new ProductGroup {Name = "Rosé vin", Category = categories[2]},
+                new ProductGroup {Name = "RÃ¶tt vin", Category = categories[2]},
+                new ProductGroup {Name = "RosÃ© vin", Category = categories[2]},
                 new ProductGroup {Name = "Mouserande vin", Category = categories[2]},
                 new ProductGroup {Name = "Portvin", Category = categories[2]},
                 new ProductGroup {Name = "IPA", Category = categories[0]},
@@ -57,7 +57,7 @@ namespace Kundbolaget.Migrations
                 new ProductGroup {Name = "Vodka", Category = categories[1]},
                 new ProductGroup {Name = "Whiskey", Category = categories[1]},
                 new ProductGroup {Name = "Konjak", Category = categories[1]},
-                new ProductGroup {Name = "Likör", Category = categories[1]},
+                new ProductGroup {Name = "LikÃ¶r", Category = categories[1]},
                 new ProductGroup {Name = "Punch", Category = categories[1]},
                 new ProductGroup {Name = "Calvados", Category = categories[1]},
             };
@@ -103,7 +103,7 @@ namespace Kundbolaget.Migrations
                 new ContactPerson
                 {
                     FirstName = "Johan",
-                    LastName = "Wänström",
+                    LastName = "WÃ¤nstrÃ¶m",
                     Email = "Johan@randomcompany.com",
                     PhoneNumber = "+46899 55 55"
                 }
@@ -111,12 +111,12 @@ namespace Kundbolaget.Migrations
 
             var addresses = new[]
             {
-                new Address {Street = "Besöksvägen", Number = "1A", ZipCode = "111 11"},
-                new Address {Street = "Lagervägen", Number = "1A", ZipCode = "000 00"},
-                new Address {Street = "Leveransvägen", Number = "2B", ZipCode = "111 12"},
-                new Address {Street = "Glimmervägen", Number = "1A", ZipCode = "111 11"},
-                new Address {Street = "Leveransvägen", Number = "1A", ZipCode = "111 11"},
-                new Address {Street = "Stadsvägen", Number = "1C", ZipCode = "112 11"}
+                new Address {Street = "BesÃ¶ksvÃ¤gen", Number = "1A", ZipCode = "111 11"},
+                new Address {Street = "LagervÃ¤gen", Number = "1A", ZipCode = "000 00"},
+                new Address {Street = "LeveransvÃ¤gen", Number = "2B", ZipCode = "111 12"},
+                new Address {Street = "GlimmervÃ¤gen", Number = "1A", ZipCode = "111 11"},
+                new Address {Street = "LeveransvÃ¤gen", Number = "1A", ZipCode = "111 11"},
+                new Address {Street = "StadsvÃ¤gen", Number = "1C", ZipCode = "112 11"}
             };
 
 
@@ -127,7 +127,7 @@ namespace Kundbolaget.Migrations
                 ContactPerson = contactPersons.First(cp => cp.FirstName == "Viktor"),
                 Email = "lager@kundbolaget.se",
                 PhoneNumber = "+46899 00 00",
-                Address = addresses.First(a => a.Street == "Lagervägen")
+                Address = addresses.First(a => a.Street == "LagervÃ¤gen")
             };
 
             var wareHouse2 = new Warehouse
@@ -137,15 +137,15 @@ namespace Kundbolaget.Migrations
                 ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
                 Email = "mindreLager@kundbolaget.se",
                 PhoneNumber = "+46899 00 01",
-                Address = addresses.First(a => a.Street == "Stadsvägen")
+                Address = addresses.First(a => a.Street == "StadsvÃ¤gen")
             };
 
             var icaGruppen = new Company
             {
-                Address = addresses.First(a => a.Street == "Besöksvägen"),
+                Address = addresses.First(a => a.Street == "BesÃ¶ksvÃ¤gen"),
                 ContactPerson = contactPersons.First(cp => cp.FirstName == "Johan"),
                 Country = countries.First(c => c.Name == "Sweden"),
-                DeliveryAddress = addresses.First(a => a.Street == "Besöksvägen"),
+                DeliveryAddress = addresses.First(a => a.Street == "BesÃ¶ksvÃ¤gen"),
                 Email = "icagruppen@ica.com",
                 Name = "IcaGruppen",
                 PhoneNumber = "+56899 22 22"
@@ -153,22 +153,22 @@ namespace Kundbolaget.Migrations
 
             var icaVarberg = new Company
             {
-                Address = addresses.First(a => a.Street == "Glimmervägen"),
+                Address = addresses.First(a => a.Street == "GlimmervÃ¤gen"),
                 ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
                 Country = countries.First(c => c.Name == "Sweden"),
-                DeliveryAddress = addresses.First(a => a.Street == "Leveransvägen" && a.Number == "2B"),
+                DeliveryAddress = addresses.First(a => a.Street == "LeveransvÃ¤gen" && a.Number == "2B"),
                 Email = "icavarberg@ica.com",
                 PhoneNumber = "+46899 11 11",
                 ParentCompany = icaGruppen,
-                Name = "Ica Vårberg"
+                Name = "Ica VÃ¥rberg"
             };
 
             var coop = new Company
             {
-                Address = addresses.First(a => a.Street == "Besöksvägen"),
+                Address = addresses.First(a => a.Street == "BesÃ¶ksvÃ¤gen"),
                 ContactPerson = contactPersons.First(cp => cp.FirstName == "Michel"),
                 Country = countries.First(c => c.Name == "Sweden"),
-                DeliveryAddress = addresses.First(a => a.Street == "Besöksvägen"),
+                DeliveryAddress = addresses.First(a => a.Street == "BesÃ¶ksvÃ¤gen"),
                 Email = "Coop@medmera.com",
                 Name = "Coop",
                 PhoneNumber = "+56899 22 11"
@@ -176,21 +176,21 @@ namespace Kundbolaget.Migrations
 
             var coopHaggvik = new Company
             {
-                Address = addresses.First(a => a.Street == "Stadsvägen"),
+                Address = addresses.First(a => a.Street == "StadsvÃ¤gen"),
                 ContactPerson = contactPersons.First(cp => cp.FirstName == "Robert"),
                 Country = countries.First(c => c.Name == "Sweden"),
-                DeliveryAddress = addresses.First(a => a.Street == "Stadsvägen" && a.Number == "1C"),
+                DeliveryAddress = addresses.First(a => a.Street == "StadsvÃ¤gen" && a.Number == "1C"),
                 Email = "Coophaggvik@coop.com",
                 PhoneNumber = "+46899 11 33",
                 ParentCompany = coop,
-                Name = "Coop Häggvik"
+                Name = "Coop HÃ¤ggvik"
             };
             var coopLiljeholmen = new Company
             {
-                Address = addresses.First(a => a.Street == "Besöksvägen"),
+                Address = addresses.First(a => a.Street == "BesÃ¶ksvÃ¤gen"),
                 ContactPerson = contactPersons.First(cp => cp.FirstName == "Robert"),
                 Country = countries.First(c => c.Name == "Sweden"),
-                DeliveryAddress = addresses.First(a => a.Street == "Lagervägen" && a.Number == "1A"),
+                DeliveryAddress = addresses.First(a => a.Street == "LagervÃ¤gen" && a.Number == "1A"),
                 Email = "coopliljeholmen@coop.com",
                 PhoneNumber = "+46899 33 33",
                 ParentCompany = coop,
@@ -198,10 +198,10 @@ namespace Kundbolaget.Migrations
             };
             var icaLiljeholmen = new Company
             {
-                Address = addresses.First(a => a.Street == "Besöksvägen"),
+                Address = addresses.First(a => a.Street == "BesÃ¶ksvÃ¤gen"),
                 ContactPerson = contactPersons.First(cp => cp.FirstName == "Willy"),
                 Country = countries.First(c => c.Name == "Sweden"),
-                DeliveryAddress = addresses.First(a => a.Street == "Lagervägen" && a.Number == "1A"),
+                DeliveryAddress = addresses.First(a => a.Street == "LagervÃ¤gen" && a.Number == "1A"),
                 Email = "icaliljeholmen@ica.com",
                 PhoneNumber = "+46899 11 54",
                 ParentCompany = icaGruppen,
@@ -218,12 +218,12 @@ namespace Kundbolaget.Migrations
                 new ProductInfo
                 {
                     Name = "Norrlandsguld",
-                    Abv = 5.3,
+                    Abv = 5.3m,
                     Container = containers.First(c => c.Name == "Burk"),
                     Volume = volumes.First(v => v.Milliliter == 330),
-                    Description = "Öl",
+                    Description = "Ã–l",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
-                    PurchasePrice = 5.3,
+                    PurchasePrice = 5.3m,
                     TradingMargin = 10,
                     Price = 250,
                     NewPrice = 1337,
@@ -232,36 +232,36 @@ namespace Kundbolaget.Migrations
                 new ProductInfo
                 {
                     Name = "Norrlandsguld",
-                    Abv = 5.3,
+                    Abv = 5.3m,
                     Container = containers.First(c => c.Name == "Burk"),
                     Volume = volumes.First(v => v.Milliliter == 500),
-                    Description = "Öl",
+                    Description = "Ã–l",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
-                    PurchasePrice = 8.3,
+                    PurchasePrice = 8.3m,
                     TradingMargin = 8,
                     Price = 325
                 },
                 new ProductInfo
                 {
-                    Name = "Nääs APA",
-                    Abv = 5.8,
+                    Name = "NÃ¤Ã¤s APA",
+                    Abv = 5.8m,
                     Container = containers.First(c => c.Name == "Flaska"),
                     Volume = volumes.First(v => v.Milliliter == 330),
                     Description = "APA",
                     ProductGroup = productGroups.First(pg => pg.Name == "APA"),
-                    PurchasePrice = 8.3,
+                    PurchasePrice = 8.3m,
                     TradingMargin = 8,
                     Price = 325
                 },
                 new ProductInfo
                 {
                     Name = "Lagunitas IPA",
-                    Abv = 6.2,
+                    Abv = 6.2m,
                     Container = containers.First(c => c.Name == "Flaska"),
                     Volume = volumes.First(v => v.Milliliter == 350),
                     Description = "IPA",
                     ProductGroup = productGroups.First(pg => pg.Name == "IPA"),
-                    PurchasePrice = 8.3,
+                    PurchasePrice = 8.3m,
                     TradingMargin = 8,
                     Price = 400
                 },
@@ -316,11 +316,11 @@ namespace Kundbolaget.Migrations
                 new ProductInfo
                 {
                     Name = " Vino Nobile di Montepulciano",
-                    Abv = 13.5,
+                    Abv = 13.5m,
                     Container = containers.First(c => c.Name == "Flaska"),
                     Volume = volumes.First(v => v.Milliliter == 700),
                     Description = "Sangiovese",
-                    ProductGroup = productGroups.First(pg => pg.Name == "Rött vin"),
+                    ProductGroup = productGroups.First(pg => pg.Name == "RÃ¶tt vin"),
                     PurchasePrice = 35,
                     TradingMargin = 50,
                     Price = 1250
@@ -345,7 +345,7 @@ namespace Kundbolaget.Migrations
 
             var dummyOrder = new Order
             {
-                Company = companies.First(c => c.Name == "Ica Vårberg"),
+                Company = companies.First(c => c.Name == "Ica VÃ¥rberg"),
                 CreatedDate = DateTime.Now,
                 WishedDeliveryDate = DateTime.Parse("2016-12-12"),
             };

@@ -19,7 +19,9 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public void Create(Invoice invoice)
         {
+
             db.Invoices.Add(invoice);
+
             db.SaveChanges();
         }
     }

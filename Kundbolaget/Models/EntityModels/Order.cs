@@ -38,7 +38,7 @@ namespace Kundbolaget.Models.EntityModels
         public DateTime? OrderDelivered { get; set; }
         public string Comment { get; set; }
 
-        public Invoice Invoice { get; set; }
+        public virtual Invoice Invoice { get; set; }
     }
 
 }

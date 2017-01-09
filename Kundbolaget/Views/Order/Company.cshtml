@@ -25,29 +25,36 @@
         <th>
             Pris
         </th>
+
     </tr>
 
-@foreach (var item in Model.Orders) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Company.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerOrderId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
-        </td>
-        <td>
+    @foreach (var item in Model.Orders)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerOrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
+            </td>
+            <td>
 
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            <a href="@Url.Action("OrderDetails", "Order", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">info_outline</i></a>
-        </td>
-    </tr>
-}
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a href="@Url.Action("OrderDetails", "Order", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating btn-small waves-effect waves-light">
+                    <i class="material-icons">info_outline</i>
+                </a>
+            </td>
+            <td>
+                @Html.ActionLink("Skapa Fak", "CreateInvoice", "Order", new {item.Id}, null)
+            </td>
+        </tr>
+    }
 </table>

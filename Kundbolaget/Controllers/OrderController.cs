@@ -13,11 +13,13 @@ namespace Kundbolaget.Controllers
     {
         private DbOrderRepository _orders;
         private DbCompanyRepository _companies;
+        private DbInvoiceRepository _invoices;
 
         public OrderController()
         {
             _orders = new DbOrderRepository();
             _companies = new DbCompanyRepository();
+            _invoices = new DbInvoiceRepository();
         }
 
         //Constructor for tests
@@ -145,6 +147,50 @@ namespace Kundbolaget.Controllers
             var order = _orders.GetOrder(id);
             order.Comment = comment;
             _orders.UpdateOrder(order);
+        }
+
+        public void CreateInvoice(int id)
+        {
+            var orderViewModel = new OrderViewModel
+            {
+                Order = _orders.GetEntity(id)
+            };
+            var invoice = new Invoice
+            {
+                Id = orderViewModel.Order.Id,
+                Order = orderViewModel.Order,
+                CreatedDate = DateTime.Now,
+                DueDate = DateTime.Now.AddDays(90),
+                InvoiceDetails = new List<InvoiceDetail>(),
+                CompanyId = orderViewModel.Order.CompanyId,
+                CustomerOrderId = orderViewModel.Order.CustomerOrderId
+            };
+
+            
+            foreach (var orderDetail in orderViewModel.Order.OrderDetails)
+            {
+                double finalPrice;
+
+                if (orderDetail.Amount >= 10 && orderDetail.ProductInfo.PalletDiscount.HasValue)
+                {
+                    var remainder = orderDetail.Amount % 10;
+                    var totalPallets = (orderDetail.Amount - remainder) / 10;
+                    var remainderPrice = remainder * orderDetail.UnitPrice;
+                    var palletPrice = totalPallets * 10 * orderDetail.UnitPrice;
+                    var palletDiscount = palletPrice * orderDetail.ProductInfo.PalletDiscount.Value;
+                    var discountedPrice = palletPrice - palletDiscount + remainderPrice;
+
+                    finalPrice = discountedPrice;
+                }
+                else
+                {
+                    finalPrice = orderDetail.Amount * orderDetail.UnitPrice;
+                }
+                invoice.InvoiceDetails.Add(new InvoiceDetail { FinalPrice = finalPrice, InvoiceId = invoice.Id});
+                invoice.Price += (int)finalPrice;
+            }
+            orderViewModel.Order.Invoice = invoice;
+            _orders.UpdateEntity(orderViewModel.Order);
         }
     }
 }

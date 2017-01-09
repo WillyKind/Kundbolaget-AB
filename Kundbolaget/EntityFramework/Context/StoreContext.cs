@@ -46,7 +46,35 @@ namespace Kundbolaget.EntityFramework.Context
             modelBuilder.Entity<Invoice>()
                 .HasRequired(x => x.Order)
                 .WithOptional(x => x.Invoice);
-            
+
+            modelBuilder.Entity<ProductInfo>()
+                .Property(i => i.Price)
+                .HasColumnType("Money");
+            modelBuilder.Entity<ProductInfo>()
+                .Property(i => i.PurchasePrice)
+                .HasColumnType("Money");
+            modelBuilder.Entity<ProductInfo>()
+                .Property(i => i.NewPrice)
+                .HasColumnType("Money");
+
+            modelBuilder.Entity<OrderDetails>()
+                .Property(i => i.UnitPrice)
+                .HasColumnType("Money");
+            modelBuilder.Entity<OrderDetails>()
+                .Property(i => i.TotalPrice)
+                .HasColumnType("Money");
+
+            modelBuilder.Entity<Order>()
+                .Property(i => i.Price)
+                .HasColumnType("Money");
+
+            modelBuilder.Entity<Invoice>()
+                .Property(i => i.Price)
+                .HasColumnType("Money");
+
+            modelBuilder.Entity<InvoiceDetail>()
+                .Property(i => i.FinalPrice)
+                .HasColumnType("Money");
         }
     }
 }

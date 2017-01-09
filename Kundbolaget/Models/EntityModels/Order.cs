@@ -31,7 +31,7 @@ namespace Kundbolaget.Models.EntityModels
         public bool IsRemoved { get; set; }
 
         [Required]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         public DateTime? OrderPicked { get; set; }
         public DateTime? OrderTransported { get; set; }

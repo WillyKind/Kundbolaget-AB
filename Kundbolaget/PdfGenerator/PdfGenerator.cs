@@ -15,7 +15,7 @@ namespace Kundbolaget.PdfGenerator
     {
         private static StoreContext db;
 
-        public void ExportToPdf(int id)
+        public void ExportDeliveryNoteToPdf(int id)
         {
             db = new StoreContext();
 
@@ -42,7 +42,6 @@ namespace Kundbolaget.PdfGenerator
                               od.Order.Company.DeliveryAddress.Number,
                               od.Order.Company.DeliveryAddress.ZipCode,
                               od.Order.WishedDeliveryDate
-                              
                           };
 
             var doc = new Document();

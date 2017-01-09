@@ -126,10 +126,10 @@ namespace Kundbolaget.Controllers
         }
 
         [HttpPost]
-        public string ExportPdf(int id)
+        public string ExportDeliveryNote(int id)
         {
             PdfGenerator.PdfGenerator pdfGenerator = new PdfGenerator.PdfGenerator();
-            pdfGenerator.ExportToPdf(id);
+            pdfGenerator.ExportDeliveryNoteToPdf(id);
             return "Success " + id;
         }
     }

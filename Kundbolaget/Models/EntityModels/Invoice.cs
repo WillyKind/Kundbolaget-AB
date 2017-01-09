@@ -10,10 +10,7 @@ namespace Kundbolaget.Models.EntityModels
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("OrderId")]
         public Order Order { get; set; }
-
-        public int Orderid { get; set; }
 
         [Required]
         public int Price { get; set; }
@@ -27,7 +24,7 @@ namespace Kundbolaget.Models.EntityModels
         [Required]
         public DateTime DueDate { get; set; }
 
-        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
+        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
 
         [Required]
         public int CompanyId { get; set; }

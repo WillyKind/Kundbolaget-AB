@@ -20,7 +20,10 @@ namespace Kundbolaget.EntityFramework.Context
         public virtual DbSet<Volume> Volumes { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
 
-        public StoreContext() : base(@"data source =.\SQLEXPRESS; initial catalog=KundBolaget; integrated security=SSPI") {}
+        public StoreContext()
+            : base(@"data source =.\SQLEXPRESS; initial catalog=KundBolaget; integrated security=SSPI")
+        {
+        }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -38,6 +41,11 @@ namespace Kundbolaget.EntityFramework.Context
             modelBuilder.Entity<ProductStock>()
                 .HasRequired(x => x.ProductInfo)
                 .WithMany(x => x.ProductStocks);
+
+            modelBuilder.Entity<Invoice>()
+                .HasRequired(x => x.Order)
+                .WithOptional(x => x.Invoice);
+            
         }
     }
 }

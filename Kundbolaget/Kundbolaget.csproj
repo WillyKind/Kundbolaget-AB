@@ -411,6 +411,10 @@
     <Compile Include="Migrations\201701090900353_AddFieldPalletDiscount.Designer.cs">
       <DependentUpon>201701090900353_AddFieldPalletDiscount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701091017313_OneToOneInvoiceOrder.cs" />
+    <Compile Include="Migrations\201701091017313_OneToOneInvoiceOrder.Designer.cs">
+      <DependentUpon>201701091017313_OneToOneInvoiceOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -419,6 +423,7 @@
     <Compile Include="Models\EntityModels\Container.cs" />
     <Compile Include="Models\EntityModels\Country.cs" />
     <Compile Include="Models\EntityModels\Invoice.cs" />
+    <Compile Include="Models\EntityModels\InvoiceDetail.cs" />
     <Compile Include="Models\EntityModels\Order.cs" />
     <Compile Include="Models\EntityModels\OrderDetails.cs" />
     <Compile Include="Models\EntityModels\ProductInfo.cs" />
@@ -624,6 +629,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701090900353_AddFieldPalletDiscount.resx">
       <DependentUpon>201701090900353_AddFieldPalletDiscount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701091017313_OneToOneInvoiceOrder.resx">
+      <DependentUpon>201701091017313_OneToOneInvoiceOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

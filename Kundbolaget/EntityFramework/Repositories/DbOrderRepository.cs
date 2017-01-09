@@ -213,6 +213,11 @@ namespace Kundbolaget.EntityFramework.Repositories
                         detail.ReservedAmount += diff.Value;
                         productStocks.Add(saldo);
                     }
+                    else if (detail.Amount > saldo.Amount && saldo.Amount != 0)
+                    {
+                        detail.ReservedAmount += saldo.Amount;
+                        saldo.Amount = 0;
+                    }
                 }
             }
             UpdateOrder(orders);

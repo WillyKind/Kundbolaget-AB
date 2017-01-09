@@ -415,6 +415,10 @@
     <Compile Include="Migrations\201701091017313_OneToOneInvoiceOrder.Designer.cs">
       <DependentUpon>201701091017313_OneToOneInvoiceOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701091312046_AddPropertProductInfoToInvoiceDetail.cs" />
+    <Compile Include="Migrations\201701091312046_AddPropertProductInfoToInvoiceDetail.Designer.cs">
+      <DependentUpon>201701091312046_AddPropertProductInfoToInvoiceDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -632,6 +636,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701091017313_OneToOneInvoiceOrder.resx">
       <DependentUpon>201701091017313_OneToOneInvoiceOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701091312046_AddPropertProductInfoToInvoiceDetail.resx">
+      <DependentUpon>201701091312046_AddPropertProductInfoToInvoiceDetail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -166,7 +166,7 @@ namespace Kundbolaget.Controllers
                 CustomerOrderId = orderViewModel.Order.CustomerOrderId
             };
 
-            
+
             foreach (var orderDetail in orderViewModel.Order.OrderDetails)
             {
                 double finalPrice;
@@ -186,8 +186,13 @@ namespace Kundbolaget.Controllers
                 {
                     finalPrice = orderDetail.Amount * orderDetail.UnitPrice;
                 }
-                invoice.InvoiceDetails.Add(new InvoiceDetail { FinalPrice = finalPrice, InvoiceId = invoice.Id});
-                invoice.Price += (int)finalPrice;
+                invoice.InvoiceDetails.Add(new InvoiceDetail
+                {
+                    FinalPrice = finalPrice,
+                    InvoiceId = invoice.Id,
+                    ProductInfo = orderDetail.ProductInfo
+                });
+                invoice.Price += (int) finalPrice;
             }
             orderViewModel.Order.Invoice = invoice;
             _orders.UpdateEntity(orderViewModel.Order);

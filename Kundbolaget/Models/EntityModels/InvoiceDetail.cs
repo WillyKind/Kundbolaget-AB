@@ -16,5 +16,11 @@ namespace Kundbolaget.Models.EntityModels
 
         [Required]
         public double FinalPrice { get; set; }
+
+        [ForeignKey("ProductInfoId")]
+        public ProductInfo ProductInfo { get; set; }
+
+        [Required]
+        public int ProductInfoId { get; set; }
     }
 }

@@ -4,7 +4,7 @@ namespace Kundbolaget.JsonEntityModels
 {
     public class SubOrder
     {
-        public string deliverTo { get; set; }
+        public int deliverTo { get; set; }
         public string deliverDate { get; set; }
         public List<OrderRow> orderedProducts { get; set; }
     }

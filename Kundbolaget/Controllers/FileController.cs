@@ -51,7 +51,7 @@ namespace Kundbolaget.Controllers
             }
 
             string jsonSchema =
-                @"{'$schema':'http://json-schema.org/draft-04/schema#','type':'object','properties':{'companyId':{'type':'string'},'customerOrderFileId':{'type':'integer'},'orders':{'type':'array','items':{'type':'object','properties':{'deliverTo':{'type':'string'},'deliverDate':{'type':'string'},'orderedProducts':{'type':'array','items':{'type':'object','properties':{'productId':{'type':'integer'},'amount':{'type':'integer'}},'required':['productId','amount']}}},'required':['deliverTo','deliverDate','orderedProducts']}}},'required':['companyId','customerOrderFileId','orders']}";
+                @"{'$schema':'http://json-schema.org/draft-04/schema#','type':'object','properties':{'companyId':{'type':'integer'},'customerOrderFileId':{'type':'integer'},'orders':{'type':'array','items':{'type':'object','properties':{'deliverTo':{'type':'integer'},'deliverDate':{'type':'string'},'orderedProducts':{'type':'array','items':{'type':'object','properties':{'productId':{'type':'integer'},'amount':{'type':'integer'}},'required':['productId','amount']}}},'required':['deliverTo','deliverDate','orderedProducts']}}},'required':['companyId','customerOrderFileId','orders']}";
             var schema = JSchema.Parse(jsonSchema);
             var json = Encoding.Default.GetString(data);
             var jObj = JObject.Parse(json);
@@ -62,7 +62,7 @@ namespace Kundbolaget.Controllers
 
             var entity = JsonConvert.DeserializeObject<OrderFile>(json);
             //check if company that places order is a company in database
-            var company = _companies.ValidateCompanyId(int.Parse(entity.companyId));
+            var company = _companies.ValidateCompanyId(entity.companyId);
             if (company == null)
             {
                 _errorViewModel.Message = "Det moderbolag ni angett är ej giltigt.";
@@ -71,7 +71,7 @@ namespace Kundbolaget.Controllers
 
             //check if companies in orderfile exist as childcompanies to parent company that placed order
             var subCompaniesExist =
-                entity.orders.All(subOrder => company.SubCompanies.Any(cc => cc.Id == int.Parse(subOrder.deliverTo)));
+                entity.orders.All(subOrder => company.SubCompanies.Any(cc => cc.Id == subOrder.deliverTo));
             if (!subCompaniesExist)
             {
                 _errorViewModel.Message = "En eller flera underföretag ni angett existerar ej som kund.";
@@ -97,7 +97,7 @@ namespace Kundbolaget.Controllers
             }
 
             //check if order has been registered in database before
-            var orderExists = _orders.ValidateCompanyOrderId(entity.customerOrderFileId, int.Parse(entity.companyId));
+            var orderExists = _orders.ValidateCompanyOrderId(entity.customerOrderFileId, entity.companyId);
             if (orderExists)
             {
                 _errorViewModel.Message =

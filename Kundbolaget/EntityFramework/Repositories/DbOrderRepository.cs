@@ -78,7 +78,7 @@ namespace Kundbolaget.EntityFramework.Repositories
                 }
                 orders.Add(new Order
                 {
-                    CompanyId = int.Parse(subOrder.deliverTo),
+                    CompanyId = subOrder.deliverTo,
                     WishedDeliveryDate = DateTime.Parse(subOrder.deliverDate),
                     CreatedDate = DateTime.Now,
                     CustomerOrderId = order.customerOrderFileId,

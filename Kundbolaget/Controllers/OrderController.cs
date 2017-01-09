@@ -13,11 +13,13 @@ namespace Kundbolaget.Controllers
     {
         private DbOrderRepository _orders;
         private DbCompanyRepository _companies;
+        private DbProductStockRepository _productStock;
 
         public OrderController()
         {
             _orders = new DbOrderRepository();
             _companies = new DbCompanyRepository();
+            _productStock = new DbProductStockRepository();
         }
 
         //Constructor for tests
@@ -67,9 +69,20 @@ namespace Kundbolaget.Controllers
         public string Delete(int id)
         {
             var entity = _orders.GetEntity(id);
+            RestoreProductStock(entity);
             entity.IsRemoved = true;
             _orders.UpdateEntity(entity);
             return "Success";
+        }
+
+        private void RestoreProductStock(Order entity)
+        {
+            foreach (var orderDetail in entity.OrderDetails)
+            {
+                var productStock = _productStock.GetEntity(orderDetail.ProductInfoId);
+                productStock.Amount += orderDetail.ReservedAmount.Value;
+                _productStock.UpdateEntity(productStock);
+            }
         }
 
         public ActionResult GetAllUnpickedOrders()

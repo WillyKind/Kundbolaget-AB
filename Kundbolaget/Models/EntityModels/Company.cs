@@ -50,7 +50,10 @@ namespace Kundbolaget.Models.EntityModels
         public virtual Address DeliveryAddress { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
+
         [Required]
         public bool IsRemoved { get; set; }
+
+        public double Discount { get; set; }
     }
 }

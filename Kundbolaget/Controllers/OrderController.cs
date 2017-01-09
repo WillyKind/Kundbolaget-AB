@@ -194,6 +194,9 @@ namespace Kundbolaget.Controllers
                 });
                 invoice.Price += (int) finalPrice;
             }
+
+
+            invoice.Price = invoice.Price / (invoice.Order.Company.ParentCompany.Discount + 1);
             orderViewModel.Order.Invoice = invoice;
             _orders.UpdateEntity(orderViewModel.Order);
         }

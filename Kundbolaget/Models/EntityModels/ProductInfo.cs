@@ -46,14 +46,14 @@ namespace Kundbolaget.Models.EntityModels
         public bool IsRemoved { get; set; }
 
         [Required]
-        public int Price { get; set; }
+        public double Price { get; set; }
 
-        public int? NewPrice { get; set; }
+        public double? NewPrice { get; set; }
 
         public DateTime? PriceStart { get; set; }
 
 
-        public float? PalletDiscount { get; set; }
+        public double? PalletDiscount { get; set; }
 
         public virtual ICollection<ProductStock> ProductStocks { get; set; }
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }

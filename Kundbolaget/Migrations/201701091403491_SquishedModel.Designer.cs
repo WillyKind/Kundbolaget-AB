@@ -7,13 +7,13 @@ namespace Kundbolaget.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class OneToManyCompanyAddress : IMigrationMetadata
+    public sealed partial class SquishedModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(OneToManyCompanyAddress));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SquishedModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612021324404_OneToManyCompanyAddress"; }
+            get { return "201701091403491_SquishedModel"; }
         }
         
         string IMigrationMetadata.Source

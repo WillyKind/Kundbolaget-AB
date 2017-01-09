@@ -406,6 +406,10 @@
     <Compile Include="Migrations\201701051237533_AddPropertyNewPriceAndPriceStart.Designer.cs">
       <DependentUpon>201701051237533_AddPropertyNewPriceAndPriceStart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701090900353_AddFieldPalletDiscount.cs" />
+    <Compile Include="Migrations\201701090900353_AddFieldPalletDiscount.Designer.cs">
+      <DependentUpon>201701090900353_AddFieldPalletDiscount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -616,6 +620,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701051237533_AddPropertyNewPriceAndPriceStart.resx">
       <DependentUpon>201701051237533_AddPropertyNewPriceAndPriceStart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701090900353_AddFieldPalletDiscount.resx">
+      <DependentUpon>201701090900353_AddFieldPalletDiscount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

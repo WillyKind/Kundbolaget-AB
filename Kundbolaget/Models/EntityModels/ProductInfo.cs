@@ -52,6 +52,9 @@ namespace Kundbolaget.Models.EntityModels
 
         public DateTime? PriceStart { get; set; }
 
+
+        public float? PalletDiscount { get; set; }
+
         public virtual ICollection<ProductStock> ProductStocks { get; set; }
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
     }

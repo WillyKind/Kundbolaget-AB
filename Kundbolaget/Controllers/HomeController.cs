@@ -30,12 +30,9 @@ namespace Kundbolaget.Controllers
         public ActionResult Delivery()
         {
             var unpickedOrders = _orders.GetUnpickedOrders().ToList();
-            ProductAllocater.IsOrderComplete(unpickedOrders);
-            var orders = ProductAllocater.AmountDiffSolver(unpickedOrders);
-            foreach (var order in orders)
-            {
-               _orders.UpdateOrder(order);
-            }
+            _orders.IsOrderComplete(unpickedOrders);
+            _orders.AmountDiffSolver(unpickedOrders);
+           
             return View();
         }
     }

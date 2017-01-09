@@ -232,9 +232,18 @@ namespace Kundbolaget.EntityFramework.Repositories
                 db.ProductStocks.Attach(stock);
                 var entry = db.Entry(stock);
                 entry.State = EntityState.Modified;
-                db.SaveChanges();
             }
+            db.SaveChanges();
         }
+
+        public void UpdateStock(ProductStock productStocks)
+        {
+                db.ProductStocks.Attach(productStocks);
+                var entry = db.Entry(productStocks);
+                entry.State = EntityState.Modified;
+                db.SaveChanges();
+        }
+
 
         public void IsOrderComplete(List<Order> orders)
         {
@@ -243,6 +252,28 @@ namespace Kundbolaget.EntityFramework.Repositories
                 order.OrderComplete = order.OrderDetails.All(x => x.Amount == x.ReservedAmount);
                 UpdateOrder(order);
             }
+        }
+
+        public void ReturnProductToStock(int id)
+        {
+            var detail = db.OrderDetails.FirstOrDefault(od => od.Id == id);
+            if (detail.Amount < detail.ReservedAmount.Value)
+            {
+                var diff = detail.ReservedAmount - detail.Amount;
+                var saldo = GetProductStockSaldo(detail.ProductInfoId);
+                saldo.Amount += diff.Value;
+                detail.ReservedAmount = detail.Amount;
+                UpdateStock(saldo);
+                UpdateOrderdetail(detail);
+            }
+        }
+
+        public void UpdateOrderdetail(OrderDetails orderDetails)
+        {
+            db.OrderDetails.Attach(orderDetails);
+            var entry = db.Entry(orderDetails);
+            entry.State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }

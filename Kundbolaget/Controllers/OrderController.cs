@@ -74,7 +74,7 @@ namespace Kundbolaget.Controllers
 
         public ActionResult GetAllUnpickedOrders()
         {
-            var model = _orders.GetUnpickedOrders();
+            var model = _orders.GetUnpickedOrders().OrderBy(d => d.CreatedDate).ThenBy(d => d.WishedDeliveryDate);
             return View(model);
         }
 

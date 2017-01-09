@@ -56,6 +56,7 @@ namespace Kundbolaget.Controllers
             var product = _products.GetEntity(model.OrderDetails.ProductInfoId);
             model.OrderDetails.UnitPrice = product.Price;
             model.OrderDetails.TotalPrice = model.OrderDetails.Amount*model.OrderDetails.UnitPrice;
+            model.OrderDetails.ReservedAmount = 0;
             var updatedOrder = _orders.GetEntity(model.OrderDetails.OrderId);
             updatedOrder.Price +=(int) model.OrderDetails.TotalPrice;
 

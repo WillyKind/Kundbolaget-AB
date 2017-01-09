@@ -301,7 +301,7 @@ namespace Kundbolaget.Migrations
                 },
                 new ProductInfo
                 {
-                    Name = " Dreissigacker",
+                    Name = "Dreissigacker",
                     Abv = 12,
                     Container = containers.First(c => c.Name == "Flaska"),
                     Volume = volumes.First(v => v.Milliliter == 700),
@@ -313,7 +313,7 @@ namespace Kundbolaget.Migrations
                 },
                 new ProductInfo
                 {
-                    Name = " Vino Nobile di Montepulciano",
+                    Name = "Vino Nobile di Montepulciano",
                     Abv = 13.5,
                     Container = containers.First(c => c.Name == "Flaska"),
                     Volume = volumes.First(v => v.Milliliter == 700),
@@ -330,15 +330,57 @@ namespace Kundbolaget.Migrations
                 new ProductStock
                 {
                     Amount = 500,
-                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld"),
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld" && pi.Volume.Milliliter == 330),
+                    Warehouse = warehouse
+                },
+                new ProductStock
+                {
+                    Amount = 500,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld" && pi.Volume.Milliliter == 500),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
                     Amount = 200,
-                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva"),
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Nääs APA" && pi.Volume.Milliliter == 330),
                     Warehouse = warehouse
-                }
+                },
+                new ProductStock
+                {
+                    Amount = 300,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Lagunitas IPA" && pi.Volume.Milliliter == 350),
+                    Warehouse = warehouse
+                },
+                new ProductStock
+                {
+                    Amount = 150,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva" && pi.Volume.Milliliter == 700),
+                    Warehouse = warehouse
+                },
+                new ProductStock
+                {
+                    Amount = 150,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Absolut Vodka" && pi.Volume.Milliliter == 700),
+                    Warehouse = warehouse
+                },
+                new ProductStock
+                {
+                    Amount = 150,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Smirnoff Vodka" && pi.Volume.Milliliter == 700),
+                    Warehouse = warehouse
+                },
+                new ProductStock
+                {
+                    Amount = 150,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Dreissigacker" && pi.Volume.Milliliter == 700),
+                    Warehouse = warehouse
+                },
+                new ProductStock
+                {
+                    Amount = 150,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Vino Nobile di Montepulciano" && pi.Volume.Milliliter == 700),
+                    Warehouse = warehouse
+                },
             };
 
             var dummyOrder = new Order

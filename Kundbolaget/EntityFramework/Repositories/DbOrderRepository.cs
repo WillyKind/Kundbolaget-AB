@@ -9,7 +9,6 @@ using Kundbolaget.Interfaces;
 using Kundbolaget.JsonEntityModels;
 using Kundbolaget.Models;
 using Kundbolaget.Models.EntityModels;
-using Kundbolaget.OrderUtility;
 
 namespace Kundbolaget.EntityFramework.Repositories
 {

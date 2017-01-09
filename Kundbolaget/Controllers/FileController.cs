@@ -11,7 +11,6 @@ using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.JsonEntityModels;
 using Kundbolaget.Models;
 using Kundbolaget.Models.EntityModels;
-using Kundbolaget.OrderUtility;
 using Kundbolaget.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

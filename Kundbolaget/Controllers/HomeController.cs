@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Kundbolaget.EntityFramework.Repositories;
-using Kundbolaget.OrderUtility;
 
 namespace Kundbolaget.Controllers
 {
@@ -30,9 +29,9 @@ namespace Kundbolaget.Controllers
         public ActionResult Delivery()
         {
             var unpickedOrders = _orders.GetUnpickedOrders().ToList();
-            _orders.IsOrderComplete(unpickedOrders);
             _orders.AmountDiffSolver(unpickedOrders);
-           
+            _orders.IsOrderComplete(unpickedOrders);
+
             return View();
         }
     }

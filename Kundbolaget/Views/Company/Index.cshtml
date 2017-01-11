@@ -15,8 +15,7 @@
         <tr>
             <th>Namn</th>
             <th>Besöksadress</th>
-            <th>Land</th>
-            <th>KontaktPerson</th>
+            <th>Kontaktperson</th>
             <th>Email</th>
             <th>Telefonnummer</th>
             <th>Leveransadress</th>
@@ -32,7 +31,6 @@
             <tr id="@item.Id">
                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
                 <td>@Html.DisplayFor(modelItem => item.Address.Street) @Html.DisplayFor(modelItem => item.Address.Number)</td>
-                <td>@Html.DisplayFor(modelItem => item.Country.Name)</td>
                 <td>@Html.DisplayFor(modelItem => item.ContactPerson.FirstName)</td>
                 <td>@Html.DisplayFor(modelItem => item.Email)</td>
                 <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>

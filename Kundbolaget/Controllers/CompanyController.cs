@@ -42,7 +42,6 @@ namespace Kundbolaget.Controllers
             return "Success";
         }
 
-
         [HttpPost]
         public string DeleteEntity(int id)
         {

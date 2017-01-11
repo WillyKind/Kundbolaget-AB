@@ -176,12 +176,12 @@ namespace Kundbolaget.PdfGenerator
                  
                 new PdfPCell(new Phrase("")) {Colspan = 2, Border = 0},
                 new PdfPCell(new Phrase("Öresutjämning:", hBold)) {Colspan = 2, Border = 0},
-                new PdfPCell(new Phrase(Math.Round((Math.Round(order.Invoice.PriceWithCompanyDiscount + Math.Round(order.Invoice.PriceWithCompanyDiscount * 0.25,0))
+                new PdfPCell(new Phrase(Math.Round((Math.Round(order.Invoice.PriceWithCompanyDiscount + Math.Round(order.Invoice.PriceWithCompanyDiscount * 0.25,0,MidpointRounding.AwayFromZero))
                 - (Math.Round(order.Invoice.PriceWithCompanyDiscount,2)+ Math.Round(order.Invoice.PriceWithCompanyDiscount * 0.25,2))),2).ToString(), hBold)){Border = 0},
                  
                 new PdfPCell(new Phrase("")) {Colspan = 2, Border = 0},
                 new PdfPCell(new Phrase("Summa att betala SEK:", hBold)) { BorderWidthBottom = 0,BorderWidthLeft = 0,BorderWidthRight = 0, Colspan = 2 },
-                new PdfPCell(new Phrase(Math.Round(order.Invoice.PriceWithCompanyDiscount + (order.Invoice.PriceWithCompanyDiscount * 0.25),0).ToString(), hBold)) { BorderWidthBottom = 0,BorderWidthLeft = 0,BorderWidthRight = 0},
+                new PdfPCell(new Phrase(Math.Round(order.Invoice.PriceWithCompanyDiscount + (order.Invoice.PriceWithCompanyDiscount * 0.25),0,MidpointRounding.AwayFromZero).ToString(), hBold)) { BorderWidthBottom = 0,BorderWidthLeft = 0,BorderWidthRight = 0},
             };
 
             foreach (var priceCell in priceInfoCells)

@@ -256,6 +256,10 @@
     <Compile Include="Migrations\201701111003186_AddPriceTrackingForInvoiceAndDiscountToCompany.Designer.cs">
       <DependentUpon>201701111003186_AddPriceTrackingForInvoiceAndDiscountToCompany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701111505132_RemovesUnusedPropertiesOnProductInfo.cs" />
+    <Compile Include="Migrations\201701111505132_RemovesUnusedPropertiesOnProductInfo.Designer.cs">
+      <DependentUpon>201701111505132_RemovesUnusedPropertiesOnProductInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -354,6 +358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701111003186_AddPriceTrackingForInvoiceAndDiscountToCompany.resx">
       <DependentUpon>201701111003186_AddPriceTrackingForInvoiceAndDiscountToCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701111505132_RemovesUnusedPropertiesOnProductInfo.resx">
+      <DependentUpon>201701111505132_RemovesUnusedPropertiesOnProductInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

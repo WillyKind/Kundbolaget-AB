@@ -86,8 +86,6 @@ namespace Tests
                     Milliliter = 750
                 },
                 Abv = 14,
-                PurchasePrice = 30,
-                TradingMargin = 5
             };
             model.ProductInfo = productInfo;
             _productController.Create(model);
@@ -109,8 +107,6 @@ namespace Tests
                     Milliliter = 750
                 },
                 Abv = 14,
-                PurchasePrice = 30,
-                TradingMargin = 5
             };
             var testmodel = new ManageProductInfosViewModel();
             testmodel.ProductInfo = prod;

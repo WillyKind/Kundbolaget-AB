@@ -33,8 +33,20 @@
                         @Html.DisplayFor(model => model.Abv)
                     </li>
                     <li>
-                        Utpris:
+                        Pallrabatt:
+                        @Html.DisplayFor(model => model.PalletDiscount)
+                    </li>
+                    <li>
+                        Pris:
                         @Html.DisplayFor(model => model.Price)
+                    </li>
+                    <li>
+                        Nytt pris:
+                        @Html.DisplayFor(model => model.NewPrice)
+                    </li>
+                    <li>
+                        Nytt pris datum:
+                        @Html.DisplayFor(model => model.PriceStart)
                     </li>
                 </ul>
                 

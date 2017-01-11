@@ -28,9 +28,9 @@ namespace Kundbolaget.PdfGenerator
                           {
                               od.OrderId,
                               od.Order.Company.Name,
-                              od.Order.Company.DeliveryAddress.Street,
-                              od.Order.Company.DeliveryAddress.Number,
-                              od.Order.Company.DeliveryAddress.ZipCode,
+                              od.Order.Company.Address.Street,
+                              od.Order.Company.Address.Number,
+                              od.Order.Company.Address.ZipCode,
                               od.Order.WishedDeliveryDate,
                               od.Order.CreatedDate,
                               od.Order.CompanyId,
@@ -235,37 +235,54 @@ namespace Kundbolaget.PdfGenerator
 
             var fs1 = FontFactory.GetFont(FontFactory.HELVETICA, 20);
             var fs2 = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+            var hBold = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
             doc.Add(new Paragraph("Följesedel", fs1));
             doc.Add(new Paragraph("\n"));
 
-            foreach (var c in company)
+            var table0 = new PdfPTable(3) {HorizontalAlignment = 1, WidthPercentage = 100f};
+            table0.SetWidths(new float[] {1f, 2f, 1f});
+
+            var cellsLeft = new List<PdfPCell>
             {
-                doc.Add(new Paragraph($"Ordernummer: {c.OrderId} ") { Alignment = Element.ALIGN_LEFT });
-                doc.Add(new Paragraph($"Beställare: {c.Name} ") { Alignment = Element.ALIGN_LEFT });
-                doc.Add(new Paragraph($"Leveransadress: {c.Street} {c.Number} {c.ZipCode} ") { Alignment = Element.ALIGN_LEFT });
-                doc.Add(new Paragraph($"Leveransdatum: {c.WishedDeliveryDate.ToShortDateString()} ") { Alignment = Element.ALIGN_LEFT });
-                break;
+                new PdfPCell(new Phrase("Ordernummer:")) {Border = 0},
+                new PdfPCell(new Phrase(company.FirstOrDefault().OrderId.ToString())) {Border = 0},
+                new PdfPCell(new Phrase("")) {Border = 0},
+                new PdfPCell(new Phrase("Beställare:")) {Border = 0},
+                new PdfPCell(new Phrase(company.FirstOrDefault().Name)) {Border = 0},
+                new PdfPCell(new Phrase("")) {Border = 0},
+                new PdfPCell(new Phrase("Leveransadress:")) {Border = 0},
+                new PdfPCell(new Phrase($"{company.FirstOrDefault().Street} {company.FirstOrDefault().Number}, {company.FirstOrDefault().ZipCode}")) {Border = 0},
+                new PdfPCell(new Phrase("")) {Border = 0},
+                new PdfPCell(new Phrase("Leveransdatum:")) {Border = 0},
+                new PdfPCell(new Phrase(company.FirstOrDefault().WishedDeliveryDate.ToShortDateString())) {Border = 0},
+                new PdfPCell(new Phrase("")) {Border = 0},
+            };
+
+            foreach (var cell in cellsLeft)
+            {
+                table0.AddCell(cell);
             }
+            doc.Add(table0);
 
             doc.Add(new Paragraph("\n\n"));
 
-            var table = new PdfPTable(4) {HorizontalAlignment = 1, WidthPercentage = 100f};
-            var cell = new PdfPCell(new Phrase("Detaljer"))
+            var table = new PdfPTable(3) {HorizontalAlignment = 1, WidthPercentage = 100f};
+            table.SetWidths(new float[] {1f, 2f, 1f} );
+            var headerCells = new List<PdfPCell>
             {
-                Colspan = 4,
-                HorizontalAlignment = 1 //0=Left, 1=Centre, 2=Right
-            }; 
-            table.AddCell(cell);
-            table.AddCell("Artikelnr");
-            table.AddCell("Produkt");
-            table.AddCell("Behållare");
-            table.AddCell("Antal");
-            
+                new PdfPCell(new Phrase("Artikelnr", hBold)) {BackgroundColor = BaseColor.LIGHT_GRAY },
+                new PdfPCell(new Phrase("Beskrivning", hBold)) { BackgroundColor = BaseColor.LIGHT_GRAY },
+                new PdfPCell(new Phrase("Antal Kolli", hBold)) { BackgroundColor = BaseColor.LIGHT_GRAY },
+            };
+            foreach (var headerCell in headerCells)
+            {
+                table.AddCell(headerCell);
+            }
+
             foreach (var item in product)
             {
                 table.AddCell($"{item.ProductInfoId}");
-                table.AddCell($"{item.Name}");
-                table.AddCell($"{item.Container} {item.Volume.Milliliter}ml");
+                table.AddCell($"{item.Name} {item.Container} {item.Volume.Milliliter}ml");
                 table.AddCell($"{item.Amount}");
             }
             doc.Add(table);

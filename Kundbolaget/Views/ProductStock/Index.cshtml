@@ -30,12 +30,12 @@
             <td>@Html.DisplayFor(modelItem => item.Warehouse.Name)</td>
             <td>@Html.DisplayFor(modelItem => item.Amount)</td>
             <td class="centeredColumn">
-                <a href="@Url.Action("Edit", "Product", new {id = item.Id})" class="btn btn-floating  waves-effect waves-light">
+                <a href="@Url.Action("Edit", "ProductStock", new {id = item.Id})" class="btn btn-floating  waves-effect waves-light">
                     <i class="material-icons">mode_edit</i>
                 </a>
             </td>
             <td class="centeredColumn">
-                <a href="@Url.Action("Details", "Product", new {id = item.Id})" class="btn btn-floating  waves-effect waves-light blue">
+                <a href="@Url.Action("Details", "ProductStock", new {id = item.Id})" class="btn btn-floating  waves-effect waves-light blue">
                     <i class="material-icons">info_outline</i>
                 </a>
             </td>

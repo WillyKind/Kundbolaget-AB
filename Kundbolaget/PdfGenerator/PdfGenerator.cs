@@ -53,6 +53,7 @@ namespace Kundbolaget.PdfGenerator
                               od.TotalPrice,
                           };
             
+            
             var doc = new Document();
             string path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\Faktura_o{id}_c{company.FirstOrDefault().Name}{DateTime.Now.ToShortDateString()}.pdf";
 
@@ -175,6 +176,12 @@ namespace Kundbolaget.PdfGenerator
                 new PdfPCell(new Phrase("100 kr", hBold)) { Border = 0},
                 new PdfPCell(new Phrase("")) {Colspan = 3, Border = 0},
                 new PdfPCell(new Phrase("Total moms:", hBold)) {  Border = 0, Colspan = 3 },
+                new PdfPCell(new Phrase("500 kr", hBold)) {  Border = 0 },
+                new PdfPCell(new Phrase("")) {Colspan = 3, Border = 0},
+                new PdfPCell(new Phrase("Pris före rabatt:", hBold)) {  Border = 0, Colspan = 3 },
+                new PdfPCell(new Phrase("500 kr", hBold)) {  Border = 0 },
+                new PdfPCell(new Phrase("")) {Colspan = 3, Border = 0},
+                new PdfPCell(new Phrase("Pris med rabatt:", hBold)) {  Border = 0, Colspan = 3 },
                 new PdfPCell(new Phrase("500 kr", hBold)) {  Border = 0 },
                 new PdfPCell(new Phrase("")) {Colspan = 3, Border = 0},
                 new PdfPCell(new Phrase("Öresutjämning:", hBold)) {  Border = 0, Colspan = 3 },

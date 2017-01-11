@@ -143,6 +143,7 @@ namespace Kundbolaget.Controllers
             var order = _orders.GetOrder(id);
             order.OrderDelivered = DateTime.Now;
             _orders.UpdateOrder(order);
+            CreateInvoice(id);
             return "Success " + id;
         }
 

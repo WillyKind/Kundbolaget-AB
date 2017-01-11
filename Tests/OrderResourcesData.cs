@@ -48,6 +48,25 @@ namespace Tests
                 },
                 CreatedDate = DateTime.Now,
                 WishedDeliveryDate = DateTime.Parse("2016-12-12"),
+                OrderDetails = new List<OrderDetails>
+                {
+                    new OrderDetails
+                    {
+                        ProductInfo = ResourceData.ProductInfoList[1],
+                        Amount = 10,
+                        Order = DummyOrder[0],
+                        UnitPrice = ResourceData.ProductInfoList[1].Price,
+                        TotalPrice = ResourceData.ProductInfoList[1].Price*10
+                    },
+                    new OrderDetails
+                    {
+                        ProductInfo = ResourceData.ProductInfoList[2],
+                        Amount = 25,
+                        UnitPrice = ResourceData.ProductInfoList[2].Price,
+                        TotalPrice = ResourceData.ProductInfoList[2].Price*25,
+                        Order = DummyOrder[0]
+                    }
+                }
             }
         };
 

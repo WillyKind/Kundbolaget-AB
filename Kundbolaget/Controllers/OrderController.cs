@@ -38,7 +38,7 @@ namespace Kundbolaget.Controllers
         public ActionResult Index()
         {
             var model = _companies.GetParentCompanies();
-            return View(model);
+            return View("Index" ,model);
         }
 
         public ActionResult Company(int id)
@@ -82,7 +82,7 @@ namespace Kundbolaget.Controllers
             return "Success";
         }
 
-        private void RestoreProductStock(Order entity)
+        public void RestoreProductStock(Order entity)
         {
             foreach (var orderDetail in entity.OrderDetails)
             {

@@ -104,16 +104,13 @@ namespace Kundbolaget.Controllers
             {
                 return HttpNotFound();
             }
-            var updatedModel = _orderDetails.GetEntity(id);
-            updatedModel.Amount = model.OrderDetails.Amount;
-            updatedModel.TotalPrice = model.OrderDetails.Amount*updatedModel.UnitPrice;
-            _orderDetails.UpdateEntity(updatedModel);
+            model.OrderDetails.TotalPrice = model.OrderDetails.Amount*model.OrderDetails.UnitPrice;
+            _orderDetails.UpdateEntity(model.OrderDetails);
 
-            var updatedOrder = _orders.GetEntity(updatedModel.OrderId);
-            updatedOrder.Price= updatedOrder.OrderDetails.Sum(updateOrderOrderDetail => (int) updateOrderOrderDetail.TotalPrice);
+            model.OrderDetails.Order.Price = model.OrderDetails.Order.OrderDetails.Sum(od => od.TotalPrice);
 
-            _orders.UpdateEntity(updatedOrder);
-            return RedirectToAction("Index", new {id=updatedOrder.Id, companyId= updatedOrder.Company.ParentCompanyId});
+            _orders.UpdateEntity(model.OrderDetails.Order);
+            return RedirectToAction("Index", new {id=model.OrderDetails.Order.Id, companyId= model.OrderDetails.Order.Company.ParentCompanyId});
         }
 
         public ActionResult Delete(int id, int orderId)

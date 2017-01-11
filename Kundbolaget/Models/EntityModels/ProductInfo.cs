@@ -37,12 +37,6 @@ namespace Kundbolaget.Models.EntityModels
         public double Abv { get; set; }
 
         [Required]
-        public double TradingMargin { get; set; }
-
-        [Required]
-        public double PurchasePrice { get; set; }
-
-        [Required]
         public bool IsRemoved { get; set; }
 
         [Required]

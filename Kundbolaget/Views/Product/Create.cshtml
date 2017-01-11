@@ -4,13 +4,11 @@
     ViewBag.Title = "Skapa";
 }
 
-@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { @class = "col s12" }))
+@using (Html.BeginForm("Create", "Product", FormMethod.Post, new {@class = "col s12"}))
 {
-    
-    
     @Html.AntiForgeryToken()
     <div>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true)
         <div class="row">
             <h4>Skapa ny produkt</h4>
             <form class="col s12">
@@ -56,31 +54,24 @@
                         @Html.ValidationMessageFor(model => model.ProductInfo.Abv, "", new {@class = "text-danger"})
                     </div>
                 </div>
-                @*<div class="row">
-                    <div class="input-field col s12">
-                        @Html.LabelFor(model => model.ProductInfo.TradingMargin, "TG", htmlAttributes: new {@class = "control-label col-md-2"})
-                        @Html.EditorFor(model => model.ProductInfo.TradingMargin, new {htmlAttributes = new {@class = "form-control"}})
-                        @Html.ValidationMessageFor(model => model.ProductInfo.TradingMargin, "", new {@class = "text-danger"})
-                    </div>
-                </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        @Html.LabelFor(model => model.ProductInfo.PurchasePrice, "Inköpspris", htmlAttributes: new {@class = "control-label col-md-2"})
-                        @Html.EditorFor(model => model.ProductInfo.PurchasePrice, new {htmlAttributes = new {@class = "form-control"}})
-                        @Html.ValidationMessageFor(model => model.ProductInfo.PurchasePrice, "", new {@class = "text-danger"})
-                    </div>
-                </div>*@
-                <div class="row">
-                    <div class="input-field col s12">
-                        @Html.LabelFor(model => model.ProductInfo.Price, "Utpris", htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.LabelFor(model => model.ProductInfo.Price, "Pris", htmlAttributes: new {@class = "control-label col-md-2"})
                         @Html.EditorFor(model => model.ProductInfo.Price, new {htmlAttributes = new {@class = "form-control"}})
                         @Html.ValidationMessageFor(model => model.ProductInfo.Price, "", new {@class = "text-danger"})
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input type="submit" value="Skapa" class="btn btn-default" /> 
-                        @Html.ActionLink("Tillbaka", "Index", null, new { @class = "btn blue" })
+                        @Html.LabelFor(model => model.ProductInfo.PalletDiscount, "Pallrabatt", htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.EditorFor(model => model.ProductInfo.PalletDiscount, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.ProductInfo.PalletDiscount, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="submit" value="Skapa" class="btn btn-default"/>
+                        @Html.ActionLink("Tillbaka", "Index", null, new {@class = "btn blue"})
                     </div>
                 </div>
             </form>

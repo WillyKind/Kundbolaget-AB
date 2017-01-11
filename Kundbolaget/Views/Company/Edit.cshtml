@@ -107,6 +107,27 @@
                 @Html.ValidationMessageFor(model => model.Company.PhoneNumber)
             </div>
         </div>
+        @{
+            if (Model.Company.ParentCompanyId == null)
+            {
+                <div class="row">
+                    <div class="col s10 input-field">
+
+                        @Html.EditorFor(model => model.Company.Discount, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "validate",
+                                type = "text",
+                                data_val_required = "Måste fyllas i."
+                            }
+                        })
+                        @Html.LabelFor(model => model.Company.Discount, "Företagsrabatt")
+                        @Html.ValidationMessageFor(model => model.Company.Discount)
+                    </div>
+                </div>
+            }
+        }
 
         <div class="row">
             <div class="col s10">
@@ -154,7 +175,7 @@
         <div class="row">
             <div class="col s10">
                 <input type="submit" value="Spara" class="teal btn waves-effect waves-light"/>
-                @Html.ActionLink("Tillbaka", "Index", null, new {@class = "blue btn waves-effect waves-light" })
+                @Html.ActionLink("Tillbaka", "Index", null, new {@class = "blue btn waves-effect waves-light"})
             </div>
         </div>
     </div>

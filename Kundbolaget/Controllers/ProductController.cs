@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -91,8 +92,6 @@ namespace Kundbolaget.Controllers
         [HttpPost]
         public ActionResult Create(ManageProductInfosViewModel model)
         {
-            model.ProductInfo.TradingMargin = 0;
-            model.ProductInfo.PurchasePrice = 0;
             if (!ModelState.IsValid)
             {
                 return View(model);

@@ -247,6 +247,14 @@
     <Compile Include="Migrations\201701091403491_SquishedModel.Designer.cs">
       <DependentUpon>201701091403491_SquishedModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701091420000_AddDiscountToCompany.cs" />
+    <Compile Include="Migrations\201701091420000_AddDiscountToCompany.Designer.cs">
+      <DependentUpon>201701091420000_AddDiscountToCompany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701091449523_AddPriceTrackingForInvoice.cs" />
+    <Compile Include="Migrations\201701091449523_AddPriceTrackingForInvoice.Designer.cs">
+      <DependentUpon>201701091449523_AddPriceTrackingForInvoice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -338,6 +346,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701091403491_SquishedModel.resx">
       <DependentUpon>201701091403491_SquishedModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701091420000_AddDiscountToCompany.resx">
+      <DependentUpon>201701091420000_AddDiscountToCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701091449523_AddPriceTrackingForInvoice.resx">
+      <DependentUpon>201701091449523_AddPriceTrackingForInvoice.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

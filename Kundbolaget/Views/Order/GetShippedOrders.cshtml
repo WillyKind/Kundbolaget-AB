@@ -1,10 +1,12 @@
 ﻿@using Kundbolaget.Controllers
 @using Kundbolaget.Models.EntityModels
 @model IEnumerable<Kundbolaget.Models.EntityModels.Order>
-<h2>Bekräfta leverans</h2>
-@Html.ActionLink("Tillbaka", "Delivery", "Home", null, new { @class = "orange-text" })
-<hr/>
+<h4>Bekräfta leverans</h4>
+<div>
+    @Html.ActionLink("Tillbaka", "Delivery", "Home", null, new { @class = "orange-text" })
+</div>
 <table class="highlight">
+    <thead>
     <tr>
         <th>
             Ordernummer
@@ -37,51 +39,53 @@
             Kommentar
         </th>
     </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a onclick="OrderController(@item.Id, 'OrderDelivered')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">check</i></a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Index", "OrderDetails", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">update</i></a>
+                </td>
+                <td>
+                    <a href="@Url.Action("OrderDetails", "Order", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">info_outline</i></a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Create", "Order", new {id = item.Company.ParentCompanyId, customerOrderId = item.CustomerOrderId, companyId = item.CompanyId})" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">add_circle_outline</i></a>
+                </td>
+                <td>
+                    @Html.TextArea("txtValue", item.Comment, new { id = "textArea" + @item.Id })
+                </td>
+                <td>
+                    <a onclick="OrderComment('SetComment', @item.Id)" class="btn btn-floating btn-small waves-effect waves-light">
+                        <i class="material-icons">update</i>
+                    </a>
+                </td>
+            </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr id="@item.Id">
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Company.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a onclick="OrderController(@item.Id,'OrderDelivered')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">check</i></a>
-            </td>
-            <td>
-                <a href="@Url.Action("Index","OrderDetails", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">update</i></a>
-            </td>
-            <td>
-                <a href="@Url.Action("OrderDetails", "Order", new { id = item.Id, companyId = item.Company.ParentCompanyId })" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">info_outline</i></a>
-            </td>
-            <td>
-                <a href="@Url.Action("Create", "Order", new { id = item.Company.ParentCompanyId, customerOrderId=item.CustomerOrderId, companyId=item.CompanyId})" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">add_circle_outline</i></a>
-            </td>
-            <td>
-                @Html.TextArea("txtValue", item.Comment, new { id = "textArea" + @item.Id})
-            </td>
-            <td>
-                <a onclick="OrderComment('SetComment', @item.Id)" class="btn btn-floating btn-small waves-effect waves-light">
-                    <i class="material-icons">update</i>
-                </a>
-            </td>         
-        </tr>
 
 
 
-
-    }
+        }
+    </tbody>
 </table>
 <script src="~/Scripts/CallOrderController.js"></script>
 

@@ -20,10 +20,9 @@ namespace Tests
     [TestFixture]
     class AdressControllerTests
     {
-        
-         Mock<StoreContext> _mockContext;
-         Mock<DbSet<Address>> _mockAdress;
-         AddressController _adressController;
+        Mock<StoreContext> _mockContext;
+        Mock<DbSet<Address>> _mockAdress;
+        AddressController _adressController;
 
         [SetUp]
         public void Initializer()
@@ -35,6 +34,7 @@ namespace Tests
             var setupDbAddress = Helper.SetupDb(_mockAdress, dataAdressList);
             _mockContext.Setup(x => x.Addresses).Returns(setupDbAddress.Object);
             _mockAdress.Setup(x => x.Include(It.IsAny<string>())).Returns(_mockAdress.Object);
+            _mockContext.Setup(x => x.SetModified(It.IsAny<Address>()));
             var dbAddressRepository = new DbAddressRepository(_mockContext.Object);
             _adressController = new AddressController(dbAddressRepository);
         }
@@ -64,6 +64,7 @@ namespace Tests
             var viewResultModel = (Address) viewResult.Model;
             Assert.AreEqual(1, viewResultModel.Id);
         }
+
         [Test]
         public void Edit_Change_Value_In_Adress()
         {
@@ -102,7 +103,7 @@ namespace Tests
         {
             var addresses = _mockAdress.Object.ToList();
             _adressController.Delete(addresses[0], addresses[0].Id);
-            Assert.AreEqual(true , _mockAdress.Object.First().IsRemoved);
+            Assert.AreEqual(true, _mockAdress.Object.First().IsRemoved);
         }
 
         [Test]
@@ -115,7 +116,9 @@ namespace Tests
         [Test]
         public void Delete_Redirect_To_Action()
         {
-            var result = _adressController.Delete(ResourceData.AdressList[0], ResourceData.AdressList[0].Id) as RedirectToRouteResult;
+            var result =
+                _adressController.Delete(ResourceData.AdressList[0], ResourceData.AdressList[0].Id) as
+                    RedirectToRouteResult;
             Assert.AreSame("Index", result.RouteValues["action"]);
         }
 
@@ -150,7 +153,6 @@ namespace Tests
                 ZipCode = "18238",
                 Number = "1",
                 Street = "Blomstigen",
-
             };
             _adressController.Create(address);
             _mockAdress.Verify(x => x.Add(address), Times.Once);

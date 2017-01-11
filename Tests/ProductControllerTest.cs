@@ -57,6 +57,7 @@ namespace Tests
             //Without this you will get null reference exception when calling include.
             _mockSetProductInfo.Setup(x => x.Include(It.IsAny<string>())).Returns(_mockSetProductInfo.Object);
 
+            _mockContext.Setup(x => x.SetModified(It.IsAny<ProductInfo>()));
             // Injects mock database via overloaded ctor
             var dbProductInfoRepository = new DbProductInfoRepository(_mockContext.Object);
             var dbContainerRepository = new DbContainerRepository(_mockContext.Object);
@@ -69,7 +70,6 @@ namespace Tests
                 dbProductGroupRepository, dbVolumeRepository);
         }
 
-        
 
         [Test]
         public void Create()
@@ -123,35 +123,20 @@ namespace Tests
         {
             var productInfo = _mockSetProductInfo.Object.First(x => x.Id == 1);
 
-            _productController.Delete(productInfo, productInfo.Id);
+            _productController.Delete(productInfo.Id);
             var result = _mockSetProductInfo.Object.First(x => x.Id == productInfo.Id);
             Assert.AreEqual(true, result.IsRemoved);
             _mockContext.Verify(x => x.SaveChanges(), Times.Once);
         }
 
-        [Test]
-        public void Delete_Get_Object()
-        {
-            var actionResult = _productController.Delete(1);
-            var viewResult = actionResult as ViewResult;
-            var productInfo = (ProductInfo) viewResult.Model;
-            Assert.AreEqual(1, productInfo.Id);
-        }
 
         [Test]
         public void Delete_Is_Soft_Delte()
         {
             var productInfo = _mockSetProductInfo.Object.First(x => x.Id == 1);
-            _productController.Delete(productInfo, productInfo.Id);
+            _productController.Delete(productInfo.Id);
             //Verifies that Remove method is never called.
             _mockSetProductInfo.Verify(x => x.Remove(productInfo), Times.Never);
-        }
-
-        [Test]
-        public void Delete_Post_Redirect_To_Index()
-        {
-            var result = _productController.Delete(ResourceData.ProductInfoList[0], 1) as RedirectToRouteResult;
-            Assert.AreEqual("Index", result.RouteValues["action"]);
         }
 
 
@@ -172,7 +157,7 @@ namespace Tests
         {
             var actionResult = _productController.Edit(1);
             var viewResult = actionResult as ViewResult;
-             var result = (ManageProductInfosViewModel) viewResult.Model;
+            var result = (ManageProductInfosViewModel) viewResult.Model;
             Assert.AreEqual(1, result.ProductInfo.Id);
             Assert.AreEqual(ResourceData.ProductInfoList[0].Name, result.ProductInfo.Name);
             Assert.AreEqual(ResourceData.ProductInfoList[0].Description, result.ProductInfo.Description);
@@ -182,7 +167,9 @@ namespace Tests
         [Test]
         public void Edit_Post_Redirect_To_Index()
         {
-            var result = _productController.Edit(new ManageProductInfosViewModel {ProductInfo = ResourceData.ProductInfoList[0] }) as RedirectToRouteResult;
+            var result =
+                _productController.Edit(new ManageProductInfosViewModel {ProductInfo = ResourceData.ProductInfoList[0]})
+                    as RedirectToRouteResult;
             Assert.AreEqual("Index", result.RouteValues["action"]);
         }
 
@@ -192,7 +179,7 @@ namespace Tests
             var productInfos = _mockSetProductInfo.Object.ToList();
             var tempObj = productInfos[0];
             tempObj.Abv = 100;
-            _productController.Edit( new ManageProductInfosViewModel {ProductInfo = tempObj });
+            _productController.Edit(new ManageProductInfosViewModel {ProductInfo = tempObj});
 
             Assert.AreEqual(100, productInfos[0].Abv);
             _mockSetProductInfo.Verify(x => x.Attach(tempObj), Times.Once);
@@ -218,12 +205,6 @@ namespace Tests
             Assert.AreEqual("Create", result.ViewName);
         }
 
-        [Test]
-        public void View_Delete_With_Existing_Entity()
-        {
-            var result = _productController.Delete(1) as ViewResult;
-            Assert.AreEqual("Delete", result.ViewName);
-        }
 
         [Test]
         public void View_Delete_With_Existing_Entity_Does_Not_Return_404_Error()
@@ -232,12 +213,6 @@ namespace Tests
             Assert.AreNotEqual(typeof(HttpNotFoundResult), result.GetType());
         }
 
-        [Test]
-        public void View_Delete_Without_Existing_Entity_Return_404_Error()
-        {
-            var result = _productController.Delete(2000);
-            Assert.AreEqual(typeof(HttpNotFoundResult), result.GetType());
-        }
 
         [Test]
         public void View_Detail_With_Existing_Does_Not_Return_404_Error()

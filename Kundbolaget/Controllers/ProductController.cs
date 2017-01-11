@@ -52,7 +52,7 @@ namespace Kundbolaget.Controllers
             model.Containers = _containerRepository.GetEntities();
             model.ProductGroups = _productGroupRepository.GetEntities();
             model.Volumes = _volumeRepository.GetEntities();
-            
+
             return View("Edit", model);
         }
 
@@ -77,28 +77,6 @@ namespace Kundbolaget.Controllers
             return View("Details", model);
         }
 
-        //public ActionResult Delete(int id)
-        //{
-        //    var model = _productInfo.GetEntity(id);
-        //    if (model == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    return View("Delete", model);
-        //}
-
-        //[HttpPost]
-        //public ActionResult Delete(ProductInfo model, int id)
-        //{
-        //    if (model.Id != id)
-        //    {
-        //        ModelState.AddModelError("Name", "Bad Request");
-        //        return View(model);
-        //    }
-        //    _productInfo.DeleteEntity(id);
-        //    return RedirectToAction("Index", "Product");
-        //}
 
         [HttpPost]
         public string Delete(int id)

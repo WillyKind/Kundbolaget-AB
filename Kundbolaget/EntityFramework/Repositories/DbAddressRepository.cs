@@ -56,8 +56,7 @@ namespace Kundbolaget.EntityFramework.Repositories
         public void UpdateEntity(Address updatedEntity)
         {
             _db.Addresses.Attach(updatedEntity);
-            var entry = _db.Entry(updatedEntity);
-            entry.State = EntityState.Modified;
+            _db.SetModified(updatedEntity);
             _db.SaveChanges();
         }
     }

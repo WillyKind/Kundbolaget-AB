@@ -40,7 +40,7 @@ namespace Kundbolaget.EntityFramework.Repositories
         public void UpdateEntity(ProductStock updatedEntity)
         {
             _storeContext.ProductStocks.Attach(updatedEntity);
-            _storeContext.Entry(updatedEntity).State = EntityState.Modified;
+            _storeContext.SetModified(updatedEntity);
             _storeContext.SaveChanges();
         }
     }

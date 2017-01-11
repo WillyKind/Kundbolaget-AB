@@ -34,10 +34,13 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public ProductInfo GetEntity(int id)
         {
-            return UpdatePrice(db.ProductsInfoes
+            var singleOrDefault = db.ProductsInfoes
                 .Include(p => p.ProductGroup)
                 .Include(p => p.Container)
-                .SingleOrDefault(p => p.Id == id));
+                .SingleOrDefault(p => p.Id == id);
+            return singleOrDefault == null
+                ? null
+                : UpdatePrice(singleOrDefault);
         }
 
         public void CreateEntity(ProductInfo newEntity)
@@ -70,8 +73,7 @@ namespace Kundbolaget.EntityFramework.Repositories
         public void UpdateEntity(ProductInfo updatedEntity)
         {
             db.ProductsInfoes.Attach(updatedEntity);
-            var entry = db.Entry(updatedEntity);
-            entry.State = EntityState.Modified;
+            db.SetModified(updatedEntity);
             db.SaveChanges();
         }
     }

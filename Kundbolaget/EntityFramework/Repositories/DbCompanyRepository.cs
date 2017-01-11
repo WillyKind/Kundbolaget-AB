@@ -77,17 +77,17 @@ namespace Kundbolaget.EntityFramework.Repositories
             if (updatedEntity.AddressId == updatedEntity.DeliveryAddressId)
             {
                 _db.Addresses.Add(updatedEntity.DeliveryAddress);
-                _db.Entry(updatedEntity.DeliveryAddress).State = EntityState.Added;
+                _db.SetAdded(updatedEntity.DeliveryAddress);
             }
             else
             {
                 _db.Addresses.Attach(updatedEntity.Address);
                 _db.Addresses.Attach(updatedEntity.DeliveryAddress);
-                _db.Entry(updatedEntity.Address).State = EntityState.Modified;
-                _db.Entry(updatedEntity.DeliveryAddress).State = EntityState.Modified;
+                _db.SetModified(updatedEntity.Address);
+                _db.SetModified(updatedEntity.DeliveryAddress);
             }
             _db.Companies.Attach(updatedEntity);
-            _db.Entry(updatedEntity).State = EntityState.Modified;
+            _db.SetModified(updatedEntity);
             _db.SaveChanges();
         }
 

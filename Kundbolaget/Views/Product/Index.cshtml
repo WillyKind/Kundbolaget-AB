@@ -7,8 +7,10 @@
 <h4>Produktöversikt</h4>
 
 <div>
-    <a href="@Url.Action("Create","Product")" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">add</i></a>
-    <a href="@Url.Action("AdminManager","Home")" class="btn btn-floating btn-small waves-effect waves-light blue"><i class="material-icons">fast_rewind</i></a>
+    @*<a href="@Url.Action("Create","Product")" class="btn btn-floating waves-effect waves-light">Skapa ny</a>*@
+    
+    @Html.ActionLink("Skapa", "Create","Product" , null, new { @class = "teal btn" })
+    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new { @class = "blue btn" })
 </div>
 <table class="highlight responsive-table">
     <thead>
@@ -18,9 +20,9 @@
         <th>Produktnamn</th>
         <th>Beskrivning</th>
         <th>Alkoholhalt</th>
-        <th>TG</th>
-        <th>Inköpspris</th>
-        <th>Utpris</th>
+        @*<th>TG</th>
+        <th>Inköpspris</th>*@
+        <th>Pris</th>
         <th>Ändra</th>
         <th>Detaljer</th>
         <th>Ta bort</th>
@@ -35,8 +37,8 @@
             <td>@Html.DisplayFor(modelItem => item.Name)</td>
             <td>@Html.DisplayFor(modelItem => item.Description)</td>
             <td>@Html.DisplayFor(modelItem => item.Abv)</td>
-            <td>@Html.DisplayFor(modelItem => item.TradingMargin)</td>
-            <td>@Html.DisplayFor(modelItem => item.PurchasePrice)</td>
+            @*<td>@Html.DisplayFor(modelItem => item.TradingMargin)</td>
+            <td>@Html.DisplayFor(modelItem => item.PurchasePrice)</td>*@
             <td>@Html.DisplayFor(modelItem => item.Price)</td>
             <td>
                 <a href="@Url.Action("Edit","Product", new { id = item.Id})" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">mode_edit</i></a>

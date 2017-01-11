@@ -113,6 +113,8 @@ namespace Kundbolaget.Controllers
         [HttpPost]
         public ActionResult Create(ManageProductInfosViewModel model)
         {
+            model.ProductInfo.TradingMargin = 0;
+            model.ProductInfo.PurchasePrice = 0;
             if (!ModelState.IsValid)
             {
                 return View(model);

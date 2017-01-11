@@ -7,10 +7,14 @@
 <h4>Företag</h4>
 
 <div>
-    @Html.ActionLink("Skapa Ny", "Create", null, new {@class = "orange-text"}) |
-    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new {@class = "orange-text"})
+    @*@Html.ActionLink("Skapa Ny", "Create", null, new {@class = "orange-text"}) |
+    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new {@class = "orange-text"})*@
+    
+    <a href="@Url.Action("Create","Company")" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">add</i></a>
+    <a href="@Url.Action("AdminManager","Home")" class="btn btn-floating btn-small waves-effect waves-light blue"><i class="material-icons">fast_rewind</i></a>
+
 </div>
-<table class="responsive-table">
+<table class="highlight responsive-table">
     <thead>
         <tr>
             <th>Namn</th>
@@ -37,17 +41,17 @@
                 <td>@Html.DisplayFor(modelItem => item.DeliveryAddress.Street) @Html.DisplayFor(modelItem => item.DeliveryAddress.Number)</td>
                 <td>@Html.DisplayFor(modelItem => item.ParentCompany.Name)</td>
                 <td>
-                    <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-floating small waves-effect waves-light">
+                    <a href="@Url.Action("Edit", new {id = item.Id})" class="teal btn btn-floating small waves-effect waves-light">
                         <i class="material-icons">edit</i>
                     </a>
                 </td>
                 <td>
-                    <a href="@Url.Action("Details", new {id = item.Id})" class="btn btn-floating small waves-effect waves-light">
+                    <a href="@Url.Action("Details", new {id = item.Id})" class="blue btn btn-floating small waves-effect waves-light">
                         <i class="material-icons">info_outline</i>
                     </a>
                 </td>
                 <td>
-                    <a onclick="CompanyController(@item.Id, 'Delete')" class="btn btn-floating btn-small waves-effect waves-light">
+                    <a onclick="CompanyController(@item.Id, 'Delete')" class="red btn btn-floating btn-small waves-effect waves-light">
                         <i class="material-icons">delete</i>
                     </a>
                 </td>

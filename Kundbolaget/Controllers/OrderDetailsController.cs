@@ -88,7 +88,11 @@ namespace Kundbolaget.Controllers
             updatedOrder.Price = updatedOrder.OrderDetails.Sum(updateOrderOrderDetail => (int)updateOrderOrderDetail.TotalPrice);
 
             _orders.UpdateEntity(updatedOrder);
-            UpdateSaldoEditedOrder(id);
+
+            if (updatedOrder.OrderPicked == null && updatedOrder.OrderTransported == null)
+            {
+                UpdateSaldoEditedOrder(id);
+            }
             return true;
         }
 

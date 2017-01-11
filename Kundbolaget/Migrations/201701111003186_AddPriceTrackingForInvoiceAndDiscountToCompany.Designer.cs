@@ -7,13 +7,13 @@ namespace Kundbolaget.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddDiscountToCompany : IMigrationMetadata
+    public sealed partial class AddPriceTrackingForInvoiceAndDiscountToCompany : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddDiscountToCompany));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddPriceTrackingForInvoiceAndDiscountToCompany));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701091420000_AddDiscountToCompany"; }
+            get { return "201701111003186_AddPriceTrackingForInvoiceAndDiscountToCompany"; }
         }
         
         string IMigrationMetadata.Source

@@ -7,13 +7,13 @@ namespace Kundbolaget.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddPriceTrackingForInvoice : IMigrationMetadata
+    public sealed partial class AddsReservedAmountToOrderDetailsOrderCompleteToOrder : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddPriceTrackingForInvoice));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddsReservedAmountToOrderDetailsOrderCompleteToOrder));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701091449523_AddPriceTrackingForInvoice"; }
+            get { return "201701110902471_AddsReservedAmountToOrderDetailsOrderCompleteToOrder"; }
         }
         
         string IMigrationMetadata.Source

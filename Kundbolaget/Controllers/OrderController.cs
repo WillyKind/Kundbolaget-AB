@@ -14,12 +14,15 @@ namespace Kundbolaget.Controllers
         private DbOrderRepository _orders;
         private DbCompanyRepository _companies;
         private DbInvoiceRepository _invoices;
+        private DbProductStockRepository _productStock;
+
 
         public OrderController()
         {
             _orders = new DbOrderRepository();
             _companies = new DbCompanyRepository();
             _invoices = new DbInvoiceRepository();
+            _productStock = new DbProductStockRepository();
         }
 
         //Constructor for tests
@@ -70,14 +73,25 @@ namespace Kundbolaget.Controllers
         public string Delete(int id)
         {
             var entity = _orders.GetEntity(id);
+            RestoreProductStock(entity);
             entity.IsRemoved = true;
             _orders.UpdateEntity(entity);
             return "Success";
         }
 
+        private void RestoreProductStock(Order entity)
+        {
+            foreach (var orderDetail in entity.OrderDetails)
+            {
+                var productStock = _productStock.GetEntity(orderDetail.ProductInfoId);
+                productStock.Amount += orderDetail.ReservedAmount.Value;
+                _productStock.UpdateEntity(productStock);
+            }
+        }
+
         public ActionResult GetAllUnpickedOrders()
         {
-            var model = _orders.GetUnpickedOrders();
+            var model = _orders.GetUnpickedOrders().OrderBy(d => d.CreatedDate).ThenBy(d => d.WishedDeliveryDate);
             return View(model);
         }
 
@@ -116,6 +130,10 @@ namespace Kundbolaget.Controllers
         public ActionResult OrderDetails(int id)
         {
             var model = _orders.GetOrderDetails(id);
+            if (model.Length == 0)
+            {
+                return RedirectToAction("GetAllUnpickedOrders");
+            }
             return View(model);
         }
 
@@ -127,6 +145,7 @@ namespace Kundbolaget.Controllers
             _orders.UpdateOrder(order);
             return "Success " + id;
         }
+
 
         private static void CalculatePallets(Order order)
         {
@@ -174,11 +193,11 @@ namespace Kundbolaget.Controllers
 
                 if (orderDetail.Amount >= 10 && orderDetail.ProductInfo.PalletDiscount.HasValue)
                 {
-                    var remainder = orderDetail.Amount % 10;
-                    var totalPallets = (orderDetail.Amount - remainder) / 10;
-                    var remainderPrice = remainder * orderDetail.UnitPrice;
-                    var palletPrice = totalPallets * 10 * orderDetail.UnitPrice;
-                    var palletDiscount = palletPrice * orderDetail.ProductInfo.PalletDiscount.Value;
+                    var remainder = orderDetail.Amount%10;
+                    var totalPallets = (orderDetail.Amount - remainder)/10;
+                    var remainderPrice = remainder*orderDetail.UnitPrice;
+                    var palletPrice = totalPallets*10*orderDetail.UnitPrice;
+                    var palletDiscount = palletPrice*orderDetail.ProductInfo.PalletDiscount.Value;
                     var discountedPrice = palletPrice - palletDiscount + remainderPrice;
 
 
@@ -186,7 +205,7 @@ namespace Kundbolaget.Controllers
                 }
                 else
                 {
-                    finalPrice = orderDetail.Amount * orderDetail.UnitPrice;
+                    finalPrice = orderDetail.Amount*orderDetail.UnitPrice;
                 }
                 invoice.InvoiceDetails.Add(new InvoiceDetail
                 {
@@ -201,6 +220,14 @@ namespace Kundbolaget.Controllers
             invoice.PriceWithCompanyDiscount = invoice.PriceWithPalletDiscount / (invoice.Order.Company.ParentCompany.Discount + 1);
             orderViewModel.Order.Invoice = invoice;
             _orders.UpdateEntity(orderViewModel.Order);
+        }
+
+        [HttpPost]
+        public string ExportDeliveryNote(int id)
+        {
+            PdfGenerator.PdfGenerator pdfGenerator = new PdfGenerator.PdfGenerator();
+            pdfGenerator.ExportDeliveryNoteToPdf(id);
+            return "Success " + id;
         }
     }
 }

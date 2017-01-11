@@ -10,6 +10,7 @@ using Kundbolaget.EntityFramework.Context;
 using Kundbolaget.EntityFramework.Repositories;
 using Kundbolaget.JsonEntityModels;
 using Kundbolaget.Models;
+using Kundbolaget.Models.EntityModels;
 using Kundbolaget.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -113,12 +114,18 @@ namespace Kundbolaget.Controllers
                     "Denna order innehåller önskade leveransdatum som redan har passerat.";
                 return View("OrderFileError", _errorViewModel);
             }
-            _orders.CreateOrder(entity);
-            model.OrderFile = entity;
+            var orders = _orders.CreateOrder(entity);
 
+            //Allocates productsStockAmount to OrderDetailsAmount
+            _orders.AllocateProducts(orders);
+
+          
+
+            model.OrderFile = entity;
             return View("OrderFileSuccess", model);
         }
 
+        
 
         protected override void Dispose(bool disposing)
         {

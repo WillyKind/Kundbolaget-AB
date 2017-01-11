@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Kundbolaget.Models.EntityModels.OrderDetails>
 
-<h2>Orderdetaljer för order: @Model.First().OrderId</h2>
+<h2>Orderdetaljer för order: @Model.FirstOrDefault().OrderId</h2>
 <div>
     <a href="javascript:GoBack();"class="orange-text" >Tillbaka</a>
     @*@Html.ActionLink("Tillbaka", "GetAllUnpickedOrders", "Order", null, new { onclick = "GoBack();" })*@
@@ -41,7 +41,7 @@
                 @Html.DisplayFor(modelItem => item.ProductInfo.Volume.Milliliter)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
+                @Html.DisplayFor(modelItem => item.ReservedAmount)/@Html.DisplayFor(modelItem => item.Amount)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UnitPrice)

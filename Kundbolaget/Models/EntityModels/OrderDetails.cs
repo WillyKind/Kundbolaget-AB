@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Core.Common.CommandTrees;
 
 namespace Kundbolaget.Models.EntityModels
 {
@@ -28,5 +30,6 @@ namespace Kundbolaget.Models.EntityModels
         public double UnitPrice { get; set; }
         [Required]
         public double TotalPrice { get; set; }
+        public int? ReservedAmount { get; set; }
     }
 }

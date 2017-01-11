@@ -7,34 +7,63 @@
 <div>
     @Html.ActionLink("Tillbaka", "Index", null, new {@class = "orange-text"})
 </div>
-<table class="responsive-table">
-    <thead>
+
+<hr/>
+<table class="table">
+    <tr>
+        <th>
+            Företag
+        </th>
+        <th>
+            Order skapad
+        </th>
+        <th>
+            Ordernummer från kund
+        </th>
+        <th>
+            Önskat leveransdatum
+        </th>
+        <th>
+            Pris
+        </th>
+        <th>
+            Info
+        </th>
+        <th>
+            Skapa Pdf
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model.Orders)
+    {
         <tr>
-            <th>Företag</th>
-            <th>Order skapad</th>
-            <th>Ordernummer från kund</th>
-            <th>Önskat leveransdatum</th>
-            <th>Pris</th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerOrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
+            </td>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a href="@Url.Action("OrderDetails", "Order", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating btn-small waves-effect waves-light">
+                    <i class="material-icons">info_outline</i>
+                </a>
+            </td>
+            <td>
+                <a onclick="CreatePdf(@item.Id, 'ExportInvoice')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">store</i></a>
+            </td>
+
         </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Orders)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Company.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.CustomerOrderId)</td>
-                <td>@Html.DisplayFor(modelItem => item.WishedDeliveryDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                <td>
-                    <a href="@Url.Action("OrderDetails", "Order", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating btn-small waves-effect waves-light">
-                        <i class="material-icons">info_outline</i>
-                    </a>
-                </td>
-                <td>
-                    @Html.ActionLink("Skapa Fak", "CreateInvoice", "Order", new { item.Id }, null)
-                </td>
-            </tr>
-        }
-    </tbody>
+    }
 </table>
+<script src="~/Scripts/CallOrderController.js"></script>

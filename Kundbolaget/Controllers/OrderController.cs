@@ -143,6 +143,7 @@ namespace Kundbolaget.Controllers
             var order = _orders.GetOrder(id);
             order.OrderDelivered = DateTime.Now;
             _orders.UpdateOrder(order);
+            CreateInvoice(id);
             return "Success " + id;
         }
 
@@ -227,6 +228,14 @@ namespace Kundbolaget.Controllers
         {
             PdfGenerator.PdfGenerator pdfGenerator = new PdfGenerator.PdfGenerator();
             pdfGenerator.ExportDeliveryNoteToPdf(id);
+            return "Success " + id;
+        }
+
+        [HttpPost]
+        public string ExportInvoice(int id)
+        {
+            PdfGenerator.PdfGenerator pdfGenerator = new PdfGenerator.PdfGenerator();
+            pdfGenerator.ExportInvoiceToPdf(id);
             return "Success " + id;
         }
     }

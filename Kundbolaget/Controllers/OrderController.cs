@@ -183,7 +183,8 @@ namespace Kundbolaget.Controllers
                 DueDate = DateTime.Now.AddDays(90),
                 InvoiceDetails = new List<InvoiceDetail>(),
                 CompanyId = orderViewModel.Order.CompanyId,
-                CustomerOrderId = orderViewModel.Order.CustomerOrderId
+                CustomerOrderId = orderViewModel.Order.CustomerOrderId,
+                OriginalPrice = orderViewModel.Order.Price
             };
 
 
@@ -200,6 +201,7 @@ namespace Kundbolaget.Controllers
                     var palletDiscount = palletPrice*orderDetail.ProductInfo.PalletDiscount.Value;
                     var discountedPrice = palletPrice - palletDiscount + remainderPrice;
 
+
                     finalPrice = discountedPrice;
                 }
                 else
@@ -212,8 +214,11 @@ namespace Kundbolaget.Controllers
                     InvoiceId = invoice.Id,
                     ProductInfo = orderDetail.ProductInfo
                 });
-                invoice.Price += (int) finalPrice;
+                invoice.PriceWithPalletDiscount += (int) finalPrice;
             }
+
+
+            invoice.PriceWithCompanyDiscount = invoice.PriceWithPalletDiscount / (invoice.Order.Company.ParentCompany.Discount + 1);
             orderViewModel.Order.Invoice = invoice;
             _orders.UpdateEntity(orderViewModel.Order);
         }

@@ -251,6 +251,10 @@
     <Compile Include="Migrations\201701110902471_AddsReservedAmountToOrderDetailsOrderCompleteToOrder.Designer.cs">
       <DependentUpon>201701110902471_AddsReservedAmountToOrderDetailsOrderCompleteToOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701111003186_AddPriceTrackingForInvoiceAndDiscountToCompany.cs" />
+    <Compile Include="Migrations\201701111003186_AddPriceTrackingForInvoiceAndDiscountToCompany.Designer.cs">
+      <DependentUpon>201701111003186_AddPriceTrackingForInvoiceAndDiscountToCompany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -346,6 +350,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701110902471_AddsReservedAmountToOrderDetailsOrderCompleteToOrder.resx">
       <DependentUpon>201701110902471_AddsReservedAmountToOrderDetailsOrderCompleteToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701111003186_AddPriceTrackingForInvoiceAndDiscountToCompany.resx">
+      <DependentUpon>201701111003186_AddPriceTrackingForInvoiceAndDiscountToCompany.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -25,6 +25,7 @@ namespace Kundbolaget.EntityFramework.Repositories
         {
             db = new StoreContext();
         }
+
         public DbOrderRepository(StoreContext fakeContext)
         {
             db = fakeContext;
@@ -47,7 +48,10 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public Order GetEntity(int id)
         {
-            return db.Orders.FirstOrDefault(o => o.Id == id);
+            return db.Orders
+                .Include(x => x.Company)
+                .Include(x => x.Company.ParentCompany)
+                .FirstOrDefault(o => o.Id == id);
         }
 
         public void UpdateEntity(Order updatedEntity)
@@ -83,13 +87,14 @@ namespace Kundbolaget.EntityFramework.Repositories
                     CreatedDate = DateTime.Now,
                     CustomerOrderId = order.customerOrderFileId,
                     OrderDetails = orderedProducts,
-                    Price = orderedProducts.Sum(p => p.ProductInfo.Price*p.Amount)
+                    Price = orderedProducts.Sum(p => p.ProductInfo.Price * p.Amount)
                 });
             }
             db.Orders.AddRange(orders);
             db.SaveChanges();
             return orders;
         }
+
         public void DeleteEntity(int id)
         {
             var product = db.Orders.SingleOrDefault(p => p.Id == id);
@@ -157,18 +162,18 @@ namespace Kundbolaget.EntityFramework.Repositories
         public Order[] GetOrderHistory()
         {
             return db.Orders.Where(o => !o.IsRemoved &&
-                                       o.OrderTransported != null &&
-                                       o.OrderPicked != null &&
-                                       o.OrderDelivered != null).ToArray();
+                                        o.OrderTransported != null &&
+                                        o.OrderPicked != null &&
+                                        o.OrderDelivered != null).ToArray();
         }
 
         public Order[] GetOrderHistoryForCompany(int id)
         {
-            return db.Orders.Where(o => o.Company.ParentCompany.Id==id &&
-                                       !o.IsRemoved &&
-                                       o.OrderTransported != null &&
-                                       o.OrderPicked != null &&
-                                       o.OrderDelivered != null).ToArray();
+            return db.Orders.Where(o => o.Company.ParentCompany.Id == id &&
+                                        !o.IsRemoved &&
+                                        o.OrderTransported != null &&
+                                        o.OrderPicked != null &&
+                                        o.OrderDelivered != null).ToArray();
         }
 
         public void AllocateProducts(List<Order> orders)

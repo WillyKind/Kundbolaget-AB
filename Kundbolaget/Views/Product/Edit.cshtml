@@ -75,21 +75,14 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        @Html.LabelFor(model => model.ProductInfo.TradingMargin, "TG")
-                        @Html.EditorFor(model => model.ProductInfo.TradingMargin)
-                        @Html.ValidationMessageFor(model => model.ProductInfo.TradingMargin)
+                        @Html.LabelFor(model => model.ProductInfo.PalletDiscount, "Pallrabatt")
+                        @Html.EditorFor(model => model.ProductInfo.PalletDiscount)
+                        @Html.ValidationMessageFor(model => model.ProductInfo.PalletDiscount)
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        @Html.LabelFor(model => model.ProductInfo.PurchasePrice, "Inköpspris")
-                        @Html.EditorFor(model => model.ProductInfo.PurchasePrice)
-                        @Html.ValidationMessageFor(model => model.ProductInfo.PurchasePrice)
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        @Html.LabelFor(model => model.ProductInfo.Price, "Utpris")
+                        @Html.LabelFor(model => model.ProductInfo.Price, "Pris")
                         @Html.EditorFor(model => model.ProductInfo.Price)
                         @Html.ValidationMessageFor(model => model.ProductInfo.Price)
                     </div>

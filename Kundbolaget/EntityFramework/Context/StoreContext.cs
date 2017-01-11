@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using Kundbolaget.Models.EntityModels;
 
 namespace Kundbolaget.EntityFramework.Context
@@ -27,6 +28,11 @@ namespace Kundbolaget.EntityFramework.Context
         }
 
 
+        public virtual void SetModified<T>(T entity) where T : class
+        {
+            Entry(entity).State = EntityState.Modified;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Company>()
@@ -46,7 +52,6 @@ namespace Kundbolaget.EntityFramework.Context
             modelBuilder.Entity<Invoice>()
                 .HasRequired(x => x.Order)
                 .WithOptional(x => x.Invoice);
-            
         }
     }
 }

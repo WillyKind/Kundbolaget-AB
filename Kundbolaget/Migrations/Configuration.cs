@@ -223,8 +223,6 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 330),
                     Description = "Öl",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
-                    PurchasePrice = 5.3,
-                    TradingMargin = 10,
                     Price = 250,
                     NewPrice = 1337,
                     PriceStart = DateTime.Now.AddMinutes(1)
@@ -237,8 +235,6 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 500),
                     Description = "Öl",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
-                    PurchasePrice = 8.3,
-                    TradingMargin = 8,
                     Price = 325
                 },
                 new ProductInfo
@@ -249,8 +245,6 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 330),
                     Description = "APA",
                     ProductGroup = productGroups.First(pg => pg.Name == "APA"),
-                    PurchasePrice = 8.3,
-                    TradingMargin = 8,
                     Price = 325
                 },
                 new ProductInfo
@@ -261,8 +255,6 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 350),
                     Description = "IPA",
                     ProductGroup = productGroups.First(pg => pg.Name == "IPA"),
-                    PurchasePrice = 8.3,
-                    TradingMargin = 8,
                     Price = 400
                 },
                 new ProductInfo
@@ -273,8 +265,6 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 700),
                     Description = "Vodka",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
-                    PurchasePrice = 35,
-                    TradingMargin = 50,
                     Price = 900
                 },
                 new ProductInfo
@@ -285,8 +275,6 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 700),
                     Description = "Vodka",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
-                    PurchasePrice = 35,
-                    TradingMargin = 50,
                     Price = 1200
                 },
                 new ProductInfo
@@ -297,8 +285,6 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 700),
                     Description = "Vodka",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
-                    PurchasePrice = 35,
-                    TradingMargin = 50,
                     Price = 1250
                 },
                 new ProductInfo
@@ -309,8 +295,6 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 700),
                     Description = "Riesling",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vitt vin"),
-                    PurchasePrice = 35,
-                    TradingMargin = 50,
                     Price = 1250
                 },
                 new ProductInfo
@@ -321,8 +305,6 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 700),
                     Description = "Sangiovese",
                     ProductGroup = productGroups.First(pg => pg.Name == "Rött vin"),
-                    PurchasePrice = 35,
-                    TradingMargin = 50,
                     Price = 1250
                 },
             };

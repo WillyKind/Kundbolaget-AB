@@ -128,6 +128,7 @@ namespace Kundbolaget.Controllers
             return "Success " + id;
         }
 
+
         private static void CalculatePallets(Order order)
         {
             var pallets = order.OrderDetails.Where(details => details.Amount >= 10).ToArray();
@@ -173,18 +174,18 @@ namespace Kundbolaget.Controllers
 
                 if (orderDetail.Amount >= 10 && orderDetail.ProductInfo.PalletDiscount.HasValue)
                 {
-                    var remainder = orderDetail.Amount % 10;
-                    var totalPallets = (orderDetail.Amount - remainder) / 10;
-                    var remainderPrice = remainder * orderDetail.UnitPrice;
-                    var palletPrice = totalPallets * 10 * orderDetail.UnitPrice;
-                    var palletDiscount = palletPrice * orderDetail.ProductInfo.PalletDiscount.Value;
+                    var remainder = orderDetail.Amount%10;
+                    var totalPallets = (orderDetail.Amount - remainder)/10;
+                    var remainderPrice = remainder*orderDetail.UnitPrice;
+                    var palletPrice = totalPallets*10*orderDetail.UnitPrice;
+                    var palletDiscount = palletPrice*orderDetail.ProductInfo.PalletDiscount.Value;
                     var discountedPrice = palletPrice - palletDiscount + remainderPrice;
 
                     finalPrice = discountedPrice;
                 }
                 else
                 {
-                    finalPrice = orderDetail.Amount * orderDetail.UnitPrice;
+                    finalPrice = orderDetail.Amount*orderDetail.UnitPrice;
                 }
                 invoice.InvoiceDetails.Add(new InvoiceDetail
                 {
@@ -196,6 +197,14 @@ namespace Kundbolaget.Controllers
             }
             orderViewModel.Order.Invoice = invoice;
             _orders.UpdateEntity(orderViewModel.Order);
+        }
+
+        [HttpPost]
+        public string ExportDeliveryNote(int id)
+        {
+            PdfGenerator.PdfGenerator pdfGenerator = new PdfGenerator.PdfGenerator();
+            pdfGenerator.ExportDeliveryNoteToPdf(id);
+            return "Success " + id;
         }
     }
 }

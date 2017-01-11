@@ -11,3 +11,7 @@ main { flex: 1 0 auto; }
 .clickable {
     cursor: pointer;
 }
+
+.centeredColumn {
+    text-align: center
+}

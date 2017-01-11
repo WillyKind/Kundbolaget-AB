@@ -73,7 +73,7 @@ namespace Tests
         }
 
         [Test]
-        public void Create()
+        public void Create_To_Database()
         {
             var model = new OrderDetailsViewModel();
             var orderDetails = new OrderDetails
@@ -96,23 +96,42 @@ namespace Tests
         {
             var model = new OrderDetailsViewModel();
             var orderDetails = new OrderDetails
-                {
-                    Id = 1,
-                    Amount = 10,
-                    IsRemoved = false,
-                    OrderId = 0,
-                    ProductInfoId = 1,
-                    UnitPrice = 50,
-                    TotalPrice = 5000
+            {
+                Id = 1,
+                Amount = 10,
+                IsRemoved = false,
+                OrderId = 0,
+                ProductInfoId = 1,
+                UnitPrice = 50,
+                TotalPrice = 5000
             };
             model.OrderDetails = orderDetails;
-            var actionResult = (RedirectToRouteResult)_orderDetailsController.Edit(model.OrderDetails.Id, model);
+            var actionResult = (RedirectToRouteResult) _orderDetailsController.Edit(model.OrderDetails.Id, model);
             var result = actionResult.RouteValues;
             Assert.IsTrue(result.ContainsKey("id"));
             Assert.IsTrue(result.ContainsKey("companyId"));
             Assert.IsTrue(result.ContainsKey("action"));
             Assert.IsTrue(result.ContainsValue(0));
             Assert.IsTrue(result.ContainsValue("Index"));
+        }
+
+        [Test]
+        public void Edit_Update_Database()
+        {
+            var model = new OrderDetailsViewModel();
+            var orderDetails = new OrderDetails
+            {
+                Id = 1,
+                Amount = 10,
+                IsRemoved = false,
+                OrderId = 0,
+                ProductInfoId = 1,
+                UnitPrice = 50,
+                TotalPrice = 5000
+            };
+            model.OrderDetails = orderDetails;
+            _orderDetailsController.Edit(model.OrderDetails.Id, model);
+            _mockContext.Verify(x => x.SaveChanges(), Times.Exactly(2));
         }
     }
 }

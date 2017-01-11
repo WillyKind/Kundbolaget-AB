@@ -35,7 +35,6 @@ namespace Kundbolaget.Controllers
             model.OrderDetailses = _orders.GetOrderDetails(id);
             model.OrderId = id;
             model.ParentCompanyId = _orders.GetEntity(id).Company.ParentCompanyId.Value;
-
             return View(model);
         }
 
@@ -46,7 +45,6 @@ namespace Kundbolaget.Controllers
             model.OrderDetails.OrderId = id;
             model.OrderId = id;
             model.ParentCompanyId = _orders.GetEntity(id).Company.ParentCompanyId.Value;
-
             return View(model);
         }
 
@@ -58,6 +56,7 @@ namespace Kundbolaget.Controllers
             var product = _products.GetEntity(model.OrderDetails.ProductInfoId);
             model.OrderDetails.UnitPrice = product.Price;
             model.OrderDetails.TotalPrice = model.OrderDetails.Amount*model.OrderDetails.UnitPrice;
+            model.OrderDetails.ReservedAmount = 0;
             var updatedOrder = _orders.GetEntity(model.OrderDetails.OrderId);
             updatedOrder.Price +=(int) model.OrderDetails.TotalPrice;
 
@@ -89,6 +88,7 @@ namespace Kundbolaget.Controllers
             updatedOrder.Price = updatedOrder.OrderDetails.Sum(updateOrderOrderDetail => (int)updateOrderOrderDetail.TotalPrice);
 
             _orders.UpdateEntity(updatedOrder);
+            UpdateSaldoEditedOrder(id);
             return true;
         }
 
@@ -136,9 +136,23 @@ namespace Kundbolaget.Controllers
             }
             var updatedOrder = _orders.GetEntity(model.OrderId);
             updatedOrder.Price = updatedOrder.Price - (int)model.OrderDetails.TotalPrice;
+
+            var orderDetails = _orderDetails.GetEntity(id);
+            foreach (var stock in orderDetails.ProductInfo.ProductStocks)
+            {
+                stock.Amount += orderDetails.ReservedAmount.Value;
+            }
             _orders.UpdateEntity(updatedOrder);
             _orderDetails.DeleteEntity(id);
             return RedirectToAction("Index", new {id=updatedOrder.Id, companyId=updatedOrder.Company.ParentCompanyId});
         }
+
+        [HttpPost]
+        public void UpdateSaldoEditedOrder(int id)
+        {
+            _orders.ReturnProductToStock(id);
+        }
+
+        
     }
 }

@@ -1,6 +1,6 @@
-﻿function OrderDetailsController(id, method) {
+﻿function OrderDetailsController(id) {
     $.ajax({
-        url: "/OrderDetails/" + method,
+        url: "/OrderDetails/SaveOrderDetail",
         type: 'POST',
         data: {id: id, newAmount: $("#" +"amount"+ id).val()},
         success: function (result) {
@@ -11,3 +11,4 @@
         }
     });
 }
+

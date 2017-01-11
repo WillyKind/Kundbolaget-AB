@@ -303,7 +303,7 @@ namespace Kundbolaget.Migrations
                 },
                 new ProductInfo
                 {
-                    Name = " Dreissigacker",
+                    Name = "Dreissigacker",
                     Abv = 12,
                     Container = containers.First(c => c.Name == "Flaska"),
                     Volume = volumes.First(v => v.Milliliter == 700),
@@ -315,7 +315,7 @@ namespace Kundbolaget.Migrations
                 },
                 new ProductInfo
                 {
-                    Name = " Vino Nobile di Montepulciano",
+                    Name = "Vino Nobile di Montepulciano",
                     Abv = 13.5,
                     Container = containers.First(c => c.Name == "Flaska"),
                     Volume = volumes.First(v => v.Milliliter == 700),
@@ -332,15 +332,57 @@ namespace Kundbolaget.Migrations
                 new ProductStock
                 {
                     Amount = 500,
-                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld"),
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld" && pi.Volume.Milliliter == 330),
+                    Warehouse = warehouse
+                },
+                new ProductStock
+                {
+                    Amount = 500,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld" && pi.Volume.Milliliter == 500),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
                     Amount = 200,
-                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva"),
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Nääs APA" && pi.Volume.Milliliter == 330),
                     Warehouse = warehouse
-                }
+                },
+                new ProductStock
+                {
+                    Amount = 300,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Lagunitas IPA" && pi.Volume.Milliliter == 350),
+                    Warehouse = warehouse
+                },
+                new ProductStock
+                {
+                    Amount = 150,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva" && pi.Volume.Milliliter == 700),
+                    Warehouse = warehouse
+                },
+                new ProductStock
+                {
+                    Amount = 150,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Absolut Vodka" && pi.Volume.Milliliter == 700),
+                    Warehouse = warehouse
+                },
+                new ProductStock
+                {
+                    Amount = 150,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Smirnoff Vodka" && pi.Volume.Milliliter == 700),
+                    Warehouse = warehouse
+                },
+                new ProductStock
+                {
+                    Amount = 150,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Dreissigacker" && pi.Volume.Milliliter == 700),
+                    Warehouse = warehouse
+                },
+                new ProductStock
+                {
+                    Amount = 150,
+                    ProductInfo = productInfoes.First(pi => pi.Name == "Vino Nobile di Montepulciano" && pi.Volume.Milliliter == 700),
+                    Warehouse = warehouse
+                },
             };
 
             var dummyOrder = new Order
@@ -348,6 +390,7 @@ namespace Kundbolaget.Migrations
                 Company = companies.First(c => c.Name == "Ica Vårberg"),
                 CreatedDate = DateTime.Now,
                 WishedDeliveryDate = DateTime.Parse("2016-12-12"),
+                OrderComplete = false
             };
 
             var orderDetails = new[]
@@ -358,7 +401,8 @@ namespace Kundbolaget.Migrations
                     Amount = 10,
                     Order = dummyOrder,
                     UnitPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price,
-                    TotalPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price*10
+                    TotalPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price*10,
+                    ReservedAmount = 0
                 },
                 new OrderDetails
                 {
@@ -366,7 +410,8 @@ namespace Kundbolaget.Migrations
                     Amount = 25,
                     UnitPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price,
                     TotalPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price*25,
-                    Order = dummyOrder
+                    Order = dummyOrder,
+                    ReservedAmount = 0
                 }
             };
             dummyOrder.Price += orderDetails.Sum(p => p.ProductInfo.Price*p.Amount);

@@ -247,6 +247,10 @@
     <Compile Include="Migrations\201701091403491_SquishedModel.Designer.cs">
       <DependentUpon>201701091403491_SquishedModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701110902471_AddsReservedAmountToOrderDetailsOrderCompleteToOrder.cs" />
+    <Compile Include="Migrations\201701110902471_AddsReservedAmountToOrderDetailsOrderCompleteToOrder.Designer.cs">
+      <DependentUpon>201701110902471_AddsReservedAmountToOrderDetailsOrderCompleteToOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModels\Company.cs" />
     <Compile Include="Models\EntityModels\ContactPerson.cs" />
@@ -339,6 +343,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701091403491_SquishedModel.resx">
       <DependentUpon>201701091403491_SquishedModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701110902471_AddsReservedAmountToOrderDetailsOrderCompleteToOrder.resx">
+      <DependentUpon>201701110902471_AddsReservedAmountToOrderDetailsOrderCompleteToOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

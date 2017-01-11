@@ -7,12 +7,8 @@
 <h4>Företag</h4>
 
 <div>
-    @*@Html.ActionLink("Skapa Ny", "Create", null, new {@class = "orange-text"}) |
-    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new {@class = "orange-text"})*@
-    
-    <a href="@Url.Action("Create","Company")" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">add</i></a>
-    <a href="@Url.Action("AdminManager","Home")" class="btn btn-floating btn-small waves-effect waves-light blue"><i class="material-icons">fast_rewind</i></a>
-
+    @Html.ActionLink("Skapa", "Create", null, new {@class = "teal btn waves-effect waves-light" })
+    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new {@class = "blue btn waves-effect waves-light" })
 </div>
 <table class="highlight responsive-table">
     <thead>
@@ -21,7 +17,7 @@
             <th>Besöksadress</th>
             <th>Kontaktperson</th>
             <th>Email</th>
-            <th>Telefonnummer</th>
+            <th>Telefonnummer</th>  
             <th>Leveransadress</th>
             <th>Moderbolag</th>
             <th>Ändra</th>

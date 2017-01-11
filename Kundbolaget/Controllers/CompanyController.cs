@@ -33,25 +33,6 @@ namespace Kundbolaget.Controllers
         // GET: Company
         public ActionResult Index() => View(_companyRepository.GetEntities());
 
-        //public ActionResult Delete(int id)
-        //{
-        //    var company = _companyRepository.GetEntity(id);
-        //    return company == null ? (ActionResult) HttpNotFound() : View(company);
-        //}
-
-        //[HttpPost]
-        //public ActionResult Delete(Company model, int id)
-        //{
-        //    if (model.Id != id)
-        //    {
-        //        ModelState.AddModelError("Name", "Bad Request");
-        //        return View(model);
-        //    }
-        //    _companyRepository.DeleteEntity(id);
-        //    return RedirectToAction("Index");
-        //}
-
-
         [HttpPost]
         public string Delete(int id)
         {

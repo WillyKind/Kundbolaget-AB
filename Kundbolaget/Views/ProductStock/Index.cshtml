@@ -6,30 +6,40 @@
 
 <h4>Produktlager</h4>
 
+
 <div>
-    @Html.ActionLink("Skapa Ny", "Create", null, new { @class = "orange-text" }) |
-    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new { @class = "orange-text" })
+    @Html.ActionLink("Skapa", "Create", "ProductStock", null, new {@class = "teal btn"})
+    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new {@class = "blue btn"})
 </div>
+
 <table class="responsive-table">
     <thead>
-        <tr>
-            <th>Produkt</th>
-            <th>Varuhus</th>
-            <th>Lagersaldo</th>
-        </tr>
+    <tr>
+        <th>Produkt</th>
+        <th>Varuhus</th>
+        <th>Lagersaldo</th>
+        <th class="centeredColumn">Ändra</th>
+        <th class="centeredColumn">Detaljer</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.ProductInfo.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Warehouse.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
-                <td>
-                    @Html.ActionLink("Ändra", "Edit", new { id = item.Id }, new { @class = "orange-text" }) |
-                    @Html.ActionLink("Detaljer", "Details", new { id = item.Id }, new { @class = "orange-text" }) 
-                </td>
-            </tr>
-        }
+    @foreach (var item in Model)
+    {
+        <tr id="@item.Id">
+            <td>@Html.DisplayFor(modelItem => item.ProductInfo.Name ) @Html.DisplayFor(modelItem => item.ProductInfo.Volume.Milliliter)ml</td>
+            <td>@Html.DisplayFor(modelItem => item.Warehouse.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+            <td class="centeredColumn">
+                <a href="@Url.Action("Edit", "Product", new {id = item.Id})" class="btn btn-floating  waves-effect waves-light">
+                    <i class="material-icons">mode_edit</i>
+                </a>
+            </td>
+            <td class="centeredColumn">
+                <a href="@Url.Action("Details", "Product", new {id = item.Id})" class="btn btn-floating  waves-effect waves-light blue">
+                    <i class="material-icons">info_outline</i>
+                </a>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>

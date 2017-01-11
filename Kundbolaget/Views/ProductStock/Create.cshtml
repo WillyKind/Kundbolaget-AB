@@ -10,9 +10,8 @@
     @using (Html.BeginForm("Create", "ProductStock", FormMethod.Post, new {@class = "col s12"}))
     {
         @Html.AntiForgeryToken()
-        <div class="form-horizontal">
-            <h4>ProductStock</h4>
-            <hr/>
+        <div >
+            <h4>Lagersaldo</h4>
             @Html.ValidationSummary(true)
             <div class="row">
                 <div class="input-field col s3">
@@ -35,7 +34,7 @@
             <div class="row">
                 <div class="col s10">
                     @Html.LabelFor(model => model.ProductStock.ProductInfoId, "Produktartikel")
-                    @Html.DropDownListFor(model => model.ProductStock.ProductInfoId, new SelectList(Model.ProductInfos , "Id", "Name"), new
+                    @Html.DropDownListFor(model => model.ProductStock.ProductInfoId, new SelectList(Model.ProductInfos, "Id", "Name"), new
                     {
                         htmlAttributes = new
                         {
@@ -49,7 +48,7 @@
             <div class="row">
                 <div class="col s10">
                     @Html.LabelFor(model => model.ProductStock.WarehouseId, "Varuhus")
-                    @Html.DropDownListFor(model => model.ProductStock.WarehouseId, new SelectList(Model.Warehouses, "Id" , "Name"), new
+                    @Html.DropDownListFor(model => model.ProductStock.WarehouseId, new SelectList(Model.Warehouses, "Id", "Name"), new
                     {
                         htmlAttributes = new
                         {
@@ -60,17 +59,15 @@
                 </div>
             </div>
             <div class="row">
-                <button class="btn waves-effect waves-light" type="submit", name="action">
+                <button class="btn teal" type="submit", name="action">
                     Skapa
-                    <i class="material-icons right">add</i>
                 </button>
+                @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new {@class = "blue btn"})
             </div>
+
         </div>
     }
 
-    <div>
-        @Html.ActionLink("Backa", "Index")
-    </div>
 </div>
 @*Is required for validation*@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>

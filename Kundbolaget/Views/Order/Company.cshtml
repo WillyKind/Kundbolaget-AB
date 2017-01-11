@@ -25,6 +25,12 @@
         <th>
             Pris
         </th>
+        <th>
+            Info
+        </th>
+        <th>
+            Skapa Pdf
+        </th>
 
     </tr>
 
@@ -52,7 +58,11 @@
                     <i class="material-icons">info_outline</i>
                 </a>
             </td>
-            
+            <td>
+                <a onclick="CreatePdf(@item.Id, 'ExportInvoice')" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">store</i></a>
+            </td>
+
         </tr>
     }
 </table>
+<script src="~/Scripts/CallOrderController.js"></script>

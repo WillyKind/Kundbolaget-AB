@@ -230,5 +230,13 @@ namespace Kundbolaget.Controllers
             pdfGenerator.ExportDeliveryNoteToPdf(id);
             return "Success " + id;
         }
+
+        [HttpPost]
+        public string ExportInvoice(int id)
+        {
+            PdfGenerator.PdfGenerator pdfGenerator = new PdfGenerator.PdfGenerator();
+            pdfGenerator.ExportInvoiceToPdf(id);
+            return "Success " + id;
+        }
     }
 }

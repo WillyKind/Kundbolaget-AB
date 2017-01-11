@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Kundbolaget.EntityFramework.Context;
+using Kundbolaget.EntityFramework.Repositories;
 using Font = iTextSharp.text.Font;
 
 namespace Kundbolaget.PdfGenerator
@@ -20,7 +21,7 @@ namespace Kundbolaget.PdfGenerator
         public void ExportInvoiceToPdf(int id)
         {
             db = new StoreContext();
-
+            var orders = new DbOrderRepository();
             var company = from od in db.OrderDetails
                           where od.OrderId == id
                           select new
@@ -52,11 +53,11 @@ namespace Kundbolaget.PdfGenerator
                               od.UnitPrice,
                               od.TotalPrice,
                           };
-            
+
+            var order = orders.GetEntity(id);
             
             var doc = new Document();
             string path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\Faktura_o{id}_c{company.FirstOrDefault().Name}{DateTime.Now.ToShortDateString()}.pdf";
-
             FileStream fS = File.Create(path);
             var pb = new PdfContentByte(PdfWriter.GetInstance(doc, fS));
             //PdfWriter.GetInstance(doc, fS);
@@ -72,24 +73,20 @@ namespace Kundbolaget.PdfGenerator
 
             var table1 = new PdfPTable(4) { HorizontalAlignment = 1, WidthPercentage = 100f};
             table1.SetWidths(new float[] { 1f, 1f, 2f, 1f } );
-
             var nestedTableLeft = new PdfPTable(2);
-            var orderDate = company.FirstOrDefault().CreatedDate;
-            var dueDate = orderDate.AddDays(14); 
+
             var cellsLeft = new List<PdfPCell>
             {
                 new PdfPCell(new Phrase("Fakturadatum:")) {Border = 0},
-                new PdfPCell(new Phrase(company.FirstOrDefault().CreatedDate.ToShortDateString())) {Border = 0},                
+                new PdfPCell(new Phrase(order.Invoice.CreatedDate.ToShortDateString())) {Border = 0},                
                 new PdfPCell(new Phrase("Fakturanr:")) {Border = 0},
-                new PdfPCell(new Phrase("000000")) {Border = 0},
+                new PdfPCell(new Phrase(order.Invoice.Id.ToString())) {Border = 0},
                 new PdfPCell(new Phrase("Kundnr:")) {Border = 0},
-                new PdfPCell(new Phrase(company.FirstOrDefault().CompanyId.ToString())) {Border = 0},             
+                new PdfPCell(new Phrase(order.Invoice.CompanyId.ToString())) {Border = 0},             
                 new PdfPCell(new Phrase("Förfallodag:")) {Border = 0},
-                new PdfPCell(new Phrase(dueDate.ToShortDateString())) {Border = 0},                
-                new PdfPCell(new Phrase("Dröjsmålsränta:")) {Border = 0},
-                new PdfPCell(new Phrase("8.0%")) {Border = 0},
+                new PdfPCell(new Phrase(order.Invoice.DueDate.ToShortDateString())) {Border = 0},                       
                 new PdfPCell(new Phrase("Betalningsvillkor:")) {Border = 0},
-                new PdfPCell(new Phrase("14 dagar")) {Border = 0},
+                new PdfPCell(new Phrase("90 dagar")) {Border = 0},
                 new PdfPCell(new Phrase("Plusgironr:")) {Border = 0},
                 new PdfPCell(new Phrase("1234567-8")) {Border = 0},
                 new PdfPCell(new Phrase("Bankgironr:")) {Border = 0},
@@ -120,7 +117,6 @@ namespace Kundbolaget.PdfGenerator
                 new PdfPCell(new Phrase($"{company.FirstOrDefault().Street} {company.FirstOrDefault().Number}")) {Border = 0},
                 new PdfPCell(new Phrase("")) {Border = 0},
                 new PdfPCell(new Phrase(company.FirstOrDefault().ZipCode)) {Border = 0},
-                
             };
 
             foreach (var cell in cellsRight)
@@ -131,65 +127,63 @@ namespace Kundbolaget.PdfGenerator
             nesthousingRight.Colspan = 2;
             nesthousingRight.Border = 0;
             table1.AddCell(nesthousingRight);
+
             doc.Add(table1);
 
             doc.Add(new Paragraph("\n\n"));
-            var momsEnkel = product.FirstOrDefault().UnitPrice*0.25;
-            var momsTotal = product.FirstOrDefault().TotalPrice*0.25;
-            var table2 = new PdfPTable(7) {HorizontalAlignment = 1, WidthPercentage = 100f};
-            table2.SetWidths(new float[] { 1f, 3f, 1.1f, 0.75f, 0.65f, 1f, 1f });
-
+            var table2 = new PdfPTable(5) {HorizontalAlignment = 1, WidthPercentage = 100f};
+            table2.SetWidths(new float[] { 0.65f, 2.9f, 0.9f, 0.9f, 0.9f });
             var headerCells = new List<PdfPCell>
             {
-                new PdfPCell(new Phrase("Artikelnr.", hBold)) {BackgroundColor = BaseColor.LIGHT_GRAY },
+                new PdfPCell(new Phrase("Artikelnr", hBold)) {BackgroundColor = BaseColor.LIGHT_GRAY },
                 new PdfPCell(new Phrase("Beskrivning", hBold)) { BackgroundColor = BaseColor.LIGHT_GRAY },
                 new PdfPCell(new Phrase("Antal Kolli", hBold)) { BackgroundColor = BaseColor.LIGHT_GRAY },
-                new PdfPCell(new Phrase("à-pris", hBold)) { BackgroundColor = BaseColor.LIGHT_GRAY },
-                new PdfPCell(new Phrase("Moms", hBold)) { BackgroundColor = BaseColor.LIGHT_GRAY },
-                new PdfPCell(new Phrase("Moms Kr", hBold)) { BackgroundColor = BaseColor.LIGHT_GRAY },
+                new PdfPCell(new Phrase("à-pris", hBold)) { BackgroundColor = BaseColor.LIGHT_GRAY },          
                 new PdfPCell(new Phrase("Belopp", hBold)) { BackgroundColor = BaseColor.LIGHT_GRAY },
             };
-
             foreach (var headerCell in headerCells)
             {
                 table2.AddCell(headerCell);
             }
-
             foreach (var item in product)
             {
                 table2.AddCell($"{item.ProductInfoId}");
                 table2.AddCell($"{item.Name} {item.Container} {item.Volume.Milliliter}ml");
                 table2.AddCell($"{item.Amount}");
-                table2.AddCell($"{item.UnitPrice}");
-                table2.AddCell("25%");
-                table2.AddCell(momsEnkel.ToString());
-                table2.AddCell(momsTotal.ToString());
+                table2.AddCell($"{item.UnitPrice}"); 
+                table2.AddCell($"{item.UnitPrice * item.Amount}");
             }
-            
             var priceInfoCells = new List<PdfPCell>
             {
-                new PdfPCell(new Phrase("FUCKOFF!", white)) {Colspan = 7, Border = 0},
-                new PdfPCell(new Phrase("FUCKOFF AGAIN!", white)) {Colspan = 7, Border = 0},
-
-                new PdfPCell(new Phrase("")) {Colspan = 3, Border = 0},
-                new PdfPCell(new Phrase("Belopp före moms:", hBold)) {Border = 0, Colspan = 3},
-                new PdfPCell(new Phrase("100 kr", hBold)) { Border = 0},
-                new PdfPCell(new Phrase("")) {Colspan = 3, Border = 0},
-                new PdfPCell(new Phrase("Total moms:", hBold)) {  Border = 0, Colspan = 3 },
-                new PdfPCell(new Phrase("500 kr", hBold)) {  Border = 0 },
-                new PdfPCell(new Phrase("")) {Colspan = 3, Border = 0},
-                new PdfPCell(new Phrase("Pris före rabatt:", hBold)) {  Border = 0, Colspan = 3 },
-                new PdfPCell(new Phrase("500 kr", hBold)) {  Border = 0 },
-                new PdfPCell(new Phrase("")) {Colspan = 3, Border = 0},
-                new PdfPCell(new Phrase("Pris med rabatt:", hBold)) {  Border = 0, Colspan = 3 },
-                new PdfPCell(new Phrase("500 kr", hBold)) {  Border = 0 },
-                new PdfPCell(new Phrase("")) {Colspan = 3, Border = 0},
-                new PdfPCell(new Phrase("Öresutjämning:", hBold)) {  Border = 0, Colspan = 3 },
-                new PdfPCell(new Phrase("0,25", hBold)) {  Border = 0 },
-                new PdfPCell(new Phrase("")) {Colspan = 3, Border = 0},
-                new PdfPCell(new Phrase("Totalt belopp att betala:", hBold)) { BorderWidthBottom = 0,BorderWidthLeft = 0,BorderWidthRight = 0, Colspan = 3 },
-                new PdfPCell(new Phrase(product.FirstOrDefault().TotalPrice.ToString(), hBold)) { BorderWidthBottom = 0,BorderWidthLeft = 0,BorderWidthRight = 0},
+                new PdfPCell(new Phrase("FUCKOFF!", white)) {Colspan = 5, Border = 0},
+                new PdfPCell(new Phrase("FUCKOFF AGAIN!", white)) {Colspan = 5, Border = 0},
+  
+                new PdfPCell(new Phrase("")) {Colspan = 2, Border = 0},
+                new PdfPCell(new Phrase("Orginalpris:", hBold)) {Colspan = 2, Border = 0},
+                new PdfPCell(new Phrase(order.Invoice.OriginalPrice.ToString(),hBold)) {Border = 0},
+                
+                new PdfPCell(new Phrase("")) {Colspan = 2, Border = 0},
+                new PdfPCell(new Phrase("Pris med mängdrabatt:", hBold)) {Colspan = 2, Border = 0},
+                new PdfPCell(new Phrase(Math.Round(order.Invoice.PriceWithPalletDiscount, 2).ToString(), hBold)) {Border = 0},
+                 
+                new PdfPCell(new Phrase("")) {Colspan = 2, Border = 0},
+                new PdfPCell(new Phrase("Pris med företagsrabatt:", hBold)) {Colspan = 2, Border = 0},
+                new PdfPCell(new Phrase(Math.Round(order.Invoice.PriceWithCompanyDiscount, 2).ToString(), hBold)) {Border = 0},
+                 
+                new PdfPCell(new Phrase("")) {Colspan = 2, Border = 0},
+                new PdfPCell(new Phrase("Total moms:", hBold)) {Colspan = 2, Border = 0},
+                new PdfPCell(new Phrase((Math.Round( (order.Invoice.PriceWithCompanyDiscount * 0.25),2)).ToString(), hBold)) {Border = 0},
+                 
+                new PdfPCell(new Phrase("")) {Colspan = 2, Border = 0},
+                new PdfPCell(new Phrase("Öresutjämning:", hBold)) {Colspan = 2, Border = 0},
+                new PdfPCell(new Phrase(Math.Round((Math.Round(order.Invoice.PriceWithCompanyDiscount + Math.Round(order.Invoice.PriceWithCompanyDiscount * 0.25,0))
+                - (Math.Round(order.Invoice.PriceWithCompanyDiscount,2)+ Math.Round(order.Invoice.PriceWithCompanyDiscount * 0.25,2))),2).ToString(), hBold)){Border = 0},
+                 
+                new PdfPCell(new Phrase("")) {Colspan = 2, Border = 0},
+                new PdfPCell(new Phrase("Summa att betala SEK:", hBold)) { BorderWidthBottom = 0,BorderWidthLeft = 0,BorderWidthRight = 0, Colspan = 2 },
+                new PdfPCell(new Phrase(Math.Round(order.Invoice.PriceWithCompanyDiscount + (order.Invoice.PriceWithCompanyDiscount * 0.25),0).ToString(), hBold)) { BorderWidthBottom = 0,BorderWidthLeft = 0,BorderWidthRight = 0},
             };
+
             foreach (var priceCell in priceInfoCells)
             {
                 table2.AddCell(priceCell);
@@ -255,7 +249,7 @@ namespace Kundbolaget.PdfGenerator
 
             doc.Add(new Paragraph("\n\n"));
 
-            var table = new PdfPTable(4) {HorizontalAlignment = 0};
+            var table = new PdfPTable(4) {HorizontalAlignment = 1, WidthPercentage = 100f};
             var cell = new PdfPCell(new Phrase("Detaljer"))
             {
                 Colspan = 4,
@@ -264,15 +258,15 @@ namespace Kundbolaget.PdfGenerator
             table.AddCell(cell);
             table.AddCell("Artikelnr");
             table.AddCell("Produkt");
-            table.AddCell("Antal");
             table.AddCell("Behållare");
-
+            table.AddCell("Antal");
+            
             foreach (var item in product)
             {
                 table.AddCell($"{item.ProductInfoId}");
                 table.AddCell($"{item.Name}");
-                table.AddCell($"{item.Amount}");
                 table.AddCell($"{item.Container} {item.Volume.Milliliter}ml");
+                table.AddCell($"{item.Amount}");
             }
             doc.Add(table);
 

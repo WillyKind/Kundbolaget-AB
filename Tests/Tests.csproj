@@ -90,7 +90,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdressControllerTests.cs" />
     <Compile Include="CompanyControllerTest.cs" />
     <Compile Include="CustomerProductControllerTest.cs" />
     <Compile Include="Helper.cs" />

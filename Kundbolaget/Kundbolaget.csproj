@@ -215,7 +215,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AdressController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\CustomerProductController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />

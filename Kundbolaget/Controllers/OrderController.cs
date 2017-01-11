@@ -26,9 +26,12 @@ namespace Kundbolaget.Controllers
         }
 
         //Constructor for tests
-        public OrderController(DbOrderRepository dbOrderRepository)
+        public OrderController(DbOrderRepository dbOrderRepository, DbCompanyRepository dbCompanyRepository, DbInvoiceRepository dbInvoiceRepository, DbProductStockRepository dbProductStockRepository)
         {
             _orders = dbOrderRepository;
+            _companies = dbCompanyRepository;
+            _invoices = dbInvoiceRepository;
+            _productStock = dbProductStockRepository;
         }
 
         // GET: Order

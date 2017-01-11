@@ -52,26 +52,6 @@ namespace Tests
         };
 
 
-        //static OrderDetails[] orderDetails = new[]
-        //{
-        //    new OrderDetails
-        //    {
-        //        ProductInfo = ResourceData.ProductInfoList[1],
-        //        Amount = 10,
-        //        Order = DummyOrder[0],
-        //        UnitPrice = ResourceData.ProductInfoList[1].Price,
-        //        TotalPrice = ResourceData.ProductInfoList[1].Price*10
-        //    },
-        //    new OrderDetails
-        //    {
-        //        ProductInfo = ResourceData.ProductInfoList[2],
-        //        Amount = 25,
-        //        UnitPrice = ResourceData.ProductInfoList[2].Price,
-        //        TotalPrice = ResourceData.ProductInfoList[2].Price*25,
-        //        Order = DummyOrder[0]
-        //    }
-        //};
 
-        //    DummyOrder[0].Price += orderDetails.Sum(p => p.ProductInfo.Price*p.Amount);
     }
 }

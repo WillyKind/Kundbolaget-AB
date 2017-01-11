@@ -22,6 +22,7 @@ namespace Kundbolaget.Controllers
             _products = new DbProductInfoRepository();
         }
 
+
         public OrderDetailsController(DbOrderDetailsRpository orderDetailsRpository, DbOrderRepository dbOrderRepository,DbProductInfoRepository dbProductInfoRepository)
         {
             _orderDetails = orderDetailsRpository;

@@ -92,8 +92,10 @@
   <ItemGroup>
     <Compile Include="CompanyControllerTest.cs" />
     <Compile Include="CustomerProductControllerTest.cs" />
+    <Compile Include="OrderDetailsResources.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="OrderControllerTest.cs" />
+    <Compile Include="OrderDetailsControllerTest.cs" />
     <Compile Include="OrderResourcesData.cs" />
     <Compile Include="HomeContollerTest.cs" />
     <Compile Include="ProductControllerTest.cs" />

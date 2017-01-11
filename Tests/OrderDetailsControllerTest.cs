@@ -55,6 +55,13 @@ namespace Tests
             _mockContext.Setup(x => x.ProductsInfoes).Returns(setupDbProductInfos.Object);
             _mockContext.Setup(x => x.Orders).Returns(setupDbOrders.Object);
 
+
+            _mockContext.Setup(x => x.SetModified(It.IsAny<OrderDetails>()));
+            _mockContext.Setup(x => x.SetAdded(It.IsAny<OrderDetails>()));
+
+            _mockContext.Setup(x => x.SetModified(It.IsAny<Order>()));
+            _mockContext.Setup(x => x.SetAdded(It.IsAny<Order>()));
+
             //inject mock database via overloaded ctor
             var dbOrderDetailsRepository = new DbOrderDetailsRpository(_mockContext.Object);
             var dbOrdersRepository = new DbOrderRepository(_mockContext.Object);
@@ -125,12 +132,14 @@ namespace Tests
                 Amount = 10,
                 IsRemoved = false,
                 OrderId = 0,
+                Order = OrderResourcesData.DummyOrder[0],
                 ProductInfoId = 1,
                 UnitPrice = 50,
                 TotalPrice = 5000
             };
             model.OrderDetails = orderDetails;
             _orderDetailsController.Edit(model.OrderDetails.Id, model);
+            _mockSetOrderDetails.Verify(x=>x.Attach(orderDetails));
             _mockContext.Verify(x => x.SaveChanges(), Times.Exactly(2));
         }
     }

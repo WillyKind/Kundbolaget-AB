@@ -57,6 +57,7 @@ namespace Tests
             //Without this you will get null reference exception when calling include.
             _mockSetProductInfo.Setup(x => x.Include(It.IsAny<string>())).Returns(_mockSetProductInfo.Object);
 
+            _mockContext.Setup(x => x.SetModified(It.IsAny<ProductInfo>()));
             // Injects mock database via overloaded ctor
             var dbProductInfoRepository = new DbProductInfoRepository(_mockContext.Object);
             var dbContainerRepository = new DbContainerRepository(_mockContext.Object);
@@ -69,7 +70,6 @@ namespace Tests
                 dbProductGroupRepository, dbVolumeRepository);
         }
 
-        
 
         [Test]
         public void Create()
@@ -172,7 +172,7 @@ namespace Tests
         {
             var actionResult = _productController.Edit(1);
             var viewResult = actionResult as ViewResult;
-             var result = (ManageProductInfosViewModel) viewResult.Model;
+            var result = (ManageProductInfosViewModel) viewResult.Model;
             Assert.AreEqual(1, result.ProductInfo.Id);
             Assert.AreEqual(ResourceData.ProductInfoList[0].Name, result.ProductInfo.Name);
             Assert.AreEqual(ResourceData.ProductInfoList[0].Description, result.ProductInfo.Description);
@@ -182,7 +182,9 @@ namespace Tests
         [Test]
         public void Edit_Post_Redirect_To_Index()
         {
-            var result = _productController.Edit(new ManageProductInfosViewModel {ProductInfo = ResourceData.ProductInfoList[0] }) as RedirectToRouteResult;
+            var result =
+                _productController.Edit(new ManageProductInfosViewModel {ProductInfo = ResourceData.ProductInfoList[0]})
+                    as RedirectToRouteResult;
             Assert.AreEqual("Index", result.RouteValues["action"]);
         }
 
@@ -192,7 +194,7 @@ namespace Tests
             var productInfos = _mockSetProductInfo.Object.ToList();
             var tempObj = productInfos[0];
             tempObj.Abv = 100;
-            _productController.Edit( new ManageProductInfosViewModel {ProductInfo = tempObj });
+            _productController.Edit(new ManageProductInfosViewModel {ProductInfo = tempObj});
 
             Assert.AreEqual(100, productInfos[0].Abv);
             _mockSetProductInfo.Verify(x => x.Attach(tempObj), Times.Once);

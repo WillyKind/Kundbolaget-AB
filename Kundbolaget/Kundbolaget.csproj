@@ -194,6 +194,7 @@
     <Content Include="content\materialize\fonts\roboto\Roboto-Bold.ttf" />
     <Content Include="content\materialize\fonts\roboto\Roboto-Bold.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\CallCompanyController.js" />
     <Content Include="Scripts\CallOrderController.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\CallProductController.js" />

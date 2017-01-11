@@ -21,12 +21,15 @@
             <th>Telefonnummer</th>
             <th>Leveransadress</th>
             <th>Moderbolag</th>
+            <th>Ändra</th>
+            <th>Info</th>
+            <th>Ta bort</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr id="@item.Id">
                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
                 <td>@Html.DisplayFor(modelItem => item.Address.Street) @Html.DisplayFor(modelItem => item.Address.Number)</td>
                 <td>@Html.DisplayFor(modelItem => item.Country.Name)</td>
@@ -39,20 +42,19 @@
                     <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-floating small waves-effect waves-light">
                         <i class="material-icons">edit</i>
                     </a>
+                </td>
+                <td>
                     <a href="@Url.Action("Details", new {id = item.Id})" class="btn btn-floating small waves-effect waves-light">
                         <i class="material-icons">info_outline</i>
                     </a>
-                    <a onclick="openRemovalModal(@item.Id)" href="#" class="btn btn-floating small waves-effect waves-light">
-                        <i class="material-icons">clear</i>
-                    </a>
-                    <div id="@("modal" + item.Id)" class="modal">
-                        <div class="modal-content">
-                            <h4>Ta bort @item.Name</h4>
-                            <button onclick="deleteCompany(@item.Id)" class="btn">Ja</button>
-                            <button onclick="closeRemovalModal(@item.Id)" class="btn">Nej</button>
-                        </div>
-                    </div>
                 </td>
+                <td>
+                    <a onclick="CompanyController(@item.Id, 'Delete')" class="btn btn-floating btn-small waves-effect waves-light">
+                        <i class="material-icons">delete</i>
+                    </a>
+                </td>
+                
+
             </tr>
         }
     </tbody>
@@ -77,3 +79,5 @@
         })
     }
 </script>
+
+<script src="~/Scripts/CallCompanyController.js"></script>

@@ -77,28 +77,38 @@ namespace Kundbolaget.Controllers
             return View("Details", model);
         }
 
-        public ActionResult Delete(int id)
-        {
-            var model = _productInfo.GetEntity(id);
-            if (model == null)
-            {
-                return HttpNotFound();
-            }
+        //public ActionResult Delete(int id)
+        //{
+        //    var model = _productInfo.GetEntity(id);
+        //    if (model == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
 
-            return View("Delete", model);
-        }
+        //    return View("Delete", model);
+        //}
+
+        //[HttpPost]
+        //public ActionResult Delete(ProductInfo model, int id)
+        //{
+        //    if (model.Id != id)
+        //    {
+        //        ModelState.AddModelError("Name", "Bad Request");
+        //        return View(model);
+        //    }
+        //    _productInfo.DeleteEntity(id);
+        //    return RedirectToAction("Index", "Product");
+        //}
 
         [HttpPost]
-        public ActionResult Delete(ProductInfo model, int id)
+        public string Delete(int id)
         {
-            if (model.Id != id)
-            {
-                ModelState.AddModelError("Name", "Bad Request");
-                return View(model);
-            }
-            _productInfo.DeleteEntity(id);
-            return RedirectToAction("Index", "Product");
+            var entity = _productInfo.GetEntity(id);
+            entity.IsRemoved = true;
+            _productInfo.UpdateEntity(entity);
+            return "Success";
         }
+
 
         [HttpPost]
         public ActionResult Create(ManageProductInfosViewModel model)

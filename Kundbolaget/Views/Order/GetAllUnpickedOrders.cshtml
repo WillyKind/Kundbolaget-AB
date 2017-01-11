@@ -56,7 +56,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            @if (item.OrderComplete)
+            @if (item.OrderComplete && item.OrderDetails.Count != 0)
             {
                 <td>
                     <a onclick="OrderController(@item.Id, 'OrderPicked')" class="btn btn-floating btn-small waves-effect waves-light">

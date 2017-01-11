@@ -126,6 +126,10 @@ namespace Kundbolaget.Controllers
         public ActionResult OrderDetails(int id)
         {
             var model = _orders.GetOrderDetails(id);
+            if (model.Length == 0)
+            {
+                return RedirectToAction("GetAllUnpickedOrders");
+            }
             return View(model);
         }
 

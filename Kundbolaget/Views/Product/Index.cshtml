@@ -7,10 +7,8 @@
 <h4>Produktöversikt</h4>
 
 <div>
-    @*<a href="@Url.Action("Create","Product")" class="btn btn-floating waves-effect waves-light">Skapa ny</a>*@
-    
-    @Html.ActionLink("Skapa", "Create","Product" , null, new { @class = "teal btn" })
-    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new { @class = "blue btn" })
+    @Html.ActionLink("Skapa", "Create", "Product", null, new {@class = "teal btn"})
+    @Html.ActionLink("Tillbaka", "AdminManager", "Home", null, new {@class = "blue btn"})
 </div>
 <table class="highlight responsive-table">
     <thead>
@@ -38,10 +36,14 @@
             <td>@Html.DisplayFor(modelItem => item.Abv)</td>
             <td>@Html.DisplayFor(modelItem => item.Price)</td>
             <td class="centeredColumn">
-                <a href="@Url.Action("Edit","Product", new { id = item.Id})" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">mode_edit</i></a>
+                <a href="@Url.Action("Edit", "Product", new {id = item.Id})" class="btn btn-floating btn-small waves-effect waves-light">
+                    <i class="material-icons">mode_edit</i>
+                </a>
             </td>
             <td class="centeredColumn">
-                <a href="@Url.Action("Details", "Product", new { id = item.Id})" class="btn btn-floating btn-small waves-effect waves-light blue"><i class="material-icons">info_outline</i></a>
+                <a href="@Url.Action("Details", "Product", new {id = item.Id})" class="btn btn-floating btn-small waves-effect waves-light blue">
+                    <i class="material-icons">info_outline</i>
+                </a>
             </td>
             <td class="centeredColumn">
                 <a onclick="ProductController(@item.Id, 'Delete')" class="btn btn-floating btn-small waves-effect waves-light red">

@@ -28,14 +28,6 @@
                         Alkoholhalt:
                         @Html.DisplayFor(model => model.Abv)
                     </li>
-                    <li>
-                        TG:
-                        @Html.DisplayFor(model => model.TradingMargin)
-                    </li>
-                    <li>
-                        Inköpspris:
-                        @Html.DisplayFor(model => model.PurchasePrice)
-                    </li>
                 </ul>
                 <div class="card-action">
                     @using (Html.BeginForm())
@@ -44,7 +36,7 @@
 
                         <div class="form-actions no-color">
                             <input type="submit" value="Ta Bort" class="btn btn-default"/>
-                           | @Html.ActionLink("Tillbaka", "Index", null, new { @class = "orange-text" })
+                            | @Html.ActionLink("Tillbaka", "Index", null, new {@class = "orange-text"})
                         </div>
                     }
                 </div>

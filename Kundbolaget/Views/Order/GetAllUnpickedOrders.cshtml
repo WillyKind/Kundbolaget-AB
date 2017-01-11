@@ -1,106 +1,111 @@
 ﻿@using System.Web.UI.HtmlControls
 @using System.Web.UI.WebControls
 @model IEnumerable<Kundbolaget.Models.EntityModels.Order>
-<h2>Oplockade ordrar</h2>
-@Html.ActionLink("Tillbaka", "Delivery", "Home", null, new {@class = "orange-text"})
-<hr/>
-<table class="highlight">
-    <tr>
-        <th>
-            Ordernummer
-        </th>
-        <th>
-            Butik
-        </th>
-        <th>
-            Orderdatum
-        </th>
-        <th>
-            Önskat leveransdatum
-        </th>
-        <th>
-            Totalpris
-        </th>
-        <th>
-            Plockad
-        </th>
-        <th>
-            Ändra
-        </th>
-        <th>
-            Plocklista
-        </th>
-        <th>
-            Ta bort
-        </th>
-        <th>
-            Kommentar
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr id="@item.Id">
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Company.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            @if (item.OrderComplete && item.OrderDetails.Count != 0)
-            {
-                <td>
-                    <a onclick="OrderController(@item.Id, 'OrderPicked')" class="btn btn-floating btn-small waves-effect waves-light">
-                        <i class="material-icons">check</i>
-                    </a>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <a class="btn btn-floating btn-small waves-effect waves-light red">
-                        <i class="material-icons">check</i>
-                    </a>
-                </td>
-            }
-
-            <td>
-                <a href="@Url.Action("Index", "OrderDetails", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating btn-small waves-effect waves-light">
-                    <i class="material-icons">update</i>
-                </a>
-            </td>
-            <td>
-                <a href="@Url.Action("OrderDetails", "Order", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating btn-small waves-effect waves-light">
-                    <i class="material-icons">info_outline</i>
-                </a>
-            </td>
-            <td>
-
-                <a onclick="OrderController(@item.Id, 'Delete')" class="btn btn-floating btn-small waves-effect waves-light">
-                    <i class="material-icons">delete</i>
-                </a>
-            </td>
-            <td>
-               @Html.TextArea("txtValue",item.Comment , new { id = "textArea"+@item.Id} )
-
-            </td>
-            <td>
-                <a onclick="OrderComment('SetComment', @item.Id)" class="btn btn-floating btn-small waves-effect waves-light">
-                    <i class="material-icons">update</i>
-                </a>
-            </td>            
+<h4>Oplockade ordrar</h4>
+<div>
+    @Html.ActionLink("Tillbaka", "Delivery", "Home", null, new { @class = "orange-text" })
+</div>
+<table class="highlight responsive-table">
+    <thead>
+        <tr>
+            <th>
+                Ordernummer
+            </th>
+            <th>
+                Butik
+            </th>
+            <th>
+                Orderdatum
+            </th>
+            <th>
+                Önskat leveransdatum
+            </th>
+            <th>
+                Totalpris
+            </th>
+            <th>
+                Plockad
+            </th>
+            <th>
+                Ändra
+            </th>
+            <th>
+                Plocklista
+            </th>
+            <th>
+                Ta bort
+            </th>
+            <th>
+                Kommentar
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WishedDeliveryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                @if (item.OrderComplete && item.OrderDetails.Count != 0)
+                {
+                    <td>
+                        <a onclick="OrderController(@item.Id, 'OrderPicked')" class="btn btn-floating btn-small waves-effect waves-light">
+                            <i class="material-icons">check</i>
+                        </a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a class="btn btn-floating btn-small waves-effect waves-light red">
+                            <i class="material-icons">check</i>
+                        </a>
+                    </td>
+                }
+
+                <td>
+                    <a href="@Url.Action("Index", "OrderDetails", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating btn-small waves-effect waves-light">
+                        <i class="material-icons">update</i>
+                    </a>
+                </td>
+                <td>
+                    <a href="@Url.Action("OrderDetails", "Order", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating btn-small waves-effect waves-light">
+                        <i class="material-icons">info_outline</i>
+                    </a>
+                </td>
+                <td>
+
+                    <a onclick="OrderController(@item.Id, 'Delete')" class="btn btn-floating btn-small waves-effect waves-light">
+                        <i class="material-icons">delete</i>
+                    </a>
+                </td>
+                <td>
+                    @Html.TextArea("txtValue", item.Comment, new { id = "textArea" + @item.Id })
+
+                </td>
+                <td>
+                    <a onclick="OrderComment('SetComment', @item.Id)" class="btn btn-floating btn-small waves-effect waves-light">
+                        <i class="material-icons">update</i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
 <script src="~/Scripts/CallOrderController.js"></script>
 
 <script>
@@ -116,6 +121,9 @@
         });
     }
 </script>
+
+
+
 
 
 

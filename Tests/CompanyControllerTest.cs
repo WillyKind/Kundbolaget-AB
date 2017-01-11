@@ -123,6 +123,9 @@ namespace Tests
             //Without this you will get null reference exception when calling include.
             _mockCompanies.Setup(x => x.Include(It.IsAny<string>())).Returns(() => setupCompany);
 
+           
+            _mockContext.Setup(x => x.SetModified(It.IsAny<Company>()));
+
             _mockContext.Setup(x => x.Companies).Returns(_mockCompanies.Object);
             _mockContext.Setup(x => x.Addresses).Returns(_mockAddresses.Object);
             _mockContext.Setup(x => x.Countries).Returns(_mockCountries.Object);

@@ -198,7 +198,7 @@ namespace Kundbolaget.Controllers
                     var totalPallets = (orderDetail.Amount - remainder)/10;
                     var remainderPrice = remainder*orderDetail.UnitPrice;
                     var palletPrice = totalPallets*10*orderDetail.UnitPrice;
-                    var palletDiscount = palletPrice*orderDetail.ProductInfo.PalletDiscount.Value;
+                    var palletDiscount = palletPrice*(orderDetail.ProductInfo.PalletDiscount.Value/100);
                     var discountedPrice = palletPrice - palletDiscount + remainderPrice;
 
 
@@ -218,7 +218,7 @@ namespace Kundbolaget.Controllers
             }
 
 
-            invoice.PriceWithCompanyDiscount = invoice.PriceWithPalletDiscount / (invoice.Order.Company.ParentCompany.Discount + 1);
+            invoice.PriceWithCompanyDiscount = invoice.PriceWithPalletDiscount- invoice.PriceWithPalletDiscount * (invoice.Order.Company.ParentCompany.Discount/100);
             orderViewModel.Order.Invoice = invoice;
             _orders.UpdateEntity(orderViewModel.Order);
         }

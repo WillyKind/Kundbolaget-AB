@@ -87,7 +87,7 @@
                         data_val_required = "Måste fyllas i."
                     }
                 })
-                @Html.LabelFor(model => model.Company.Email, "MailAddress")
+                @Html.LabelFor(model => model.Company.Email, "E-Post")
                 @Html.ValidationMessageFor(model => model.Company.Email)
             </div>
         </div>
@@ -137,15 +137,15 @@
             @Html.HiddenFor(model => model.Company.Address.Id)
             <div class="input-field col s10">
                 @Html.EditorFor(model => model.Company.Address.Street)
-                @Html.LabelFor(model => model.Company.Address.Street)
+                @Html.Label("Adress")
             </div>
             <div class="input-field col s10">
                 @Html.EditorFor(model => model.Company.Address.Number)
-                @Html.LabelFor(model => model.Company.Address.Number)
+                @Html.Label("Gatunummer")
             </div>
             <div class="input-field col s10">
                 @Html.EditorFor(model => model.Company.Address.ZipCode)
-                @Html.LabelFor(model => model.Company.Address.ZipCode)
+                @Html.Label("Postnummer")
                 @Html.ValidationMessageFor(model => model.Company.Address)
             </div>
         </div>
@@ -158,15 +158,15 @@
             @Html.HiddenFor(model => model.Company.DeliveryAddress.Id)
             <div class="input-field col s10">
                 @Html.EditorFor(model => model.Company.DeliveryAddress.Street)
-                @Html.LabelFor(model => model.Company.DeliveryAddress.Street)
+                @Html.Label("Adress")
             </div>
             <div class="input-field col s10">
                 @Html.EditorFor(model => model.Company.DeliveryAddress.Number)
-                @Html.LabelFor(model => model.Company.DeliveryAddress.Number)
+                @Html.Label("Gatunummer")
             </div>
             <div class="input-field col s10">
                 @Html.EditorFor(model => model.Company.DeliveryAddress.ZipCode)
-                @Html.LabelFor(model => model.Company.DeliveryAddress.ZipCode)
+                @Html.Label("Postnummer")
             </div>
             @Html.ValidationMessageFor(model => model.Company.Address)
         </div>
@@ -174,7 +174,7 @@
 
         <div class="row">
             <div class="col s10">
-                <input type="submit" value="Spara" class="teal btn waves-effect waves-light"/>
+                <input type="submit" value="Skapa" class="teal btn waves-effect waves-light"/>
                 @Html.ActionLink("Tillbaka", "Index", null, new {@class = "blue btn waves-effect waves-light"})
             </div>
         </div>

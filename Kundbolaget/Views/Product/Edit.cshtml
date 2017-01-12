@@ -28,7 +28,7 @@
                 </div>
                 <div class="row">
                     <div class="col s12">
-                        @Html.LabelFor(model => model.ProductInfo.VolumeId, "Volume")
+                        @Html.LabelFor(model => model.ProductInfo.VolumeId, "Volym")
                         @Html.DropDownListFor(model => model.ProductInfo.VolumeId, new SelectList(Model.Volumes, "Id", "Milliliter"), new
                         {
                             htmlAttributes = new
@@ -82,7 +82,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        @Html.LabelFor(model => model.ProductInfo.Price, "Pris")
+                        @Html.LabelFor(model => model.ProductInfo.Price, "Pris per kolli")
                         @Html.EditorFor(model => model.ProductInfo.Price)
                         @Html.ValidationMessageFor(model => model.ProductInfo.Price)
                     </div>
@@ -90,7 +90,7 @@
 
                 <div class="row">
                     <div class="input-field col s6">
-                        @Html.LabelFor(model => model.ProductInfo.NewPrice, "Pris för kommande datum")
+                        @Html.LabelFor(model => model.ProductInfo.NewPrice, "Nytt pris")
                         @Html.EditorFor(model => model.ProductInfo.NewPrice)
                         @Html.ValidationMessageFor(model => model.ProductInfo.NewPrice)
                     </div>

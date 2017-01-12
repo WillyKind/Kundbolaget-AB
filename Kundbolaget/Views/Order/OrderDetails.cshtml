@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<Kundbolaget.Models.EntityModels.OrderDetails>
 
-<h2>Orderdetaljer för order: @Model.FirstOrDefault().OrderId</h2>
+<h4>Orderdetaljer för order: @Model.FirstOrDefault().OrderId</h4>
 <div>
-    <a href="javascript:GoBack();"class="orange-text" >Tillbaka</a>
+    <a href="javascript:GoBack();"class="blue btn waves-effect waves-light">Tillbaka</a>
+
     @*@Html.ActionLink("Tillbaka", "GetAllUnpickedOrders", "Order", null, new { onclick = "GoBack();" })*@
 </div>
 <hr/>

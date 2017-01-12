@@ -3,7 +3,7 @@
 @model IEnumerable<Kundbolaget.Models.EntityModels.Order>
 <h4>Skicka order</h4>
 <div>
-    @Html.ActionLink("Tillbaka", "Delivery", "Home", null, new {@class = "orange-text"})
+    @Html.ActionLink("Tillbaka", "Delivery", "Home", null, new { @class = "blue btn" })
 </div>
 <table class="highlight">
     <thead>
@@ -27,7 +27,7 @@
             Leverera
         </th>
         <th class="centeredColumn">
-            Skapa Pdf
+            Följesedel
         </th>
         <th class="centeredColumn">
             Info

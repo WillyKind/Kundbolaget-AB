@@ -13,6 +13,7 @@ namespace Tests
         {
             new Order
             {
+                
                 Company = new Company
                 {
                     Address = new Address {Street = "Besöksvägen", Number = "1A", ZipCode = "111 11"}
@@ -59,9 +60,19 @@ namespace Tests
                         OrderId = 0,
                         ProductInfoId = 1,
                         UnitPrice = 50,
-                        TotalPrice = 5000
+                        TotalPrice = 5000,
+                        ReservedAmount = 10,
+                        ProductInfo = new ProductInfo
+                        {
+                            Id = 1,
+                            PalletDiscount = 10
+                            
+                        }
                     }
-                }
+                },
+                OrderDelivered = null,
+                OrderPicked = null,
+                OrderTransported = null
             }
         };
     }

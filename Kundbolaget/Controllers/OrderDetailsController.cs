@@ -30,7 +30,7 @@ namespace Kundbolaget.Controllers
             _products = dbProductInfoRepository;
         }
         // GET: OrderDetails
-        public ActionResult Index(int id, int companyId)
+        public ActionResult Index(int id)
         {
             var model = new OrderDetailsViewModel();
             model.OrderDetailses = _orders.GetOrderDetails(id);

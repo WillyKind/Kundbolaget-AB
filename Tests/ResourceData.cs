@@ -172,6 +172,16 @@ namespace Tests
                 Name = "Kalas Oscars finöl",
                 Description = "Kalas ska det vara.",
                 ProductGroupId = ProductGroups[0].Id,
+                ProductStocks = new List<ProductStock>
+                {
+                    new ProductStock
+                    {
+                        ProductInfoId = 1,
+                        Id = 1,
+                        WarehouseId = 0,
+                        Amount = 100
+                    }
+                }
             },
             new ProductInfo
             {

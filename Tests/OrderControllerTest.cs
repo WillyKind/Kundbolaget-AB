@@ -24,7 +24,7 @@ namespace Tests
         private Mock<DbSet<Invoice>> _mockInvoice;
         private Mock<DbSet<ProductStock>> _mockProductStock;
         private OrderController _orderController;
-        private Mock<DbSet<OrderDetails>> _mockOrderDetails;
+        
 
         [SetUp]
         public void Initializer()

@@ -21,6 +21,7 @@ namespace Tests
                 OrderId = OrderResourcesData.DummyOrder[0].Id,
                 UnitPrice = ResourceData.ProductInfoList[1].Price,
                 TotalPrice = ResourceData.ProductInfoList[1].Price*10,
+                ReservedAmount = 11
             },
             new OrderDetails
             {
@@ -31,7 +32,8 @@ namespace Tests
                 UnitPrice = ResourceData.ProductInfoList[1].Price,
                 TotalPrice = ResourceData.ProductInfoList[1].Price*25,
                 Order = OrderResourcesData.DummyOrder[0],
-                OrderId = OrderResourcesData.DummyOrder[0].Id
+                OrderId = OrderResourcesData.DummyOrder[0].Id,
+                ReservedAmount = 25
             }
         };
     }

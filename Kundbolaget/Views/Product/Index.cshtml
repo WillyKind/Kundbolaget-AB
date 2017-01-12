@@ -37,8 +37,8 @@
             <td>@Html.DisplayFor(modelItem => item.Volume.Milliliter)ml</td>
             <td>@Html.DisplayFor(modelItem => item.Description)</td>
             <td>@Html.DisplayFor(modelItem => item.Abv)%</td>
-            <td>@Html.DisplayFor(modelItem => item.PalletDiscount)</td>
-            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+            <td>@Html.DisplayFor(modelItem => item.PalletDiscount)%</td>
+            <td>@Html.DisplayFor(modelItem => item.Price) kr</td>
             <td class="centeredColumn">
                 <a href="@Url.Action("Edit", "Product", new {id = item.Id})" class="btn btn-floating btn-small waves-effect waves-light">
                     <i class="material-icons">mode_edit</i>

@@ -35,8 +35,7 @@ namespace Kundbolaget.EntityFramework.Repositories
         public void UpdateEntity(OrderDetails updatedEntity)
         {
             db.OrderDetails.Attach(updatedEntity);
-            var entry = db.Entry(updatedEntity);
-            entry.State = EntityState.Modified;
+            db.SetModified(updatedEntity);
             db.SaveChanges();
         }
 

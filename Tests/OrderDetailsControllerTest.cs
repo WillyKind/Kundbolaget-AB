@@ -113,6 +113,7 @@ namespace Tests
                 TotalPrice = 5000
             };
             model.OrderDetails = orderDetails;
+            model.OrderDetails.Order = OrderResourcesData.DummyOrder[0];
             var actionResult = (RedirectToRouteResult) _orderDetailsController.Edit(model.OrderDetails.Id, model);
             var result = actionResult.RouteValues;
             Assert.IsTrue(result.ContainsKey("id"));

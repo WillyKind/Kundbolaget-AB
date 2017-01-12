@@ -16,6 +16,7 @@
         <th>Behållare</th>
         <th>Produktgrupp</th>
         <th>Produktnamn</th>
+        <th>Volym</th>
         <th>Beskrivning</th>
         <th>Alkoholhalt</th>
         <th>Pallrabatt</th>
@@ -33,8 +34,9 @@
             <td>@Html.DisplayFor(modelItem => item.Container.Name)</td>
             <td>@Html.DisplayFor(modelItem => item.ProductGroup.Name)</td>
             <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Volume.Milliliter)ml</td>
             <td>@Html.DisplayFor(modelItem => item.Description)</td>
-            <td>@Html.DisplayFor(modelItem => item.Abv)</td>
+            <td>@Html.DisplayFor(modelItem => item.Abv)%</td>
             <td>@Html.DisplayFor(modelItem => item.PalletDiscount)</td>
             <td>@Html.DisplayFor(modelItem => item.Price)</td>
             <td class="centeredColumn">

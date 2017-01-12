@@ -23,7 +23,7 @@ namespace Kundbolaget.EntityFramework.Context
         public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
 
         public StoreContext()
-            : base(@"data source =.\SQLEXPRESS; initial catalog=KundBolaget; integrated security=SSPI")
+            : base(@"data source =.\SQLEXPRESS; initial catalog=KundBolagetDemo; integrated security=SSPI")
         {
         }
 

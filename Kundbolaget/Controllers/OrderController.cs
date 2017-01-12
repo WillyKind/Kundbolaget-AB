@@ -26,9 +26,12 @@ namespace Kundbolaget.Controllers
         }
 
         //Constructor for tests
-        public OrderController(DbOrderRepository dbOrderRepository)
+        public OrderController(DbOrderRepository dbOrderRepository, DbCompanyRepository dbCompanyRepository, DbInvoiceRepository dbInvoiceRepository, DbProductStockRepository dbProductStockRepository)
         {
             _orders = dbOrderRepository;
+            _companies = dbCompanyRepository;
+            _invoices = dbInvoiceRepository;
+            _productStock = dbProductStockRepository;
         }
 
         // GET: Order
@@ -79,7 +82,7 @@ namespace Kundbolaget.Controllers
             return "Success";
         }
 
-        private void RestoreProductStock(Order entity)
+        public void RestoreProductStock(Order entity)
         {
             foreach (var orderDetail in entity.OrderDetails)
             {
@@ -145,20 +148,6 @@ namespace Kundbolaget.Controllers
             _orders.UpdateOrder(order);
             CreateInvoice(id);
             return "Success " + id;
-        }
-
-
-        private static void CalculatePallets(Order order)
-        {
-            var pallets = order.OrderDetails.Where(details => details.Amount >= 10).ToArray();
-            if (pallets.Any())
-            {
-                foreach (var orderDetails in pallets)
-                {
-                    var remainder = orderDetails.Amount % 10;
-                    var totalPallets = (orderDetails.Amount - remainder) / 10;
-                }
-            }
         }
 
         [HttpPost]

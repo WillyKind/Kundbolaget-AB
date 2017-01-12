@@ -128,8 +128,7 @@ namespace Kundbolaget.EntityFramework.Repositories
         public void UpdateOrder(Order order)
         {
             db.Orders.Attach(order);
-            var entry = db.Entry(order);
-            entry.State = EntityState.Modified;
+            db.SetModified(order);
             db.SaveChanges();
         }
 

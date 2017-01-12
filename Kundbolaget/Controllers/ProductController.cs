@@ -62,7 +62,7 @@ namespace Kundbolaget.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View("Edit", model);
             }
             _productInfo.UpdateEntity(model.ProductInfo);
             return RedirectToAction("Index", "Product");
@@ -94,7 +94,7 @@ namespace Kundbolaget.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View("Create", model);
             }
             _productInfo.CreateEntity(model.ProductInfo);
             return RedirectToAction("Index", "Product");

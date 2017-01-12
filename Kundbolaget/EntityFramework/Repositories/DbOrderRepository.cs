@@ -138,8 +138,7 @@ namespace Kundbolaget.EntityFramework.Repositories
             foreach (var order in orders)
             {
                 db.Orders.Attach(order);
-                var entry = db.Entry(order);
-                entry.State = EntityState.Modified;
+                db.SetModified(order);
             }
             db.SaveChanges();
         }

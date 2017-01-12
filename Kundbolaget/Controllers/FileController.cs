@@ -20,10 +20,30 @@ namespace Kundbolaget.Controllers
 {
     public class FileController : Controller
     {
-        private DbOrderRepository _orders = new DbOrderRepository();
-        private DbCompanyRepository _companies = new DbCompanyRepository();
-        private DbProductInfoRepository _products = new DbProductInfoRepository();
-        private ErrorViewModel _errorViewModel = new ErrorViewModel();
+        private DbOrderRepository _orders;
+        private DbCompanyRepository _companies;
+        private DbProductInfoRepository _products;
+        private ErrorViewModel _errorViewModel;
+
+        public FileController(
+            DbOrderRepository dbOrderRepository,
+            DbCompanyRepository dbCompanyRepository,
+            DbProductInfoRepository dbProductInfoRepository)
+        {
+            _orders = dbOrderRepository;
+            _companies = dbCompanyRepository;
+            _companies = dbCompanyRepository;
+            _products = dbProductInfoRepository;
+            _errorViewModel = new ErrorViewModel();
+        }
+
+        public FileController() : this(
+            new DbOrderRepository(),
+            new DbCompanyRepository(),
+            new DbProductInfoRepository())
+        {
+        }
+
         // GET: File
         public ActionResult Index()
         {
@@ -119,13 +139,11 @@ namespace Kundbolaget.Controllers
             //Allocates productsStockAmount to OrderDetailsAmount
             _orders.AllocateProducts(orders);
 
-          
 
             model.OrderFile = entity;
             return View("OrderFileSuccess", model);
         }
 
-        
 
         protected override void Dispose(bool disposing)
         {

@@ -77,18 +77,18 @@
             }
 
             <td class="centeredColumn">
-                <a href="@Url.Action("Index", "OrderDetails", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating waves-effect waves-light">
-                    <i class="material-icons">update</i>
+                <a href="@Url.Action("Index", "OrderDetails", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating waves-effect waves-light blue">
+                    <i class="material-icons">edit</i>
                 </a>
             </td>
             <td class="centeredColumn">
-                <a href="@Url.Action("OrderDetails", "Order", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating waves-effect waves-light">
+                <a href="@Url.Action("OrderDetails", "Order", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating waves-effect waves-light blue">
                     <i class="material-icons">info_outline</i>
                 </a>
             </td>
             <td class="centeredColumn">
 
-                <a onclick="OrderController(@item.Id, 'Delete')" class="btn btn-floating  waves-effect waves-light">
+                <a onclick="OrderController(@item.Id, 'Delete')" class="btn btn-floating  waves-effect waves-light red">
                     <i class="material-icons">delete</i>
                 </a>
             </td>

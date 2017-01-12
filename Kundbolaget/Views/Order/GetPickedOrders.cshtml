@@ -60,12 +60,12 @@
                 </a>
             </td>
             <td class="centeredColumn">
-                <a onclick="CreatePdf(@item.Id, 'ExportDeliveryNote')" class="btn btn-floating waves-effect waves-light">
+                <a onclick="CreatePdf(@item.Id, 'ExportDeliveryNote')" class="btn btn-floating waves-effect waves-light blue">
                     <i class="material-icons">store</i>
                 </a>
             </td>
             <td class="centeredColumn">
-                <a href="@Url.Action("OrderDetails", "Order", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating waves-effect waves-light">
+                <a href="@Url.Action("OrderDetails", "Order", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating waves-effect waves-light blue">
                     <i class="material-icons">info_outline</i>
                 </a>
             </td>

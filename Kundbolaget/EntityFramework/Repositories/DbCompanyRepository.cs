@@ -37,7 +37,7 @@ namespace Kundbolaget.EntityFramework.Repositories
 
         public Company[] GetParentCompanies()
         {
-            return _db.Companies.Where(c => c.ParentCompany == null && !c.IsRemoved).ToArray();
+            return _db.Companies.Where(c => c.ParentCompanyId == null && !c.IsRemoved).ToArray();
         }
 
         public Company[] GetEntities()
@@ -46,7 +46,9 @@ namespace Kundbolaget.EntityFramework.Repositories
         }
 
         public Company[] GetParentCompanies(int companyId)
-            => _db.Companies.Where(company => company.Id != companyId && !company.IsRemoved).ToArray();
+        {
+            return _db.Companies.Where(company => company.Id != companyId && !company.IsRemoved && company.ParentCompanyId == null).ToArray();
+        }
 
         public Company GetEntity(int id)
         {

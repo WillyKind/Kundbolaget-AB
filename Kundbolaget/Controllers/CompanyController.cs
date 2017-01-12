@@ -90,7 +90,7 @@ namespace Kundbolaget.Controllers
             var addresses = _addressRepository.GetEntities();
             var countries = _countryRepository.GetEntities();
             var contactPersons = _contactPersonRepository.GetEntities();
-            var parentCompanies = _companyRepository.GetEntities();
+            var parentCompanies = _companyRepository.GetParentCompanies();
 
             var companyViewModel = new CompanyViewModel
             {

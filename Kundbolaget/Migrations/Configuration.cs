@@ -322,55 +322,55 @@ namespace Kundbolaget.Migrations
             {
                 new ProductStock
                 {
-                    Amount = 500,
+                    Amount = 10,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld" && pi.Volume.Milliliter == 330),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 500,
+                    Amount = 9,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld" && pi.Volume.Milliliter == 500),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 200,
+                    Amount = 5,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Nääs APA" && pi.Volume.Milliliter == 330),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 300,
+                    Amount = 10,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Lagunitas IPA" && pi.Volume.Milliliter == 350),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 150,
+                    Amount = 5,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva" && pi.Volume.Milliliter == 700),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 150,
+                    Amount = 5,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Absolut Vodka" && pi.Volume.Milliliter == 700),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 150,
+                    Amount = 2,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Smirnoff Vodka" && pi.Volume.Milliliter == 700),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 150,
+                    Amount = 09,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Dreissigacker" && pi.Volume.Milliliter == 700),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 150,
+                    Amount = 2,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Vino Nobile di Montepulciano" && pi.Volume.Milliliter == 700),
                     Warehouse = warehouse
                 },

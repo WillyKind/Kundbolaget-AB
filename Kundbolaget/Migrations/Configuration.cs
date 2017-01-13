@@ -346,7 +346,7 @@ namespace Kundbolaget.Migrations
                 },
                 new ProductStock
                 {
-                    Amount = 5,
+                    Amount = 14,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva" && pi.Volume.Milliliter == 700),
                     Warehouse = warehouse
                 },

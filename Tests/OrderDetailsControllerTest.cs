@@ -162,13 +162,15 @@ namespace Tests
             Assert.AreNotEqual(orderDetails, orderDetailsSaveNewAmount.Amount);
         }
 
-        [Test]
-        public void Delete_Get_Correct_OrderDetail_For_Deletion()
-        {
-            var actionResult = _orderDetailsController.Delete(OrderDetailsResources.DummyOrderDetails.First().Id, 0);
-            var viewResult = actionResult as ViewResult;
-            var orderDetailsViewModel = (OrderDetailsViewModel) viewResult.Model;
-            Assert.AreEqual(OrderDetailsResources.DummyOrderDetails.First().Id, orderDetailsViewModel.OrderDetails.Id);
-        }
+
+        //Test no longer works since since deletion of order details now is handeled by JS and ajax
+        //[Test]
+        //public void Delete_Get_Correct_OrderDetail_For_Deletion()
+        //{
+        //    var actionResult = _orderDetailsController.Delete(OrderDetailsResources.DummyOrderDetails.First().Id, 0);
+        //    var viewResult = actionResult as ViewResult;
+        //    var orderDetailsViewModel = (OrderDetailsViewModel) viewResult.Model;
+        //    Assert.AreEqual(OrderDetailsResources.DummyOrderDetails.First().Id, orderDetailsViewModel.OrderDetails.Id);
+        //}
     }
 }

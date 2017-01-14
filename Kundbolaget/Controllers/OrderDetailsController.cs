@@ -114,36 +114,37 @@ namespace Kundbolaget.Controllers
             return RedirectToAction("Index", new {id=model.OrderDetails.Order.Id, companyId= model.OrderDetails.Order.Company.ParentCompanyId});
         }
 
-        public ActionResult Delete(int id, int orderId)
-        {
-            var model = new OrderDetailsViewModel();
-            model.OrderDetails = _orderDetails.GetEntity(id);
-            model.OrderId = orderId;
-            model.ParentCompanyId = _orders.GetEntity(orderId).Company.ParentCompanyId.Value;
+        //public ActionResult Delete(int id, int orderId)
+        //{
+        //    var model = new OrderDetailsViewModel();
+        //    model.OrderDetails = _orderDetails.GetEntity(id);
+        //    model.OrderId = orderId;
+        //    model.ParentCompanyId = _orders.GetEntity(orderId).Company.ParentCompanyId.Value;
 
-            if (model == null)
-            {
-                return HttpNotFound();
-            }
+        //    if (model == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
         [HttpPost]
-        public ActionResult Delete(OrderDetailsViewModel model, int id)
+        public ActionResult Delete(int id)
         {
-            if (model.OrderDetails.Id != id)
-            {
-                ModelState.AddModelError("Name", "Bad Request");
-                return View(model);
-            }
-            var updatedOrder = _orders.GetEntity(model.OrderId);
-            updatedOrder.Price = updatedOrder.Price - (int)model.OrderDetails.TotalPrice;
+            //if (model.OrderDetails.Id != id)
+            //{
+            //    ModelState.AddModelError("Name", "Bad Request");
+            //    return View(model);
+            //}
 
-            var orderDetails = _orderDetails.GetEntity(id);
-            foreach (var stock in orderDetails.ProductInfo.ProductStocks)
+            var orderDetail = _orderDetails.GetEntity(id);
+            var updatedOrder = _orders.GetEntity(orderDetail.OrderId);
+            updatedOrder.Price = updatedOrder.Price - orderDetail.TotalPrice;
+
+            foreach (var stock in orderDetail.ProductInfo.ProductStocks)
             {
-                stock.Amount += orderDetails.ReservedAmount.Value;
+                stock.Amount += orderDetail.ReservedAmount.Value;
             }
             _orders.UpdateEntity(updatedOrder);
             _orderDetails.DeleteEntity(id);

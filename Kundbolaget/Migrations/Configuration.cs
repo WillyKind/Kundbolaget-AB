@@ -225,7 +225,8 @@ namespace Kundbolaget.Migrations
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
                     Price = 250,
                     NewPrice = 1337,
-                    PriceStart = DateTime.Now.AddMinutes(1)
+                    PriceStart = DateTime.Now.AddMinutes(1),
+                    PalletDiscount = 10
                 },
                 new ProductInfo
                 {
@@ -235,7 +236,8 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 500),
                     Description = "Öl",
                     ProductGroup = productGroups.First(pg => pg.Name == "Lager"),
-                    Price = 325
+                    Price = 325,
+                    PalletDiscount = 10
                 },
                 new ProductInfo
                 {
@@ -245,7 +247,8 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 330),
                     Description = "APA",
                     ProductGroup = productGroups.First(pg => pg.Name == "APA"),
-                    Price = 325
+                    Price = 325,
+                    PalletDiscount = 10
                 },
                 new ProductInfo
                 {
@@ -255,7 +258,8 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 350),
                     Description = "IPA",
                     ProductGroup = productGroups.First(pg => pg.Name == "IPA"),
-                    Price = 400
+                    Price = 400,
+                    PalletDiscount = 10
                 },
                 new ProductInfo
                 {
@@ -265,7 +269,8 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 700),
                     Description = "Vodka",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
-                    Price = 900
+                    Price = 900,
+                    PalletDiscount = 10
                 },
                 new ProductInfo
                 {
@@ -275,7 +280,8 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 700),
                     Description = "Vodka",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
-                    Price = 1200
+                    Price = 1200,
+                    PalletDiscount = 10
                 },
                 new ProductInfo
                 {
@@ -285,7 +291,8 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 700),
                     Description = "Vodka",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vodka"),
-                    Price = 1250
+                    Price = 1250,
+                    PalletDiscount = 10
                 },
                 new ProductInfo
                 {
@@ -295,7 +302,8 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 700),
                     Description = "Riesling",
                     ProductGroup = productGroups.First(pg => pg.Name == "Vitt vin"),
-                    Price = 1250
+                    Price = 1250,
+                    PalletDiscount = 10
                 },
                 new ProductInfo
                 {
@@ -305,7 +313,8 @@ namespace Kundbolaget.Migrations
                     Volume = volumes.First(v => v.Milliliter == 700),
                     Description = "Sangiovese",
                     ProductGroup = productGroups.First(pg => pg.Name == "Rött vin"),
-                    Price = 1250
+                    Price = 1250,
+                    PalletDiscount = 10
                 },
             };
 
@@ -313,90 +322,90 @@ namespace Kundbolaget.Migrations
             {
                 new ProductStock
                 {
-                    Amount = 500,
+                    Amount = 10,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld" && pi.Volume.Milliliter == 330),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 500,
+                    Amount = 9,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld" && pi.Volume.Milliliter == 500),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 200,
+                    Amount = 5,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Nääs APA" && pi.Volume.Milliliter == 330),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 300,
+                    Amount = 10,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Lagunitas IPA" && pi.Volume.Milliliter == 350),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 150,
+                    Amount = 14,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva" && pi.Volume.Milliliter == 700),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 150,
+                    Amount = 5,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Absolut Vodka" && pi.Volume.Milliliter == 700),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 150,
+                    Amount = 2,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Smirnoff Vodka" && pi.Volume.Milliliter == 700),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 150,
+                    Amount = 9,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Dreissigacker" && pi.Volume.Milliliter == 700),
                     Warehouse = warehouse
                 },
                 new ProductStock
                 {
-                    Amount = 150,
+                    Amount = 2,
                     ProductInfo = productInfoes.First(pi => pi.Name == "Vino Nobile di Montepulciano" && pi.Volume.Milliliter == 700),
                     Warehouse = warehouse
                 },
             };
 
-            var dummyOrder = new Order
-            {
-                Company = companies.First(c => c.Name == "Ica Vårberg"),
-                CreatedDate = DateTime.Now,
-                WishedDeliveryDate = DateTime.Parse("2016-12-12"),
-                OrderComplete = false
-            };
+            //var dummyOrder = new Order
+            //{
+            //    Company = companies.First(c => c.Name == "Ica Vårberg"),
+            //    CreatedDate = DateTime.Now,
+            //    WishedDeliveryDate = DateTime.Parse("2016-12-12"),
+            //    OrderComplete = false
+            //};
 
-            var orderDetails = new[]
-            {
-                new OrderDetails
-                {
-                    ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva"),
-                    Amount = 10,
-                    Order = dummyOrder,
-                    UnitPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price,
-                    TotalPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price*10,
-                    ReservedAmount = 0
-                },
-                new OrderDetails
-                {
-                    ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld"),
-                    Amount = 25,
-                    UnitPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price,
-                    TotalPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price*25,
-                    Order = dummyOrder,
-                    ReservedAmount = 0
-                }
-            };
-            dummyOrder.Price += orderDetails.Sum(p => p.ProductInfo.Price*p.Amount);
+            //var orderDetails = new[]
+            //{
+            //    new OrderDetails
+            //    {
+            //        ProductInfo = productInfoes.First(pi => pi.Name == "Koskenkorva"),
+            //        Amount = 10,
+            //        Order = dummyOrder,
+            //        UnitPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price,
+            //        TotalPrice = productInfoes.First(pi => pi.Name == "Koskenkorva").Price*10,
+            //        ReservedAmount = 0
+            //    },
+            //    new OrderDetails
+            //    {
+            //        ProductInfo = productInfoes.First(pi => pi.Name == "Norrlandsguld"),
+            //        Amount = 25,
+            //        UnitPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price,
+            //        TotalPrice = productInfoes.First(pi => pi.Name == "Norrlandsguld").Price*25,
+            //        Order = dummyOrder,
+            //        ReservedAmount = 0
+            //    }
+            //};
+            //dummyOrder.Price += orderDetails.Sum(p => p.ProductInfo.Price * p.Amount);
 
 
             context.Countries.AddOrUpdate(countries);
@@ -404,12 +413,12 @@ namespace Kundbolaget.Migrations
             context.Categories.AddOrUpdate(categories);
             context.ProductGroups.AddOrUpdate(productGroups);
             context.Containers.AddOrUpdate(containers);
-            context.Warehouses.AddOrUpdate(warehouse, wareHouse2);
+            context.Warehouses.AddOrUpdate(warehouse);
             context.Companies.AddOrUpdate(companies);
             context.ProductsInfoes.AddOrUpdate(productInfoes);
             context.ProductStocks.AddOrUpdate(stock);
             context.Addresses.AddOrUpdate(addresses);
-            context.OrderDetails.AddOrUpdate(orderDetails);
+            //context.OrderDetails.AddOrUpdate(orderDetails);
             context.Volumes.AddOrUpdate(volumes);
             context.SaveChanges();
         }

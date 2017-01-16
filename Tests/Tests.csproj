@@ -92,12 +92,14 @@
   <ItemGroup>
     <Compile Include="CompanyControllerTest.cs" />
     <Compile Include="CustomerProductControllerTest.cs" />
+    <Compile Include="FileControllerTest.cs" />
     <Compile Include="OrderDetailsResources.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="OrderControllerTest.cs" />
     <Compile Include="OrderDetailsControllerTest.cs" />
     <Compile Include="OrderResourcesData.cs" />
     <Compile Include="HomeContollerTest.cs" />
+    <Compile Include="Orders.cs" />
     <Compile Include="ProductControllerTest.cs" />
     <Compile Include="ProductStockControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

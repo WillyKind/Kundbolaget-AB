@@ -3,7 +3,7 @@
 @model IEnumerable<Kundbolaget.Models.EntityModels.Order>
 <h4>Skicka order</h4>
 <div>
-    @Html.ActionLink("Tillbaka", "Delivery", "Home", null, new {@class = "orange-text"})
+    @Html.ActionLink("Tillbaka", "Delivery", "Home", null, new { @class = "blue btn" })
 </div>
 <table class="highlight">
     <thead>
@@ -27,7 +27,7 @@
             Leverera
         </th>
         <th class="centeredColumn">
-            Skapa Pdf
+            Följesedel
         </th>
         <th class="centeredColumn">
             Info
@@ -60,12 +60,12 @@
                 </a>
             </td>
             <td class="centeredColumn">
-                <a onclick="CreatePdf(@item.Id, 'ExportDeliveryNote')" class="btn btn-floating waves-effect waves-light">
+                <a onclick="CreatePdf(@item.Id, 'ExportDeliveryNote')" class="btn btn-floating waves-effect waves-light blue">
                     <i class="material-icons">store</i>
                 </a>
             </td>
             <td class="centeredColumn">
-                <a href="@Url.Action("OrderDetails", "Order", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating waves-effect waves-light">
+                <a href="@Url.Action("OrderDetails", "Order", new {id = item.Id, companyId = item.Company.ParentCompanyId})" class="btn btn-floating waves-effect waves-light blue">
                     <i class="material-icons">info_outline</i>
                 </a>
             </td>

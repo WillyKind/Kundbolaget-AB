@@ -13,6 +13,7 @@ namespace Tests
         {
             new Order
             {
+                
                 Company = new Company
                 {
                     Address = new Address {Street = "Besöksvägen", Number = "1A", ZipCode = "111 11"}
@@ -24,6 +25,7 @@ namespace Tests
                         Email = "Viktor@randomcompany.com",
                         PhoneNumber = "+46899 99 99"
                     },
+                    ParentCompanyId = 1,
                     Country = new Country {Name = "Sweden", CountryCode = "+46", Region = "EMEA"},
                     DeliveryAddress = new Address {Street = "Besöksvägen", Number = "1A", ZipCode = "111 11"},
                     Email = "icavarberg@ica.com",
@@ -59,9 +61,19 @@ namespace Tests
                         OrderId = 0,
                         ProductInfoId = 1,
                         UnitPrice = 50,
-                        TotalPrice = 5000
+                        TotalPrice = 5000,
+                        ReservedAmount = 10,
+                        ProductInfo = new ProductInfo
+                        {
+                            Id = 1,
+                            PalletDiscount = 10
+                            
+                        }
                     }
-                }
+                },
+                OrderDelivered = null,
+                OrderPicked = null,
+                OrderTransported = null
             }
         };
     }

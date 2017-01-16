@@ -66,7 +66,7 @@ namespace Kundbolaget.PdfGenerator
             var fs1 = FontFactory.GetFont(FontFactory.HELVETICA, 20);
             var hBold = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
             var fs2 = FontFactory.GetFont(FontFactory.HELVETICA, 10);
-            var white = FontFactory.GetFont(FontFactory.HELVETICA, 12,1,color: BaseColor.WHITE);
+            
 
             doc.Add(new Paragraph("Faktura", fs1));
             doc.Add(new Paragraph("\n"));
@@ -155,8 +155,8 @@ namespace Kundbolaget.PdfGenerator
             }
             var priceInfoCells = new List<PdfPCell>
             {
-                new PdfPCell(new Phrase("FUCKOFF!", white)) {Colspan = 5, Border = 0},
-                new PdfPCell(new Phrase("FUCKOFF AGAIN!", white)) {Colspan = 5, Border = 0},
+                new PdfPCell(new Phrase(" ")) {Colspan = 5, Border = 0},
+                new PdfPCell(new Phrase(" ")) {Colspan = 5, Border = 0},
   
                 new PdfPCell(new Phrase("")) {Colspan = 2, Border = 0},
                 new PdfPCell(new Phrase("Orginalpris:", hBold)) {Colspan = 2, Border = 0},

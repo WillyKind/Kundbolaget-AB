@@ -58,7 +58,6 @@ namespace Tests
 
             _mockContext.Setup(x => x.SetModified(It.IsAny<OrderDetails>()));
             _mockContext.Setup(x => x.SetAdded(It.IsAny<OrderDetails>()));
-
             _mockContext.Setup(x => x.SetModified(It.IsAny<Order>()));
             _mockContext.Setup(x => x.SetAdded(It.IsAny<Order>()));
 
@@ -143,5 +142,35 @@ namespace Tests
             _mockSetOrderDetails.Verify(x=>x.Attach(orderDetails));
             _mockContext.Verify(x => x.SaveChanges(), Times.Exactly(2));
         }
+
+        [Test]
+        public void Index_Get_OrderDetails_For_Order()
+        {
+            var actionResult = _orderDetailsController.Index(0);
+            var viewResult = actionResult as ViewResult;
+            var orderDetailsViewModel = (OrderDetailsViewModel) viewResult.Model;
+            var orderDetailses = orderDetailsViewModel.OrderDetailses;
+            Assert.AreEqual(10,orderDetailses.First().Amount);
+        }
+
+        [Test]
+        public void SaveOrderDetail()
+        {
+            var orderDetails = _mockSetOrderDetails.Object.First().Amount;
+            _orderDetailsController.SaveOrderDetail(1, 1000);
+            var orderDetailsSaveNewAmount = _mockSetOrderDetails.Object.First();
+            Assert.AreNotEqual(orderDetails, orderDetailsSaveNewAmount.Amount);
+        }
+
+
+        //Test no longer works since since deletion of order details now is handeled by JS and ajax
+        //[Test]
+        //public void Delete_Get_Correct_OrderDetail_For_Deletion()
+        //{
+        //    var actionResult = _orderDetailsController.Delete(OrderDetailsResources.DummyOrderDetails.First().Id, 0);
+        //    var viewResult = actionResult as ViewResult;
+        //    var orderDetailsViewModel = (OrderDetailsViewModel) viewResult.Model;
+        //    Assert.AreEqual(OrderDetailsResources.DummyOrderDetails.First().Id, orderDetailsViewModel.OrderDetails.Id);
+        //}
     }
 }

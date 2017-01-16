@@ -6,10 +6,16 @@
 
 <h4>Orderdetaljer</h4>
 <div>
-    @Html.ActionLink("Tillbaka", "Delivery","Home", null,new { @class = "orange-text" })
+    @{
+        if (Model.OrderDetails.Order.OrderPicked == null)
+        {
+            @Html.ActionLink("Skapa", "Create", "OrderDetails", new {id = Model.OrderId}, new {@class = "waves-effect waves-light btn"})
+        }
+    }
+    @Html.ActionLink("Tillbaka", "Delivery", "Home", null, new {@class = "blue btn"})
 </div>
-<hr/>
 <table class="table">
+    <thead>
     <tr>
         <th>
             Produkt
@@ -30,9 +36,11 @@
             Pris total
         </th>
     </tr>
-
-    @foreach (var item in Model.OrderDetailses) {
-        <tr class="row">
+    </thead>
+    <tbody>
+    @foreach (var item in Model.OrderDetailses)
+    {
+        <tr class="row" id="@item.Id">
             <td>
                 @Html.DisplayFor(modelItem => item.ProductInfo.Name)
             </td>
@@ -43,7 +51,7 @@
                 @Html.DisplayFor(modelItem => item.ProductInfo.Volume.Milliliter)
             </td>
             <td>
-                @Html.EditorFor(model => model.OrderDetails.Amount, new { htmlAttributes = new { Value=item.Amount, id="amount"+item.Id } })
+                @Html.EditorFor(model => model.OrderDetails.Amount, new {htmlAttributes = new {Value = item.Amount, id = "amount" + item.Id}})
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UnitPrice)
@@ -52,15 +60,37 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
-                <a onclick="OrderDetailsController(@item.Id)" class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">check</i></a>
-                <a href="@Url.Action("Delete", new { id = item.Id, orderId = Model.OrderId })"class="btn btn-floating btn-small waves-effect waves-light"><i class="material-icons">clear</i></a>
+                <a onclick="OrderDetailsController(@item.Id)" class="btn btn-floating btn-small waves-effect waves-light">
+                    <i class="material-icons">check</i>
+                </a>
+                <a onclick="DeleteOrderDetail(@item.Id)" class="btn btn-floating btn-small waves-effect waves-light red">
+                    <i class="material-icons">delete</i>
+                </a>
             </td>
         </tr>
     }
+
+    </tbody>
+
+
 </table>
-<div>
-    @Html.ActionLink("Skapa +", "Create", "OrderDetails", new { id = Model.OrderId }, new { @class = "waves-effect waves-light btn" })
-</div>  
+
 
 <script src="~/Scripts/CallOrderDetailsController.js"></script>
 <script src="~/Scripts/PreviousPage.js"></script>
+<script>
+    function DeleteOrderDetail(id) {
+        $.ajax({
+            url: "/Orderdetails/Delete",
+            type: 'POST',
+            data: { id: id },
+            success: function(data) {
+                $("#" + id).fadeOut("slow",
+                    function() {
+                    });
+            }
+
+        });
+    }
+
+</script>

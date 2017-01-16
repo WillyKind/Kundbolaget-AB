@@ -5,46 +5,47 @@
 }
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model=>model.OrderDetails.OrderId)
+    @Html.HiddenFor(model => model.OrderDetails.OrderId)
     <div class="form-horizontal">
         <h4>Ny orderrad</h4>
-        @Html.ActionLink("Tillbaka", "Index", "OrderDetails", new { id = Model.OrderId, companyId = Model.ParentCompanyId }, new { @class = "orange-text" })
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <hr/>
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
         <div class="form-group">
-            @Html.LabelFor(model => model.OrderDetails.Amount,"Antal kollin", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.OrderDetails.Amount, "Antal kollin", htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OrderDetails.Amount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OrderDetails.Amount, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.OrderDetails.Amount, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.OrderDetails.Amount, "", new {@class = "text-danger"})
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.OrderDetails.ProductInfoId, "Produkt", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.OrderDetails.ProductInfoId, "Produkt", htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.OrderDetails.ProductInfoId, new SelectList(Model.ProductInfos.Select(pi=> new {pi.Id, Name= pi.Name+" "+pi.Volume.Milliliter+"ml"}), "Id", "Name"), new
-           {
-               htmlAttributes = new
-               {
-                   @class = "dropdown-content"
-               }
-           })
+                @Html.DropDownListFor(model => model.OrderDetails.ProductInfoId, new SelectList(Model.ProductInfos.Select(pi => new {pi.Id, Name = pi.Name + " " + pi.Volume.Milliliter + "ml"}), "Id", "Name"), new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "dropdown-content"
+                    }
+                })
                 @Html.ValidationMessageFor(model => model.OrderDetails.ProductInfoId, "", new {@class = "text-danger"})
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Skapa +" class="btn btn-default" />
+                <input type="submit" value="Skapa" class="btn btn-default"/>
+                @Html.ActionLink("Tillbaka", "Index", "OrderDetails", new {id = Model.OrderId, companyId = Model.ParentCompanyId}, new {@class = "blue btn"})
             </div>
+
         </div>
     </div>
 }
 
 
-
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
